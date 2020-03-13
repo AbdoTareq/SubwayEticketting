@@ -8,7 +8,7 @@
     <string name="sign_without_logging">الاستمرار بدون تسجيل دخول</string>
     <string name="forget_pass">هل نسيت كلمة المرور؟</string>
     <string name="or">--------------------- أو ---------------------</string>
-    <string name="sign_up">إنشاء حساب</string>
+    <string name="create_new_account">إنشاء حساب</string>
     <string name="sign_up_with_google">إنشاء حساب باستخدام Google</string>
     <string name="sign_up_with_face">إنشاء حساب باستخدام Facebook</string>
     <string name="sign_in">تسجيل دخول</string>

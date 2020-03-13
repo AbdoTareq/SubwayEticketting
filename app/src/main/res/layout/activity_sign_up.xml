@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".ui.activity.SignInActivity">
+    tools:context=".ui.activity.SignUpActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/very_large_margin"
         android:gravity="center"
-        android:text="@string/signIn"
+        android:text="@string/sign_up"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/sign_in_main_text_size"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,30 +32,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_margin"
-        android:src="@drawable/white_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/very_large_margin"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/small_margin"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4">
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <EditText
-            android:id="@+id/sign_in_phone_num"
+            android:id="@+id/sign_up_Name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@drawable/user_icon"
+            android:drawablePadding="10dp"
+            android:hint="@string/user_name"
+            android:padding="15dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorPrimary"
+            android:textColorHighlight="@color/colorPrimary"
+            android:textColorHint="@color/colorWhite"
+            tools:targetApi="lollipop" />
+
+        <EditText
+            android:id="@+id/sign_up_email_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -72,7 +81,7 @@
             tools:targetApi="lollipop" />
 
         <EditText
-            android:id="@+id/sign_in_pass_EditText"
+            android:id="@+id/sign_up_pass_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -89,45 +98,77 @@
             android:textColorHint="@color/colorWhite"
             tools:targetApi="lollipop" />
 
+        <EditText
+            android:id="@+id/sign_up_confirm_pass_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@drawable/password_icon"
+            android:drawablePadding="10dp"
+            android:hint="@string/confirm_new_pass"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textColor="@color/colorPrimary"
+            android:textColorHighlight="@color/colorPrimary"
+            android:textColorHint="@color/colorWhite"
+            tools:targetApi="lollipop" />
+
     </LinearLayout>
 
+    <Spinner
+        android:id="@+id/sign_up_spinner1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@android:drawable/btn_dropdown"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:spinnerMode="dropdown"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/v_line2"
+        app:layout_constraintStart_toStartOf="@+id/v_line1"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <Spinner
+        android:id="@+id/sign_up_spinner2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:background="@android:drawable/btn_dropdown"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/v_line2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
     <Button
-        android:id="@+id/sign_in_btn"
+        android:id="@+id/sign_up_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:textSize="@dimen/sign_in_medium_text_size"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="@dimen/very_large_margin"
         android:background="@drawable/shape_sign_up"
         android:padding="15dp"
+        android:layout_marginTop="@dimen/large_margin"
         android:shadowColor="@android:color/transparent"
-        android:text="@string/log_in"
+        android:text="@string/sign_up"
         android:textColor="@color/colorWhite"
+        android:textSize="@dimen/sign_in_medium_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-
-    <TextView
-        android:id="@+id/sign_in_forget_pass_textView"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/very_small_margin"
-        android:layout_height="wrap_content"
-        android:text="@string/forget_pass"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_15sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_spinner1" />
 
     <TextView
-        android:id="@+id/sign_in_sign_up_textView"
+        android:id="@+id/sign_up_sign_up_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium_margin"
         android:gravity="center"
-        android:text="@string/create_new_account"
+        android:text="@string/signIn"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/sign_in_sub_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -145,7 +186,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintHeight_percent="0.0" />
+        app:layout_constraintGuide_percent="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -155,17 +196,32 @@
         app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v_line1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v_line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/v_line3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="1" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

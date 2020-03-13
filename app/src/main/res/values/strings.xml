@@ -7,7 +7,7 @@
     <string name="sign_without_logging">الاستمرار بدون تسجيل دخول</string>
     <string name="forget_pass">Recover password</string>
     <string name="or">--------------------- أو ---------------------</string>
-    <string name="sign_up">Create New Account</string>
+    <string name="create_new_account">Create New Account</string>
     <string name="sign_up_with_google">إنشاء حساب باستخدام Google</string>
     <string name="sign_up_with_face">إنشاء حساب باستخدام Facebook</string>
     <string name="sign_in">تسجيل دخول</string>
@@ -24,7 +24,7 @@
     <string name="enter_verification">ادحل كود التفعيل</string>
     <string name="message3">تم ارسال كود التفعيل للرقم: </string>
     <string name="message4">برجاء إدخال كود التفعيل</string>
-    <string name="confirm_new_pass">تأكيد كلمة المرور</string>
+    <string name="confirm_new_pass">Confirm Password</string>
     <string name="new_pass">أدخل كلمة المرور الجديده</string>
     <string name="change_pass_button">تغيير كلمة المرور</string>
 
@@ -36,7 +36,7 @@
     <string name="test_body_text">ناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنصَ</string>
     <string name="news_body">نص الخبر</string>
     <string name="news_image">صورة الخبر</string>
-    <string name="user_name">اسم المستخدم</string>
+    <string name="user_name">Name</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -227,6 +227,7 @@
 
     <string name="facebook_app_id">161197391840342</string>
     <string name="fb_login_protocol_scheme">fb161197391840342</string>
+    <string name="sign_up">Sign Up</string>
 
 
 </resources>

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.abdotareq.subwaye_ticketting.databinding.ActivityMainBinding;
 import com.abdotareq.subwaye_ticketting.ui.activity.SignInActivity;
+import com.abdotareq.subwaye_ticketting.ui.activity.SignUpActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.testButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
