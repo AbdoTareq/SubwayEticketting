@@ -2,11 +2,13 @@ package com.abdotareq.subwaye_ticketting;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.abdotareq.subwaye_ticketting.databinding.ActivityMainBinding;
+import com.abdotareq.subwaye_ticketting.ui.activity.SignInActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(intent);
             }
         });
 

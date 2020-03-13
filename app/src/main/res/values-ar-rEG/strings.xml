@@ -1,23 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Subway E-ticketting</string>
     <string name="logo">logo</string>
     <string name="phone">رقم المحمول</string>
-    <string name="password">Password</string>
-    <string name="log_in">log in</string>
+    <string name="password">كلمة السر</string>
+    <string name="log_in">تسجيل دخول</string>
     <string name="sign_without_logging">الاستمرار بدون تسجيل دخول</string>
-    <string name="forget_pass">Recover password</string>
+    <string name="forget_pass">هل نسيت كلمة المرور؟</string>
     <string name="or">--------------------- أو ---------------------</string>
-    <string name="sign_up">Create New Account</string>
+    <string name="sign_up">إنشاء حساب</string>
     <string name="sign_up_with_google">إنشاء حساب باستخدام Google</string>
     <string name="sign_up_with_face">إنشاء حساب باستخدام Facebook</string>
     <string name="sign_in">تسجيل دخول</string>
     <string name="first_name">الاسم الأول</string>
     <string name="nick_name">اسم الشهرة</string>
     <string name="family_name">اسم العائلة</string>
-    <string name="mail">Email</string>
+    <string name="mail">البريد الإلكتروني</string>
     <string name="retype_pass">تأكيد كلمة المرور</string>
     <string name="signIn">Sign In</string>
-    <string name="message2">To access all features</string>
+    <string name="message2"> الإداره العامة لصحة البيئة</string>
     <string name="phone_num">رقم المحمول</string>
     <string name="send_verification_code">ارسال كود التفعيل</string>
     <string name="continue_pass">الاستمرار</string>
@@ -227,6 +228,4 @@
 
     <string name="facebook_app_id">161197391840342</string>
     <string name="fb_login_protocol_scheme">fb161197391840342</string>
-
-
 </resources>
