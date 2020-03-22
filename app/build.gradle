@@ -41,7 +41,9 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.5'
     implementation 'com.google.android.material:material:1.1.0'
 
-    implementation 'com.github.drawers:SpinnerDatePicker:2.0.1'
+    //retrofit library
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
 
 
 }

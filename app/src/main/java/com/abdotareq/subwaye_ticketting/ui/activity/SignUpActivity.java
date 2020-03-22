@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, R.layout.gender_spinner_row, R.id.gender_tv, gender_array);
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, R.layout.spinner_gender, R.id.gender_tv, gender_array);
 
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
