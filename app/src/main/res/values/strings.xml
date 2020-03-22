@@ -228,6 +228,13 @@
     <string name="facebook_app_id">161197391840342</string>
     <string name="fb_login_protocol_scheme">fb161197391840342</string>
     <string name="sign_up">Sign Up</string>
+    <string name="birth_date">Birth date</string>
+    <string name="select_gender">Select gender:</string>
+
+    <string-array name="gender_array">
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
 
 
 </resources>
