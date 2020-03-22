@@ -11,7 +11,7 @@
     <string name="sign_up_with_google">إنشاء حساب باستخدام Google</string>
     <string name="sign_up_with_face">إنشاء حساب باستخدام Facebook</string>
     <string name="sign_in">تسجيل دخول</string>
-    <string name="first_name">الاسم الأول</string>
+    <string name="first_name">First Name</string>
     <string name="nick_name">اسم الشهرة</string>
     <string name="family_name">اسم العائلة</string>
     <string name="mail">Email</string>
@@ -230,6 +230,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="birth_date">Birth date</string>
     <string name="select_gender">Select gender:</string>
+    <string name="last_name">Last Name</string>
 
     <string-array name="gender_array">
         <item>Female</item>
