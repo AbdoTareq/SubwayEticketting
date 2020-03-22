@@ -28,7 +28,7 @@
     <string name="new_pass">أدخل كلمة المرور الجديده</string>
     <string name="change_pass_button">تغيير كلمة المرور</string>
 
-    <string name="base_url">http://46.151.210.248:8888/rating_app/</string>
+    <string name="base_url">https://subway-ticketing-system.herokuapp.com/</string>
 
     <string name="news_title">عنوان الخبر</string>
     <string name="news">الأخبار</string>
@@ -48,11 +48,11 @@
     <string name="send_complain">إرسال البلاغ</string>
 
     <string name="pass_fix">pass fix</string>
-    <string name="pass_warning">كلمة السر من 8 الى 12 حرف انجليزي ورقم ويجب ان تحتوي على ارقام وبدون مسافات </string>
+    <string name="pass_warning">Enter Pass between 12 to 8 Characters</string>
     <string name="user_blocked">تم حجب هذا الحساب برجاء استخدام حساب اخر</string>
     <string name="user_deleted">تم حذف هذا الحساب برجاء استخدام حساب اخر</string>
-    <string name="fix_confirmPassWarning">كلمة السر غير متطابقه</string>
-    <string name="invalid_mail_warning">برجاء إدخال بريد الكتروني صحيح</string>
+    <string name="fix_confirmPassWarning">Enter the same Password</string>
+    <string name="invalid_mail_warning">Enter mail correctly</string>
     <string name="contact_qassem">التواصل مع أمانة القصيم</string>
     <string name="contact_health">التواصل مع الإدارة العامه لصحة البيئة</string>
     <string name="favourite_rest">مطاعمي المفضلة</string>
@@ -144,7 +144,7 @@
     <string name="user_comment">التعليق</string>
     <string name="no_blocked_users">لم يتم العثور على مستخدمين محظورين</string>
     <string name="favouriteProgMessege">جاري الإضافة للمفضلة</string>
-    <string name="progMessage">جاري عرض البيانات</string>
+    <string name="progMessage">Loading</string>
     <string name="contact_name">موقع التواصل</string>
     <string name="contact_type">اسم التواصل</string>
     <string name="no_complains">لا يوجد بلاغات سابقه</string>
@@ -192,8 +192,8 @@
     <string name="remove_admin_mess">إزالة الإشراف</string>
     <string name="dublicated_data">الرقم او الايميل موجود بالفعل</string>
     <string name="prog_create_mess">جاري إنشاء الحساب</string>
-    <string name="fist_name">برجاء إدخال الاسم الأول صحيح</string>
-    <string name="family_name_mess">برجاء إدخال اسم العائلة صحيح</string>
+    <string name="fix_fist_name">Enter F name </string>
+    <string name="fix_last_name_mess">Enter L name</string>
     <string name="famous_name">برجاء إدخال اسم الشهره صحيح</string>
     <string name="mobile_num">برجاء إدخال رقم محمول صحيح</string>
     <string name="unavailable">غير متوافر</string>
@@ -230,6 +230,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="birth_date">Birth date</string>
     <string name="select_gender">Select gender:</string>
+    <string name="select_birthday">Select birthday:</string>
     <string name="last_name">Last Name</string>
 
     <string-array name="gender_array">

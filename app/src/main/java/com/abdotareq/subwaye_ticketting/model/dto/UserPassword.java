@@ -1,4 +1,4 @@
-package com.abdotareq.subwaye_ticketting.model;
+package com.abdotareq.subwaye_ticketting.model.dto;
 
 import com.google.gson.annotations.SerializedName;
 

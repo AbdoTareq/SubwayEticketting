@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         binding.testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(intent);
             }
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         binding.testButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }

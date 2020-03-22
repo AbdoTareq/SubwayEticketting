@@ -29,7 +29,7 @@
     <string name="new_pass">أدخل كلمة المرور الجديده</string>
     <string name="change_pass_button">تغيير كلمة المرور</string>
 
-    <string name="base_url">http://46.151.210.248:8888/rating_app/</string>
+    <string name="base_url">https://subway-ticketing-system.herokuapp.com/</string>
 
     <string name="news_title">عنوان الخبر</string>
     <string name="news">الأخبار</string>
@@ -193,8 +193,8 @@
     <string name="remove_admin_mess">إزالة الإشراف</string>
     <string name="dublicated_data">الرقم او الايميل موجود بالفعل</string>
     <string name="prog_create_mess">جاري إنشاء الحساب</string>
-    <string name="fist_name">برجاء إدخال الاسم الأول صحيح</string>
-    <string name="family_name_mess">برجاء إدخال اسم العائلة صحيح</string>
+    <string name="fix_fist_name">برجاء إدخال الاسم الأول صحيح</string>
+    <string name="fix_last_name_mess">برجاء إدخال اسم العائلة صحيح</string>
     <string name="famous_name">برجاء إدخال اسم الشهره صحيح</string>
     <string name="mobile_num">برجاء إدخال رقم محمول صحيح</string>
     <string name="unavailable">غير متوافر</string>
