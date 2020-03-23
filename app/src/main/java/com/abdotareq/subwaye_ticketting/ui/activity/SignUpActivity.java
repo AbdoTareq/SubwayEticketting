@@ -1,7 +1,9 @@
 package com.abdotareq.subwaye_ticketting.ui.activity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.abdotareq.subwaye_ticketting.MainActivity;
 import com.abdotareq.subwaye_ticketting.R;
 import com.abdotareq.subwaye_ticketting.databinding.ActivitySignUpBinding;
 import com.abdotareq.subwaye_ticketting.model.dto.User;
@@ -38,13 +39,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
 
-    private String[] gender_array = {"Female", "Male"};
+    private String[] genderList = {"", "Female", "Male"};
 
     private Calendar materialCalendar;
     private DatePickerDialog datePicker;
 
     private Retrofit retrofit;
-    private ArrayAdapter<String> genderAdapter;
 
     int year = 0;
     String gender = "";
@@ -60,14 +60,9 @@ public class SignUpActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        genderAdapter = new ArrayAdapter<String>(this, R.layout.spinner_gender, R.id.gender_tv, gender_array);
-
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
-        binding.signUpGenderSpinner.setAdapter(genderAdapter);
-
 
         callListeners();
 
@@ -77,16 +72,22 @@ public class SignUpActivity extends AppCompatActivity {
 
     // Call listeners on the activity
     private void callListeners() {
-        binding.signUpGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                gender = String.valueOf(binding.signUpGenderSpinner.getSelectedItem());
 
-            }
-
+        binding.signUpGenderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                binding.signUpGenderSpinner.setSelection(0);
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                builder.setTitle(getString(R.string.select_gender));
+
+                builder.setItems(genderList, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int position) {
+                        gender = genderList[position];
+                        binding.signUpGenderBtn.setText(gender);
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
@@ -176,7 +177,6 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * A method called to handle sign up button clicks
      */
-
     private void signUpBtnClick() {
         //check for all inputs from user are correct
         if (TextUtils.isEmpty(binding.signUpFNameEt.getText().toString()) && binding.signUpFNameEt.getText().toString().equals("")) {

@@ -27,6 +27,7 @@
 
 
     <dimen name="large_font">@dimen/_12sdp</dimen>
+    <dimen name="very_large_font">@dimen/_15sdp</dimen>
     <dimen name="medium_font">@dimen/_9sdp</dimen>
     <dimen name="small_font">@dimen/_6sdp</dimen>
 

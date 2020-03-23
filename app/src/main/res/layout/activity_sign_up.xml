@@ -142,8 +142,8 @@
 
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/sign_up_gender_spinner"
+    <Button
+        android:id="@+id/sign_up_gender_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/small_margin"
@@ -151,9 +151,12 @@
         android:layout_marginRight="@dimen/small_margin"
         android:background="@android:drawable/spinner_background"
         android:drawableStart="@drawable/gender_icon"
-        android:spinnerMode="dropdown"
-        android:hint="Select one"
-        android:textAlignment="viewStart"
+        android:text="@string/select_gender"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="@dimen/very_large_font"
+        android:textColor="@android:color/black"
+        android:fontFamily="@font/segoe_ui"
         app:layout_constraintEnd_toStartOf="@+id/v_line2"
         app:layout_constraintStart_toStartOf="@+id/v_line1"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
@@ -168,7 +171,9 @@
         android:background="@android:drawable/spinner_background"
         android:drawableStart="@drawable/calender_icon"
         android:fontFamily="@font/segoe_ui"
+        android:textSize="@dimen/very_large_font"
         android:text="@string/birth_date"
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -191,7 +196,7 @@
         android:textSize="@dimen/sign_in_medium_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_gender_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_gender_btn" />
 
     <TextView
         android:id="@+id/sign_up_sign_in_tv"
