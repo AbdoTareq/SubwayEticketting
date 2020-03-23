@@ -1,5 +1,6 @@
 package com.abdotareq.subwaye_ticketting.model.retrofit;
 
+import com.abdotareq.subwaye_ticketting.model.dto.Token;
 import com.abdotareq.subwaye_ticketting.model.dto.User;
 
 import okhttp3.ResponseBody;
@@ -13,9 +14,12 @@ import retrofit2.http.POST;
  */
 public interface UserService {
 
-
     @POST("users/signup")
-    Call<ResponseBody> saveUser(@Body User user);
+    Call<Token> saveUser(@Body User user);
+
+    @POST("users/signin")
+    Call<Token> authenticate(@Body User user);
+
 
 
 }

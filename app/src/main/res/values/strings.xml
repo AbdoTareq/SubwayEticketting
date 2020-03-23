@@ -15,6 +15,8 @@
     <string name="nick_name">اسم الشهرة</string>
     <string name="family_name">اسم العائلة</string>
     <string name="mail">Email</string>
+    <string name="mail_exist">Email already exist</string>
+    <string name="pass_war">Password Less Than 8 Characters </string>
     <string name="retype_pass">تأكيد كلمة المرور</string>
     <string name="signIn">Sign In</string>
     <string name="message2">To access all features</string>
@@ -63,6 +65,7 @@
     <string name="secretariat_info">نبذة عامة عن الإدارة العامة لصحة البيئة</string>
     <string name="health_website">البوابة العامة لصحة اليئة</string>
     <string name="wrong_code">كود التفعيل خاطئ</string>
+    <string name="wrong_mail_or_pass">Wrong mail or pass</string>
     <string name="unrecorded_num_warning">هذا الرقم غير مسجل</string>
     <string name="tell_a_friend">اخبر صديق</string>
     <string name="account_settings">إعدادات الحساب</string>
@@ -174,7 +177,7 @@
     <string name="district">الحي</string>
     <string name="no_searched_stores">لم يتم العثور على مطاعم بهذا الاسم</string>
     <string name="block_messege">لقد تم حظر هذا الحساب, برجاء التواصل مع المشرفين على البرنامج</string>
-    <string name="error_message">حدث خطأ ما, الرجاء المحاوله مره أخرى</string>
+    <string name="error_message">Failure happened</string>
     <string name="ok">حسنا</string>
     <string name="progSavingMessage">جاري حفظ البيانات</string>
     <string name="rating_added_message">تم إضافة التقييم بنجاح</string>

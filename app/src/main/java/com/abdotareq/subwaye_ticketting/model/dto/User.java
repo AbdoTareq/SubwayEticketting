@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Arrays;
 
-
 public class User {
 
     @SerializedName("id")
@@ -25,82 +24,106 @@ public class User {
     @SerializedName("image")
     private byte[] image;
 
-    @SerializedName("age")
-    private int age;
+    @SerializedName("birth_date")
+    private String birth_date;
 
     @SerializedName("gender")
     private String gender;
 
-	public int getId() {
-		return id;
-	}
+    @SerializedName("admin")
+    private int admin;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public User(String email, String password, int admin) {
+        this.email = email;
+        this.password = password;
+        this.admin = admin;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public User() {
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getFirst_name() {
-		return first_name;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getLast_name() {
-		return last_name;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public byte[] getImage() {
-		return image;
-	}
+    public String getFirst_name() {
+        return first_name;
+    }
 
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
 
-	public int getAge() {
-		return age;
-	}
+    public String getLast_name() {
+        return last_name;
+    }
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
 
-	public String getGender() {
-		return gender;
-	}
+    public byte[] getImage() {
+        return image;
+    }
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
-	@Override
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", first_name=" + first_name
-                + ", last_name=" + last_name + ", image=" + Arrays.toString(image) + ", age=" + age + ", gender="
+                + ", last_name=" + last_name + ", image=" + Arrays.toString(image) + ", birth_date=" + birth_date + ", gender="
                 + gender + "]";
     }
 
 
+    public int getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin = admin;
+    }
+
+    public void setBirth_date(String birth_date) {
+        this.birth_date = birth_date;
+    }
+
+    public String getBirth_date() {
+        return birth_date;
+    }
 }

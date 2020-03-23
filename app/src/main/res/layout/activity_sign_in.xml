@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimary"
     tools:context=".ui.activity.SignInActivity">
 
     <TextView
@@ -55,36 +55,36 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4">
 
         <EditText
-            android:id="@+id/sign_in_phone_num"
+            android:id="@+id/sign_in_mail_et"
+            style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/colorWhite"
             android:drawableStart="@drawable/email_icon"
             android:drawablePadding="10dp"
             android:hint="@string/mail"
             android:padding="15dp"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorPrimary"
             android:textColorHighlight="@color/colorPrimary"
             android:textColorHint="@color/colorWhite"
             tools:targetApi="lollipop" />
 
         <EditText
-            android:id="@+id/sign_in_pass_EditText"
+            android:id="@+id/sign_in_pass_et"
+            style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/colorWhite"
             android:drawableStart="@drawable/password_icon"
             android:drawablePadding="10dp"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="15dp"
-            android:textColor="@color/colorPrimary"
             android:textColorHighlight="@color/colorPrimary"
             android:textColorHint="@color/colorWhite"
             tools:targetApi="lollipop" />
@@ -96,39 +96,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:textSize="@dimen/sign_in_medium_text_size"
-        android:layout_marginEnd="24dp"
         android:layout_marginTop="@dimen/very_large_margin"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/shape_sign_up"
         android:padding="15dp"
         android:shadowColor="@android:color/transparent"
         android:text="@string/log_in"
         android:textColor="@color/colorWhite"
+        android:textSize="@dimen/sign_in_medium_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 
     <TextView
-        android:id="@+id/sign_in_forget_pass_textView"
+        android:id="@+id/sign_in_recover_pass_tv"
         android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/very_small_margin"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
         android:text="@string/forget_pass"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
     <TextView
-        android:id="@+id/sign_in_sign_up_textView"
+        android:id="@+id/sign_in_sign_up_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium_margin"
         android:gravity="center"
         android:text="@string/create_new_account"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:textSize="@dimen/sign_in_sub_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline5" />

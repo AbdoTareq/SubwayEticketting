@@ -9,20 +9,24 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.abdotareq.subwaye_ticketting.R;
 import com.abdotareq.subwaye_ticketting.databinding.ActivitySignUpBinding;
+import com.abdotareq.subwaye_ticketting.model.dto.Token;
 import com.abdotareq.subwaye_ticketting.model.dto.User;
 import com.abdotareq.subwaye_ticketting.model.retrofit.UserService;
+import com.abdotareq.subwaye_ticketting.utility.SharedPreferenceUtil;
 import com.abdotareq.subwaye_ticketting.utility.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -39,14 +43,21 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
 
-    private String[] genderList = {"", "Female", "Male"};
+    private String[] genderList = {"Female", "Male"};
 
     private Calendar materialCalendar;
     private DatePickerDialog datePicker;
 
+    private Button signUpBtn, calenderBtn, genderBtn;
+    private TextView signInTv;
+
     private Retrofit retrofit;
 
+
     int year = 0;
+    Date date;
+    String formatDate;
+
     String gender = "";
 
     @Override
@@ -70,10 +81,15 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    // Call listeners on the activity
+    // Call listeners on the activity for code readability
     private void callListeners() {
 
-        binding.signUpGenderBtn.setOnClickListener(new View.OnClickListener() {
+        genderBtn = binding.signUpGenderBtn;
+        calenderBtn = binding.signUpCalender;
+        signUpBtn = binding.signUpBtn;
+        signInTv = binding.signUpSignInTv;
+
+        genderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
@@ -83,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int position) {
                         gender = genderList[position];
-                        binding.signUpGenderBtn.setText(gender);
+                        genderBtn.setText(gender);
                     }
                 });
                 AlertDialog alertDialog = builder.create();
@@ -91,19 +107,24 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        binding.signUpCalender.setOnClickListener(new View.OnClickListener() {
+        calenderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 materialCalendar = Calendar.getInstance();
+
                 int day = materialCalendar.get(Calendar.DAY_OF_MONTH);
                 int month = materialCalendar.get(Calendar.MONTH);
                 year = materialCalendar.get(Calendar.YEAR);
+                date = materialCalendar.getTime();
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                formatDate = format1.format(date);
+
 
                 datePicker = new DatePickerDialog(SignUpActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
-                        Toast.makeText(SignUpActivity.this, "mDay" + mDay + " month:" + (mMonth + 1) + "mYear:" + mYear, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, date.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }, year, month, day);//changed from day,month,year to year,month,day
                 datePicker.show();
@@ -111,14 +132,14 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         //sign up method that will call the web service
-        binding.signUpBtn.setOnClickListener(new View.OnClickListener() {
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signUpBtnClick();
             }
         });
 
-        binding.signUpSignInTv.setOnClickListener(new View.OnClickListener() {
+        signInTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
@@ -136,16 +157,16 @@ public class SignUpActivity extends AppCompatActivity {
         UserService service = retrofit.create(UserService.class);
 
         //initialize the save user call
-        Call<ResponseBody> call = service.saveUser(user);
+        Call<Token> call = service.saveUser(user);
 
         //initialize and show a progress dialog to the user
         final ProgressDialog progressDialog = util.initProgress(this, getString(R.string.progMessage));
         progressDialog.show();
 
         //start the call
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<Token>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<Token> call, Response<Token> response) {
 
                 int responseCode = response.code();
                 if (responseCode >= 200 && responseCode <= 299) {
@@ -153,19 +174,34 @@ public class SignUpActivity extends AppCompatActivity {
                     progressDialog.dismiss();
 
                     Intent returnIntent = getIntent();
+                    //write token into SharedPreferences
+                    SharedPreferenceUtil.setSharedPrefsLoggedIn(SignUpActivity.this, true);
+                    if (response.body() != null) {
+                        SharedPreferenceUtil.setSharedPrefsUserId(SignUpActivity.this, response.body().getToken());
+                    }
+
+                    Intent intent =new Intent(SignUpActivity.this,HomeActivity.class);
+                    startActivity(intent);
+
 //                    returnIntent.putExtra("MOBILE", phone.getText().toString());
                     setResult(RESULT_OK, returnIntent);
                     Toast.makeText(SignUpActivity.this, "success", Toast.LENGTH_SHORT).show();
 
+                } else if (responseCode == 434) {
+                    Toast.makeText(SignUpActivity.this, getText(R.string.pass_war), Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                } else if (responseCode == 435) {
+                    Toast.makeText(SignUpActivity.this, getText(R.string.mail_exist), Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss();
-                    Toast.makeText(SignUpActivity.this, "else onResponse", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "else onResponse " + responseCode, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Token> call, Throwable t) {
 
                 progressDialog.dismiss();
                 Toast.makeText(SignUpActivity.this, getString(R.string.error_message), Toast.LENGTH_LONG).show();
@@ -210,9 +246,9 @@ public class SignUpActivity extends AppCompatActivity {
         user.setLast_name(binding.signUpLNameEt.getText().toString());
         user.setEmail(binding.signUpMailEt.getText().toString());
         user.setPassword(binding.signUpPassEt.getText().toString());
-        user.setPassword(binding.signUpPassEt.getText().toString());
         user.setGender(gender);
-        user.setAge(year);
+        user.setBirth_date(formatDate);
+        user.setAdmin(0);
 
         Log.e("SignUpActivity", user.toString());
 
