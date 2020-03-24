@@ -5,25 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abdotareq.subwaye_ticketting.ForgetPassActivity;
-import com.abdotareq.subwaye_ticketting.MainActivity;
 import com.abdotareq.subwaye_ticketting.R;
 import com.abdotareq.subwaye_ticketting.databinding.ActivitySignInBinding;
-import com.abdotareq.subwaye_ticketting.databinding.ActivitySignUpBinding;
 import com.abdotareq.subwaye_ticketting.model.dto.Token;
 import com.abdotareq.subwaye_ticketting.model.dto.User;
 import com.abdotareq.subwaye_ticketting.model.retrofit.UserService;
 import com.abdotareq.subwaye_ticketting.utility.SharedPreferenceUtil;
 import com.abdotareq.subwaye_ticketting.utility.util;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -13,9 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChangePassActivity"></activity>
-        <activity android:name=".VerificationActivity" />
-        <activity android:name=".ForgetPassActivity" />
+        <activity android:name=".ui.activity.ChangePassActivity"></activity>
+        <activity android:name=".ui.activity.VerificationActivity" />
+        <activity android:name=".ui.activity.ForgetPassActivity" />
         <activity android:name=".ui.activity.HomeLandActivity" />
         <activity android:name=".ui.activity.HomeActivity" />
         <activity android:name=".ui.activity.SignUpActivity" />

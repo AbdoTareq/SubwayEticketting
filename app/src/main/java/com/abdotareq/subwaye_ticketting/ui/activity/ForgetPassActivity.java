@@ -1,19 +1,17 @@
-package com.abdotareq.subwaye_ticketting;
+package com.abdotareq.subwaye_ticketting.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abdotareq.subwaye_ticketting.databinding.ActivityVerificationBinding;
-import com.abdotareq.subwaye_ticketting.model.dto.Token;
+import com.abdotareq.subwaye_ticketting.R;
+import com.abdotareq.subwaye_ticketting.databinding.ActivityForgetPassBinding;
 import com.abdotareq.subwaye_ticketting.model.dto.User;
 import com.abdotareq.subwaye_ticketting.model.retrofit.UserService;
 import com.abdotareq.subwaye_ticketting.utility.util;
@@ -25,25 +23,21 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class VerificationActivity extends AppCompatActivity {
+public class ForgetPassActivity extends AppCompatActivity {
 
-    private ActivityVerificationBinding binding;
-
-    private TextView mailTv;
-    private EditText codeEt;
-    private Button continueBtn;
+    private ActivityForgetPassBinding binding;
+    private EditText mailEt;
+    private Button sendCode;
 
     private Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verification);
-
-        final String mail = getIntent().getStringExtra("mail");
+        setContentView(R.layout.activity_forget_pass);
 
         // this for view binding to replace findviewbyid
-        binding = ActivityVerificationBinding.inflate(getLayoutInflater());
+        binding = ActivityForgetPassBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -53,72 +47,69 @@ public class VerificationActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        mailTv = binding.verificationMailTv;
-        codeEt = binding.verificationEt;
-        continueBtn = binding.verificationContinueBtn;
+        mailEt = binding.forgetPassMailEt;
+        sendCode = binding.forgetPassSendVerificationBtn;
 
-        mailTv.setText(mail);
-
-
-        continueBtn.setOnClickListener(new View.OnClickListener() {
+        sendCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(codeEt.getText().toString()) && codeEt.getText().toString().equals("")) {
-                    codeEt.setText(getText(R.string.enter_verification));
+                if (!util.isValidEmail(mailEt.getText().toString())) {
+                    mailEt.setText("");
+                    mailEt.setHint(getString(R.string.invalid_mail_warning));
                     return;
-                } else {
-                    verifyCode(mail, codeEt.getText().toString());
-                }
+                } else
+                    sendVerificationCode(mailEt.getText().toString());
             }
         });
 
-
     }
 
-    private void verifyCode(String mail, String code) {
-        User user = new User(mail, code);
+    // send send Verification Code to user mail
+    private void sendVerificationCode(final String mail) {
+
+        User user = new User(mail);
 
         //create UserService object
         UserService userService = retrofit.create(UserService.class);
 
         //initialize the save user call
-        Call<Token> call = userService.verifyCode(user);
+        Call<ResponseBody> resetPassCall = userService.sendVerificationCode(user);
 
         //initialize and show a progress dialog to the user
-        final ProgressDialog progressDialog = util.initProgress(VerificationActivity.this, getString(R.string.loading));
+        final ProgressDialog progressDialog = util.initProgress(ForgetPassActivity.this, getString(R.string.loading));
         progressDialog.show();
 
         //start the call
-        call.enqueue(new Callback<Token>() {
+        resetPassCall.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<Token> call, Response<Token> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 int responseCode = response.code();
                 if (responseCode >= 200 && responseCode <= 299 && response.body() != null) {
                     //user saved successfully
                     progressDialog.dismiss();
                     //ToDo: Remove Toast
-                    Intent intent = new Intent(VerificationActivity.this, ChangePassActivity.class);
-                    intent.putExtra("token", response.body().getToken());
-                    Toast.makeText(VerificationActivity.this, "token: " + response.body().getToken(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ForgetPassActivity.this, VerificationActivity.class);
+                    intent.putExtra("mail", mail);
                     startActivity(intent);
                     finish();
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss();
-                    Toast.makeText(VerificationActivity.this, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgetPassActivity.this, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Token> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 progressDialog.dismiss();
-                Toast.makeText(VerificationActivity.this, getString(R.string.error_message), Toast.LENGTH_LONG).show();
+                Toast.makeText(ForgetPassActivity.this, getString(R.string.error_message), Toast.LENGTH_LONG).show();
 //                //ToDo: Remove Toast
 //                Log.e("FAILED : ", t.getMessage());
             }
         });
+
 
     }
 

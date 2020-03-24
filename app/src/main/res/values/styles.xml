@@ -14,11 +14,11 @@
     </style>
 
     <style name="EditTStyle">
-        <item name="colorAccent">@color/colorWhite</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="fontFamily">@font/segoe_ui</item>
         <item name="android:textColorHint">@color/colorWhite</item>
         <item name="backgroundTint">@color/colorWhite</item>
+
         <!--        <item name="android:textColorPrimary">@color/white</item>-->
     </style>
 

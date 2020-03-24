@@ -24,7 +24,7 @@
 	<string name="phone_num">Mobile number</string>
 	<string name="send_verification_code">Send activation code</string>
 	<string name="continue_pass">Continue</string>
-	<string name="enter_verification">Enter code activation</string>
+	<string name="enter_verification">Please enter code activation</string>
 	<string name="message3">Activation code has been sent to:</string>
 	<string name="message4">Please enter the activation code</string>
 	<string name="confirm_new_pass">Confirm Password</string>
