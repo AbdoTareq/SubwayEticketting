@@ -180,7 +180,7 @@ public class SignUpActivity extends AppCompatActivity {
                         SharedPreferenceUtil.setSharedPrefsUserId(SignUpActivity.this, response.body().getToken());
                     }
 
-                    Intent intent =new Intent(SignUpActivity.this,HomeActivity.class);
+                    Intent intent = new Intent(SignUpActivity.this, HomeLandActivity.class);
                     startActivity(intent);
 
 //                    returnIntent.putExtra("MOBILE", phone.getText().toString());

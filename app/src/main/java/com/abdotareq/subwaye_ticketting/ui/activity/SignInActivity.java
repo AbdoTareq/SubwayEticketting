@@ -82,13 +82,14 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
+    // Handle sign in Button clicks
     private void signInBtnClick() {
 
         mailEt = binding.signInMailEt;
         passEt = binding.signInPassEt;
 
-//        mailEt.setText("raidomar5@gmail.com");
-//        passEt.setText("omar123456");
+        mailEt.setText("abdo.elbishihi@gmail.com");
+        passEt.setText("abdo1234");
 
         //check for all inputs from user are not empty
         if (!util.isValidEmail(mailEt.getText().toString())) {
@@ -137,7 +138,7 @@ public class SignInActivity extends AppCompatActivity {
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(SignInActivity.this, true);
                     SharedPreferenceUtil.setSharedPrefsUserId(SignInActivity.this, response.body().getToken());
 
-                    Intent intent =new Intent(SignInActivity.this,HomeActivity.class);
+                    Intent intent =new Intent(SignInActivity.this,HomeLandActivity.class);
                     startActivity(intent);
 
                     passEt.setHint("token:   " + response.body().getToken());
