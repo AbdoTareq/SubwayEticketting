@@ -20,6 +20,11 @@ public interface UserService {
     @POST("users/signin")
     Call<Token> authenticate(@Body User user);
 
+    @POST("users/forgetpassword")
+    Call<ResponseBody> sendVerificationCode(@Body User user);
+
+    @POST("users/verifyotp")
+    Call<Token> verifyCode(@Body User user);
 
 
 }

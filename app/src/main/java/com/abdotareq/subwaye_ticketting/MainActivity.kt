@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         signinBtn = binding.mainActivitySigninBtn
 
         signUpBtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, SignInActivity::class.java)
+            val intent = Intent(this@MainActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
         signinBtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, SignUpActivity::class.java)
+            val intent = Intent(this@MainActivity, SignInActivity::class.java)
             startActivity(intent)
         }
 

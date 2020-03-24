@@ -23,9 +23,9 @@
 	<string name="message2">To access all features</string>
 	<string name="phone_num">Mobile number</string>
 	<string name="send_verification_code">Send activation code</string>
-	<string name="continue_pass">Continuation</string>
-	<string name="enter_verification">Adahl code activation</string>
-	<string name="message3">It has been sent to the activation code number:</string>
+	<string name="continue_pass">Continue</string>
+	<string name="enter_verification">Enter code activation</string>
+	<string name="message3">Activation code has been sent to:</string>
 	<string name="message4">Please enter the activation code</string>
 	<string name="confirm_new_pass">Confirm Password</string>
 	<string name="new_pass">Enter your new password</string>
@@ -174,6 +174,7 @@
 	<string name="no_searched_stores">Not found restaurants that name</string>
 	<string name="block_messege">This has been blocked account, please communicate with the supervisors of the program</string>
 	<string name="error_message">Failure happened</string>
+	<string name="else_on_repsonse">else onResponse</string>
 	<string name="ok">OK</string>
 	<string name="progSavingMessage">Gary Remember Me</string>
 	<string name="rating_added_message">Evaluation was added successfully</string>

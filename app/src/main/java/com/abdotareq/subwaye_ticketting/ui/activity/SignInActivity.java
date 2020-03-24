@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abdotareq.subwaye_ticketting.ForgetPassActivity;
 import com.abdotareq.subwaye_ticketting.MainActivity;
 import com.abdotareq.subwaye_ticketting.R;
 import com.abdotareq.subwaye_ticketting.databinding.ActivitySignInBinding;
@@ -75,6 +76,14 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        recoverPassTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignInActivity.this, ForgetPassActivity.class);
                 startActivity(intent);
             }
         });

@@ -33,19 +33,36 @@ public class User {
     @SerializedName("admin")
     private int admin;
 
+    @SerializedName("otp_token")
+    private String otp_token;
+
+
     public User(String email, String password, int admin) {
         this.email = email;
         this.password = password;
         this.admin = admin;
     }
 
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
     public User() {
     }
+
+    public User(String email) {
+        this.email = email;
+    }
+
+    public User(String email, String otp_token) {
+        this.email = email;
+        this.otp_token = otp_token;
+    }
+
+    public String getOtp_token() {
+        return otp_token;
+    }
+
+    public void setOtp_token(String otp_token) {
+        this.otp_token = otp_token;
+    }
+
 
     public int getId() {
         return id;
