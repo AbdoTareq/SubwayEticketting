@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,7 +94,7 @@ public class SignInActivity extends AppCompatActivity {
         passEt = binding.signInPassEt;
 
         mailEt.setText("abdo.elbishihi@gmail.com");
-        passEt.setText("abdo1234");
+//        passEt.setText("abdo1234");
 
         //check for all inputs from user are not empty
         if (!util.isValidEmail(mailEt.getText().toString())) {
@@ -106,7 +107,12 @@ public class SignInActivity extends AppCompatActivity {
             return;
         }
 
-        User user = new User(mailEt.getText().toString(), passEt.getText().toString());
+        User user = new User(mailEt.getText().toString());
+
+        user.setPassword(passEt.getText().toString());
+
+        Log.e("SignInActivity: ", user.toString());
+
         authenticate(user);
 
     }

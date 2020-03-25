@@ -4,6 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".ui.activity.ChangePassActivity">
+
+
+    <EditText
+        android:id="@+id/pass_change_pass_et"
+        style="@style/EditTStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:drawableStart="@drawable/password_icon"
+        android:drawablePadding="10dp"
+        android:hint="@string/new_pass"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48000002"
+        tools:targetApi="lollipop" />
+
+
+    <EditText
+        android:id="@+id/pass_change_confirm_pass_et"
+        style="@style/EditTStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableStart="@drawable/password_icon"
+        android:drawablePadding="10dp"
+        android:hint="@string/confirm_new_pass"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pass_change_pass_et"
+        tools:targetApi="lollipop" />
+
+    <Button
+        android:id="@+id/change_pass_confirm_btn"
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_36sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:background="@drawable/shape_sign_up"
+        android:padding="15dp"
+        android:text="@string/change_pass_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pass_change_confirm_pass_et"
+        tools:targetApi="lollipop" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

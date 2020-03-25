@@ -6,6 +6,7 @@ import com.abdotareq.subwaye_ticketting.model.dto.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 /**
@@ -25,6 +26,9 @@ public interface UserService {
 
     @POST("users/verifyotp")
     Call<Token> verifyCode(@Body User user);
+
+    @POST("users/changepassword")
+    Call<ResponseBody> changePass(@Body User user, @Header("Authorization")String bearerToken);
 
 
 }

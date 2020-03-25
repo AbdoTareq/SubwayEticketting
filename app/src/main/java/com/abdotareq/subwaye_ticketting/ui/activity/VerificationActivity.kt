@@ -32,11 +32,9 @@ class VerificationActivity : AppCompatActivity() {
     private lateinit var continueBtn: Button
     private lateinit var retrofit: Retrofit
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verification)
-        val mail = intent.getStringExtra("mail")
 
         // this for view binding to replace findviewbyid
         binding = ActivityVerificationBinding.inflate(layoutInflater)
@@ -49,28 +47,33 @@ class VerificationActivity : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
+        val mail = intent.getStringExtra("mail")
+
         mailTv = binding.verificationMailTv
         codeEt = binding.verificationEt
         continueBtn = binding.verificationContinueBtn
+
         mailTv.text = mail
 
         continueBtn.setOnClickListener(View.OnClickListener {
             if (codeEt.text.isNullOrEmpty()) {
                 codeEt.hint = getText(R.string.enter_verification)
-                codeEt.setHintTextColor(getColor(R.color.colorAccent))
+                codeEt.setHintTextColor(resources.getColor(R.color.colorAccent))
             } else {
                 verifyCode(mail, codeEt.text.toString())
             }
         })
+
     }
 
+    // call to verify the user
     private fun verifyCode(mail: String, code: String) {
         val user = User(mail, code)
 
         //create UserService object
         val userService = retrofit.create(UserService::class.java)
 
-        //initialize the save user call
+        //initialize the verifyCode call
         val call = userService.verifyCode(user)
 
         //initialize and show a progress dialog to the user
@@ -82,11 +85,12 @@ class VerificationActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {
-                    //user saved successfully
+                    //verifyCode successfully
                     progressDialog.dismiss()
                     //ToDo: Remove Toast
                     val intent = Intent(this@VerificationActivity, ChangePassActivity::class.java)
                     intent.putExtra("token", response.body()!!.token)
+                    intent.putExtra("mail", mail)
                     Toast.makeText(this@VerificationActivity, "token: " + response.body()!!.token, Toast.LENGTH_SHORT).show()
                     startActivity(intent)
                     finish()
@@ -104,4 +108,5 @@ class VerificationActivity : AppCompatActivity() {
             }
         })
     }
+
 }

@@ -17,6 +17,8 @@
     <string name="mail">Email</string>
     <string name="mail_exist">Email already exist</string>
     <string name="pass_war">Password Less Than 8 Characters </string>
+    <string name="user_not_found">User not found </string>
+    <string name="email_does_not_match">Email does not match </string>
     <string name="retype_pass">تأكيد كلمة المرور</string>
     <string name="signIn">Sign In</string>
     <string name="message2">To access all features</string>
