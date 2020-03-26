@@ -1,4 +1,4 @@
-package com.abdotareq.subwaye_ticketting.ui.activity;
+package com.abdotareq.subwaye_ticketting.ui.activity.regesteriation;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -21,6 +21,7 @@ import com.abdotareq.subwaye_ticketting.databinding.ActivitySignUpBinding;
 import com.abdotareq.subwaye_ticketting.model.dto.Token;
 import com.abdotareq.subwaye_ticketting.model.dto.User;
 import com.abdotareq.subwaye_ticketting.model.retrofit.UserService;
+import com.abdotareq.subwaye_ticketting.ui.activity.HomeLandActivity;
 import com.abdotareq.subwaye_ticketting.utility.SharedPreferenceUtil;
 import com.abdotareq.subwaye_ticketting.utility.util;
 
@@ -28,7 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,7 +52,6 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView signInTv;
 
     private Retrofit retrofit;
-
 
     int year = 0;
     Date date;

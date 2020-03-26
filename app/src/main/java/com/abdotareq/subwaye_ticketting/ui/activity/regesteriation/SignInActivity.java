@@ -1,4 +1,4 @@
-package com.abdotareq.subwaye_ticketting.ui.activity;
+package com.abdotareq.subwaye_ticketting.ui.activity.regesteriation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,7 @@ import com.abdotareq.subwaye_ticketting.databinding.ActivitySignInBinding;
 import com.abdotareq.subwaye_ticketting.model.dto.Token;
 import com.abdotareq.subwaye_ticketting.model.dto.User;
 import com.abdotareq.subwaye_ticketting.model.retrofit.UserService;
+import com.abdotareq.subwaye_ticketting.ui.activity.HomeLandActivity;
 import com.abdotareq.subwaye_ticketting.utility.SharedPreferenceUtil;
 import com.abdotareq.subwaye_ticketting.utility.util;
 
@@ -148,7 +149,7 @@ public class SignInActivity extends AppCompatActivity {
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(SignInActivity.this, true);
                     SharedPreferenceUtil.setSharedPrefsUserId(SignInActivity.this, response.body().getToken());
 
-                    Intent intent =new Intent(SignInActivity.this,HomeLandActivity.class);
+                    Intent intent =new Intent(SignInActivity.this, HomeLandActivity.class);
                     startActivity(intent);
 
                     passEt.setHint("token:   " + response.body().getToken());

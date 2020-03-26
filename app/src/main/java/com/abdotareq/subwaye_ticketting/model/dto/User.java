@@ -36,7 +36,6 @@ public class User {
     @SerializedName("otp_token")
     private String otp_token;
 
-
     public User(String email, String password, int admin) {
         this.email = email;
         this.password = password;

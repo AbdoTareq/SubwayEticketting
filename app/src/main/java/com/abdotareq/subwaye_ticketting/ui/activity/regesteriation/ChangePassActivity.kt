@@ -1,6 +1,5 @@
-package com.abdotareq.subwaye_ticketting.ui.activity
+package com.abdotareq.subwaye_ticketting.ui.activity.regesteriation
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subwaye_ticketting.R
 import com.abdotareq.subwaye_ticketting.databinding.ActivityChangePassBinding
-import com.abdotareq.subwaye_ticketting.model.dto.Token
 import com.abdotareq.subwaye_ticketting.model.dto.User
 import com.abdotareq.subwaye_ticketting.model.retrofit.UserService
 import com.abdotareq.subwaye_ticketting.utility.util
@@ -19,7 +17,6 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.security.auth.callback.Callback
 
 class ChangePassActivity : AppCompatActivity() {
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.activity.SignUpActivity">
+    tools:context=".ui.activity.regesteriation.SignUpActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -192,7 +192,7 @@
         android:padding="15dp"
         android:shadowColor="@android:color/transparent"
         android:text="@string/sign_up"
-        style="@style/EditTStyle"
+        style="@style/ButtonStyle"
         android:textSize="@dimen/sign_in_medium_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

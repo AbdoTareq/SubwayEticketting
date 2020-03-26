@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subwaye_ticketting.databinding.ActivityMainBinding
-import com.abdotareq.subwaye_ticketting.ui.activity.SignInActivity
-import com.abdotareq.subwaye_ticketting.ui.activity.SignUpActivity
+import com.abdotareq.subwaye_ticketting.ui.activity.regesteriation.SignInActivity
+import com.abdotareq.subwaye_ticketting.ui.activity.regesteriation.SignUpActivity
 
 class MainActivity : AppCompatActivity() {
 

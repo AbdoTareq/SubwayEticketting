@@ -1,4 +1,4 @@
-package com.abdotareq.subwaye_ticketting.ui.activity;
+package com.abdotareq.subwaye_ticketting.ui.activity.regesteriation;
 
 import androidx.appcompat.app.AppCompatActivity;
 

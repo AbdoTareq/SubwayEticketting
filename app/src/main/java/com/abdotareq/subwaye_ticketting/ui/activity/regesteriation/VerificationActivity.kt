@@ -1,15 +1,12 @@
-package com.abdotareq.subwaye_ticketting.ui.activity
+package com.abdotareq.subwaye_ticketting.ui.activity.regesteriation
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subwaye_ticketting.R
 import com.abdotareq.subwaye_ticketting.databinding.ActivityVerificationBinding

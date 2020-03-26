@@ -46,8 +46,11 @@ dependencies {
     //retrofit library
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:1.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Circular ImageVie Library for profile
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
 
 
 }

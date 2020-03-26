@@ -27,8 +27,9 @@ public interface UserService {
     @POST("users/verifyotp")
     Call<Token> verifyCode(@Body User user);
 
+    // be careful that header has key(Authorization) & value ("Bearer " + token)
     @POST("users/changepassword")
-    Call<ResponseBody> changePass(@Body User user, @Header("Authorization")String bearerToken);
+    Call<ResponseBody> changePass(@Body User user, @Header("Authorization") String bearerToken);
 
 
 }
