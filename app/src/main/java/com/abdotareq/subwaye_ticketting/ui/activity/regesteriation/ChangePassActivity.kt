@@ -1,5 +1,6 @@
 package com.abdotareq.subwaye_ticketting.ui.activity.regesteriation
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -118,13 +119,13 @@ class ChangePassActivity : AppCompatActivity() {
                 if (responseCode in 200..299 && response.body() != null) {
                     //pass changed successfully
                     progressDialog.dismiss()
-//                    val intent = Intent(this@ChangePassActivity, ChangePassActivity::class.java)
+                    val intent = Intent(this@ChangePassActivity, SignInActivity::class.java)
 //                    intent.putExtra("token", response.body()!!.token)
 //                    intent.putExtra("mail", mail)
-//                    startActivity(intent)
-                    Toast.makeText(this@ChangePassActivity, "pass changed", Toast.LENGTH_SHORT).show()
+                    startActivity(intent)
+                    Toast.makeText(this@ChangePassActivity, "Pass changed", Toast.LENGTH_SHORT).show()
 
-//                    finish()
+                    finish()
                 } else if (responseCode == 434) {
                     //pass not saved successfully
                     progressDialog.dismiss()

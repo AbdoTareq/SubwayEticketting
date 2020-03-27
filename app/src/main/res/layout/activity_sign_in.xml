@@ -59,35 +59,42 @@
             style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:backgroundTint="@color/colorWhite"
             android:drawableStart="@drawable/email_icon"
             android:drawablePadding="10dp"
             android:hint="@string/mail"
             android:padding="15dp"
             android:textAlignment="viewStart"
-            android:textColorHighlight="@color/colorPrimary"
-            android:textColorHint="@color/colorWhite"
             tools:targetApi="lollipop" />
 
-        <EditText
-            android:id="@+id/sign_in_pass_et"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/pass_change_pass"
             style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/colorWhite"
-            android:drawableStart="@drawable/password_icon"
-            android:drawablePadding="10dp"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:textColorHighlight="@color/colorPrimary"
-            android:textColorHint="@color/colorWhite"
-            tools:targetApi="lollipop" />
+            android:importantForAutofill="no"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:passwordToggleTint="@color/colorWhite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.48000002"
+            app:passwordToggleEnabled="true"
+            tools:targetApi="lollipop">
+
+            <EditText
+                android:id="@+id/sign_in_pass_et"
+                style="@style/EditTStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/password_icon"
+                android:drawablePadding="10dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="16dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </LinearLayout>
 
@@ -125,7 +132,6 @@
         android:id="@+id/sign_in_sign_up_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/medium_margin"
         android:gravity="center"
         android:text="@string/create_new_account"
         android:textColor="@color/colorAccent"
