@@ -96,6 +96,7 @@ public class SignInActivity extends AppCompatActivity {
 
 //        mailEt.setText("abdo.elbishihi@gmail.com");
 //        passEt.setText("abdo1234");
+//        Toast.makeText(this, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show();
 
         //check for all inputs from user are not empty
         if (!util.isValidEmail(mailEt.getText().toString())) {

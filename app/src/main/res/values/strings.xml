@@ -238,6 +238,9 @@
     <string name="select_gender">Select gender</string>
     <string name="select_birthday">Select birthday:</string>
     <string name="last_name">Last Name</string>
+    <string name="pocket">Pocket</string>
+    <string name="profile">Profile</string>
+    <string name="tickets">Tickets</string>
 
     <string-array name="gender_array">
         <item>Female</item>
