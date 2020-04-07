@@ -1,10 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+// for safe args
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.abdotareq.subwaye_ticketting"
@@ -52,7 +55,7 @@ dependencies {
     //Circular ImageVie Library for profile
     implementation 'de.hdodenhof:circleimageview:3.0.1'
 
-    // for navigation
+    // for navigation and safe arguments
     implementation "android.arch.navigation:navigation-fragment-ktx:2.2.1"
     implementation "android.arch.navigation:navigation-ui-ktx:2.2.1"
 
