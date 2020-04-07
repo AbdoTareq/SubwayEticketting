@@ -5,6 +5,9 @@
     android:id="@+id/mobile_navigation.xml"
     app:startDestination="@id/ticketFragment">
 
+    <!-- it navigates to the right item through id in every item connected
+   through menu id in bottom_nav_menu -->
+
     <fragment
         android:id="@+id/ticketFragment"
         android:name="com.abdotareq.subwaye_ticketting.ui.fragment.TicketFragment"

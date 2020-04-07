@@ -31,6 +31,7 @@ class HomeLandActivity : AppCompatActivity() {
     }
 
     // method to navigate through bottom navigation view
+    // it navigates to the right item through id in every item in bottom_nav_menu
     private fun setupBottomNavMenu(navController: NavController) {
         // TODO STEP 9.3 - Use NavigationUI to set up Bottom Nav
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)

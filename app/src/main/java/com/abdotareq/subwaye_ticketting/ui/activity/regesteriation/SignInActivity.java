@@ -94,9 +94,9 @@ public class SignInActivity extends AppCompatActivity {
         EditText mailEt = binding.signInMailEt;
         passEt = binding.signInPassEt;
 
-//        mailEt.setText("abdo.elbishihi@gmail.com");
-//        passEt.setText("abdo1234");
-//        Toast.makeText(this, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show();
+        mailEt.setText("abdo.elbishihi@gmail.com");
+        passEt.setText("abdo1234");
+        Toast.makeText(this, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show();
 
         //check for all inputs from user are not empty
         if (!util.isValidEmail(mailEt.getText().toString())) {
@@ -152,8 +152,7 @@ public class SignInActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(SignInActivity.this, HomeLandActivity.class);
                     startActivity(intent);
-
-                    passEt.setHint("token:   " + response.body().getToken());
+                    finish();
 
 //                        if (getIntent().hasExtra("LOGGED_OUT")) {
 //                            Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
