@@ -2,9 +2,11 @@ package com.abdotareq.subwaye_ticketting.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.abdotareq.subwaye_ticketting.R
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home_land.*
 
 class HomeLandActivity : AppCompatActivity() {
@@ -14,9 +16,26 @@ class HomeLandActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home_land)
 
         // this for icon background tint to be empty(just lines make image)
-        bottom_navigation_main.itemIconTintList = null
+        bottom_nav_view.itemIconTintList = null
+
+        // Set up NavHostFragment to navigate through bottom navigation
+        val host: NavHostFragment = supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
+
+        // Set up NavigationController
+        val navController = host.navController
+        setupBottomNavMenu(navController)
 
 
+
+    }
+
+    // method to navigate through bottom navigation view
+    private fun setupBottomNavMenu(navController: NavController) {
+        // TODO STEP 9.3 - Use NavigationUI to set up Bottom Nav
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+        bottomNav?.setupWithNavController(navController)
+        // TODO END STEP 9.3
     }
 
 }
