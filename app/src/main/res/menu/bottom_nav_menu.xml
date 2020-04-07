@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2018 The Android Open Source Project
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-        android:icon="@drawable/pocket_unselected"
-        android:title="@string/pocket" />
+        android:id="@id/settingsFragment"
+        android:icon="@drawable/ic_settings_state"
+        android:title="@string/tickets" />
     <item
-        android:icon="@drawable/profile_unselected"
+        android:id="@id/profileSettingsFragment"
+        android:icon="@drawable/ic_profile_state"
         android:title="@string/profile" />
     <item
-        android:icon="@drawable/ticket_selected"
+        android:id="@id/ticketFragment"
         android:title="@string/tickets" />
+
+    <item
+        android:id="@id/pocketFragment"
+        android:icon="@drawable/ic_pocket_state"
+        android:title="@string/pocket" />
+    <item
+        android:id="@id/historyFragment"
+        android:icon="@drawable/ic_history_state"
+        android:title="@string/history" />
+
 </menu>

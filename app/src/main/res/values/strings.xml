@@ -241,6 +241,7 @@
     <string name="pocket">Pocket</string>
     <string name="profile">Profile</string>
     <string name="tickets">Tickets</string>
+    <string name="history">History</string>
 
     <string-array name="gender_array">
         <item>Female</item>
