@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subwaye_ticketting.databinding.ActivityMainBinding
 import com.abdotareq.subwaye_ticketting.ui.activity.regesteriation.SignInActivity
 import com.abdotareq.subwaye_ticketting.ui.activity.regesteriation.SignUpActivity
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.getRoot()
         setContentView(view)
+
+        Timber.e("test timber")
 
         signUpBtn = binding.mainActivitySignupBtn
         signinBtn = binding.mainActivitySigninBtn

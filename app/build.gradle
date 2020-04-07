@@ -44,13 +44,22 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
 
     //retrofit library
-    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation "androidx.core:core-ktx:1.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //Circular ImageVie Library for profile
     implementation 'de.hdodenhof:circleimageview:3.0.1'
+
+    // for navigation
+    implementation "android.arch.navigation:navigation-fragment-ktx:2.2.1"
+    implementation "android.arch.navigation:navigation-ui-ktx:2.2.1"
+
+
+    // Timber logs library
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
 
 
 }

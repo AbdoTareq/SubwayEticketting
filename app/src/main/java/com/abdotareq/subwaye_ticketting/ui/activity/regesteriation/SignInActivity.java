@@ -21,6 +21,8 @@ import com.abdotareq.subwaye_ticketting.ui.activity.HomeLandActivity;
 import com.abdotareq.subwaye_ticketting.utility.SharedPreferenceUtil;
 import com.abdotareq.subwaye_ticketting.utility.util;
 
+import org.jetbrains.annotations.NotNull;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,9 +34,7 @@ public class SignInActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private ActivitySignInBinding binding;
 
-    private Button signInBtn;
-    private TextView recoverPassTv, signUpTv;
-    private EditText mailEt, passEt;
+    private EditText passEt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +58,9 @@ public class SignInActivity extends AppCompatActivity {
     // Call listeners on the activity for code readability
     private void callListeners() {
 
-        signInBtn = binding.signInBtn;
-        signUpTv = binding.signInSignUpTv;
-        recoverPassTv = binding.signInRecoverPassTv;
+        Button signInBtn = binding.signInBtn;
+        TextView signUpTv = binding.signInSignUpTv;
+        TextView recoverPassTv = binding.signInRecoverPassTv;
 
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,10 +91,10 @@ public class SignInActivity extends AppCompatActivity {
     // Handle sign in Button clicks
     private void signInBtnClick() {
 
-        mailEt = binding.signInMailEt;
+        EditText mailEt = binding.signInMailEt;
         passEt = binding.signInPassEt;
 
-        mailEt.setText("abdo.elbishihi@gmail.com");
+//        mailEt.setText("abdo.elbishihi@gmail.com");
 //        passEt.setText("abdo1234");
 
         //check for all inputs from user are not empty
@@ -137,7 +137,7 @@ public class SignInActivity extends AppCompatActivity {
         //start the call
         call.enqueue(new Callback<Token>() {
             @Override
-            public void onResponse(Call<Token> call, Response<Token> response) {
+            public void onResponse(@NotNull Call<Token> call, @NotNull Response<Token> response) {
 
                 int responseCode = response.code();
 
@@ -149,7 +149,7 @@ public class SignInActivity extends AppCompatActivity {
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(SignInActivity.this, true);
                     SharedPreferenceUtil.setSharedPrefsUserId(SignInActivity.this, response.body().getToken());
 
-                    Intent intent =new Intent(SignInActivity.this, HomeLandActivity.class);
+                    Intent intent = new Intent(SignInActivity.this, HomeLandActivity.class);
                     startActivity(intent);
 
                     passEt.setHint("token:   " + response.body().getToken());
@@ -173,7 +173,7 @@ public class SignInActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Token> call, Throwable t) {
+            public void onFailure(@NotNull Call<Token> call, Throwable t) {
 
                 progressDialog.dismiss();
                 Toast.makeText(SignInActivity.this, getText(R.string.error_message), Toast.LENGTH_LONG).show();
