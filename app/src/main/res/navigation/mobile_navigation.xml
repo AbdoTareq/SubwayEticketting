@@ -10,27 +10,27 @@
 
     <fragment
         android:id="@+id/ticketFragment"
-        android:name="com.abdotareq.subwaye_ticketting.ui.fragment.TicketFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.TicketFragment"
         android:label="fragment_ticket"
         tools:layout="@layout/fragment_ticket" />
     <fragment
         android:id="@+id/pocketFragment"
-        android:name="com.abdotareq.subwaye_ticketting.ui.fragment.PocketFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.PocketFragment"
         android:label="fragment_pocket"
         tools:layout="@layout/fragment_pocket" />
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.abdotareq.subwaye_ticketting.ui.fragment.HistoryFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/profileSettingsFragment"
-        android:name="com.abdotareq.subwaye_ticketting.ui.fragment.ProfileSettingsFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.ProfileSettingsFragment"
         android:label="fragment_profile_settings"
         tools:layout="@layout/fragment_profile_settings" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.abdotareq.subwaye_ticketting.ui.fragment.SettingsFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 
