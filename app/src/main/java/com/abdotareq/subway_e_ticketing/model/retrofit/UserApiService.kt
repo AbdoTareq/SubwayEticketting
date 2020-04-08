@@ -58,7 +58,7 @@ interface UserApiService {
     fun changePass(@Body user: User?, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
 }
 
-// this singelton object to use it like static object to use it directly as network call is expensive
+// this singleton  object to use it like static object to use it directly as network call is expensive
 // so it's better to instantiate it once 
 object UserApiObj {
     val retrofitService: UserApiService by lazy {
