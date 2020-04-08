@@ -2,7 +2,7 @@ package com.abdotareq.subwaye_ticketting.ui.activity
 
 import android.content.Intent
 import com.abdotareq.subwaye_ticketting.R
-import com.abdotareq.subwaye_ticketting.ui.activity.regesteriation.SignInActivity
+import com.abdotareq.subwaye_ticketting.ui.activity.registration.SignInActivity
 import com.abdotareq.subwaye_ticketting.utility.SharedPreferenceUtil
 import com.daimajia.androidanimations.library.Techniques
 import com.viksaa.sssplash.lib.activity.AwesomeSplash

@@ -14,14 +14,14 @@
         android:name=".utility.ApplicationController"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name=".ui.activity.regesteriation.ChangePassActivity"
+        <activity android:name=".ui.activity.registration.ChangePassActivity"
             />
-        <activity android:name=".ui.activity.regesteriation.VerificationActivity" />
-        <activity android:name=".ui.activity.regesteriation.ForgetPassActivity" />
+        <activity android:name=".ui.activity.registration.VerificationActivity" />
+        <activity android:name=".ui.activity.registration.ForgetPassActivity" />
         <activity android:name=".ui.activity.HomeLandActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.activity.regesteriation.SignUpActivity" />
-        <activity android:name=".ui.activity.regesteriation.SignInActivity" />
+        <activity android:name=".ui.activity.registration.SignUpActivity" />
+        <activity android:name=".ui.activity.registration.SignInActivity" />
         <activity android:name=".ui.activity.SplashScreenActivity"
            >
             <intent-filter>

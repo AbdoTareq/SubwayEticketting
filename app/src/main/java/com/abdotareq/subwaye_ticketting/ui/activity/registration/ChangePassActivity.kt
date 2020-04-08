@@ -1,4 +1,4 @@
-package com.abdotareq.subwaye_ticketting.ui.activity.regesteriation
+package com.abdotareq.subwaye_ticketting.ui.activity.registration
 
 import android.content.Intent
 import android.os.Bundle

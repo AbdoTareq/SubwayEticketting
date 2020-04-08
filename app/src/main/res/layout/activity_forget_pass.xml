@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.activity.regesteriation.ForgetPassActivity">
+    tools:context=".ui.activity.registration.ForgetPassActivity">
 
     <EditText
         android:id="@+id/forget_pass_mail_et"
