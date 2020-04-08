@@ -5,6 +5,10 @@ import com.abdotareq.subwaye_ticketting.BuildConfig
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
+/**
+ * Controller responsible to start timber debug tree
+ * */
+
 class ApplicationController : Application() {
     override fun onCreate() {
         super.onCreate()

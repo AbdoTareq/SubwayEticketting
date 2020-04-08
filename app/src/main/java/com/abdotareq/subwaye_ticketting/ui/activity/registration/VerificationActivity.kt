@@ -12,7 +12,8 @@ import com.abdotareq.subwaye_ticketting.R
 import com.abdotareq.subwaye_ticketting.databinding.ActivityVerificationBinding
 import com.abdotareq.subwaye_ticketting.model.dto.Token
 import com.abdotareq.subwaye_ticketting.model.dto.User
-import com.abdotareq.subwaye_ticketting.model.retrofit.UserService
+import com.abdotareq.subwaye_ticketting.model.retrofit.UserApiObj
+import com.abdotareq.subwaye_ticketting.model.retrofit.UserApiService
 import com.abdotareq.subwaye_ticketting.utility.util
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,7 +28,6 @@ class VerificationActivity : AppCompatActivity() {
     private lateinit var mailTv: TextView
     private lateinit var codeEt: EditText
     private lateinit var continueBtn: Button
-    private lateinit var retrofit: Retrofit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +38,6 @@ class VerificationActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //initialize retrofit object
-        retrofit = Retrofit.Builder()
-                .baseUrl(getString(R.string.base_url))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
         val mail = intent.getStringExtra("mail")
 
         mailTv = binding.verificationMailTv
@@ -52,14 +46,14 @@ class VerificationActivity : AppCompatActivity() {
 
         mailTv.text = mail
 
-        continueBtn.setOnClickListener(View.OnClickListener {
+        continueBtn.setOnClickListener {
             if (codeEt.text.isNullOrEmpty()) {
                 codeEt.hint = getText(R.string.enter_verification)
                 codeEt.setHintTextColor(resources.getColor(R.color.colorAccent))
             } else {
                 verifyCode(mail, codeEt.text.toString())
             }
-        })
+        }
 
     }
 
@@ -67,18 +61,12 @@ class VerificationActivity : AppCompatActivity() {
     private fun verifyCode(mail: String, code: String) {
         val user = User(mail, code)
 
-        //create UserService object
-        val userService = retrofit.create(UserService::class.java)
-
-        //initialize the verifyCode call
-        val call = userService.verifyCode(user)
-
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(this@VerificationActivity, getString(R.string.loading))
         progressDialog.show()
 
         //start the call
-        call.enqueue(object : Callback<Token?> {
+        UserApiObj.retrofitService.verifyCode(user)?.enqueue(object : Callback<Token?> {
             override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {

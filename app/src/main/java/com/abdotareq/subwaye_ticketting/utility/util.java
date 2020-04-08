@@ -33,27 +33,21 @@ public class util {
             + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
             + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
             + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
-        CharSequence inputStr = target;
         Pattern pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
-        return matcher.matches();
-
+        Matcher matcher = pattern.matcher(target);
+        return !matcher.matches();
     }
 
     public static ProgressDialog initProgress(Context context, String message) {
-
         ProgressDialog progress = new ProgressDialog(context, R.style.ProgressDialogStyle);
         progress.setMessage(message);
         progress.setCancelable(true); // disable dismiss by tapping outside of the dialog
-
         return progress;
     }
 
     public static String formatDate(Date date) {
-
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(date);
-
     }
 
 }

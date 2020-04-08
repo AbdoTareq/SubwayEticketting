@@ -11,13 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subwaye_ticketting.R
 import com.abdotareq.subwaye_ticketting.databinding.ActivityChangePassBinding
 import com.abdotareq.subwaye_ticketting.model.dto.User
-import com.abdotareq.subwaye_ticketting.model.retrofit.UserService
+import com.abdotareq.subwaye_ticketting.model.retrofit.UserApiObj
 import com.abdotareq.subwaye_ticketting.utility.util
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 
 class ChangePassActivity : AppCompatActivity() {
 
@@ -26,8 +25,6 @@ class ChangePassActivity : AppCompatActivity() {
     private lateinit var passEt: EditText
     private lateinit var confirmEt: EditText
     private lateinit var confirmBtn: Button
-
-    private lateinit var retrofit: Retrofit
 
     private lateinit var mail: String
     private lateinit var token: String
@@ -42,12 +39,6 @@ class ChangePassActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //initialize retrofit object
-        retrofit = Retrofit.Builder()
-                .baseUrl(getString(R.string.base_url))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
         // take the token to send it with bearer in header to change pass
         token = intent.getStringExtra("token")
         mail = intent.getStringExtra("mail")
@@ -61,9 +52,9 @@ class ChangePassActivity : AppCompatActivity() {
         confirmEt = binding.passChangeConfirmPassEt
         confirmBtn = binding.changePassConfirmBtn
 
-        confirmBtn.setOnClickListener(View.OnClickListener {
+        confirmBtn.setOnClickListener {
             confirmBtnClick()
-        })
+        }
 
     }
 
@@ -92,7 +83,7 @@ class ChangePassActivity : AppCompatActivity() {
         // val user = User(mail, passEt.text.toString())
 
 
-        Log.e("ChangePassActivity: ", user.toString())
+        Timber.e(user.toString())
 
         //sign up method that will call the web service
         changePassCall(user)
@@ -102,18 +93,12 @@ class ChangePassActivity : AppCompatActivity() {
 
     private fun changePassCall(user: User) {
 
-        //create UserService object
-        val userService = retrofit.create(UserService::class.java)
-
-        //initialize the changePass call
-        val call = userService.changePass(user, bearerToken)
-
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(this, getString(R.string.loading))
         progressDialog.show()
 
         //start the call
-        call.enqueue(object : retrofit2.Callback<ResponseBody?> {
+        UserApiObj.retrofitService.changePass(user, bearerToken)?.enqueue(object : retrofit2.Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {

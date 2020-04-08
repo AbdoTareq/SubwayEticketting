@@ -9,6 +9,10 @@ import com.abdotareq.subwaye_ticketting.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home_land.*
 
+/**
+ * Class responsible for the main home opening activity that host all the app fragments & contents
+ * */
+
 class HomeLandActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
