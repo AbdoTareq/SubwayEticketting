@@ -3,6 +3,7 @@ package com.abdotareq.subwaye_ticketting.ui.activity
 import android.content.Intent
 import com.abdotareq.subwaye_ticketting.R
 import com.abdotareq.subwaye_ticketting.ui.activity.regesteriation.SignInActivity
+import com.abdotareq.subwaye_ticketting.utility.SharedPreferenceUtil
 import com.daimajia.androidanimations.library.Techniques
 import com.viksaa.sssplash.lib.activity.AwesomeSplash
 import com.viksaa.sssplash.lib.cnst.Flags
@@ -52,8 +53,13 @@ class SplashScreenActivity : AwesomeSplash() {
     override fun animationsFinished() {
         //transit to another activity here
         //or do whatever you want
-        val intent = Intent(this, SignInActivity::class.java)
+        val intent: Intent = if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this))
+            Intent(this, HomeLandActivity::class.java)
+        else
+            Intent(this, SignInActivity::class.java)
+
         startActivity(intent)
-        finish();
+        finish()
+
     }
 }

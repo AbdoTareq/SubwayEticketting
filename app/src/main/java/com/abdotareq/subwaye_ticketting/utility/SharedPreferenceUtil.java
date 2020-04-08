@@ -11,6 +11,7 @@ public class SharedPreferenceUtil {
     public final static String LOGGED_IN_FLAG = "LOGGED_IN_FLAG";
     public final static String USER_ID_FLAG = "USER_ID_FLAG";
 
+    //write token into SharedPreferences to use in remember user
     public static void setSharedPrefsLoggedIn(Context context, boolean isChecked) {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
@@ -20,6 +21,7 @@ public class SharedPreferenceUtil {
 
     }
 
+    //get token from SharedPreferences to use in remember user
     public static boolean getSharedPrefsLoggedIn(Context context) {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);

@@ -147,7 +147,7 @@ public class SignInActivity extends AppCompatActivity {
                     //user authenticated successfully
                     progressDialog.dismiss();
 
-                    //write token into SharedPreferences
+                    //write token into SharedPreferences to use in remember user
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(SignInActivity.this, true);
                     SharedPreferenceUtil.setSharedPrefsUserId(SignInActivity.this, response.body().getToken());
 
