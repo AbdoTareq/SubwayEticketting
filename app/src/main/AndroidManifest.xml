@@ -19,10 +19,10 @@
         <activity android:name=".ui.activity.regesteriation.VerificationActivity" />
         <activity android:name=".ui.activity.regesteriation.ForgetPassActivity" />
         <activity android:name=".ui.activity.HomeLandActivity" />
-        <activity android:name=".ui.activity.HomeActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".ui.activity.regesteriation.SignUpActivity" />
         <activity android:name=".ui.activity.regesteriation.SignInActivity" />
-        <activity android:name=".MainActivity"
+        <activity android:name=".ui.activity.SplashScreenActivity"
            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

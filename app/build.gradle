@@ -59,10 +59,12 @@ dependencies {
     // for navigation and safe arguments
     implementation "android.arch.navigation:navigation-fragment-ktx:2.2.1"
     implementation "android.arch.navigation:navigation-ui-ktx:2.2.1"
-
-
+    
     // Timber logs library
     implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Splash screen library
+    implementation 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
 
 
 }

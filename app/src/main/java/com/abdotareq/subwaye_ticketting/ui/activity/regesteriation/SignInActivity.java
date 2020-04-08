@@ -18,6 +18,7 @@ import com.abdotareq.subwaye_ticketting.model.dto.Token;
 import com.abdotareq.subwaye_ticketting.model.dto.User;
 import com.abdotareq.subwaye_ticketting.model.retrofit.UserService;
 import com.abdotareq.subwaye_ticketting.ui.activity.HomeLandActivity;
+import com.abdotareq.subwaye_ticketting.ui.activity.SplashScreenActivity;
 import com.abdotareq.subwaye_ticketting.utility.SharedPreferenceUtil;
 import com.abdotareq.subwaye_ticketting.utility.util;
 
