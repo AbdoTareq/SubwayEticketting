@@ -60,7 +60,7 @@
 	<string name="news_health">Awareness bulletins from Ckh Environment</string>
 	<string name="secretariat_info">Overview of the General Directorate of Environmental Health</string>
 	<string name="health_website">Public Health Portal Alaih</string>
-	<string name="wrong_code">Activation code is wrong</string>
+	<string name="wrong_code">Verification code is wrong</string>
 	<string name="wrong_mail_or_pass">Wrong mail or pass</string>
 	<string name="unrecorded_num_warning">This number is not registered</string>
 	<string name="tell_a_friend">Tell a Friend</string>

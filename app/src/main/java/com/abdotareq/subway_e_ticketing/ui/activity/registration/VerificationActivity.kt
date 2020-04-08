@@ -75,8 +75,12 @@ class VerificationActivity : AppCompatActivity() {
                     Toast.makeText(this@VerificationActivity, "token: " + response.body()!!.token, Toast.LENGTH_SHORT).show()
                     startActivity(intent)
                     finish()
-                } else {
-                    //user not saved successfully
+                } else if (responseCode == 439) {
+                    //verifyCode not successfully
+                    progressDialog.dismiss()
+                    Toast.makeText(this@VerificationActivity, getString(R.string.wrong_code), Toast.LENGTH_LONG).show()
+                }else {
+                    //verifyCode not successfully
                     progressDialog.dismiss()
                     Toast.makeText(this@VerificationActivity, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
                 }

@@ -115,7 +115,6 @@ class SignUpActivity : AppCompatActivity() {
                     val intent = Intent(this@SignUpActivity, HomeLandActivity::class.java)
                     startActivity(intent)
 
-//                    returnIntent.putExtra("MOBILE", phone.getText().toString());
                     setResult(Activity.RESULT_OK, returnIntent)
                     Toast.makeText(this@SignUpActivity, "success", Toast.LENGTH_SHORT).show()
                 } else if (responseCode == 434) {

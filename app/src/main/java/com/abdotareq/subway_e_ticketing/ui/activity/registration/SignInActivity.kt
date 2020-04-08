@@ -58,7 +58,7 @@ class SignInActivity : AppCompatActivity() {
         passEt = binding.signInPassEt
 
         mailEt.setText("abdo.elbishihi@gmail.com")
-        passEt.setText("abdo12345")
+        passEt.setText("abdo1234")
         Toast.makeText(this, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show()
 
         //check for all inputs from user are not empty
@@ -99,17 +99,11 @@ class SignInActivity : AppCompatActivity() {
                     //write token into SharedPreferences to use in remember user
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(this@SignInActivity, true)
                     SharedPreferenceUtil.setSharedPrefsUserId(this@SignInActivity, response.body()!!.token)
+                    Timber.e("token:    ${response.body()!!.token}")
                     val intent = Intent(this@SignInActivity, HomeLandActivity::class.java)
                     startActivity(intent)
                     finish()
 
-//                        if (getIntent().hasExtra("LOGGED_OUT")) {
-//                            Intent mainIntent = new Intent(SignInActivity.this, MainActivity.class);
-//                            startActivity(mainIntent);
-//                        }
-//                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-//                    startActivity(intent);
-//                    finish();
                 } else if (responseCode == 436) {
                     //user not authenticated successfully
                     progressDialog.dismiss()
