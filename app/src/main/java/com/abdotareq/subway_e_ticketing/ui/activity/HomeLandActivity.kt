@@ -6,8 +6,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home_land.*
+import timber.log.Timber
 
 /**
  * Class responsible for the main home opening activity that host all the app fragments & contents
@@ -29,7 +31,6 @@ class HomeLandActivity : AppCompatActivity() {
         // Set up NavigationController
         val navController = host.navController
         setupBottomNavMenu(navController)
-
 
 
     }

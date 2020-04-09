@@ -11,10 +11,10 @@ import com.daimajia.androidanimations.library.Techniques
 import com.viksaa.sssplash.lib.activity.AwesomeSplash
 import com.viksaa.sssplash.lib.cnst.Flags
 import com.viksaa.sssplash.lib.model.ConfigSplash
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
+import java.lang.Exception
 
 class SplashScreenActivity : AwesomeSplash() {
 
@@ -76,7 +76,7 @@ class SplashScreenActivity : AwesomeSplash() {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {
                     //get user successfully
-                    Toast.makeText(this@SplashScreenActivity, " ${response.body()!!.first_name} ${response.body()!!.last_name} ", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SplashScreenActivity, "Welcome ${response.body()!!.first_name} ${response.body()!!.last_name} ", Toast.LENGTH_LONG).show()
                     user = response.body()!!
                     Timber.e("$user")
 
@@ -101,10 +101,16 @@ class SplashScreenActivity : AwesomeSplash() {
     override fun animationsFinished() {
         //transit to another activity here
         //or do whatever you want
-        val intent: Intent = if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this))
+        val intent: Intent = if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this)) {
             Intent(this, HomeLandActivity::class.java)
-        else
+
+        } else
             Intent(this, SignInActivity::class.java)
+        try {
+            intent.putExtra("user", user); // sending user object.
+        } catch (e: Exception) {
+            Timber.e("$e")
+        }
         startActivity(intent)
         finish()
 
