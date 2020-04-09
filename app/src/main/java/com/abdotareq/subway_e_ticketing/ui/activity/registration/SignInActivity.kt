@@ -118,7 +118,7 @@ class SignInActivity : AppCompatActivity() {
             override fun onFailure(call: Call<Token?>, t: Throwable) {
                 progressDialog.dismiss()
                 Timber.e("getText(R.string.error_message)${t.message}")
-                Toast.makeText(this@SignInActivity, getText(R.string.error_message), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SignInActivity, getText(R.string.failure_happened), Toast.LENGTH_LONG).show()
             }
         })
     }

@@ -50,12 +50,12 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.5'
     implementation 'com.google.android.material:material:1.1.0'
 
-    //retrofit library
+    //retrofit library and moshi for auto convert response to objects
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
-
-    //Circular ImageVie Library for profile
-    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    implementation "com.squareup.moshi:moshi:1.9.2"
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.2"
+    implementation "com.squareup.retrofit2:converter-moshi:2.5.0"
 
     // for navigation and safe arguments
     implementation "android.arch.navigation:navigation-fragment-ktx:2.2.1"
@@ -66,6 +66,10 @@ dependencies {
 
     // Splash screen library
     implementation 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
+
+    // circle profile picture
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 
 }

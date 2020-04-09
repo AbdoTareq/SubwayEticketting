@@ -180,7 +180,7 @@
     <string name="district">الحي</string>
     <string name="no_searched_stores">لم يتم العثور على مطاعم بهذا الاسم</string>
     <string name="block_messege">لقد تم حظر هذا الحساب, برجاء التواصل مع المشرفين على البرنامج</string>
-    <string name="error_message">Failure happened</string>
+    <string name="failure_happened">Failure happened</string>
     <string name="ok">حسنا</string>
     <string name="progSavingMessage">جاري حفظ البيانات</string>
     <string name="rating_added_message">تم إضافة التقييم بنجاح</string>

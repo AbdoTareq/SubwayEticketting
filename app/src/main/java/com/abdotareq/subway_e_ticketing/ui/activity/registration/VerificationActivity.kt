@@ -88,7 +88,7 @@ class VerificationActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<Token?>, t: Throwable) {
                 progressDialog.dismiss()
-                Toast.makeText(this@VerificationActivity, getString(R.string.error_message), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@VerificationActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
 
             }
         })

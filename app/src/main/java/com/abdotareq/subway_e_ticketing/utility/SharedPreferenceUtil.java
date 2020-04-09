@@ -37,10 +37,10 @@ public class SharedPreferenceUtil {
 
     }
 
-    public static long getSharedPrefsUserId(Context context) {
+    public static String  getSharedPrefsUserId(Context context) {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
-        return settings.getLong(USER_ID_FLAG, -1);
+        return settings.getString(USER_ID_FLAG,"-1");
 
     }
 

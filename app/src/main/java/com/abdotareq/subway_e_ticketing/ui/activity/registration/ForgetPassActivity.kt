@@ -72,7 +72,7 @@ class ForgetPassActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 progressDialog.dismiss()
-                Toast.makeText(this@ForgetPassActivity, getString(R.string.error_message), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@ForgetPassActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
                 //                //ToDo: Remove Toast
                 Timber.e("FAILED : ${ t.message}" )
             }

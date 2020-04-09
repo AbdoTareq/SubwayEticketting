@@ -19,11 +19,15 @@ package com.abdotareq.subway_e_ticketing.model.retrofit
 
 import com.abdotareq.subway_e_ticketing.model.dto.Token
 import com.abdotareq.subway_e_ticketing.model.dto.User
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
@@ -31,8 +35,14 @@ import retrofit2.http.POST
 // TODO (04) Create the MarsApiObj object using Retrofit to implement the UserApiService
 private const val BASE_URL = "https://subway-ticketing-system.herokuapp.com/"
 
+// moshi for auto convert response to objects
+private val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
 private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .baseUrl(BASE_URL)
         .build()
 
@@ -56,6 +66,11 @@ interface UserApiService {
     // be careful that header has key(Authorization) & value ("Bearer " + token)
     @POST("users/changepassword")
     fun changePass(@Body user: User?, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
+
+    // get user by token as it contains user id
+    @GET("/users/user")
+    fun getUser(@Header("Authorization") bearerToken: String) :Call<User>
+
 }
 
 // this singleton  object to use it like static object to use it directly as network call is expensive

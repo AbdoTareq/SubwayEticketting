@@ -20,16 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:civ_border_color="#FF000000"
         android:src="@drawable/create_account_image"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3"
-        android:contentDescription="@string/profile_picture" />
+        tools:src="@tools:sample/avatars" />
 
     <EditText
         android:id="@+id/sign_up_f_name_et"
@@ -148,8 +151,8 @@
         android:padding="15dp"
         android:text="@string/log_out"
         android:textColor="@android:color/black"
-        android:textStyle="bold"
         android:textSize="@dimen/sign_in_medium_text_size"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

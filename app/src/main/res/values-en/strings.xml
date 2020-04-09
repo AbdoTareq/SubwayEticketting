@@ -173,7 +173,7 @@
 	<string name="district">Neighborhood</string>
 	<string name="no_searched_stores">Not found restaurants that name</string>
 	<string name="block_messege">This has been blocked account, please communicate with the supervisors of the program</string>
-	<string name="error_message">Failure happened</string>
+	<string name="failure_happened">Failure happened</string>
 	<string name="else_on_repsonse">else onResponse</string>
 	<string name="ok">OK</string>
 	<string name="progSavingMessage">Gary Remember Me</string>
