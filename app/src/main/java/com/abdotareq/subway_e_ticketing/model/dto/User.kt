@@ -19,7 +19,7 @@ data class User(@Json(name = "id")
                 var last_name: String? = null,
 
                 @Json(name = "image")
-                var image: ByteArray? = null,
+                var image: String? = null,
 
                 @Json(name = "birth_date")
                 var birth_date: String? = null,
@@ -35,7 +35,7 @@ data class User(@Json(name = "id")
 
     override fun toString(): String {
         return ("User [id=" + id + ", email=" + email + ", password=" + password + ", first_name=" + first_name
-                + ", last_name=" + last_name + ", image=" + Arrays.toString(image) + ", birth_date=" + birth_date + ", gender="
+                + ", last_name=" + last_name + ", image=" + image + ", birth_date=" + birth_date + ", gender="
                 + gender + "]")
     }
 

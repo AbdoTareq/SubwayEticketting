@@ -35,7 +35,7 @@
         tools:src="@tools:sample/avatars" />
 
     <EditText
-        android:id="@+id/sign_up_f_name_et"
+        android:id="@+id/first_name_et"
         style="@style/EditTStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -49,19 +49,19 @@
         android:padding="@dimen/small_margin"
         android:textAlignment="viewStart"
         android:textColorHighlight="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/sign_up_l_name_et"
+        app:layout_constraintBottom_toBottomOf="@+id/last_name_et"
         app:layout_constraintEnd_toStartOf="@+id/v_line2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sign_up_l_name_et"
+        app:layout_constraintTop_toTopOf="@+id/last_name_et"
         tools:targetApi="lollipop" />
 
     <EditText
-        android:id="@+id/sign_up_l_name_et"
+        android:id="@+id/last_name_et"
         style="@style/EditTStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="@dimen/medium_margin"
         android:backgroundTint="@color/colorPrimary"
         android:drawableStart="@drawable/user_icon"
@@ -72,7 +72,6 @@
         android:padding="@dimen/small_margin"
         android:textAlignment="viewStart"
         android:textColorHighlight="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/sign_up_calender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/v_line2"
@@ -93,19 +92,17 @@
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="@dimen/very_large_font"
-        app:layout_constraintBottom_toBottomOf="@+id/sign_up_calender"
+        app:layout_constraintBottom_toBottomOf="@+id/calender"
         app:layout_constraintEnd_toStartOf="@+id/v_line2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sign_up_calender" />
+        app:layout_constraintTop_toTopOf="@+id/calender" />
 
     <Button
-        android:id="@+id/sign_up_calender"
+        android:id="@+id/calender"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginTop="@dimen/small_margin"
         android:layout_marginEnd="@dimen/medium_margin"
-        android:layout_marginBottom="@dimen/medium_margin"
         android:drawableStart="@drawable/calender_icon"
         android:fontFamily="@font/segoe_ui"
         android:padding="@dimen/small_margin"
@@ -118,10 +115,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/v_line2"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_l_name_et" />
+        app:layout_constraintTop_toBottomOf="@+id/mail" />
 
     <Button
-        android:id="@+id/sign_up_btn"
+        android:id="@+id/change_pass_btn"
         style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -157,7 +154,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn"
+        app:layout_constraintTop_toBottomOf="@+id/change_pass_btn"
         tools:targetApi="lollipop" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -196,6 +193,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
+
+    <EditText
+        android:id="@+id/mail"
+        android:layout_width="0dp"
+        style="@style/EditTStyle"
+        android:hint="@string/mail"
+        android:enabled="false"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="none"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_gender_btn"
+        app:layout_constraintEnd_toEndOf="@+id/last_name_et"
+        app:layout_constraintStart_toStartOf="@+id/first_name_et"
+        app:layout_constraintTop_toBottomOf="@+id/last_name_et" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

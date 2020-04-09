@@ -1,31 +1,70 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment
 
+import android.graphics.Bitmap
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.abdotareq.subway_e_ticketing.R
+import androidx.fragment.app.Fragment
+import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
 import com.abdotareq.subway_e_ticketing.model.dto.User
+import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
+import de.hdodenhof.circleimageview.CircleImageView
 import timber.log.Timber
+import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass.
  */
 class ProfileSettingsFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val v =inflater.inflate(R.layout.fragment_profile_settings, container, false)
+    private var _binding: FragmentProfileSettingsBinding? = null
 
+    private var user: User? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentProfileSettingsBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        showData()
+
+        return view
+    }
+
+    // set profile fields
+    private fun showData() {
         // receive user obj from splash screen
-        val user: User = activity?.intent?.getSerializableExtra("user") as User
-        user.let { // means if not null or empty
-            Timber.e("$user")
+        try {
+            user = activity?.intent?.getSerializableExtra("user") as User
+            user.let { // means if not null or empty
+                Timber.e("$user")
+            }
+        } catch (e: Exception) {
+            Timber.e("$e")
         }
 
-        return v
+        binding.firstNameEt.setText(user?.first_name)
+        binding.lastNameEt.setText(user?.last_name)
+        binding.mail.setText(user?.email)
+
+        //if image exists
+        if (user!!.image != null) {
+            val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
+                binding.profileImage.setImageBitmap(it)
+            })
+            bitMapCon.execute(user?.image)
+        }
+
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

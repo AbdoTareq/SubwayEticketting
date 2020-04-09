@@ -18,7 +18,7 @@ import java.lang.Exception
 
 class SplashScreenActivity : AwesomeSplash() {
 
-    private lateinit var user: User
+    private var user: User? = null
 
     //DO NOT OVERRIDE onCreate()!
     //if you need to start some services do it in initSplash()!
@@ -68,7 +68,6 @@ class SplashScreenActivity : AwesomeSplash() {
     private fun getUserData(userIdToken: String) {
         var bearerToken: String = "Bearer "
         bearerToken += userIdToken
-        Timber.e("bearerToken:  $bearerToken ")
 
         //start the call
         UserApiObj.retrofitService.getUser(bearerToken).enqueue(object : retrofit2.Callback<User?> {
@@ -78,7 +77,6 @@ class SplashScreenActivity : AwesomeSplash() {
                     //get user successfully
                     Toast.makeText(this@SplashScreenActivity, "Welcome ${response.body()!!.first_name} ${response.body()!!.last_name} ", Toast.LENGTH_LONG).show()
                     user = response.body()!!
-                    Timber.e("$user")
 
                 } else if (responseCode == 438) {
                     //pass not saved successfully
@@ -93,7 +91,7 @@ class SplashScreenActivity : AwesomeSplash() {
 
             override fun onFailure(call: Call<User?>, t: Throwable) {
                 Toast.makeText(this@SplashScreenActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
-                Timber.e(getString(R.string.failure_happened))
+                Timber.e("$t")
             }
         })
     }

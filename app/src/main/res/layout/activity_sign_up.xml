@@ -166,11 +166,9 @@
     <Button
         android:id="@+id/sign_up_gender_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="@dimen/small_margin"
-        android:layout_marginTop="@dimen/large_margin"
         android:layout_marginRight="@dimen/small_margin"
-        android:background="@android:drawable/spinner_background"
         android:drawableStart="@drawable/gender_icon"
         android:fontFamily="@font/segoe_ui"
         android:text="@string/select_gender"
@@ -178,18 +176,20 @@
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="@dimen/very_large_font"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_up_calender"
         app:layout_constraintEnd_toStartOf="@+id/v_line2"
         app:layout_constraintStart_toStartOf="@+id/v_line1"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintTop_toTopOf="@+id/sign_up_calender"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/sign_up_calender"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="@dimen/small_margin"
-        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="@dimen/small_margin"
-        android:background="@android:drawable/spinner_background"
+        android:layout_marginBottom="16dp"
         android:drawableStart="@drawable/calender_icon"
         android:fontFamily="@font/segoe_ui"
         android:text="@string/birth_date"
@@ -197,6 +197,7 @@
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="@dimen/very_large_font"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/v_line2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
@@ -204,19 +205,19 @@
     <Button
         android:id="@+id/sign_up_btn"
         style="@style/ButtonStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="@dimen/large_margin"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="13dp"
         android:background="@drawable/shape_sign_up"
         android:fontFamily="@font/segoe_ui"
         android:padding="15dp"
         android:shadowColor="@android:color/transparent"
         android:text="@string/sign_up"
         android:textSize="@dimen/sign_in_medium_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_sign_in_tv"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_calender"
+        app:layout_constraintStart_toStartOf="@+id/sign_up_gender_btn"
         app:layout_constraintTop_toBottomOf="@+id/sign_up_gender_btn" />
 
     <TextView
@@ -258,7 +259,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.0" />
+        app:layout_constraintGuide_percent="0.00243309" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/v_line2"
