@@ -71,7 +71,8 @@ class SignInActivity : AppCompatActivity() {
             passEt.hint = getString(R.string.pass_warning)
             return
         }
-        val user = User(mailEt.text.toString())
+        val user = User()
+        user.email = mailEt.text.toString()
         user.password = passEt.text.toString()
         Timber.e(user.toString())
 

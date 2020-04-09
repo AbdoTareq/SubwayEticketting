@@ -55,7 +55,9 @@ class VerificationActivity : AppCompatActivity() {
 
     // call to verify the user
     private fun verifyCode(mail: String, code: String) {
-        val user = User(mail, code)
+        val user = User()
+        user.email = mail
+        user.otp_token = code
 
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(this@VerificationActivity, getString(R.string.loading))
@@ -79,7 +81,7 @@ class VerificationActivity : AppCompatActivity() {
                     //verifyCode not successfully
                     progressDialog.dismiss()
                     Toast.makeText(this@VerificationActivity, getString(R.string.wrong_code), Toast.LENGTH_LONG).show()
-                }else {
+                } else {
                     //verifyCode not successfully
                     progressDialog.dismiss()
                     Toast.makeText(this@VerificationActivity, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()

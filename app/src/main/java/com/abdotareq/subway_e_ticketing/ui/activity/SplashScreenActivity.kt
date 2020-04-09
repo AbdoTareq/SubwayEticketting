@@ -17,6 +17,9 @@ import retrofit2.Response
 import timber.log.Timber
 
 class SplashScreenActivity : AwesomeSplash() {
+
+    private lateinit var user: User
+
     //DO NOT OVERRIDE onCreate()!
     //if you need to start some services do it in initSplash()!
     override fun initSplash(configSplash: ConfigSplash) {
@@ -25,14 +28,12 @@ class SplashScreenActivity : AwesomeSplash() {
 
         // if user logged get his data
         if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this)) {
-            var user = getUserData(SharedPreferenceUtil.getSharedPrefsUserId(this))
-
-            Timber.e("$user")
+            getUserData(SharedPreferenceUtil.getSharedPrefsUserId(this))
         }
 
         //Customize Circular Reveal
         configSplash.backgroundColor = R.color.colorPrimary //any color you want form colors.xml
-        configSplash.animCircularRevealDuration = 2000 //int ms
+        configSplash.animCircularRevealDuration = 500 //int ms
         configSplash.revealFlagX = Flags.REVEAL_RIGHT //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
 
@@ -64,11 +65,10 @@ class SplashScreenActivity : AwesomeSplash() {
 
     }
 
-    private fun getUserData(userIdToken: String): User {
+    private fun getUserData(userIdToken: String) {
         var bearerToken: String = "Bearer "
         bearerToken += userIdToken
         Timber.e("bearerToken:  $bearerToken ")
-        var user = User()
 
         //start the call
         UserApiObj.retrofitService.getUser(bearerToken).enqueue(object : retrofit2.Callback<User?> {
@@ -76,8 +76,10 @@ class SplashScreenActivity : AwesomeSplash() {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {
                     //get user successfully
-                    Toast.makeText(this@SplashScreenActivity, "fname + ${response.body()!!.first_name} ", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SplashScreenActivity, " ${response.body()!!.first_name} ${response.body()!!.last_name} ", Toast.LENGTH_LONG).show()
                     user = response.body()!!
+                    Timber.e("$user")
+
                 } else if (responseCode == 438) {
                     //pass not saved successfully
                     Toast.makeText(this@SplashScreenActivity, getString(R.string.pass_war), Toast.LENGTH_LONG).show()
@@ -94,7 +96,6 @@ class SplashScreenActivity : AwesomeSplash() {
                 Timber.e(getString(R.string.failure_happened))
             }
         })
-        return user
     }
 
     override fun animationsFinished() {

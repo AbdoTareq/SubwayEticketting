@@ -45,8 +45,8 @@ class ForgetPassActivity : AppCompatActivity() {
 
     // send send Verification Code to user mail
     private fun sendVerificationCode(mail: String) {
-        val user = User(mail)
-
+        val user = User()
+        user.email = mail
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(this@ForgetPassActivity, getString(R.string.loading))
         progressDialog.show()

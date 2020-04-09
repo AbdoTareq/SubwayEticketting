@@ -75,7 +75,8 @@ class ChangePassActivity : AppCompatActivity() {
         }
 
         //create MobileUser object and set it's attributes
-        val user = User(mail)
+        val user = User()
+        user.email = mail
         user.password = passEt.text.toString()
         // this constructor iz wrong as it's for mail and otp verify
         // val user = User(mail, passEt.text.toString())
