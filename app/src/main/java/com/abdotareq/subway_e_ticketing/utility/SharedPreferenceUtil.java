@@ -28,7 +28,7 @@ public class SharedPreferenceUtil {
         return settings.getBoolean(LOGGED_IN_FLAG, false);
     }
 
-    public static void setSharedPrefsUserId(Context context, String token) {
+    public static void setSharedPrefsTokenId(Context context, String token) {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
         SharedPreferences.Editor editor = settings.edit();
@@ -37,7 +37,7 @@ public class SharedPreferenceUtil {
 
     }
 
-    public static String  getSharedPrefsUserId(Context context) {
+    public static String getSharedPrefsTokenId(Context context) {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
         return settings.getString(USER_ID_FLAG,"-1");

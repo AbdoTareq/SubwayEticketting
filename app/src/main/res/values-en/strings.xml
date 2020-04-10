@@ -17,7 +17,7 @@
 	<string name="family_name">family name</string>
 	<string name="mail">Email</string>
 	<string name="mail_exist">Email already exist</string>
-	<string name="pass_war">Password Less Than 8 Characters</string>
+	<string name="pass_less">Password Less Than 8 Characters</string>
 	<string name="retype_pass">confirm password</string>
 	<string name="signIn">Sign In</string>
 	<string name="message2">To access all features</string>
@@ -233,4 +233,5 @@
 	<string name="last_name">Last Name</string>
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
+    <string name="welcome">Welcome</string>
 </resources>

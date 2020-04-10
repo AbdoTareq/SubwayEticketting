@@ -110,7 +110,7 @@ class SignUpActivity : AppCompatActivity() {
                     //write token into SharedPreferences
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(this@SignUpActivity, true)
                     if (response.body() != null) {
-                        SharedPreferenceUtil.setSharedPrefsUserId(this@SignUpActivity, response.body()!!.token)
+                        SharedPreferenceUtil.setSharedPrefsTokenId(this@SignUpActivity, response.body()!!.token)
                     }
                     val intent = Intent(this@SignUpActivity, HomeLandActivity::class.java)
                     startActivity(intent)
@@ -118,7 +118,7 @@ class SignUpActivity : AppCompatActivity() {
                     setResult(Activity.RESULT_OK, returnIntent)
                     Toast.makeText(this@SignUpActivity, "success", Toast.LENGTH_SHORT).show()
                 } else if (responseCode == 434) {
-                    Toast.makeText(this@SignUpActivity, getText(R.string.pass_war), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SignUpActivity, getText(R.string.pass_less), Toast.LENGTH_LONG).show()
                     progressDialog.dismiss()
                 } else if (responseCode == 435) {
                     Toast.makeText(this@SignUpActivity, getText(R.string.mail_exist), Toast.LENGTH_LONG).show()

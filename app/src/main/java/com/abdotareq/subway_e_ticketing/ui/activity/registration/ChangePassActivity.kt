@@ -70,7 +70,7 @@ class ChangePassActivity : AppCompatActivity() {
                 || !confirmEt.text.toString().equals(passEt.text.toString())) {
             confirmEt.setText("")
             confirmEt.hint = getString(R.string.fix_confirmPassWarning)
-            passEt.setHintTextColor(resources.getColor(R.color.colorAccent))
+            confirmEt.setHintTextColor(resources.getColor(R.color.colorAccent))
             return
         }
 
@@ -113,7 +113,7 @@ class ChangePassActivity : AppCompatActivity() {
                 } else if (responseCode == 434) {
                     //pass not saved successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@ChangePassActivity, getString(R.string.pass_war), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@ChangePassActivity, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
                 } else if (responseCode == 438) {
                     //pass not saved successfully
                     progressDialog.dismiss()

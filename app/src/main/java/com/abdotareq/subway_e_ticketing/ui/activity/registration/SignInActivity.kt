@@ -99,7 +99,7 @@ class SignInActivity : AppCompatActivity() {
 
                     //write token into SharedPreferences to use in remember user
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(this@SignInActivity, true)
-                    SharedPreferenceUtil.setSharedPrefsUserId(this@SignInActivity, response.body()!!.token)
+                    SharedPreferenceUtil.setSharedPrefsTokenId(this@SignInActivity, response.body()!!.token)
                     Timber.e("token:    ${response.body()!!.token}")
                     val intent = Intent(this@SignInActivity, HomeLandActivity::class.java)
                     startActivity(intent)

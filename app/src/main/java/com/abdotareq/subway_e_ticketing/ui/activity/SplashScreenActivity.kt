@@ -14,11 +14,11 @@ import com.viksaa.sssplash.lib.model.ConfigSplash
 import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
-import java.lang.Exception
 
 class SplashScreenActivity : AwesomeSplash() {
 
     private var user: User? = null
+    private var flag: Boolean = false
 
     //DO NOT OVERRIDE onCreate()!
     //if you need to start some services do it in initSplash()!
@@ -28,12 +28,20 @@ class SplashScreenActivity : AwesomeSplash() {
 
         // if user logged get his data
         if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this)) {
-            getUserData(SharedPreferenceUtil.getSharedPrefsUserId(this))
+            getUserData(SharedPreferenceUtil.getSharedPrefsTokenId(this), configSplash)
+        }else{
+            //Customize Title
+            configSplash.titleSplash = getString(R.string.app_name)
+            configSplash.titleTextColor = R.color.colorWhite
+            configSplash.titleTextSize = 30f //float value
+            configSplash.animTitleDuration = 2000
+            configSplash.animTitleTechnique = Techniques.FadeIn
+            //        configSplash.setTitleFont("fonts/segoe_ui.ttf"); //provide string to your font located in assets/fonts/
         }
 
         //Customize Circular Reveal
         configSplash.backgroundColor = R.color.colorPrimary //any color you want form colors.xml
-        configSplash.animCircularRevealDuration = 500 //int ms
+        configSplash.animCircularRevealDuration = 2000 //int ms
         configSplash.revealFlagX = Flags.REVEAL_RIGHT //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
 
@@ -55,17 +63,10 @@ class SplashScreenActivity : AwesomeSplash() {
 //        configSplash.setPathSplashFillColor(R.color.design_default_color_on_primary); //path object filling color
 
 
-        //Customize Title
-        configSplash.titleSplash = getString(R.string.app_name)
-        configSplash.titleTextColor = R.color.colorWhite
-        configSplash.titleTextSize = 30f //float value
-        configSplash.animTitleDuration = 2000
-        configSplash.animTitleTechnique = Techniques.FadeIn
-        //        configSplash.setTitleFont("fonts/segoe_ui.ttf"); //provide string to your font located in assets/fonts/
-
     }
 
-    private fun getUserData(userIdToken: String) {
+
+    private fun getUserData(userIdToken: String, configSplash: ConfigSplash) {
         var bearerToken: String = "Bearer "
         bearerToken += userIdToken
 
@@ -78,9 +79,15 @@ class SplashScreenActivity : AwesomeSplash() {
                     Toast.makeText(this@SplashScreenActivity, "Welcome ${response.body()!!.first_name} ${response.body()!!.last_name} ", Toast.LENGTH_LONG).show()
                     user = response.body()!!
 
+                    configSplash.titleSplash = "${getString(R.string.welcome)} ${user?.first_name} ${user?.last_name} "
+                    configSplash.animTitleDuration = 2000
+                    configSplash.titleTextSize = 30f //float value
+                    configSplash.animTitleTechnique = Techniques.FadeIn
+
+
                 } else if (responseCode == 438) {
                     //pass not saved successfully
-                    Toast.makeText(this@SplashScreenActivity, getString(R.string.pass_war), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SplashScreenActivity, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
                     Timber.e(getString(R.string.user_not_found))
                 } else {
                     //user not saved successfully
@@ -96,14 +103,15 @@ class SplashScreenActivity : AwesomeSplash() {
         })
     }
 
+
     override fun animationsFinished() {
         //transit to another activity here
         //or do whatever you want
-        val intent: Intent = if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this)) {
-            Intent(this, HomeLandActivity::class.java)
+        val intent: Intent = if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this@SplashScreenActivity)) {
+            Intent(this@SplashScreenActivity, HomeLandActivity::class.java)
 
         } else
-            Intent(this, SignInActivity::class.java)
+            Intent(this@SplashScreenActivity, SignInActivity::class.java)
         try {
             intent.putExtra("user", user); // sending user object.
         } catch (e: Exception) {

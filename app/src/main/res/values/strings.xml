@@ -16,7 +16,8 @@
     <string name="family_name">اسم العائلة</string>
     <string name="mail">Email</string>
     <string name="mail_exist">Email already exist</string>
-    <string name="pass_war">Password Less Than 8 Characters </string>
+    <string name="pass_less">Password Less Than 8 Characters </string>
+    <string name="wrong_pass">Wrong password </string>
     <string name="user_not_found">User not found </string>
     <string name="email_does_not_match">Email does not match </string>
     <string name="retype_pass">تأكيد كلمة المرور</string>
@@ -245,6 +246,7 @@
     <string name="profile_picture">profile picture</string>
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
+    <string name="welcome">Welcome</string>
 
     <string-array name="gender_array">
         <item>Female</item>

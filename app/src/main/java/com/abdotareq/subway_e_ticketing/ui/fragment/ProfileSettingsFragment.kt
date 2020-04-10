@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.abdotareq.subway_e_ticketing.ExampleDialog
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import timber.log.Timber
 
-
 /**
- * A simple [Fragment] subclass.
+ *  [ProfileSettingsFragment] responsible for user profile settings & changes.
  */
 class ProfileSettingsFragment : Fragment() {
 
@@ -74,8 +72,8 @@ class ProfileSettingsFragment : Fragment() {
 
     // this for change pass dialog
     private fun openDialog() {
-        val exampleDialog = ExampleDialog()
-        fragmentManager?.let { exampleDialog.show(it,"example") }
+        val passDialog = ChangePassDialogFragment(binding.mail.text.toString())
+        fragmentManager?.let { passDialog.show(it,"Pass Dialog") }
     }
 
 
