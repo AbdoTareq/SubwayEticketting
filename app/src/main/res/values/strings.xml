@@ -31,7 +31,6 @@
     <string name="message4">برجاء إدخال كود التفعيل</string>
     <string name="confirm_new_pass">Confirm Password</string>
     <string name="new_pass">أدخل كلمة المرور الجديده</string>
-    <string name="change_pass_button">تغيير كلمة المرور</string>
 
     <string name="base_url">https://subway-ticketing-system.herokuapp.com/</string>
 
@@ -247,11 +246,13 @@
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
     <string name="welcome">Welcome</string>
+    <string name="do_u_want_logout">Do you really want to Log out?</string>
 
     <string-array name="gender_array">
         <item>Female</item>
         <item>Male</item>
     </string-array>
+    <string name="change_pass_button">Change Password</string>
 
 
 </resources>
