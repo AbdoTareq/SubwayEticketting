@@ -14,15 +14,15 @@
         android:name="com.abdotareq.subway_e_ticketing.utility.ApplicationController"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name="com.abdotareq.subway_e_ticketing.ui.activity.registration.ChangePassActivity"
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.ChangePassActivity"
             />
-        <activity android:name="com.abdotareq.subway_e_ticketing.ui.activity.registration.VerificationActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.ui.activity.registration.ForgetPassActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity" />
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.VerificationActivity" />
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.ForgetPassActivity" />
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity" />
         <activity android:name="com.abdotareq.subway_e_ticketing.MainActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.ui.activity.registration.SignUpActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.ui.activity.registration.SignInActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.ui.activity.SplashScreenActivity"
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.SignUpActivity" />
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.SignInActivity" />
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.SplashScreenActivity"
            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

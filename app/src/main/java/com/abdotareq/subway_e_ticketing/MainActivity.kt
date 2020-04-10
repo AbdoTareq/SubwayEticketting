@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subway_e_ticketing.databinding.ActivityMainBinding
-import com.abdotareq.subway_e_ticketing.ui.activity.registration.SignInActivity
-import com.abdotareq.subway_e_ticketing.ui.activity.registration.SignUpActivity
+import com.abdotareq.subway_e_ticketing.controller.activity.registration.SignInActivity
+import com.abdotareq.subway_e_ticketing.controller.activity.registration.SignUpActivity
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {

@@ -1,11 +1,11 @@
-package com.abdotareq.subway_e_ticketing.ui.activity
+package com.abdotareq.subway_e_ticketing.controller.activity
 
 import android.content.Intent
 import android.widget.Toast
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
-import com.abdotareq.subway_e_ticketing.ui.activity.registration.SignInActivity
+import com.abdotareq.subway_e_ticketing.controller.activity.registration.SignInActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.daimajia.androidanimations.library.Techniques
 import com.viksaa.sssplash.lib.activity.AwesomeSplash

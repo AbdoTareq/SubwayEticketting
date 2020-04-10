@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorPrimary"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.PocketFragment">
+    tools:context=".controller.fragment.PocketFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

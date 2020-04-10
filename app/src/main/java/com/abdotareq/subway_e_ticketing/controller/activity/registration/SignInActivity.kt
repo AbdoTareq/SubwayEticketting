@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.ui.activity.registration
+package com.abdotareq.subway_e_ticketing.controller.activity.registration
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import com.abdotareq.subway_e_ticketing.databinding.ActivitySignInBinding
 import com.abdotareq.subway_e_ticketing.model.dto.Token
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
-import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
+import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import retrofit2.Call
