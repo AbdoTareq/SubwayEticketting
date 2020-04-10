@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/first"
+        style="@style/EditTStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:textColor="@color/colorPrimary"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/old_pass"
+            style="@style/EditTStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/password_24px"
+            android:drawablePadding="@dimen/small_margin"
+            android:hint="@string/old_password"
+            android:inputType="textPassword"
+            android:padding="@dimen/small_margin"
+            android:textColor="@color/colorPrimary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/second"
+        style="@style/EditTStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:textColor="@color/colorPrimary"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/new_password"
+            style="@style/EditTStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/password_24px"
+            android:drawablePadding="@dimen/small_margin"
+            android:hint="@string/new_password"
+            android:inputType="textPassword"
+            android:padding="@dimen/small_margin"
+            android:textColor="@color/colorPrimary" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/EditTStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/second"
+        android:id="@+id/third"
+        android:layout_marginStart="@dimen/small_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="@dimen/small_margin"
+        android:textColor="@color/colorPrimary"
+        app:passwordToggleEnabled="true">
+
+        <EditText
+            android:id="@+id/confirm_new_password"
+            style="@style/EditTStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/password_24px"
+            android:drawablePadding="@dimen/small_margin"
+            android:hint="@string/confirm_new_pass"
+            android:inputType="textPassword"
+            android:padding="@dimen/small_margin"
+            android:textColor="@color/colorPrimary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/confirm_btn"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/third"
+        android:layout_alignStart="@+id/third"
+        android:layout_alignEnd="@+id/third"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginEnd="3dp"
+        android:background="@drawable/shape_sign_up"
+        android:hint="@string/confirm_new_pass"
+        android:padding="@dimen/_8sdp" />
+
+</RelativeLayout>

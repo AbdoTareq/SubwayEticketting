@@ -228,7 +228,7 @@
 
     <string name="facebook_app_id">161197391840342</string>
     <string name="fb_login_protocol_scheme">fb161197391840342</string>
-
+    <string name="new_password">New Password</string>
 
 
 </resources>

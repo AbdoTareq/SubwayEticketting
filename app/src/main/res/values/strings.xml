@@ -243,6 +243,8 @@
     <string name="tickets">Tickets</string>
     <string name="history">History</string>
     <string name="profile_picture">profile picture</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
 
     <string-array name="gender_array">
         <item>Female</item>
