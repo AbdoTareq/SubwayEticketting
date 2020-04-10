@@ -123,7 +123,7 @@
 	<string name="report_date">Reporting date</string>
 	<string name="date">Date</string>
 	<string name="bug_title">Address error</string>
-	<string name="save">Protection</string>
+	<string name="save">Save</string>
 	<string name="store_info">About the restaurant</string>
 	<string name="store_address">Restaurant Address</string>
 	<string name="store_images">Photos of the restaurant</string>
@@ -228,7 +228,7 @@
 	<string name="fb_login_protocol_scheme">fb161197391840342</string>
 	<string name="sign_up">Sign Up</string>
 	<string name="birth_date">Birth date</string>
-	<string name="select_gender">Select gender</string>
+	<string name="select_gender">Gender</string>
 	<string name="select_birthday">Select birthday:</string>
 	<string name="last_name">Last Name</string>
     <string name="old_password">Old Password</string>

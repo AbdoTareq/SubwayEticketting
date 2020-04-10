@@ -1,8 +1,10 @@
 package com.abdotareq.subway_e_ticketing.controller.fragment
 
+import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +19,13 @@ import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.util
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  *  [ProfileSettingsFragment] responsible for user profile settings & changes.
@@ -40,13 +46,7 @@ class ProfileSettingsFragment : Fragment() {
 
         getUserData()
 
-        binding.changePassBtn.setOnClickListener {
-            openDialog()
-        }
-
-        binding.logOutBtn.setOnClickListener {
-            confirmLogOut()
-        }
+        callListeners()
 
         return view
     }
@@ -59,12 +59,62 @@ class ProfileSettingsFragment : Fragment() {
         } catch (e: Exception) {
             Timber.e("$e")
             // if failed to get user obj from splash screen get user call
-            userCall()
+            getUserCall()
         }
 
     }
 
-    private fun userCall() {
+    private fun callListeners() {
+        val genderList = arrayOf("Female", "Male")
+        var year = 0
+        var date: Date? = null
+        var formatDate: String? = null
+        var gender = ""
+        var materialCalendar: Calendar
+        var datePicker: DatePickerDialog
+
+        binding.changePassBtn.setOnClickListener {
+            openDialog()
+        }
+
+        binding.logOutBtn.setOnClickListener {
+            confirmLogOut()
+        }
+
+        binding.updateBtn.setOnClickListener {
+            saveBtnClk(gender, year, formatDate)
+        }
+
+        binding.genderBtn.setOnClickListener {
+            val builder = android.app.AlertDialog.Builder(context)
+            builder.setTitle(getString(R.string.select_gender))
+            builder.setItems(genderList) { dialogInterface, position ->
+                gender = genderList[position]
+                binding.genderBtn.text = gender
+            }
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
+
+        binding.calender.setOnClickListener {
+            materialCalendar = Calendar.getInstance()
+            val day = materialCalendar.get(Calendar.DAY_OF_MONTH)
+            val month = materialCalendar.get(Calendar.MONTH)
+            year = materialCalendar.get(Calendar.YEAR)
+            date = materialCalendar.time
+            val format1 = SimpleDateFormat("yyyy-MM-dd")
+            formatDate = format1.format(date)
+            datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+                Toast.makeText(context, date.toString(), Toast.LENGTH_SHORT).show()
+            }
+                    , year, month, day) //changed from day,month,year to year,month,day
+            datePicker.show()
+        }
+
+
+    }
+
+    private fun getUserCall() {
         if (SharedPreferenceUtil.getSharedPrefsLoggedIn(context)) {
             getUserData(SharedPreferenceUtil.getSharedPrefsTokenId(context))
         }
@@ -90,7 +140,7 @@ class ProfileSettingsFragment : Fragment() {
 
                 } else if (responseCode == 438) {
                     //pass not saved successfully
-                    Toast.makeText(context, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
                     Timber.e(getString(R.string.user_not_found))
                     progressDialog.dismiss()
                 } else {
@@ -110,14 +160,15 @@ class ProfileSettingsFragment : Fragment() {
         })
     }
 
-
     // set profile fields
     private fun showData() {
 
         try {
             binding.firstNameEt.setText(user?.first_name)
             binding.lastNameEt.setText(user?.last_name)
-            binding.mail.setText(user?.email)
+            binding.mail.text = user?.email
+            binding.genderBtn.text = user?.gender
+            binding.calender.text = user?.birth_date?.substring(0..9)
 
             //if image exists
             if (user!!.image != null) {
@@ -134,11 +185,9 @@ class ProfileSettingsFragment : Fragment() {
 
     private fun confirmLogOut() {
         //create a dialog interface to notify user that he is going to log out
-        val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
+        val dialogClickListener = DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
-                    //Yes button clicked
-
                     //reset the saved user data from the shared preferences
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(context, false)
                     SharedPreferenceUtil.setSharedPrefsTokenId(context, "-1")
@@ -176,8 +225,78 @@ class ProfileSettingsFragment : Fragment() {
         fragmentManager?.let { passDialog.show(it, "Pass Dialog") }
     }
 
+    private fun saveBtnClk(gender: String, year: Int, formatDate: String?) {
+        //check for all inputs from user are correct
+        if (TextUtils.isEmpty(binding.firstNameEt.text.toString()) && binding.firstNameEt.text.toString() == "") {
+            binding.firstNameEt.hint = getText(R.string.fix_fist_name)
+            return
+        } else if (TextUtils.isEmpty(binding.lastNameEt.text.toString()) && binding.lastNameEt.text.toString() == "") {
+            binding.lastNameEt.hint = getText(R.string.fix_last_name_mess)
+            return
+        } else if (gender.isEmpty()) {
+            Toast.makeText(context, getText(R.string.select_gender), Toast.LENGTH_SHORT).show()
+            return
+        } else if (year == 0) {
+            Toast.makeText(context, getText(R.string.select_birthday), Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // update the original user with only changed data
+        // TODO ADD IMAGE TO USER
+        user?.first_name = binding.firstNameEt.text.toString()
+        user?.last_name = binding.lastNameEt.text.toString()
+        user?.gender = gender
+        user?.birth_date = formatDate
+
+        Timber.e("$user")
+
+        updateUser()
+
+    }
+
+    private fun updateUser() {
+        var bearerToken = "Bearer "
+        bearerToken += SharedPreferenceUtil.getSharedPrefsTokenId(context)
+
+        //initialize and show a progress dialog to the user
+        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
+        progressDialog.show()
+
+        //start the call
+        UserApiObj.retrofitService.updateUser(user!!, bearerToken)?.enqueue(object : Callback<ResponseBody?> {
+            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                val responseCode = response.code()
+                if (responseCode in 200..299 && response.body() != null) {
+                    //get user successfully
+                    progressDialog.dismiss()
+                    Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
+
+
+                } else if (responseCode == 438) {
+                    //user not saved successfully
+                    Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
+                    Timber.e(getString(R.string.user_not_found))
+                    progressDialog.dismiss()
+                } else {
+                    //user not saved successfully
+                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
+                    Timber.e(getString(R.string.else_on_repsonse))
+                    progressDialog.dismiss()
+
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Timber.e("$t")
+                progressDialog.dismiss()
+            }
+        })
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }

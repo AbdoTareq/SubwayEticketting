@@ -25,8 +25,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        app:civ_border_color="#FF000000"
         android:src="@drawable/create_account_image"
+        app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +79,7 @@
         tools:targetApi="lollipop" />
 
     <Button
-        android:id="@+id/sign_up_gender_btn"
+        android:id="@+id/gender_btn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/medium_margin"
@@ -120,40 +120,48 @@
     <Button
         android:id="@+id/change_pass_btn"
         style="@style/ButtonStyle"
-        android:layout_width="match_parent"
+
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/medium_margin"
         android:background="@drawable/shape_sign_up"
         android:padding="15dp"
         android:text="@string/change_pass_button"
-        android:textSize="@dimen/sign_in_medium_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gender_btn"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gender_btn"
         app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+    <Button
+        android:id="@+id/update_btn"
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_sign_up"
+        android:padding="15dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="@+id/change_pass_btn"
+        app:layout_constraintEnd_toEndOf="@+id/calender"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/calender"
+        app:layout_constraintTop_toTopOf="@+id/change_pass_btn" />
 
     <Button
         android:id="@+id/log_out_btn"
         style="@style/ButtonStyle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_margin"
         android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/medium_margin"
         android:layout_marginBottom="@dimen/small_margin"
         android:background="@drawable/shape_sign_up"
-        android:backgroundTint="@color/colorYellow"
         android:padding="15dp"
         android:text="@string/log_out"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/sign_in_medium_text_size"
+        android:textSize="@dimen/very_large_font"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/calender"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gender_btn"
         app:layout_constraintTop_toBottomOf="@+id/change_pass_btn"
         tools:targetApi="lollipop" />
 
@@ -194,16 +202,18 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
 
-    <EditText
+    <TextView
         android:id="@+id/mail"
-        android:layout_width="0dp"
         style="@style/EditTStyle"
-        android:hint="@string/mail"
-        android:enabled="false"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="none"
-        app:layout_constraintBottom_toTopOf="@+id/sign_up_gender_btn"
+        android:enabled="false"
+        android:textSize="@dimen/very_large_font"
+        android:hint="@string/mail"
+        android:drawableStart="@drawable/email_icon"
+        android:drawablePadding="@dimen/_8sdp"
+        android:padding="@dimen/small_margin"
+        app:layout_constraintBottom_toTopOf="@+id/gender_btn"
         app:layout_constraintEnd_toEndOf="@+id/last_name_et"
         app:layout_constraintStart_toStartOf="@+id/first_name_et"
         app:layout_constraintTop_toBottomOf="@+id/last_name_et" />

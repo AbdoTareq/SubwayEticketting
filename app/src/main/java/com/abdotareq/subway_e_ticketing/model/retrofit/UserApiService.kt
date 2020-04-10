@@ -27,10 +27,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 // TODO (04) Create the MarsApiObj object using Retrofit to implement the UserApiService
@@ -69,12 +66,15 @@ interface UserApiService {
     fun changePass(@Body user: User?, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
 
     // Used to Update Password From User Settings menu
-    @POST("/users/updatepassword")
+    @POST("users/updatepassword")
     fun updatePass(@Body userPassword: UserPassword, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
 
     // get user by token as it contains user id
-    @GET("/users/user")
+    @GET("users/user")
     fun getUser(@Header("Authorization") bearerToken: String): Call<User>
+
+    @PUT("users/updateuser")
+    fun updateUser(@Body user: User, @Header("Authorization") bearerToken: String): Call<ResponseBody>?
 
 }
 

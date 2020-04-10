@@ -39,10 +39,10 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var calenderBtn: Button
     private lateinit var genderBtn: Button
     private lateinit var signInTv: TextView
-    var year = 0
-    var date: Date? = null
-    var formatDate: String? = null
-    var gender = ""
+    private var year = 0
+    private var date: Date? = null
+    private var formatDate: String? = null
+    private var gender = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +60,7 @@ class SignUpActivity : AppCompatActivity() {
         calenderBtn = binding.signUpCalender
         signUpBtn = binding.signUpBtn
         signInTv = binding.signUpSignInTv
+
         genderBtn.setOnClickListener {
             val builder = AlertDialog.Builder(this@SignUpActivity)
             builder.setTitle(getString(R.string.select_gender))

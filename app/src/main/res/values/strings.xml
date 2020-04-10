@@ -235,7 +235,7 @@
     <string name="fb_login_protocol_scheme">fb161197391840342</string>
     <string name="sign_up">Sign Up</string>
     <string name="birth_date">Birth date</string>
-    <string name="select_gender">Select gender</string>
+    <string name="select_gender">Gender</string>
     <string name="select_birthday">Select birthday:</string>
     <string name="last_name">Last Name</string>
     <string name="pocket">Pocket</string>
@@ -253,6 +253,7 @@
         <item>Male</item>
     </string-array>
     <string name="change_pass_button">Change Password</string>
+    <string name="data_saved">Data saved</string>
 
 
 </resources>
