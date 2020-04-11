@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/forgetPassFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.ForgetPassFragment"
+        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.ForgetPassFragment"
         android:label="fragment_forget_pass"
         tools:layout="@layout/fragment_forget_pass">
         <action
@@ -16,12 +16,19 @@
     </fragment>
     <fragment
         android:id="@+id/changePassFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.ChangePassFragment"
+        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.ChangePassFragment"
         android:label="fragment_change_pass"
-        tools:layout="@layout/fragment_change_pass" />
+        tools:layout="@layout/fragment_change_pass">
+        <!--args put in destination-->
+        <argument
+            android:name="mail"
+            app:argType="string" />
+        <argument android:name="token"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/verificationFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.VerificationFragment"
+        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.VerificationFragment"
         android:label="fragment_verification"
         tools:layout="@layout/fragment_verification">
         <action
@@ -29,5 +36,8 @@
             app:destination="@id/changePassFragment"
             app:popUpTo="@id/forgetPassFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="mail"
+            app:argType="string" />
     </fragment>
 </navigation>

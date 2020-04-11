@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.activity.registration
+package com.abdotareq.subway_e_ticketing.controller.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.controller.activity.registration.SignInActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentChangePassBinding
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
@@ -40,8 +42,10 @@ class ChangePassFragment : Fragment() {
 
 
         // take the token to send it with bearer in header to change pass
-        val token = activity!!.intent.getStringExtra("token")
-        val mail = activity!!.intent.getStringExtra("mail")
+
+        val safeArgs: ChangePassFragmentArgs by navArgs()
+        val token = safeArgs.token
+        val mail = safeArgs.mail
 
         // take the token to send it with bearer in header to change pass
         bearerToken += token
@@ -98,6 +102,7 @@ class ChangePassFragment : Fragment() {
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
+        Timber.e("err:    $bearerToken")
 
         //start the call
         UserApiObj.retrofitService.changePass(user, bearerToken)?.enqueue(object : retrofit2.Callback<ResponseBody?> {
@@ -115,24 +120,33 @@ class ChangePassFragment : Fragment() {
                     activity!!.finishAffinity()
                 } else if (responseCode == 434) {
                     //pass not saved successfully
+                    Timber.e("response.code:    $responseCode")
+
                     progressDialog.dismiss()
                     Toast.makeText(context, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
                 } else if (responseCode == 438) {
                     //pass not saved successfully
+                    Timber.e("response.code:    $responseCode")
+
                     progressDialog.dismiss()
                     Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
                 } else if (responseCode == 440) {
                     //pass not saved successfully
                     progressDialog.dismiss()
+                    Timber.e("response.code:    $responseCode")
+
                     Toast.makeText(context, getString(R.string.email_does_not_match), Toast.LENGTH_LONG).show()
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss()
+                    Timber.e("response.code:    $responseCode")
+
                     Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                Timber.e("err:    $t")
                 progressDialog.dismiss()
                 Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
 

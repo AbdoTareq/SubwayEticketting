@@ -1,6 +1,5 @@
-package com.abdotareq.subway_e_ticketing.controller.activity.registration
+package com.abdotareq.subway_e_ticketing.controller.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentVerificationBinding
 import com.abdotareq.subway_e_ticketing.model.dto.Token
@@ -20,6 +21,7 @@ import com.abdotareq.subway_e_ticketing.utility.util
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 class VerificationFragment : Fragment() {
 
@@ -38,7 +40,9 @@ class VerificationFragment : Fragment() {
         val view = binding.root
 
 
-        val mail = activity!!.intent.getStringExtra("mail")
+        // this how to receive with safe args
+        val safeArgs: VerificationFragmentArgs by navArgs()
+        val mail = safeArgs.mail
 
         mailTv = binding.verificationMailTv
         codeEt = binding.verificationEt
@@ -49,7 +53,7 @@ class VerificationFragment : Fragment() {
         continueBtn.setOnClickListener {
             if (codeEt.text.isNullOrEmpty()) {
                 codeEt.hint = getText(R.string.enter_verification)
-                codeEt.setHintTextColor(resources.getColor(R.color.colorAccent))
+                codeEt.setHintTextColor(getColor(context!!, R.color.colorAccent))
             } else {
                 verifyCode(mail, codeEt.text.toString())
             }
@@ -58,7 +62,7 @@ class VerificationFragment : Fragment() {
     }
 
     // call to verify the user
-    private fun verifyCode(mail: String?, code: String) {
+    private fun verifyCode(mail: String, code: String) {
         val user = User()
         user.email = mail
         user.otp_token = code
@@ -75,24 +79,27 @@ class VerificationFragment : Fragment() {
                     //verifyCode successfully
                     progressDialog.dismiss()
                     //ToDo: Remove Toast
-                    activity!!.intent.putExtra("token", response.body()!!.token)
-                    activity!!.intent.putExtra("mail", mail)
+
                     Toast.makeText(context, "token: " + response.body()!!.token, Toast.LENGTH_SHORT).show()
                     // this how to navigate between fragments using safe args after defining action in navigation xml file
-                    // between desired fragments
-                    findNavController().navigate(VerificationFragmentDirections.actionVerificationFragmentToChangePassFragment())
+                    // between desired fragments & send args safely
+                    findNavController().navigate(VerificationFragmentDirections.actionVerificationFragmentToChangePassFragment(mail, response.body()!!.token))
                 } else if (responseCode == 439) {
                     //verifyCode not successfully
                     progressDialog.dismiss()
+                    Timber.e("response.code:    $responseCode")
                     Toast.makeText(context, getString(R.string.wrong_code), Toast.LENGTH_LONG).show()
                 } else {
                     //verifyCode not successfully
                     progressDialog.dismiss()
+                    Timber.e("response.code:    $responseCode")
+
                     Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<Token?>, t: Throwable) {
+                Timber.e("err:    $t")
                 progressDialog.dismiss()
                 Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
             }

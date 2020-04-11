@@ -84,7 +84,6 @@ class SplashScreenActivity : AwesomeSplash() {
                     configSplash.titleTextSize = 30f //float value
                     configSplash.animTitleTechnique = Techniques.FadeIn
 
-
                 } else if (responseCode == 438) {
                     //pass not saved successfully
                     Toast.makeText(this@SplashScreenActivity, getString(R.string.pass_less), Toast.LENGTH_LONG).show()

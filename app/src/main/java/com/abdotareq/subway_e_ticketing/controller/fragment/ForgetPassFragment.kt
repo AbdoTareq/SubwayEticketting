@@ -1,6 +1,5 @@
-package com.abdotareq.subway_e_ticketing.controller.activity.registration
+package com.abdotareq.subway_e_ticketing.controller.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -58,11 +57,9 @@ class ForgetPassFragment : Fragment() {
                 if (responseCode in 200..299 && response.body() != null) {
                     //user saved successfully
                     progressDialog.dismiss()
-                    //ToDo: Remove Toast
-                    activity!!.intent.putExtra("mail", mail)
                     // this how to navigate between fragments using safe args after defining action in navigation xml file
                     // between desired fragments
-                    findNavController().navigate(ForgetPassFragmentDirections.actionForgetPassFragmentToVerificationFragment())
+                    findNavController().navigate(ForgetPassFragmentDirections.actionForgetPassFragmentToVerificationFragment(mail))
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss()
