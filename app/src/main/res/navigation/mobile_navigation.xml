@@ -12,7 +12,8 @@
         android:id="@+id/ticketFragment"
         android:name="com.abdotareq.subway_e_ticketing.controller.fragment.TicketFragment"
         android:label="fragment_ticket"
-        tools:layout="@layout/fragment_ticket" />
+        tools:layout="@layout/fragment_ticket"
+        />
     <fragment
         android:id="@+id/pocketFragment"
         android:name="com.abdotareq.subway_e_ticketing.controller.fragment.PocketFragment"
@@ -32,6 +33,7 @@
         <action
             android:id="@+id/action_profileSettingsFragment_to_pass_nav"
             app:destination="@id/pass_nav"
+            app:enterAnim="@anim/slide_in_down"
             app:popUpTo="@id/profileSettingsFragment"
             app:popUpToInclusive="true" />
     </fragment>
