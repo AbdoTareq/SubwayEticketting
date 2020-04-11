@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pass_nav"
-    app:startDestination="@id/forgetPassFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/forgetPassFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.ForgetPassFragment"
+        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.ForgetPassFragment"
         android:label="fragment_forget_pass"
         tools:layout="@layout/fragment_forget_pass">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/changePassFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.ChangePassFragment"
+        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.ChangePassFragment"
         android:label="fragment_change_pass"
         tools:layout="@layout/fragment_change_pass">
         <!--args put in destination-->
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/verificationFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.VerificationFragment"
+        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.VerificationFragment"
         android:label="fragment_verification"
         tools:layout="@layout/fragment_verification">
         <action
@@ -39,5 +39,26 @@
         <argument
             android:name="mail"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_forgetPassFragment"
+            app:destination="@id/forgetPassFragment" />
     </fragment>
 </navigation>

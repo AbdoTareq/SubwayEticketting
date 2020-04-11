@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.core.content.ContextCompat.getColor
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ChangePassDialogeBinding
 import com.abdotareq.subway_e_ticketing.model.dto.UserPassword
@@ -44,19 +45,19 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
         //check for all inputs from user are correct
         if (!util.isValidPassword(binding.oldPass.text.toString())) {
             binding.oldPass.setText("")
-//            binding.oldPass.hint = getString(R.string.pass_warning)
-            binding.oldPass.setHintTextColor(resources.getColor(R.color.colorAccent))
+            binding.oldPass.hint = getString(R.string.pass_warning)
+            binding.oldPass.setHintTextColor(getColor(context!!, R.color.colorAccent))
             return
         } else if (!util.isValidPassword(binding.newPassword.text.toString())) {
             binding.newPassword.setText("")
-//            binding.newPassword.hint = getString(R.string.pass_warning)
-            binding.newPassword.setHintTextColor(resources.getColor(R.color.colorAccent))
+            binding.newPassword.hint = getString(R.string.pass_warning)
+            binding.newPassword.setHintTextColor(getColor(context!!, R.color.colorAccent))
             return
         } else if (binding.confirmNewPassword.text.toString().isEmpty()
                 || binding.confirmNewPassword.text.toString() != binding.newPassword.text.toString()) {
             binding.confirmNewPassword.setText("")
-//            binding.confirmNewPassword.hint = getString(R.string.fix_confirmPassWarning)
-            binding.confirmNewPassword.setHintTextColor(resources.getColor(R.color.colorAccent))
+            binding.confirmNewPassword.hint = getString(R.string.fix_confirmPassWarning)
+            binding.confirmNewPassword.setHintTextColor(getColor(context!!, R.color.colorAccent))
             return
         }
 
@@ -97,7 +98,7 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
                     progressDialog.dismiss()
                     binding.oldPass.setText("")
 //            binding.oldPass.hint = getString(R.string.pass_warning)
-                    binding.oldPass.setHintTextColor(resources.getColor(R.color.colorAccent))
+                    binding.oldPass.setHintTextColor(getColor(context!!,R.color.colorAccent))
                     Toast.makeText(context, getString(R.string.wrong_pass), Toast.LENGTH_LONG).show()
                 } else if (responseCode == 438) {
                     //pass not saved successfully

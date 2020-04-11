@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.controller.activity.registration.SignInActivity
+import com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignInFragment
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
@@ -30,6 +32,7 @@ import java.util.*
 /**
  *  [ProfileSettingsFragment] responsible for user profile settings & changes.
  */
+// TODO FIX LOGOUT PROBLEM
 class ProfileSettingsFragment : Fragment() {
 
     private var _binding: FragmentProfileSettingsBinding? = null
@@ -188,11 +191,12 @@ class ProfileSettingsFragment : Fragment() {
                     SharedPreferenceUtil.setSharedPrefsTokenId(context, "-1")
 
                     //start the sign in activity
-                    val signInIntent = Intent(context, SignInActivity::class.java)
+                    val signInIntent = Intent(context, SignInFragment::class.java)
                     signInIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     signInIntent.putExtra("LOGGED_OUT", 1)
                     startActivity(signInIntent)
-                    activity?.finish()
+
+                    activity!!.finishAffinity()
                 }
             }
         }
@@ -205,9 +209,9 @@ class ProfileSettingsFragment : Fragment() {
 
         //change the color of the buttons
         dialog.setOnShowListener { //set the negative button with the red color
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(android.R.color.holo_red_dark))
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(context!!, android.R.color.holo_red_dark))
             //set the positive button with the primary color
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.colorPrimary))
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(context!!, R.color.colorPrimary))
         }
 
         //show the dialog
@@ -292,7 +296,7 @@ class ProfileSettingsFragment : Fragment() {
     override fun onDestroyView() {
         // this to save user data before destroy fragment or replace ir
         // (when select another fragment from bottom navigation view)
-        activity!!.intent.putExtra("user", user); // saving user object.
+        activity!!.intent.putExtra("user", user) // saving user object.
 
         super.onDestroyView()
         _binding = null

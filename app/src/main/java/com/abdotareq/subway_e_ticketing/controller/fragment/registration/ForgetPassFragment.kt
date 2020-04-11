@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment
+package com.abdotareq.subway_e_ticketing.controller.fragment.registration
 
 import android.os.Bundle
 import android.view.LayoutInflater

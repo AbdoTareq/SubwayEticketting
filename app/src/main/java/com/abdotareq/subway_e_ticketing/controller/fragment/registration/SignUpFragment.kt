@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.activity.registration
+package com.abdotareq.subway_e_ticketing.controller.fragment.registration
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -7,16 +7,18 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Button
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.ActivitySignUpBinding
+import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
+import com.abdotareq.subway_e_ticketing.databinding.FragmentSignUpBinding
 import com.abdotareq.subway_e_ticketing.model.dto.Token
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
-import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import retrofit2.Call
@@ -29,67 +31,62 @@ import java.util.*
 /**
  * The Activity Controller Class that is responsible for handling Signing Up
  */
-class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySignUpBinding
+class SignUpFragment : Fragment() {
+
+    private var _binding: FragmentSignUpBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
     private var genderList = arrayOf("Female", "Male")
-    private lateinit var materialCalendar: Calendar
-    private lateinit var datePicker: DatePickerDialog
-    private lateinit var signUpBtn: Button
-    private lateinit var calenderBtn: Button
-    private lateinit var genderBtn: Button
-    private lateinit var signInTv: TextView
     private var year = 0
-    private var date: Date? = null
+    private lateinit var date: Date
     private var formatDate: String? = null
     private var gender = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
-
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         val view = binding.root
-        setContentView(view)
+
+        // code goes here
         callListeners()
+
+        return view
     }
 
     // Call listeners on the activity for code readability
     private fun callListeners() {
-        genderBtn = binding.signUpGenderBtn
-        calenderBtn = binding.signUpCalender
-        signUpBtn = binding.signUpBtn
-        signInTv = binding.signUpSignInTv
 
-        genderBtn.setOnClickListener {
-            val builder = AlertDialog.Builder(this@SignUpActivity)
+        binding.signUpGenderBtn.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
             builder.setTitle(getString(R.string.select_gender))
             builder.setItems(genderList) { dialogInterface, position ->
                 gender = genderList[position]
-                genderBtn.text = gender
+                binding.signUpGenderBtn.text = gender
             }
             val alertDialog = builder.create()
             alertDialog.show()
         }
-        calenderBtn.setOnClickListener {
-            materialCalendar = Calendar.getInstance()
-            val day = materialCalendar.get(Calendar.DAY_OF_MONTH)
-            val month = materialCalendar.get(Calendar.MONTH)
-            year = materialCalendar.get(Calendar.YEAR)
-            date = materialCalendar.getTime()
+        binding.signUpCalender.setOnClickListener {
+            val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            val month = Calendar.getInstance().get(Calendar.MONTH)
+            date = Calendar.getInstance().time
             val format1 = SimpleDateFormat("yyyy-MM-dd")
             formatDate = format1.format(date)
-            datePicker = DatePickerDialog(this@SignUpActivity, OnDateSetListener { datePicker, mYear, mMonth, mDay ->
-                calenderBtn.text = formatDate
-            }, year, month, day) //changed from day,month,year to year,month,day
-            datePicker.show()
+            //changed from day,month,year to year,month,day
+            DatePickerDialog(context!!, OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+                year = Calendar.getInstance().get(Calendar.YEAR)
+
+                binding.signUpCalender.text = formatDate
+            }, year, month, day).show()
         }
 
         //sign up method that will call the web service
-        signUpBtn.setOnClickListener { signUpBtnClick() }
-        signInTv.setOnClickListener {
-            val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-            startActivity(intent)
+        binding.signUpBtn.setOnClickListener { signUpBtnClick() }
+        binding.signUpSignInTv.setOnClickListener {
+           findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
         }
     }
 
@@ -99,7 +96,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun saveUserCall(user: User?) {
 
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(this, getString(R.string.progMessage))
+        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
         //start the call
@@ -109,34 +106,34 @@ class SignUpActivity : AppCompatActivity() {
                 if (responseCode in 200..299) {
                     //user saved successfully
                     progressDialog.dismiss()
-                    val returnIntent = intent
+                    val returnIntent = activity!!.intent
                     //write token into SharedPreferences
-                    SharedPreferenceUtil.setSharedPrefsLoggedIn(this@SignUpActivity, true)
+                    SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
                     if (response.body() != null) {
-                        SharedPreferenceUtil.setSharedPrefsTokenId(this@SignUpActivity, response.body()!!.token)
+                        SharedPreferenceUtil.setSharedPrefsTokenId(context, response.body()!!.token)
                     }
-                    val intent = Intent(this@SignUpActivity, HomeLandActivity::class.java)
+                    val intent = Intent(context, HomeLandActivity::class.java)
                     startActivity(intent)
 
-                    setResult(Activity.RESULT_OK, returnIntent)
-                    Toast.makeText(this@SignUpActivity, "success", Toast.LENGTH_SHORT).show()
+                    activity!!.setResult(Activity.RESULT_OK, returnIntent)
+                    Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
                 } else if (responseCode == 434) {
-                    Toast.makeText(this@SignUpActivity, getText(R.string.pass_less), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getText(R.string.pass_less), Toast.LENGTH_LONG).show()
                     progressDialog.dismiss()
                 } else if (responseCode == 435) {
-                    Toast.makeText(this@SignUpActivity, getText(R.string.mail_exist), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getText(R.string.mail_exist), Toast.LENGTH_LONG).show()
                     progressDialog.dismiss()
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@SignUpActivity, "else onResponse $responseCode", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "else onResponse $responseCode", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<Token?>, t: Throwable) {
                 progressDialog.dismiss()
                 Timber.e("getText(R.string.error_message)${t.message}")
-                Toast.makeText(this@SignUpActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -164,10 +161,10 @@ class SignUpActivity : AppCompatActivity() {
             binding.signUpConfirmPassEt.hint = getString(R.string.fix_confirmPassWarning)
             return
         } else if (gender.isEmpty()) {
-            Toast.makeText(this, getText(R.string.select_gender), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getText(R.string.select_gender), Toast.LENGTH_SHORT).show()
             return
         } else if (year == 0) {
-            Toast.makeText(this, getText(R.string.select_birthday), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getText(R.string.select_birthday), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -186,4 +183,10 @@ class SignUpActivity : AppCompatActivity() {
         //sign up method that will call the web service
         saveUserCall(user)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

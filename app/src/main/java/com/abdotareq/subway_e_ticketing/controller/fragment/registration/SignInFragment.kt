@@ -1,16 +1,20 @@
-package com.abdotareq.subway_e_ticketing.controller.activity.registration
+package com.abdotareq.subway_e_ticketing.controller.fragment.registration
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.ActivitySignInBinding
+import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
+import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
 import com.abdotareq.subway_e_ticketing.model.dto.Token
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
-import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import retrofit2.Call
@@ -21,19 +25,23 @@ import timber.log.Timber
 /**
  * The Activity Controller Class that is responsible for handling Signing in
  */
-class SignInActivity : AppCompatActivity() {
+class SignInFragment : Fragment() {
 
-    private lateinit var binding: ActivitySignInBinding
+    private var _binding: FragmentSignInBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
     private lateinit var passEt: EditText
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
-
-        binding = ActivitySignInBinding.inflate(layoutInflater)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
         val view = binding.root
-        setContentView(view)
+
+        // code goes here
         callListeners()
+        
+        return view
     }
 
     // Call listeners on the activity for code readability
@@ -43,12 +51,10 @@ class SignInActivity : AppCompatActivity() {
         val recoverPassTv = binding.signInRecoverPassTv
         signInBtn.setOnClickListener { signInBtnClick() }
         signUpTv.setOnClickListener {
-            val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
         }
         recoverPassTv.setOnClickListener {
-            val intent = Intent(this@SignInActivity, RecoverPassActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToForgetPassFragment())
         }
     }
 
@@ -59,7 +65,7 @@ class SignInActivity : AppCompatActivity() {
 
         mailEt.setText("abdo.elbishihi@gmail.com")
         passEt.setText("abdo1234")
-        Toast.makeText(this, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show()
 
         //check for all inputs from user are not empty
         if (util.isValidEmail(mailEt.text.toString())) {
@@ -86,7 +92,7 @@ class SignInActivity : AppCompatActivity() {
     private fun authenticate(user: User) {
 
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(this, getString(R.string.progMessage))
+        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
         //start the call
@@ -98,29 +104,34 @@ class SignInActivity : AppCompatActivity() {
                     progressDialog.dismiss()
 
                     //write token into SharedPreferences to use in remember user
-                    SharedPreferenceUtil.setSharedPrefsLoggedIn(this@SignInActivity, true)
-                    SharedPreferenceUtil.setSharedPrefsTokenId(this@SignInActivity, response.body()!!.token)
+                    SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
+                    SharedPreferenceUtil.setSharedPrefsTokenId(context, response.body()!!.token)
                     Timber.e("token:    ${response.body()!!.token}")
-                    val intent = Intent(this@SignInActivity, HomeLandActivity::class.java)
-                    startActivity(intent)
-                    finish()
 
+                    val intent = Intent(context, HomeLandActivity::class.java)
+                    startActivity(intent)
+                    activity!!.finishAffinity()
                 } else if (responseCode == 436) {
                     //user not authenticated successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@SignInActivity, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
                 } else {
                     //user not authenticated successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@SignInActivity, "else onResponse", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<Token?>, t: Throwable) {
                 progressDialog.dismiss()
                 Timber.e("getText(R.string.error_message)${t.message}")
-                Toast.makeText(this@SignInActivity, getText(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getText(R.string.failure_happened), Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

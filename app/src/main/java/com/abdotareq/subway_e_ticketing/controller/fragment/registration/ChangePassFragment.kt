@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment
+package com.abdotareq.subway_e_ticketing.controller.fragment.registration
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.controller.activity.registration.SignInActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentChangePassBinding
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
@@ -111,7 +110,7 @@ class ChangePassFragment : Fragment() {
                 if (responseCode in 200..299 && response.body() != null) {
                     //pass changed successfully
                     progressDialog.dismiss()
-                    val intent = Intent(context, SignInActivity::class.java)
+                    val intent = Intent(context, SignInFragment::class.java)
 //                    intent.putExtra("token", response.body()!!.token)
 //                    intent.putExtra("mail", mail)
                     startActivity(intent)

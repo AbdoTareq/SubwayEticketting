@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.abdotareq.subway_e_ticketing.controller.activity.registration.RecoverPassActivity">
+    tools:context=".controller.fragment.registration.RecoverPassActivity">
 
 
     <fragment
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/pass_nav" />
+        app:navGraph="@navigation/register_nav" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

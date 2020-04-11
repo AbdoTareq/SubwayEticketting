@@ -75,6 +75,18 @@ dependencies {
 
     // circle profile picture
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    // Lifecycles
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+
+    // Saved state module for ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0"
+
+
 
 
 }

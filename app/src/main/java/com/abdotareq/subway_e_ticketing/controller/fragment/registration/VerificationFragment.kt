@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment
+package com.abdotareq.subway_e_ticketing.controller.fragment.registration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,7 +26,6 @@ import timber.log.Timber
 class VerificationFragment : Fragment() {
 
     private var _binding: FragmentVerificationBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!

@@ -14,15 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar" >
-        <activity android:name=".controller.activity.registration.RecoverPassActivity" >
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.RecoverPassActivity" >
         </activity>
-        <activity android:name=".controller.fragment.ChangePassFragment" />
-        <activity android:name=".controller.fragment.VerificationFragment" />
-        <activity android:name=".controller.fragment.ForgetPassFragment" />
+        <activity android:name=".controller.fragment.registration.ChangePassFragment" />
+        <activity android:name=".controller.fragment.registration.VerificationFragment" />
+        <activity android:name=".controller.fragment.registration.ForgetPassFragment" />
         <activity android:name=".controller.activity.HomeLandActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".controller.activity.registration.SignUpActivity" />
-        <activity android:name=".controller.activity.registration.SignInActivity" />
+        <activity android:name=".controller.activity.MainActivity" />
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignUpFragment" />
+        <activity android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignInFragment" />
         <activity android:name=".controller.activity.SplashScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
