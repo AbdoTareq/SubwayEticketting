@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.abdotareq.subway_e_ticketing">
+    package="com.abdotareq.subway_e_ticketing" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".utility.ApplicationController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:name="com.abdotareq.subway_e_ticketing.utility.ApplicationController"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeNoActionBar">
-        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.ChangePassActivity"
-            />
-        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.VerificationActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.ForgetPassActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.MainActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.SignUpActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.registration.SignInActivity" />
-        <activity android:name="com.abdotareq.subway_e_ticketing.controller.activity.SplashScreenActivity"
-           >
+        android:theme="@style/AppThemeNoActionBar" >
+        <activity android:name=".controller.activity.registration.RecoverPassActivity" >
+        </activity>
+        <activity android:name=".controller.activity.registration.ChangePassFragment" />
+        <activity android:name=".controller.activity.registration.VerificationFragment" />
+        <activity android:name=".controller.activity.registration.ForgetPassFragment" />
+        <activity android:name=".controller.activity.HomeLandActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".controller.activity.registration.SignUpActivity" />
+        <activity android:name=".controller.activity.registration.SignInActivity" />
+        <activity android:name=".controller.activity.SplashScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

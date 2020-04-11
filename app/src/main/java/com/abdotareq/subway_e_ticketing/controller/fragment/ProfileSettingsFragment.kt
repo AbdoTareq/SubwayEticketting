@@ -33,6 +33,7 @@ import java.util.*
 class ProfileSettingsFragment : Fragment() {
 
     private var _binding: FragmentProfileSettingsBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -57,7 +58,7 @@ class ProfileSettingsFragment : Fragment() {
             user = activity?.intent?.getParcelableExtra("user") as User
             showData()
         } catch (e: Exception) {
-            Timber.e("$e")
+            Timber.e(" getUser $e")
             // if failed to get user obj from splash screen get user call
             getUserData(SharedPreferenceUtil.getSharedPrefsTokenId(context))
         }
@@ -289,6 +290,10 @@ class ProfileSettingsFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        // this to save user data before destroy fragment or replace ir
+        // (when select another fragment from bottom navigation view)
+        activity!!.intent.putExtra("user", user); // saving user object.
+
         super.onDestroyView()
         _binding = null
     }

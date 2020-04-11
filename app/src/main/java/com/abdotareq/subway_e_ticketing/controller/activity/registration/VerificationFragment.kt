@@ -2,13 +2,17 @@ package com.abdotareq.subway_e_ticketing.controller.activity.registration
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.ActivityVerificationBinding
+import com.abdotareq.subway_e_ticketing.databinding.FragmentVerificationBinding
 import com.abdotareq.subway_e_ticketing.model.dto.Token
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
@@ -17,24 +21,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class VerificationActivity : AppCompatActivity() {
+class VerificationFragment : Fragment() {
 
-    private lateinit var binding: ActivityVerificationBinding
+    private var _binding: FragmentVerificationBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private lateinit var mailTv: TextView
     private lateinit var codeEt: EditText
     private lateinit var continueBtn: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_verification)
-
-        // this for view binding to replace findviewbyid
-        binding = ActivityVerificationBinding.inflate(layoutInflater)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentVerificationBinding.inflate(inflater, container, false)
         val view = binding.root
-        setContentView(view)
 
-        val mail = intent.getStringExtra("mail")
+
+        val mail = activity!!.intent.getStringExtra("mail")
 
         mailTv = binding.verificationMailTv
         codeEt = binding.verificationEt
@@ -50,17 +54,17 @@ class VerificationActivity : AppCompatActivity() {
                 verifyCode(mail, codeEt.text.toString())
             }
         }
-
+        return view
     }
 
     // call to verify the user
-    private fun verifyCode(mail: String, code: String) {
+    private fun verifyCode(mail: String?, code: String) {
         val user = User()
         user.email = mail
         user.otp_token = code
 
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(this@VerificationActivity, getString(R.string.loading))
+        val progressDialog = util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
 
         //start the call
@@ -71,29 +75,32 @@ class VerificationActivity : AppCompatActivity() {
                     //verifyCode successfully
                     progressDialog.dismiss()
                     //ToDo: Remove Toast
-                    val intent = Intent(this@VerificationActivity, ChangePassActivity::class.java)
-                    intent.putExtra("token", response.body()!!.token)
-                    intent.putExtra("mail", mail)
-                    Toast.makeText(this@VerificationActivity, "token: " + response.body()!!.token, Toast.LENGTH_SHORT).show()
-                    startActivity(intent)
-                    finish()
+                    activity!!.intent.putExtra("token", response.body()!!.token)
+                    activity!!.intent.putExtra("mail", mail)
+                    Toast.makeText(context, "token: " + response.body()!!.token, Toast.LENGTH_SHORT).show()
+                    // this how to navigate between fragments using safe args after defining action in navigation xml file
+                    // between desired fragments
+                    findNavController().navigate(VerificationFragmentDirections.actionVerificationFragmentToChangePassFragment())
                 } else if (responseCode == 439) {
                     //verifyCode not successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@VerificationActivity, getString(R.string.wrong_code), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.wrong_code), Toast.LENGTH_LONG).show()
                 } else {
                     //verifyCode not successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@VerificationActivity, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<Token?>, t: Throwable) {
                 progressDialog.dismiss()
-                Toast.makeText(this@VerificationActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
-
+                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
             }
         })
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

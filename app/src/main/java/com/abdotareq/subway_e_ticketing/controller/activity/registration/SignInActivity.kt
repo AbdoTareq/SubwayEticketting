@@ -47,7 +47,7 @@ class SignInActivity : AppCompatActivity() {
             startActivity(intent)
         }
         recoverPassTv.setOnClickListener {
-            val intent = Intent(this@SignInActivity, ForgetPassActivity::class.java)
+            val intent = Intent(this@SignInActivity, RecoverPassActivity::class.java)
             startActivity(intent)
         }
     }
@@ -58,7 +58,7 @@ class SignInActivity : AppCompatActivity() {
         passEt = binding.signInPassEt
 
         mailEt.setText("abdo.elbishihi@gmail.com")
-        passEt.setText("omar1234")
+        passEt.setText("noura1234")
         Toast.makeText(this, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show()
 
         //check for all inputs from user are not empty

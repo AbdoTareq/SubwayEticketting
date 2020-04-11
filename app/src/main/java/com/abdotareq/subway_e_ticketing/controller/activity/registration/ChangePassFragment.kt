@@ -2,12 +2,16 @@ package com.abdotareq.subway_e_ticketing.controller.activity.registration
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getColor
+import androidx.fragment.app.Fragment
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.ActivityChangePassBinding
+import com.abdotareq.subway_e_ticketing.databinding.FragmentChangePassBinding
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.util
@@ -16,61 +20,60 @@ import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
 
-class ChangePassActivity : AppCompatActivity() {
+class ChangePassFragment : Fragment() {
 
-    private lateinit var binding: ActivityChangePassBinding
+    private var _binding: FragmentChangePassBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private lateinit var passEt: EditText
     private lateinit var confirmEt: EditText
     private lateinit var confirmBtn: Button
 
-    private lateinit var mail: String
-    private lateinit var token: String
     private var bearerToken: String = "Bearer "
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_pass)
-
-        // this for view binding to replace findviewbyid
-        binding = ActivityChangePassBinding.inflate(layoutInflater)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentChangePassBinding.inflate(inflater, container, false)
         val view = binding.root
-        setContentView(view)
+
 
         // take the token to send it with bearer in header to change pass
-        token = intent.getStringExtra("token")
-        mail = intent.getStringExtra("mail")
+        val token = activity!!.intent.getStringExtra("token")
+        val mail = activity!!.intent.getStringExtra("mail")
 
         // take the token to send it with bearer in header to change pass
         bearerToken += token
 
-        Toast.makeText(this, "header: $bearerToken", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "header: $bearerToken", Toast.LENGTH_SHORT).show()
 
         passEt = binding.passChangePassEt
         confirmEt = binding.passChangeConfirmPassEt
         confirmBtn = binding.changePassConfirmBtn
 
         confirmBtn.setOnClickListener {
-            confirmBtnClick()
+            confirmBtnClick(mail)
         }
 
+        return view
     }
 
     /**
      * A method called to handle sign up button clicks
      */
-    private fun confirmBtnClick() {
+    private fun confirmBtnClick(mail: String?) {
         //check for all inputs from user are correct
         if (!util.isValidPassword(passEt.text.toString())) {
             passEt.setText("")
             passEt.hint = getString(R.string.pass_warning)
-            passEt.setHintTextColor(resources.getColor(R.color.colorAccent))
+            passEt.setHintTextColor(getColor(context!!, R.color.colorAccent))
             return
-        } else if (confirmEt.text.toString().isNullOrEmpty()
-                || !confirmEt.text.toString().equals(passEt.text.toString())) {
+        } else if (confirmEt.text.toString().isEmpty()
+                || confirmEt.text.toString() != passEt.text.toString()) {
             confirmEt.setText("")
             confirmEt.hint = getString(R.string.fix_confirmPassWarning)
-            confirmEt.setHintTextColor(resources.getColor(R.color.colorAccent))
+            confirmEt.setHintTextColor(getColor(context!!, R.color.colorAccent))
             return
         }
 
@@ -93,7 +96,7 @@ class ChangePassActivity : AppCompatActivity() {
     private fun changePassCall(user: User) {
 
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(this, getString(R.string.loading))
+        val progressDialog = util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
 
         //start the call
@@ -103,40 +106,44 @@ class ChangePassActivity : AppCompatActivity() {
                 if (responseCode in 200..299 && response.body() != null) {
                     //pass changed successfully
                     progressDialog.dismiss()
-                    val intent = Intent(this@ChangePassActivity, SignInActivity::class.java)
+                    val intent = Intent(context, SignInActivity::class.java)
 //                    intent.putExtra("token", response.body()!!.token)
 //                    intent.putExtra("mail", mail)
                     startActivity(intent)
-                    Toast.makeText(this@ChangePassActivity, "Pass changed", Toast.LENGTH_SHORT).show()
-
-                    finish()
+                    Toast.makeText(context, "Pass changed", Toast.LENGTH_SHORT).show()
+                    // this to finish recover pass activity
+                    activity!!.finishAffinity()
                 } else if (responseCode == 434) {
                     //pass not saved successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@ChangePassActivity, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
                 } else if (responseCode == 438) {
                     //pass not saved successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@ChangePassActivity, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
                 } else if (responseCode == 440) {
                     //pass not saved successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@ChangePassActivity, getString(R.string.email_does_not_match), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.email_does_not_match), Toast.LENGTH_LONG).show()
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss()
-                    Toast.makeText(this@ChangePassActivity, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 progressDialog.dismiss()
-                Toast.makeText(this@ChangePassActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
 
             }
         })
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }
