@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignInFragment
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
@@ -191,12 +192,9 @@ class ProfileSettingsFragment : Fragment() {
                     SharedPreferenceUtil.setSharedPrefsTokenId(context, "-1")
 
                     //start the sign in activity
-                    val signInIntent = Intent(context, SignInFragment::class.java)
-                    signInIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    signInIntent.putExtra("LOGGED_OUT", 1)
-                    startActivity(signInIntent)
-
-                    activity!!.finishAffinity()
+                    SharedPreferenceUtil.setSharedPrefsLoggedIn(context, false)
+                    SharedPreferenceUtil.setSharedPrefsTokenId(context, "-1")
+                    findNavController().navigate(ProfileSettingsFragmentDirections.actionProfileSettingsFragmentToPassNav())
                 }
             }
         }
