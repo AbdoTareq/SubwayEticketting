@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
+// for parcelable to work 'kotlin-android' must be before 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 // for safe args
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
@@ -29,6 +30,11 @@ android {
     // Available in Android Gradle Plugin 3.6.0
     viewBinding {
         enabled = true
+    }
+
+    // for parcelable to work
+    androidExtensions {
+        experimental = true
     }
 
 }
@@ -60,7 +66,7 @@ dependencies {
     // for navigation and safe arguments
     implementation "android.arch.navigation:navigation-fragment-ktx:2.2.1"
     implementation "android.arch.navigation:navigation-ui-ktx:2.2.1"
-    
+
     // Timber logs library
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
@@ -69,7 +75,6 @@ dependencies {
 
     // circle profile picture
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
 
 
 }

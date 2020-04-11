@@ -33,7 +33,6 @@ import java.util.*
 class ProfileSettingsFragment : Fragment() {
 
     private var _binding: FragmentProfileSettingsBinding? = null
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -51,15 +50,16 @@ class ProfileSettingsFragment : Fragment() {
         return view
     }
 
+    // get user obj from splash screen or get user call
     private fun getUserData() {
         // receive user obj from splash screen
         try {
-            user = activity?.intent?.getSerializableExtra("user") as User
+            user = activity?.intent?.getParcelableExtra("user") as User
             showData()
         } catch (e: Exception) {
             Timber.e("$e")
             // if failed to get user obj from splash screen get user call
-            getUserCall()
+            getUserData(SharedPreferenceUtil.getSharedPrefsTokenId(context))
         }
 
     }
@@ -67,7 +67,7 @@ class ProfileSettingsFragment : Fragment() {
     private fun callListeners() {
         val genderList = arrayOf("Female", "Male")
         var year = 0
-        var date: Date? = null
+        var date: Date?
         var formatDate: String? = null
         var gender = ""
         var materialCalendar: Calendar
@@ -114,12 +114,6 @@ class ProfileSettingsFragment : Fragment() {
 
     }
 
-    private fun getUserCall() {
-        if (SharedPreferenceUtil.getSharedPrefsLoggedIn(context)) {
-            getUserData(SharedPreferenceUtil.getSharedPrefsTokenId(context))
-        }
-    }
-
     private fun getUserData(userIdToken: String) {
         var bearerToken = "Bearer "
         bearerToken += userIdToken
@@ -129,7 +123,7 @@ class ProfileSettingsFragment : Fragment() {
         progressDialog.show()
 
         //start the call
-        UserApiObj.retrofitService.getUser(bearerToken).enqueue(object : retrofit2.Callback<User?> {
+        UserApiObj.retrofitService.getUser(bearerToken).enqueue(object : Callback<User?> {
             override fun onResponse(call: Call<User?>, response: Response<User?>) {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {

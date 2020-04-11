@@ -1,9 +1,10 @@
 package com.abdotareq.subway_e_ticketing.model.dto
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
-import java.io.Serializable
-import java.util.*
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(@Json(name = "id")
                 var id: Int = 0,
                 @Json(name = "email")
@@ -31,7 +32,7 @@ data class User(@Json(name = "id")
                 var admin: Int = 0,
 
                 @Json(name = "otp_token")
-                var otp_token: String? = null) :Serializable{
+                var otp_token: String? = null) : Parcelable {
 
     override fun toString(): String {
         return ("User [id=" + id + ", email=" + email + ", password=" + password + ", first_name=" + first_name

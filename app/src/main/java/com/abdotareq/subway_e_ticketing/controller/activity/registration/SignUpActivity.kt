@@ -79,7 +79,9 @@ class SignUpActivity : AppCompatActivity() {
             date = materialCalendar.getTime()
             val format1 = SimpleDateFormat("yyyy-MM-dd")
             formatDate = format1.format(date)
-            datePicker = DatePickerDialog(this@SignUpActivity, OnDateSetListener { datePicker, mYear, mMonth, mDay -> Toast.makeText(this@SignUpActivity, date.toString(), Toast.LENGTH_SHORT).show() }, year, month, day) //changed from day,month,year to year,month,day
+            datePicker = DatePickerDialog(this@SignUpActivity, OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+                calenderBtn.text = formatDate
+            }, year, month, day) //changed from day,month,year to year,month,day
             datePicker.show()
         }
 
