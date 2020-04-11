@@ -75,7 +75,6 @@ class SplashScreenActivity : AwesomeSplash() {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {
                     //get user successfully
-                    Toast.makeText(this@SplashScreenActivity, "Welcome ${response.body()!!.first_name} ${response.body()!!.last_name} ", Toast.LENGTH_LONG).show()
                     user = response.body()!!
 
                     configSplash.titleSplash = "${getString(R.string.welcome)} ${user?.first_name} ${user?.last_name} "
@@ -109,7 +108,7 @@ class SplashScreenActivity : AwesomeSplash() {
             Intent(this@SplashScreenActivity, HomeLandActivity::class.java)
 
         } else
-            Intent(this@SplashScreenActivity, MainActivity::class.java)
+            Intent(this@SplashScreenActivity, RegisterActivity::class.java)
         try {
             intent.putExtra("user", user); // sending user object.
         } catch (e: Exception) {

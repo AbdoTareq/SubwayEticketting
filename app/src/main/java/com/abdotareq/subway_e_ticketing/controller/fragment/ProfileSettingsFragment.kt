@@ -33,7 +33,7 @@ import java.util.*
 /**
  *  [ProfileSettingsFragment] responsible for user profile settings & changes.
  */
-// TODO FIX LOGOUT PROBLEM
+// TODO FIX GENDER
 class ProfileSettingsFragment : Fragment() {
 
     private var _binding: FragmentProfileSettingsBinding? = null
@@ -73,8 +73,8 @@ class ProfileSettingsFragment : Fragment() {
         val genderList = arrayOf("Female", "Male")
         var year = 0
         var date: Date?
-        var formatDate: String? = null
-        var gender = ""
+        var formatDate: String? = user?.birth_date
+        var gender = user?.gender
         var materialCalendar: Calendar
         var datePicker: DatePickerDialog
 
@@ -87,7 +87,7 @@ class ProfileSettingsFragment : Fragment() {
         }
 
         binding.updateBtn.setOnClickListener {
-            saveBtnClk(gender, year, formatDate)
+            saveBtnClk(gender, formatDate)
         }
 
         binding.genderBtn.setOnClickListener {
@@ -222,7 +222,7 @@ class ProfileSettingsFragment : Fragment() {
         fragmentManager?.let { passDialog.show(it, "Pass Dialog") }
     }
 
-    private fun saveBtnClk(gender: String, year: Int, formatDate: String?) {
+    private fun saveBtnClk(gender: String?, formatDate: String?) {
         //check for all inputs from user are correct
         if (TextUtils.isEmpty(binding.firstNameEt.text.toString()) && binding.firstNameEt.text.toString() == "") {
             binding.firstNameEt.hint = getText(R.string.fix_fist_name)
@@ -230,22 +230,19 @@ class ProfileSettingsFragment : Fragment() {
         } else if (TextUtils.isEmpty(binding.lastNameEt.text.toString()) && binding.lastNameEt.text.toString() == "") {
             binding.lastNameEt.hint = getText(R.string.fix_last_name_mess)
             return
-        } else if (gender.isEmpty()) {
-            Toast.makeText(context, getText(R.string.select_gender), Toast.LENGTH_SHORT).show()
-            return
-        } else if (year == 0) {
-            Toast.makeText(context, getText(R.string.select_birthday), Toast.LENGTH_SHORT).show()
-            return
         }
 
         // update the original user with only changed data
         // TODO ADD IMAGE TO USER
-        user?.first_name = binding.firstNameEt.text.toString()
-        user?.last_name = binding.lastNameEt.text.toString()
-        user?.gender = gender
-        user?.birth_date = formatDate
+        try {
+            user?.first_name = binding.firstNameEt.text.toString()
+            user?.last_name = binding.lastNameEt.text.toString()
+            user?.gender = gender
+            user?.birth_date = formatDate
+        } catch (e: Exception) {
+            Timber.e("$user")
+        }
 
-        Timber.e("$user")
 
         updateUser()
 
@@ -268,7 +265,6 @@ class ProfileSettingsFragment : Fragment() {
                     progressDialog.dismiss()
                     Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
 
-
                 } else if (responseCode == 438) {
                     //user not saved successfully
                     Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
@@ -277,7 +273,7 @@ class ProfileSettingsFragment : Fragment() {
                 } else {
                     //user not saved successfully
                     Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
-                    Timber.e(getString(R.string.else_on_repsonse))
+                    Timber.e("$responseCode")
                     progressDialog.dismiss()
 
                 }
