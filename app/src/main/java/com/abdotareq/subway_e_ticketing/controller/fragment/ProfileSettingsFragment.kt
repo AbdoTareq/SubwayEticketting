@@ -2,6 +2,7 @@ package com.abdotareq.subway_e_ticketing.controller.fragment
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
 import android.content.Intent
 import android.database.Cursor
@@ -32,7 +33,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -49,6 +49,13 @@ class ProfileSettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var user: User? = null
+
+    private var mYear = 0
+    private var mMonth: Int = 0
+    private var mDay: Int = 0
+
+    private var birthDate: String? = user?.birth_date
+    private var gender = user?.gender
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentProfileSettingsBinding.inflate(inflater, container, false)
@@ -77,12 +84,11 @@ class ProfileSettingsFragment : Fragment() {
 
     private fun callListeners() {
         val genderList = arrayOf("Female", "Male")
-        var year = 0
-        var date: Date?
-        var formatDate: String? = user?.birth_date
-        var gender = user?.gender
-        var materialCalendar: Calendar
-        var datePicker: DatePickerDialog
+        if (user!=null){
+            gender =user?.gender
+            birthDate =user?.birth_date
+        }
+
 
         binding.changePassBtn.setOnClickListener {
             openDialog()
@@ -92,8 +98,9 @@ class ProfileSettingsFragment : Fragment() {
             confirmLogOut()
         }
 
+        // save button
         binding.updateBtn.setOnClickListener {
-            saveBtnClk(gender, formatDate)
+            saveBtnClk(gender, birthDate)
         }
 
         binding.pickImage.setOnClickListener {
@@ -106,24 +113,24 @@ class ProfileSettingsFragment : Fragment() {
             builder.setItems(genderList) { dialogInterface, position ->
                 gender = genderList[position]
                 binding.genderBtn.text = gender
+                user?.gender = gender
             }
             val alertDialog = builder.create()
             alertDialog.show()
         }
 
         binding.calender.setOnClickListener {
-            materialCalendar = Calendar.getInstance()
-            val day = materialCalendar.get(Calendar.DAY_OF_MONTH)
-            val month = materialCalendar.get(Calendar.MONTH)
-            year = materialCalendar.get(Calendar.YEAR)
-            date = materialCalendar.time
-            val format1 = SimpleDateFormat("yyyy-MM-dd")
-            formatDate = format1.format(date)
-            datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
-                Toast.makeText(context, date.toString(), Toast.LENGTH_SHORT).show()
-            }
-                    , year, month, day) //changed from day,month,year to year,month,day
-            datePicker.show()
+            // Get Current Date
+            val c = Calendar.getInstance()
+            mYear = c[Calendar.YEAR]
+            mMonth = c[Calendar.MONTH]
+            mDay = c[Calendar.DAY_OF_MONTH]
+            val datePickerDialog = DatePickerDialog(context!!,
+                    OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                        binding.calender.text = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
+                        birthDate = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
+                    }, mYear, mMonth, mDay)
+            datePickerDialog.show()
         }
 
 
@@ -162,7 +169,7 @@ class ProfileSettingsFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<User?>, t: Throwable) {
-                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
                 Timber.e("$t")
                 progressDialog.dismiss()
             }
@@ -232,7 +239,7 @@ class ProfileSettingsFragment : Fragment() {
         fragmentManager?.let { passDialog.show(it, "Pass Dialog") }
     }
 
-    private fun saveBtnClk(gender: String?, formatDate: String?) {
+    private fun saveBtnClk(gender: String?, birthDate: String?) {
         //check for all inputs from user are correct
         if (TextUtils.isEmpty(binding.firstNameEt.text.toString()) && binding.firstNameEt.text.toString() == "") {
             binding.firstNameEt.hint = getText(R.string.fix_fist_name)
@@ -243,12 +250,11 @@ class ProfileSettingsFragment : Fragment() {
         }
 
         // update the original user with only changed data
-        // TODO ADD IMAGE TO USER
         try {
             user?.first_name = binding.firstNameEt.text.toString()
             user?.last_name = binding.lastNameEt.text.toString()
             user?.gender = gender
-            user?.birth_date = formatDate
+            user?.birth_date = birthDate
 
         } catch (e: Exception) {
             Timber.e("$user")
@@ -290,7 +296,7 @@ class ProfileSettingsFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
                 Timber.e("$t")
                 progressDialog.dismiss()
             }
@@ -314,25 +320,22 @@ class ProfileSettingsFragment : Fragment() {
     }
 
     /**
-     *  to call [getRealPathFromURI] to get image
+     *  to call [getRealPathFromURI] to get image uri is local from phone storage
      * */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode === Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
 
             val dialog = util.initProgress(context, getString(R.string.prog_image_message))
             dialog.show()
 
-            if (requestCode === 10) {
+            if (requestCode == 10) {
                 try {
                     val selectedImageUri: Uri? = data!!.data
-                    val selectedImagePath: String? = getRealPathFromURI(selectedImageUri)
+//                    val selectedImagePath: String? = getRealPathFromURI(selectedImageUri)
                     binding.profileImage.setImageURI(selectedImageUri)
 
-                    // how to store image in string format
-                    val cropImage = ImageUtil.resizeImage(context,selectedImageUri)
-                    val imageString = Base64.encodeToString(cropImage,4)
-                    user?.image= imageString
+                    convertImageToString(selectedImageUri)
 
                 } catch (e: Exception) {
                     Timber.e("error happened    $e")
@@ -348,20 +351,31 @@ class ProfileSettingsFragment : Fragment() {
     }
 
     /**
+     * convert Image To String to store it in user image and send it to server
+     * */
+    private fun convertImageToString(selectedImageUri: Uri?) {
+        // how to store image in string format
+        val cropImage = ImageUtil.resizeImage(context, selectedImageUri)
+        val imageString = Base64.encodeToString(cropImage, 4)
+        user?.image = imageString
+    }
+
+    /**
      *  method to collect image from gallery after picking [pickFromGallery]
      * */
-    fun getRealPathFromURI(uri: Uri?): String? {
+    private fun getRealPathFromURI(uri: Uri?): String? {
         if (uri == null) {
             return null
         }
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val projection = arrayOf(MediaStore.Images.Media._ID)
         val cursor: Cursor? = activity!!.contentResolver.query(uri, projection, null, null, null)
         if (cursor != null) {
-            val column_index: Int = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            val columnIndex: Int = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media._ID)
             cursor.moveToFirst()
-            return cursor.getString(column_index)
+            return cursor.getString(columnIndex)
         }
+        cursor?.close()
         return uri.path
     }
 

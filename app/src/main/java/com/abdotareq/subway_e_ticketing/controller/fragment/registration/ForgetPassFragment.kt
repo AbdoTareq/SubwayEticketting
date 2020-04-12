@@ -69,7 +69,7 @@ class ForgetPassFragment : Fragment() {
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 progressDialog.dismiss()
-                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
                 //                //ToDo: Remove Toast
                 Timber.e("FAILED : ${t.message}")
             }

@@ -41,10 +41,13 @@ class SignUpFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var genderList = arrayOf("Female", "Male")
-    private var year = 0
-    private lateinit var date: Date
-    private var formatDate: String? = null
+    private var mYear = 0
+    private var mMonth: Int = 0
+    private var mDay: Int = 0
+
     private var gender = ""
+    private var birthDate: String? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
@@ -70,23 +73,22 @@ class SignUpFragment : Fragment() {
             alertDialog.show()
         }
         binding.signUpCalender.setOnClickListener {
-            val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-            val month = Calendar.getInstance().get(Calendar.MONTH)
-            date = Calendar.getInstance().time
-            val format1 = SimpleDateFormat("yyyy-MM-dd")
-            formatDate = format1.format(date)
-            //changed from day,month,year to year,month,day
-            DatePickerDialog(context!!, OnDateSetListener { datePicker, mYear, mMonth, mDay ->
-                year = Calendar.getInstance().get(Calendar.YEAR)
-
-                binding.signUpCalender.text = formatDate
-            }, year, month, day).show()
+            val c = Calendar.getInstance()
+            mYear = c[Calendar.YEAR]
+            mMonth = c[Calendar.MONTH]
+            mDay = c[Calendar.DAY_OF_MONTH]
+            val datePickerDialog = DatePickerDialog(context!!,
+                    OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                        binding.signUpCalender.text = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
+                        birthDate = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
+                    }, mYear, mMonth, mDay)
+            datePickerDialog.show()
         }
 
         //sign up method that will call the web service
         binding.signUpBtn.setOnClickListener { signUpBtnClick() }
         binding.signUpSignInTv.setOnClickListener {
-           findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
+            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
         }
     }
 
@@ -133,7 +135,7 @@ class SignUpFragment : Fragment() {
             override fun onFailure(call: Call<Token?>, t: Throwable) {
                 progressDialog.dismiss()
                 Timber.e("getText(R.string.error_message)${t.message}")
-                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -163,7 +165,7 @@ class SignUpFragment : Fragment() {
         } else if (gender.isEmpty()) {
             Toast.makeText(context, getText(R.string.select_gender), Toast.LENGTH_SHORT).show()
             return
-        } else if (year == 0) {
+        } else if (birthDate == null) {
             Toast.makeText(context, getText(R.string.select_birthday), Toast.LENGTH_SHORT).show()
             return
         }
@@ -175,7 +177,7 @@ class SignUpFragment : Fragment() {
         user.email = binding.signUpMailEt.text.toString()
         user.password = binding.signUpPassEt.text.toString()
         user.gender = gender
-        user.birth_date = formatDate
+        user.birth_date = birthDate
         user.admin = 0
 
         Timber.e(user.toString())

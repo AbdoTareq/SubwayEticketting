@@ -28,6 +28,7 @@ import timber.log.Timber
 class SignInFragment : Fragment() {
 
     private var _binding: FragmentSignInBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -40,7 +41,7 @@ class SignInFragment : Fragment() {
 
         // code goes here
         callListeners()
-        
+
         return view
     }
 
@@ -125,7 +126,7 @@ class SignInFragment : Fragment() {
             override fun onFailure(call: Call<Token?>, t: Throwable) {
                 progressDialog.dismiss()
                 Timber.e("getText(R.string.error_message)${t.message}")
-                Toast.makeText(context, getText(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
             }
         })
     }

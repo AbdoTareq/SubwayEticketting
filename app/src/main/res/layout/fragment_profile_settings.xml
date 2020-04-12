@@ -104,7 +104,7 @@
         android:drawableStart="@drawable/calender_icon"
         android:fontFamily="@font/segoe_ui"
         android:padding="@dimen/small_margin"
-        android:text="2020-04-11"
+        android:text="@string/birth_date"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_font"

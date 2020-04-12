@@ -17,7 +17,6 @@ import timber.log.Timber
 class SplashScreenActivity : AwesomeSplash() {
 
     private var user: User? = null
-    private var flag: Boolean = false
 
     //DO NOT OVERRIDE onCreate()!
     //if you need to start some services do it in initSplash()!
@@ -33,14 +32,14 @@ class SplashScreenActivity : AwesomeSplash() {
             configSplash.titleSplash = getString(R.string.app_name)
             configSplash.titleTextColor = R.color.colorWhite
             configSplash.titleTextSize = 30f //float value
-            configSplash.animTitleDuration = 2000
+            configSplash.animTitleDuration = 500
             configSplash.animTitleTechnique = Techniques.FadeIn
             //        configSplash.setTitleFont("fonts/segoe_ui.ttf"); //provide string to your font located in assets/fonts/
         }
 
         //Customize Circular Reveal
         configSplash.backgroundColor = R.color.colorPrimary //any color you want form colors.xml
-        configSplash.animCircularRevealDuration = 2000 //int ms
+        configSplash.animCircularRevealDuration = 500 //int ms
         configSplash.revealFlagX = Flags.REVEAL_RIGHT //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
 
@@ -48,11 +47,11 @@ class SplashScreenActivity : AwesomeSplash() {
 
         //Customize Logo
         configSplash.logoSplash = R.drawable.white_logo //or any other drawable
-        configSplash.animLogoSplashDuration = 2000 //int ms
+        configSplash.animLogoSplashDuration = 200 //int ms
         configSplash.animLogoSplashTechnique = Techniques.Landing //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
         //Customize Path
-//        configSplash.setPathSplash(String.valueOf(R.drawable.white_logo)); //set path String
+//        configSplash.setPathSplash(R.string.account_Settings.toString()); //set path String
 //        configSplash.setOriginalHeight(400); //in relation to your svg (path) resource
 //        configSplash.setOriginalWidth(400); //in relation to your svg (path) resource
 //        configSplash.setAnimPathStrokeDrawingDuration(3000);
@@ -96,6 +95,11 @@ class SplashScreenActivity : AwesomeSplash() {
             override fun onFailure(call: Call<User?>, t: Throwable) {
                 Toast.makeText(this@SplashScreenActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
                 Timber.e("$t")
+                configSplash.titleSplash = getString(R.string.app_name)
+                configSplash.titleTextColor = R.color.colorWhite
+                configSplash.titleTextSize = 30f //float value
+                configSplash.animTitleDuration = 2000
+                configSplash.animTitleTechnique = Techniques.FadeIn
             }
         })
     }

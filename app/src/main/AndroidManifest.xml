@@ -14,8 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar" >
-        <activity android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.RecoverPassActivity" >
-        </activity>
         <activity android:name=".controller.fragment.registration.ChangePassFragment" />
         <activity android:name=".controller.fragment.registration.VerificationFragment" />
         <activity android:name=".controller.fragment.registration.ForgetPassFragment" />

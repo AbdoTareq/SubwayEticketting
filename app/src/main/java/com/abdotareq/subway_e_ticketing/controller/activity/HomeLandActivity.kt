@@ -30,7 +30,6 @@ class HomeLandActivity : AppCompatActivity() {
         val navController = host.navController
         setupBottomNavMenu(navController)
 
-
     }
 
     // method to navigate through bottom navigation view
