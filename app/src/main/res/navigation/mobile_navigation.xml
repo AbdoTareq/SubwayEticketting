@@ -28,21 +28,12 @@
         android:id="@+id/profileSettingsFragment"
         android:name="com.abdotareq.subway_e_ticketing.controller.fragment.ProfileSettingsFragment"
         android:label="fragment_profile_settings"
-        tools:layout="@layout/fragment_profile_settings">
-        <!-- popUpToInclusive to remove it if user click back button   -->
-        <action
-            android:id="@+id/action_profileSettingsFragment_to_pass_nav"
-            app:destination="@id/pass_nav"
-            app:enterAnim="@anim/slide_in_down"
-            app:popUpTo="@id/profileSettingsFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_profile_settings"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.abdotareq.subway_e_ticketing.controller.fragment.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
-    <include app:graph="@navigation/register_nav" />
 
 
 </navigation>

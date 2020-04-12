@@ -63,7 +63,7 @@ class SignInFragment : Fragment() {
         val mailEt = binding.signInMailEt
         passEt = binding.signInPassEt
 
-        mailEt.setText("abdo.elbishihi@gmail.com")
+        mailEt.setText("ab@gmail.com")
         passEt.setText("abdo1234")
         Toast.makeText(context, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show()
 

@@ -1,26 +1,31 @@
 package com.abdotareq.subway_e_ticketing.controller.fragment
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignInFragment
+import com.abdotareq.subway_e_ticketing.controller.activity.RegisterActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
 import com.abdotareq.subway_e_ticketing.model.dto.User
 import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
+import com.abdotareq.subway_e_ticketing.utility.imageUtil.ImageUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -29,6 +34,7 @@ import retrofit2.Response
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 /**
  *  [ProfileSettingsFragment] responsible for user profile settings & changes.
@@ -88,6 +94,10 @@ class ProfileSettingsFragment : Fragment() {
 
         binding.updateBtn.setOnClickListener {
             saveBtnClk(gender, formatDate)
+        }
+
+        binding.pickImage.setOnClickListener {
+            pickFromGallery()
         }
 
         binding.genderBtn.setOnClickListener {
@@ -192,9 +202,9 @@ class ProfileSettingsFragment : Fragment() {
                     SharedPreferenceUtil.setSharedPrefsTokenId(context, "-1")
 
                     //start the sign in activity
-                    SharedPreferenceUtil.setSharedPrefsLoggedIn(context, false)
-                    SharedPreferenceUtil.setSharedPrefsTokenId(context, "-1")
-                    findNavController().navigate(ProfileSettingsFragmentDirections.actionProfileSettingsFragmentToPassNav())
+                    val intent = Intent(context, RegisterActivity::class.java)
+                    startActivity(intent)
+                    activity!!.finishAffinity()
                 }
             }
         }
@@ -239,6 +249,7 @@ class ProfileSettingsFragment : Fragment() {
             user?.last_name = binding.lastNameEt.text.toString()
             user?.gender = gender
             user?.birth_date = formatDate
+
         } catch (e: Exception) {
             Timber.e("$user")
         }
@@ -273,9 +284,8 @@ class ProfileSettingsFragment : Fragment() {
                 } else {
                     //user not saved successfully
                     Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
-                    Timber.e("$responseCode")
+                    Timber.e("$responseCode    $user")
                     progressDialog.dismiss()
-
                 }
             }
 
@@ -285,6 +295,74 @@ class ProfileSettingsFragment : Fragment() {
                 progressDialog.dismiss()
             }
         })
+    }
+
+    /**
+     * A method called to start picking image from the gallery
+     */
+    private fun pickFromGallery() {
+        if (Build.VERSION.SDK_INT <= 19) {
+            val i = Intent()
+            i.type = "image/*"
+            i.action = Intent.ACTION_GET_CONTENT
+            i.addCategory(Intent.CATEGORY_OPENABLE)
+            startActivityForResult(i, 10)
+        } else if (Build.VERSION.SDK_INT > 19) {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, 10)
+        }
+    }
+
+    /**
+     *  to call [getRealPathFromURI] to get image
+     * */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode === Activity.RESULT_OK) {
+
+            val dialog = util.initProgress(context, getString(R.string.prog_image_message))
+            dialog.show()
+
+            if (requestCode === 10) {
+                try {
+                    val selectedImageUri: Uri? = data!!.data
+                    val selectedImagePath: String? = getRealPathFromURI(selectedImageUri)
+                    binding.profileImage.setImageURI(selectedImageUri)
+
+                    // how to store image in string format
+                    val cropImage = ImageUtil.resizeImage(context,selectedImageUri)
+                    val imageString = Base64.encodeToString(cropImage,4)
+                    user?.image= imageString
+
+                } catch (e: Exception) {
+                    Timber.e("error happened    $e")
+                }
+                dialog.dismiss()
+            } else {
+                //notify user that a problem occurred
+                Toast.makeText(context
+                        , getString(R.string.some_error), Toast.LENGTH_LONG).show()
+                dialog.dismiss()
+            }
+        }
+    }
+
+    /**
+     *  method to collect image from gallery after picking [pickFromGallery]
+     * */
+    fun getRealPathFromURI(uri: Uri?): String? {
+        if (uri == null) {
+            return null
+        }
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor: Cursor? = activity!!.contentResolver.query(uri, projection, null, null, null)
+        if (cursor != null) {
+            val column_index: Int = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            return cursor.getString(column_index)
+        }
+        return uri.path
     }
 
     override fun onDestroyView() {

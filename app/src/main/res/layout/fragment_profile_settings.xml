@@ -22,7 +22,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/create_account_image"
@@ -69,6 +69,7 @@
         android:fontFamily="@font/segoe_ui"
         android:hint="@string/last_name"
         android:inputType="textPersonName"
+        android:textSize="@dimen/large_font"
         android:padding="@dimen/small_margin"
         android:textAlignment="viewStart"
         android:textColorHighlight="@color/colorPrimary"
@@ -81,9 +82,8 @@
     <Button
         android:id="@+id/gender_btn"
         android:layout_width="0dp"
+        android:textSize="@dimen/large_font"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/medium_margin"
         android:drawableStart="@drawable/gender_icon"
         android:fontFamily="@font/segoe_ui"
         android:padding="@dimen/small_margin"
@@ -91,30 +91,27 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/very_large_font"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/calender"
-        app:layout_constraintEnd_toStartOf="@+id/v_line2"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/first_name_et"
+        app:layout_constraintStart_toStartOf="@+id/first_name_et"
         app:layout_constraintTop_toTopOf="@+id/calender" />
 
     <Button
         android:id="@+id/calender"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_margin"
-        android:layout_marginEnd="@dimen/medium_margin"
         android:drawableStart="@drawable/calender_icon"
         android:fontFamily="@font/segoe_ui"
         android:padding="@dimen/small_margin"
-        android:text="@string/birth_date"
-        android:textAlignment="center"
+        android:text="2020-04-11"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/very_large_font"
+        android:textSize="@dimen/large_font"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/v_line2"
+        app:layout_constraintEnd_toEndOf="@+id/last_name_et"
+        app:layout_constraintStart_toStartOf="@+id/last_name_et"
         app:layout_constraintTop_toBottomOf="@+id/mail" />
 
     <Button
@@ -207,16 +204,37 @@
         style="@style/EditTStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:enabled="false"
-        android:textSize="@dimen/very_large_font"
-        android:hint="@string/mail"
         android:drawableStart="@drawable/email_icon"
         android:drawablePadding="@dimen/_8sdp"
+        android:enabled="false"
+        android:hint="@string/mail"
         android:padding="@dimen/small_margin"
+        android:textSize="@dimen/very_large_font"
         app:layout_constraintBottom_toTopOf="@+id/gender_btn"
         app:layout_constraintEnd_toEndOf="@+id/last_name_et"
         app:layout_constraintStart_toStartOf="@+id/first_name_et"
         app:layout_constraintTop_toBottomOf="@+id/last_name_et" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.29" />
+
+    <ImageView
+        android:id="@+id/pick_image"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/shape_profile_change"
+        android:src="@drawable/change_pic1"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+        app:layout_constraintStart_toStartOf="@+id/v_line2"
+        app:layout_constraintTop_toTopOf="@+id/guideline8"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
