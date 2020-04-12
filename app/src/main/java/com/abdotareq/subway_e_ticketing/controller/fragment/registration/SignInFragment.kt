@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
@@ -27,8 +30,10 @@ import timber.log.Timber
  */
 class SignInFragment : Fragment() {
 
-    private var _binding: FragmentSignInBinding? = null
+    private lateinit var viewModel: SigninViewModel
+    private lateinit var viewModelFactory: SigninViewModelFactory
 
+    private var _binding: FragmentSignInBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -39,6 +44,32 @@ class SignInFragment : Fragment() {
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        viewModelFactory = SigninViewModelFactory()
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(SigninViewModel::class.java)
+
+        binding.signInViewModel = viewModel
+
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.setLifecycleOwner(this)
+
+
+        // Navigates back to title when button is pressed
+        viewModel.eventSignUp.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
+                viewModel.onSignUpComplete()
+            }
+        })
+
+        viewModel.eventRecoverPass.observe(viewLifecycleOwner , Observer {
+            if (it){
+                findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToForgetPassFragment())
+                viewModel.onRecoverPassComplete()
+            }
+        })
+
         // code goes here
         callListeners()
 
@@ -48,15 +79,9 @@ class SignInFragment : Fragment() {
     // Call listeners on the activity for code readability
     private fun callListeners() {
         val signInBtn = binding.signInBtn
-        val signUpTv = binding.signInSignUpTv
-        val recoverPassTv = binding.signInRecoverPassTv
+
         signInBtn.setOnClickListener { signInBtnClick() }
-        signUpTv.setOnClickListener {
-            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
-        }
-        recoverPassTv.setOnClickListener {
-            findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToForgetPassFragment())
-        }
+
     }
 
     // Handle sign in Button clicks
