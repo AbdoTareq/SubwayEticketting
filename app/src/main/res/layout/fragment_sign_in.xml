@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="signInViewModel"
+            name="viewmodel"
             type="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SigninViewModel" />
     </data>
 
@@ -64,7 +64,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline4">
 
             <EditText
-                android:id="@+id/sign_in_mail_et"
+                android:id="@+id/mail_et"
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,6 +72,7 @@
                 android:drawablePadding="10dp"
                 android:hint="@string/mail"
                 android:padding="15dp"
+                android:text="@={viewmodel.mail}"
                 android:textAlignment="viewStart"
                 tools:targetApi="lollipop" />
 
@@ -92,7 +93,7 @@
                 tools:targetApi="lollipop">
 
                 <EditText
-                    android:id="@+id/sign_in_pass_et"
+                    android:id="@+id/pass_et"
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,7 +101,8 @@
                     android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:padding="16dp" />
+                    android:padding="16dp"
+                    android:text="@={viewmodel.pass}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,6 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
             android:background="@drawable/shape_sign_up"
+            android:onClick="@{() -> viewmodel.onAuthenticate()}"
             android:padding="15dp"
             android:shadowColor="@android:color/transparent"
             android:text="@string/log_in"
@@ -122,13 +125,12 @@
             app:layout_constraintStart_toStartOf="@+id/linearLayout3"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-
         <TextView
             android:id="@+id/sign_in_recover_pass_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
-            android:onClick="@{() -> signInViewModel.onRecoverPass()}"
+            android:onClick="@{()->viewmodel.onRecoverPass()}"
             android:text="@string/forget_pass"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/_15sdp"
@@ -142,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:gravity="center"
-            android:onClick="@{() -> signInViewModel.onSignUp()}"
+            android:onClick="@{()->viewmodel.onSignUp()}"
             android:text="@string/create_new_account"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/sign_in_sub_text_size"

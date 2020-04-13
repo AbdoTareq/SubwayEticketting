@@ -45,12 +45,12 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
         //check for all inputs from user are correct
         if (!util.isValidPassword(binding.oldPass.text.toString())) {
             binding.oldPass.setText("")
-            binding.oldPass.hint = getString(R.string.pass_warning)
+            binding.oldPass.hint = getString(R.string.invalid_pass)
             binding.oldPass.setHintTextColor(getColor(context!!, R.color.colorAccent))
             return
         } else if (!util.isValidPassword(binding.newPassword.text.toString())) {
             binding.newPassword.setText("")
-            binding.newPassword.hint = getString(R.string.pass_warning)
+            binding.newPassword.hint = getString(R.string.invalid_pass)
             binding.newPassword.setHintTextColor(getColor(context!!, R.color.colorAccent))
             return
         } else if (binding.confirmNewPassword.text.toString().isEmpty()

@@ -49,7 +49,7 @@
     <string name="send_complain">إرسال البلاغ</string>
 
     <string name="pass_fix">pass fix</string>
-    <string name="pass_warning">كلمة السر من 8 الى 12 حرف انجليزي ورقم ويجب ان تحتوي على ارقام وبدون مسافات </string>
+    <string name="invalid_pass">كلمة السر من 8 الى 12 حرف انجليزي ورقم ويجب ان تحتوي على ارقام وبدون مسافات </string>
     <string name="user_blocked">تم حجب هذا الحساب برجاء استخدام حساب اخر</string>
     <string name="user_deleted">تم حذف هذا الحساب برجاء استخدام حساب اخر</string>
     <string name="fix_confirmPassWarning">كلمة السر غير متطابقه</string>

@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -30,32 +28,30 @@ import timber.log.Timber
  */
 class SignInFragment : Fragment() {
 
-    private lateinit var viewModel: SigninViewModel
     private lateinit var viewModelFactory: SigninViewModelFactory
+    private lateinit var viewModel: SigninViewModel
 
     private var _binding: FragmentSignInBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    private lateinit var passEt: EditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
         val view = binding.root
 
         viewModelFactory = SigninViewModelFactory()
+
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(SigninViewModel::class.java)
 
-        binding.signInViewModel = viewModel
-
+        binding.viewmodel = viewModel
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
         binding.setLifecycleOwner(this)
 
-
-        // Navigates back to title when button is pressed
+        // Navigates to sign up when button is pressed
         viewModel.eventSignUp.observe(viewLifecycleOwner, Observer {
             if (it) {
                 findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToSignUpFragment())
@@ -63,59 +59,62 @@ class SignInFragment : Fragment() {
             }
         })
 
-        viewModel.eventRecoverPass.observe(viewLifecycleOwner , Observer {
-            if (it){
+        // Navigates to recover pass when button is pressed
+        viewModel.eventRecoverPass.observe(viewLifecycleOwner, Observer {
+            if (it) {
                 findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToForgetPassFragment())
                 viewModel.onRecoverPassComplete()
             }
         })
 
-        // code goes here
-        callListeners()
+        /* these 2 fields for observing mail and pass change if needed
+         viewModel.mail.observe(viewLifecycleOwner, Observer {
+             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+         })
+         viewModel.pass.observe(viewLifecycleOwner, Observer {
+             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+         })*/
+
+        //
+        viewModel.eventAuthenticate.observe(viewLifecycleOwner, Observer { isAuthenticatedClicked ->
+            if (isAuthenticatedClicked) {
+                validateFields()
+                viewModel.onAuthenticateComplete()
+            }
+        })
 
         return view
     }
 
-    // Call listeners on the activity for code readability
-    private fun callListeners() {
-        val signInBtn = binding.signInBtn
-
-        signInBtn.setOnClickListener { signInBtnClick() }
-
-    }
-
-    // Handle sign in Button clicks
-    private fun signInBtnClick() {
-        val mailEt = binding.signInMailEt
-        passEt = binding.signInPassEt
-
-        mailEt.setText("ab@gmail.com")
-        passEt.setText("abdo1234")
-        Toast.makeText(context, "Const values written in signInBtnClick method ", Toast.LENGTH_LONG).show()
-
-        //check for all inputs from user are not empty
-        if (util.isValidEmail(mailEt.text.toString())) {
-            mailEt.setText("")
-            mailEt.hint = getString(R.string.invalid_mail_warning)
-            return
-        } else if (!util.isValidPassword(passEt.text.toString())) {
-            passEt.setText("")
-            passEt.hint = getString(R.string.pass_warning)
+    private fun validateFields() {
+        // not valid mail
+        if (!viewModel.validateMail()) {
+            binding.mailEt.setText("")
+            binding.mailEt.hint = getString(R.string.invalid_mail_warning)
             return
         }
-        val user = User()
-        user.email = mailEt.text.toString()
-        user.password = passEt.text.toString()
-        Timber.e(user.toString())
-
-        authenticate(user)
+        // not valid pass
+        if (!viewModel.validatePass()) {
+            binding.passEt.setText("")
+            binding.passEt.hint = getString(R.string.invalid_pass)
+            return
+        }
+        // data is valid call authenticate
+        authenticate()
+//        Toast.makeText(context, "pass", Toast.LENGTH_SHORT).show()
     }
 
     /**
      * A method used to authenticate user (sign in)
      * can't be boolean as it has a thread which method won't wait until it finishes
      */
-    private fun authenticate(user: User) {
+    private fun authenticate() {
+        val user = User()
+
+        user.email = viewModel.onGetMail()
+        user.password = viewModel.onGetPass()
+
+        Timber.e(user.toString())
 
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(context, getString(R.string.progMessage))
@@ -154,6 +153,7 @@ class SignInFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
             }
         })
+
     }
 
     override fun onDestroyView() {

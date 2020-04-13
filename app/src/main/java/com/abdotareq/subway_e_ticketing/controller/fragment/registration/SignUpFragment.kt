@@ -25,7 +25,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
-import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -156,7 +155,7 @@ class SignUpFragment : Fragment() {
             return
         } else if (!util.isValidPassword(binding.signUpPassEt.text.toString())) {
             binding.signUpPassEt.setText("")
-            binding.signUpPassEt.hint = getString(R.string.pass_warning)
+            binding.signUpPassEt.hint = getString(R.string.invalid_pass)
             return
         } else if (binding.signUpPassEt.text.toString() != binding.signUpConfirmPassEt.text.toString()) {
             binding.signUpConfirmPassEt.setText("")

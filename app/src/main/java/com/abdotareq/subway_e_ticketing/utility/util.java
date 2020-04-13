@@ -23,10 +23,12 @@ public class util {
     public static final int ABOUT_US_TYPE_ID = 4;
 
     // Validate pass is 8 - 12
+    // return true when pass isn't valid
     public static boolean isValidPassword(String target) {
         return Pattern.compile("^(?=.*\\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,12}$").matcher(target).matches();
     }
 
+    // return true when mail is valid
     public static boolean isValidEmail(CharSequence target) {String regExpn = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
             + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
             + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."

@@ -69,7 +69,7 @@ class ChangePassFragment : Fragment() {
         //check for all inputs from user are correct
         if (!util.isValidPassword(passEt.text.toString())) {
             passEt.setText("")
-            passEt.hint = getString(R.string.pass_warning)
+            passEt.hint = getString(R.string.invalid_pass)
             passEt.setHintTextColor(getColor(context!!, R.color.colorAccent))
             return
         } else if (confirmEt.text.toString().isEmpty()

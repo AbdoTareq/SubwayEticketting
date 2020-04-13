@@ -47,7 +47,7 @@
     <string name="add_image">Add image</string>
     <string name="send_complain">Send the author</string>
     <string name="pass_fix">pass fix</string>
-    <string name="pass_warning">Enter Pass between 12 to 8 Characters</string>
+    <string name="invalid_pass">Enter Pass between 12 to 8 Characters</string>
     <string name="user_blocked">This account has been blocked, please use another account</string>
     <string name="user_deleted">This account was deleted, please use another account</string>
     <string name="fix_confirmPassWarning">Enter the same Password</string>

@@ -52,7 +52,7 @@
     <string name="send_complain">إرسال البلاغ</string>
 
     <string name="pass_fix">pass fix</string>
-    <string name="pass_warning">Enter Pass between 12 to 8 Characters</string>
+    <string name="invalid_pass">Enter Pass between 12 to 8 Characters</string>
     <string name="user_blocked">تم حجب هذا الحساب برجاء استخدام حساب اخر</string>
     <string name="user_deleted">تم حذف هذا الحساب برجاء استخدام حساب اخر</string>
     <string name="fix_confirmPassWarning">Enter the same Password</string>

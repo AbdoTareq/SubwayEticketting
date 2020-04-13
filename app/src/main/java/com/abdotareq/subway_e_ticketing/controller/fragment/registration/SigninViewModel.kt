@@ -3,16 +3,30 @@ package com.abdotareq.subway_e_ticketing.controller.fragment.registration
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.abdotareq.subway_e_ticketing.utility.util
 
+/**
+ * ViewModel containing all the logic needed to sign in
+ */
 class SigninViewModel : ViewModel() {
 
-    private val _mail = MutableLiveData<String>()
-    val mail: LiveData<String>
-        get() = _mail
-
-    private val _pass = MutableLiveData<String>()
+    /**
+     *  Don't expose:   private val _pass = MutableLiveData<String>()
     val pass: LiveData<String>
-        get() = _pass
+    get() = _pass
+    as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
+     * */
+
+    val mail = MutableLiveData<String>()
+    private val _getMail = MutableLiveData<String>()
+    val getMail: LiveData<String>
+        get() = _getMail
+
+
+    val pass = MutableLiveData<String>()
+    private val _getPass = MutableLiveData<String>()
+    val getPass: LiveData<String>
+        get() = _getPass
 
     private val _eventAuthenticate = MutableLiveData<Boolean>()
     val eventAuthenticate: LiveData<Boolean>
@@ -48,6 +62,30 @@ class SigninViewModel : ViewModel() {
 
     fun onRecoverPass() {
         _eventRecoverPass.value = true
+    }
+
+    fun validateMail(): Boolean {
+        if (mail.value.isNullOrEmpty() || util.isValidEmail(mail.value)) {
+            return false
+        }
+        return true
+    }
+
+    fun validatePass(): Boolean {
+        if (pass.value.isNullOrEmpty() || !util.isValidPassword(pass.value)) {
+            return false
+        }
+        return true
+    }
+
+    fun onGetMail(): String? {
+        _getMail.value = mail.value
+        return _getMail.value
+    }
+
+    fun onGetPass(): String? {
+        _getPass.value = pass.value
+        return _getPass.value
     }
 
 }
