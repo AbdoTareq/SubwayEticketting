@@ -25,6 +25,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -72,14 +74,18 @@ class SignUpFragment : Fragment() {
             alertDialog.show()
         }
         binding.signUpCalender.setOnClickListener {
-            val c = Calendar.getInstance()
-            mYear = c[Calendar.YEAR]
-            mMonth = c[Calendar.MONTH]
-            mDay = c[Calendar.DAY_OF_MONTH]
             val datePickerDialog = DatePickerDialog(context!!,
                     OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                        binding.signUpCalender.text = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
-                        birthDate = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
+//                        birthDate = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
+                        val calendar = Calendar.getInstance()
+                        calendar[Calendar.YEAR] = year
+                        calendar[Calendar.MONTH] = monthOfYear
+                        calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+                        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+                        val currentDateString: String = dateFormat.format(calendar.getTime())
+                        binding.signUpCalender.text = currentDateString
+                        birthDate = currentDateString
+
                     }, mYear, mMonth, mDay)
             datePickerDialog.show()
         }
