@@ -1,279 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context=".controller.fragment.registration.SignUpFragment">
+    >
+    <data>
 
-    <TextView
-        android:id="@+id/textView"
+        <variable
+            name="viewmodel"
+            type="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignupViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/very_large_margin"
-        android:fontFamily="@font/segoe_ui"
-        android:gravity="center"
-        android:text="@string/sign_up"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/sign_in_main_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".controller.fragment.registration.SignUpFragment">
 
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/EditTStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/segoe_ui"
-        android:gravity="center"
-        android:text="@string/message2"
-        android:textSize="@dimen/sign_in_sub_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:fontFamily="@font/segoe_ui"
+            android:gravity="center"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sign_in_main_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <EditText
-        android:id="@+id/sign_up_f_name_et"
-        style="@style/EditTStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:drawableStart="@drawable/user_icon"
-        android:drawablePadding="@dimen/_8sdp"
-        android:fontFamily="@font/segoe_ui"
-        android:hint="@string/first_name"
-        android:padding="@dimen/small_margin"
-        android:textAlignment="viewStart"
-        android:textColorHighlight="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toStartOf="@+id/sign_up_l_name_et"
-        app:layout_constraintStart_toStartOf="@+id/v_line1"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        tools:targetApi="lollipop" />
-
-    <EditText
-        android:id="@+id/sign_up_l_name_et"
-        style="@style/EditTStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:backgroundTint="@color/colorPrimary"
-        android:drawableStart="@drawable/user_icon"
-        android:drawablePadding="@dimen/_8sdp"
-        android:fontFamily="@font/segoe_ui"
-        android:hint="@string/last_name"
-        android:padding="@dimen/small_margin"
-        android:textAlignment="viewStart"
-        android:textColorHighlight="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/v_line2"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        tools:targetApi="lollipop" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_f_name_et">
-
-
-        <EditText
-            android:id="@+id/sign_up_mail_et"
+        <TextView
+            android:id="@+id/textView2"
             style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/email_icon"
+            android:fontFamily="@font/segoe_ui"
+            android:gravity="center"
+            android:text="@string/message2"
+            android:textSize="@dimen/sign_in_sub_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <EditText
+            android:id="@+id/sign_up_f_name_et"
+            style="@style/EditTStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@={viewmodel.first}"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:drawableStart="@drawable/user_icon"
             android:drawablePadding="@dimen/_8sdp"
             android:fontFamily="@font/segoe_ui"
-            android:hint="@string/mail"
+            android:hint="@string/first_name"
             android:padding="@dimen/small_margin"
             android:textAlignment="viewStart"
             android:textColorHighlight="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toStartOf="@+id/sign_up_l_name_et"
+            app:layout_constraintStart_toStartOf="@+id/v_line1"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
             tools:targetApi="lollipop" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
+            android:id="@+id/sign_up_l_name_et"
             style="@style/EditTStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:backgroundTint="@color/colorPrimary"
+            android:drawableStart="@drawable/user_icon"
+            android:drawablePadding="@dimen/_8sdp"
+            android:text="@={viewmodel.last}"
+            android:fontFamily="@font/segoe_ui"
+            android:hint="@string/last_name"
+            android:padding="@dimen/small_margin"
+            android:textAlignment="viewStart"
+            android:textColorHighlight="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/v_line2"
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            tools:targetApi="lollipop" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.48000002"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorWhite"
-            tools:targetApi="lollipop">
+            app:layout_constraintTop_toBottomOf="@+id/sign_up_f_name_et">
+
 
             <EditText
-                android:id="@+id/sign_up_pass_et"
+                android:id="@+id/sign_up_mail_et"
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/password_icon"
-                android:drawablePadding="10dp"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:padding="16dp" />
+                android:drawableStart="@drawable/email_icon"
+                android:drawablePadding="@dimen/_8sdp"
+                android:fontFamily="@font/segoe_ui"
+                android:text="@={viewmodel.mail}"
+                android:hint="@string/mail"
+                android:padding="@dimen/small_margin"
+                android:textAlignment="viewStart"
+                android:textColorHighlight="@color/colorPrimary"
+                tools:targetApi="lollipop" />
 
-        </com.google.android.material.textfield.TextInputLayout>
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/EditTStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.48000002"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorWhite"
-            tools:targetApi="lollipop">
-
-            <EditText
-                android:id="@+id/sign_up_confirm_pass_et"
+            <com.google.android.material.textfield.TextInputLayout
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/password_icon"
-                android:drawablePadding="10dp"
-                android:hint="@string/confirm_new_pass"
-                android:inputType="textPassword"
-                android:padding="16dp" />
+                android:importantForAutofill="no"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.48000002"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorWhite"
+                tools:targetApi="lollipop">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/sign_up_pass_et"
+                    style="@style/EditTStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/password_icon"
+                    android:drawablePadding="10dp"
+                    android:text="@={viewmodel.pass}"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="16dp" />
 
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/sign_up_gender_btn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/small_margin"
-        android:layout_marginRight="@dimen/small_margin"
-        android:drawableStart="@drawable/gender_icon"
-        android:fontFamily="@font/segoe_ui"
-        android:text="@string/select_gender"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/very_large_font"
-        app:layout_constraintBottom_toBottomOf="@+id/sign_up_calender"
-        app:layout_constraintEnd_toStartOf="@+id/v_line2"
-        app:layout_constraintStart_toStartOf="@+id/v_line1"
-        app:layout_constraintTop_toTopOf="@+id/sign_up_calender"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/sign_up_calender"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/small_margin"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="@dimen/small_margin"
-        android:layout_marginBottom="16dp"
-        android:drawableStart="@drawable/calender_icon"
-        android:fontFamily="@font/segoe_ui"
-        android:text="@string/birth_date"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/very_large_font"
-        app:layout_constraintBottom_toTopOf="@+id/sign_up_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/v_line2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-    <Button
-        android:id="@+id/sign_up_btn"
-        style="@style/ButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="13dp"
-        android:background="@drawable/shape_sign_up"
-        android:fontFamily="@font/segoe_ui"
-        android:padding="15dp"
-        android:shadowColor="@android:color/transparent"
-        android:text="@string/sign_up"
-        android:textSize="@dimen/sign_in_medium_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/sign_up_sign_in_tv"
-        app:layout_constraintEnd_toEndOf="@+id/sign_up_calender"
-        app:layout_constraintStart_toStartOf="@+id/sign_up_gender_btn"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_gender_btn" />
-
-    <TextView
-        android:id="@+id/sign_up_sign_in_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/segoe_ui"
-        android:gravity="center"
-        android:text="@string/signIn"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/sign_in_sub_text_size"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1.0" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.0" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v_line1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.00243309" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/EditTStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.48000002"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorWhite"
+                tools:targetApi="lollipop">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v_line2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+                <EditText
+                    android:id="@+id/sign_up_confirm_pass_et"
+                    style="@style/EditTStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewmodel.confPass}"
+                    android:drawableStart="@drawable/password_icon"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/confirm_new_pass"
+                    android:inputType="textPassword"
+                    android:padding="16dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/v_line3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="1" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/sign_up_gender_btn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:drawableStart="@drawable/gender_icon"
+            android:fontFamily="@font/segoe_ui"
+            android:text="@={viewmodel.gender}"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/very_large_font"
+            app:layout_constraintBottom_toBottomOf="@+id/sign_up_calender"
+            app:layout_constraintEnd_toStartOf="@+id/v_line2"
+            app:layout_constraintStart_toStartOf="@+id/v_line1"
+            app:layout_constraintTop_toTopOf="@+id/sign_up_calender"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/sign_up_calender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginBottom="16dp"
+            android:drawableStart="@drawable/calender_icon"
+            android:fontFamily="@font/segoe_ui"
+            android:text="@={viewmodel.birthDate}"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/very_large_font"
+            app:layout_constraintBottom_toTopOf="@+id/sign_up_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/v_line2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <Button
+            android:id="@+id/sign_up_btn"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="13dp"
+            android:background="@drawable/shape_sign_up"
+            android:fontFamily="@font/segoe_ui"
+            android:onClick="@{() -> viewmodel.onRegister()}"
+            android:padding="15dp"
+            android:shadowColor="@android:color/transparent"
+            android:text="@string/sign_up"
+            android:textSize="@dimen/sign_in_medium_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/sign_up_sign_in_tv"
+            app:layout_constraintEnd_toEndOf="@+id/sign_up_calender"
+            app:layout_constraintStart_toStartOf="@+id/sign_up_gender_btn"
+            app:layout_constraintTop_toBottomOf="@+id/sign_up_gender_btn" />
+
+        <TextView
+            android:id="@+id/sign_up_sign_in_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoe_ui"
+            android:gravity="center"
+            android:onClick="@{() -> viewmodel.onSignIn()}"
+            android:text="@string/signIn"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/sign_in_sub_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="1.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/v_line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.00243309" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/v_line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/v_line3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="1" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

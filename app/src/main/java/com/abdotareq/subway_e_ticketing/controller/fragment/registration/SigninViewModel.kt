@@ -78,14 +78,5 @@ class SigninViewModel : ViewModel() {
         return true
     }
 
-    fun onGetMail(): String? {
-        _getMail.value = mail.value
-        return _getMail.value
-    }
-
-    fun onGetPass(): String? {
-        _getPass.value = pass.value
-        return _getPass.value
-    }
 
 }

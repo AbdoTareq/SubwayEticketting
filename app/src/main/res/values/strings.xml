@@ -12,6 +12,7 @@
     <string name="sign_up_with_face">إنشاء حساب باستخدام Facebook</string>
     <string name="sign_in">تسجيل دخول</string>
     <string name="first_name">First Name</string>
+    <string name="first_name_warrning">Enter First Name</string>
     <string name="nick_name">اسم الشهرة</string>
     <string name="family_name">اسم العائلة</string>
     <string name="mail">Email</string>

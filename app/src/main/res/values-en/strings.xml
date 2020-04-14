@@ -13,6 +13,7 @@
     <string name="sign_up_with_face">Create an account using Facebook</string>
     <string name="sign_in">Login</string>
     <string name="first_name">First Name</string>
+    <string name="first_name_warrning">Enter First Name</string>
     <string name="check_network">Check network connection</string>
     <string name="nick_name">Nickname</string>
     <string name="family_name">family name</string>
@@ -194,7 +195,7 @@
     <string name="dublicated_data">Number or email already exists</string>
     <string name="prog_create_mess">Creating Account</string>
     <string name="fix_fist_name">Enter F name</string>
-    <string name="fix_last_name_mess">Enter L name</string>
+    <string name="fix_last_name_mess">Enter Last name</string>
     <string name="famous_name">Please enter a valid nickname</string>
     <string name="mobile_num">Please enter a mobile number is true</string>
     <string name="unavailable">Offline</string>

@@ -102,7 +102,7 @@ class ProfileSettingsFragment : Fragment() {
 
         // save button
         binding.updateBtn.setOnClickListener {
-            saveBtnClk(gender, birthDate)
+            saveBtnClk()
         }
 
         binding.pickImage.setOnClickListener {
@@ -244,7 +244,7 @@ class ProfileSettingsFragment : Fragment() {
         fragmentManager?.let { passDialog.show(it, "Pass Dialog") }
     }
 
-    private fun saveBtnClk(gender: String?, birthDate: String?) {
+    private fun saveBtnClk() {
         //check for all inputs from user are correct
         if (TextUtils.isEmpty(binding.firstNameEt.text.toString()) && binding.firstNameEt.text.toString() == "") {
             binding.firstNameEt.hint = getText(R.string.fix_fist_name)
@@ -258,8 +258,8 @@ class ProfileSettingsFragment : Fragment() {
         try {
             user?.first_name = binding.firstNameEt.text.toString()
             user?.last_name = binding.lastNameEt.text.toString()
-            user?.gender = gender
-            user?.birth_date = birthDate
+            user?.gender = binding.genderBtn.text.toString()
+            user?.birth_date = binding.calender.text.toString()
 
         } catch (e: Exception) {
             Timber.e("$user")

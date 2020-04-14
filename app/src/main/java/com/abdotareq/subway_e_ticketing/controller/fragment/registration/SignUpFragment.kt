@@ -1,9 +1,7 @@
 package com.abdotareq.subway_e_ticketing.controller.fragment.registration
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -11,7 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
@@ -29,11 +30,15 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 /**
  * The Activity Controller Class that is responsible for handling Signing Up
  */
 
 class SignUpFragment : Fragment() {
+
+    private lateinit var viewModelFactory: SignUpViewModelFactory
+    private lateinit var viewModel: SignupViewModel
 
     private var _binding: FragmentSignUpBinding? = null
 
@@ -45,7 +50,6 @@ class SignUpFragment : Fragment() {
     private var mYear = 0
     private var mMonth: Int = 0
     private var mDay: Int = 0
-
     private var gender = ""
     private var birthDate: String? = null
 
@@ -53,6 +57,41 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        viewModelFactory = SignUpViewModelFactory()
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(SignupViewModel::class.java)
+
+        binding.viewmodel = viewModel
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.setLifecycleOwner(this)
+
+        /* viewModel.first.observe(viewLifecycleOwner, Observer {
+             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+         })
+
+         viewModel.last.observe(viewLifecycleOwner, Observer {
+             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+         })
+
+         viewModel.mail.observe(viewLifecycleOwner, Observer {
+             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+         })
+ */
+
+        viewModel.eventSignIn.observe(viewLifecycleOwner, Observer {
+            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
+            viewModel.onSignInComplete()
+        })
+
+        viewModel.eventRegister.observe(viewLifecycleOwner, Observer { signUpClicked ->
+            if (signUpClicked) {
+                validateFields()
+                viewModel.onRegisterComplete()
+            }
+        })
 
         // code goes here
         callListeners()
@@ -62,9 +101,8 @@ class SignUpFragment : Fragment() {
 
     // Call listeners on the activity for code readability
     private fun callListeners() {
-
         binding.signUpGenderBtn.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(context!!)
             builder.setTitle(getString(R.string.select_gender))
             builder.setItems(genderList) { dialogInterface, position ->
                 gender = genderList[position]
@@ -75,7 +113,7 @@ class SignUpFragment : Fragment() {
         }
         binding.signUpCalender.setOnClickListener {
             val datePickerDialog = DatePickerDialog(context!!,
-                    OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 //                        birthDate = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
                         val calendar = Calendar.getInstance()
                         calendar[Calendar.YEAR] = year
@@ -88,12 +126,6 @@ class SignUpFragment : Fragment() {
 
                     }, mYear, mMonth, mDay)
             datePickerDialog.show()
-        }
-
-        //sign up method that will call the web service
-        binding.signUpBtn.setOnClickListener { signUpBtnClick() }
-        binding.signUpSignInTv.setOnClickListener {
-            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
         }
     }
 
@@ -148,30 +180,34 @@ class SignUpFragment : Fragment() {
     /**
      * A method called to handle sign up button clicks
      */
-    private fun signUpBtnClick() {
+    private fun validateFields() {
         //check for all inputs from user are correct
-        if (TextUtils.isEmpty(binding.signUpFNameEt.text.toString()) && binding.signUpFNameEt.text.toString() == "") {
-            binding.signUpFNameEt.setText(getText(R.string.fix_fist_name))
+        // not valid mail
+        if (viewModel.first.value.isNullOrEmpty()) {
+            binding.signUpFNameEt.setText("")
+            binding.signUpFNameEt.hint = getString(R.string.first_name_warrning)
             return
-        } else if (TextUtils.isEmpty(binding.signUpLNameEt.text.toString()) && binding.signUpLNameEt.text.toString() == "") {
-            binding.signUpLNameEt.setText(getText(R.string.fix_last_name_mess))
+        } else if (viewModel.last.value.isNullOrEmpty()) {
+            binding.signUpFNameEt.setText("")
+            binding.signUpFNameEt.hint = getString(R.string.fix_last_name_mess)
             return
-        } else if (util.isValidEmail(binding.signUpMailEt.text.toString())) {
-            binding.signUpMailEt.setText(getString(R.string.invalid_mail_warning))
+        } else if (!viewModel.validateMail()) {
+            binding.signUpMailEt.setText("")
+            binding.signUpMailEt.hint = getString(R.string.invalid_mail_warning)
             return
-        } else if (!util.isValidPassword(binding.signUpPassEt.text.toString())) {
+        } else if (!viewModel.validatePass(viewModel.pass.value.toString())) {
             binding.signUpPassEt.setText("")
             binding.signUpPassEt.hint = getString(R.string.invalid_pass)
             return
-        } else if (binding.signUpPassEt.text.toString() != binding.signUpConfirmPassEt.text.toString()) {
+        } else if (!viewModel.validatePass(viewModel.confPass.value.toString())) {
             binding.signUpConfirmPassEt.setText("")
-            binding.signUpConfirmPassEt.hint = getString(R.string.fix_confirmPassWarning)
+            binding.signUpConfirmPassEt.hint = getString(R.string.invalid_pass)
             return
-        } else if (gender.isEmpty()) {
-            Toast.makeText(context, getText(R.string.select_gender), Toast.LENGTH_SHORT).show()
+        } else if (viewModel.gender.value == "Gender") {
+            Toast.makeText(context, getString(R.string.select_gender), Toast.LENGTH_LONG).show()
             return
-        } else if (birthDate == null) {
-            Toast.makeText(context, getText(R.string.select_birthday), Toast.LENGTH_SHORT).show()
+        } else if (viewModel.birthDate.value == "Birth Date") {
+            Toast.makeText(context, getString(R.string.select_birthday), Toast.LENGTH_LONG).show()
             return
         }
 
@@ -181,8 +217,8 @@ class SignUpFragment : Fragment() {
         user.last_name = binding.signUpLNameEt.text.toString()
         user.email = binding.signUpMailEt.text.toString()
         user.password = binding.signUpPassEt.text.toString()
-        user.gender = gender
-        user.birth_date = birthDate
+        user.gender = binding.signUpGenderBtn.text.toString()
+        user.birth_date = binding.signUpCalender.text.toString()
         user.admin = 0
 
         Timber.e(user.toString())

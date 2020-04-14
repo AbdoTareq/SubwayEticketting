@@ -111,8 +111,8 @@ class SignInFragment : Fragment() {
     private fun authenticate() {
         val user = User()
 
-        user.email = viewModel.onGetMail()
-        user.password = viewModel.onGetPass()
+        user.email = viewModel.mail.value
+        user.password = viewModel.pass.value
 
         Timber.e(user.toString())
 
