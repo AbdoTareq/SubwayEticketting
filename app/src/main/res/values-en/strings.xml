@@ -8,7 +8,7 @@
     <string name="sign_without_logging">Continue without login</string>
     <string name="forget_pass">Recover password</string>
     <string name="or">Or --------------------- ---------------------</string>
-    <string name="create_new_account">Create New Account</string>
+    <string name="create_new_account">Create Account</string>
     <string name="sign_up_with_google">Create an account using Google</string>
     <string name="sign_up_with_face">Create an account using Facebook</string>
     <string name="sign_in">Login</string>
@@ -236,4 +236,8 @@
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
     <string name="welcome">Welcome</string>
+    <string name="tut_acc_mess">To be able to access all your data and trips history</string>
+    <string name="tut_buy_tickets">Buy tickets easily from the store in just few seconds</string>
+    <string name="tut_scan_code">Scan the ticket code to at the station gates</string>
+    <string name="show_tutorial">Show Tutorial</string>
 </resources>

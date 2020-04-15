@@ -8,11 +8,12 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/showTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
         android:layout_gravity="center"
-        android:text="@string/save_settings"
+        android:text="@string/show_tutorial"
         android:textSize="@dimen/_24sdp" />
 
 </FrameLayout>

@@ -1,11 +1,15 @@
 package com.abdotareq.subway_e_ticketing.controller.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
+import com.abdotareq.subway_e_ticketing.controller.activity.OnBoardActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSettingsBinding
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 
 /**
  * A simple [Fragment] subclass.
@@ -13,6 +17,7 @@ import com.abdotareq.subway_e_ticketing.databinding.FragmentSettingsBinding
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -22,6 +27,10 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        binding.showTitle.setOnClickListener {
+            val intent = Intent(context, OnBoardActivity::class.java)
+            startActivity(intent)
+        }
 
 
         return view

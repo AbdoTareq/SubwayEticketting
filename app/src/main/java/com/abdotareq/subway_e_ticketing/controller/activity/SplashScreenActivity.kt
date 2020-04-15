@@ -112,7 +112,7 @@ class SplashScreenActivity : AwesomeSplash() {
             Intent(this@SplashScreenActivity, HomeLandActivity::class.java)
 
         } else
-            Intent(this@SplashScreenActivity, RegisterActivity::class.java)
+            Intent(this@SplashScreenActivity, OnBoardActivity::class.java)
         try {
             intent.putExtra("user", user); // sending user object.
         } catch (e: Exception) {
