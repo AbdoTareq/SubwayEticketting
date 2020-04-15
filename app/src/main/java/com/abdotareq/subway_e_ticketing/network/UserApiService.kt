@@ -1,8 +1,8 @@
-package com.abdotareq.subway_e_ticketing.model.retrofit
+package com.abdotareq.subway_e_ticketing.network
 
-import com.abdotareq.subway_e_ticketing.model.dto.Token
-import com.abdotareq.subway_e_ticketing.model.dto.User
-import com.abdotareq.subway_e_ticketing.model.dto.UserPassword
+import com.abdotareq.subway_e_ticketing.model.Token
+import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.model.UserPassword
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.ResponseBody

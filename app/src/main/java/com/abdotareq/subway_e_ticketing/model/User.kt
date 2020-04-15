@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.model.dto
+package com.abdotareq.subway_e_ticketing.model
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.abdotareq.subway_e_ticketing.controller.fragment.registration
+package com.abdotareq.subway_e_ticketing.viewmodels
 
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class SignUpViewModelFactory() : ViewModelProvider.Factory {
+class SigninViewModelFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(SignupViewModel::class.java)) {
-            return SignupViewModel(application = Application()) as T
+        if (modelClass.isAssignableFrom(SigninViewModel::class.java)) {
+            return SigninViewModel(application = Application()) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

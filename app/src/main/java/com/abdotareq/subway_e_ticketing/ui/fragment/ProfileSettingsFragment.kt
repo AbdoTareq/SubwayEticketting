@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment
+package com.abdotareq.subway_e_ticketing.ui.fragment
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -20,10 +20,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.controller.activity.RegisterActivity
+import com.abdotareq.subway_e_ticketing.ui.activity.RegisterActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
-import com.abdotareq.subway_e_ticketing.model.dto.User
-import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
+import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.ImageUtil

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/forgetPassFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.ForgetPassFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.registration.ForgetPassFragment"
         android:label="fragment_forget_pass"
         tools:layout="@layout/fragment_forget_pass">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/changePassFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.ChangePassFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.registration.ChangePassFragment"
         android:label="fragment_change_pass"
         tools:layout="@layout/fragment_change_pass">
         <!--args put in destination-->
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/verificationFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.VerificationFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.registration.VerificationFragment"
         android:label="fragment_verification"
         tools:layout="@layout/fragment_verification">
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignUpFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.registration.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SignInFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.registration.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action

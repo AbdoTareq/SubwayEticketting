@@ -1,31 +1,34 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment.registration
+package com.abdotareq.subway_e_ticketing.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.utility.util
 
 /**
  * ViewModel containing all the logic needed to sign up
+ *
+ * @param application The application that this viewmodel is attached to, it's safe to hold a
+ * reference to applications across rotation since Application is never recreated during activity
+ * or fragment lifecycle events.
  */
 class SignupViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      *  Don't expose:   private val _pass = MutableLiveData<String>()
-    val pass: LiveData<String>
-    get() = _pass
+                        val pass: LiveData<String>
+                        get() = _pass
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
 
     val first = MutableLiveData<String>()
-    private val _GetFirst = MutableLiveData<String>()
+    private val _getFirst = MutableLiveData<String>()
     val getFirst: LiveData<String>
-        get() = _GetFirst
+        get() = _getFirst
 
     val last = MutableLiveData<String>()
-    val _getLast = MutableLiveData<String>()
+    private val _getLast = MutableLiveData<String>()
     val getLast: LiveData<String>
         get() = _getLast
 

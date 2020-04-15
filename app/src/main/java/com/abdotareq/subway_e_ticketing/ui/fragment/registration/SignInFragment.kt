@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment.registration
+package com.abdotareq.subway_e_ticketing.ui.fragment.registration
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,13 +11,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.controller.activity.HomeLandActivity
+import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
-import com.abdotareq.subway_e_ticketing.model.dto.Token
-import com.abdotareq.subway_e_ticketing.model.dto.User
-import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
+import com.abdotareq.subway_e_ticketing.model.Token
+import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModelFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

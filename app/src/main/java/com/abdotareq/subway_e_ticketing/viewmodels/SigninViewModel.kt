@@ -1,14 +1,19 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment.registration
+package com.abdotareq.subway_e_ticketing.viewmodels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.abdotareq.subway_e_ticketing.utility.util
 
 /**
  * ViewModel containing all the logic needed to sign in
+ *
+ * @param application The application that this viewmodel is attached to, it's safe to hold a
+ * reference to applications across rotation since Application is never recreated during actiivty
+ * or fragment lifecycle events.
  */
-class SigninViewModel : ViewModel() {
+class SigninViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      *  Don't expose:   private val _pass = MutableLiveData<String>()

@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.model.dto
+package com.abdotareq.subway_e_ticketing.model
 
 import com.squareup.moshi.Json
 

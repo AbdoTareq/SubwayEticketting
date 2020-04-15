@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.activity
+package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

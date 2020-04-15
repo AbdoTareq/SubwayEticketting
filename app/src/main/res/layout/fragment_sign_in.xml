@@ -7,14 +7,14 @@
 
         <variable
             name="viewmodel"
-            type="com.abdotareq.subway_e_ticketing.controller.fragment.registration.SigninViewModel" />
+            type="com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
-        tools:context=".controller.fragment.registration.SignInFragment">
+        tools:context=".ui.fragment.registration.SignInFragment">
 
         <TextView
             android:id="@+id/textView"

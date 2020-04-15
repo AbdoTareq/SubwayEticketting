@@ -1,7 +1,6 @@
-package com.abdotareq.subway_e_ticketing.controller.activity
+package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.abdotareq.subway_e_ticketing.R

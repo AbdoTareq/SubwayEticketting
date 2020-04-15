@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment
+package com.abdotareq.subway_e_ticketing.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.content.ContextCompat.getColor
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ChangePassDialogeBinding
-import com.abdotareq.subway_e_ticketing.model.dto.UserPassword
-import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
+import com.abdotareq.subway_e_ticketing.model.UserPassword
+import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import okhttp3.ResponseBody

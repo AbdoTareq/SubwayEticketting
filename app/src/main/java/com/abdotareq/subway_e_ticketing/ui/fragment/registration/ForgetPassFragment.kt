@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.controller.fragment.registration
+package com.abdotareq.subway_e_ticketing.ui.fragment.registration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentForgetPassBinding
-import com.abdotareq.subway_e_ticketing.model.dto.User
-import com.abdotareq.subway_e_ticketing.model.retrofit.UserApiObj
+import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.util
 import okhttp3.ResponseBody
 import retrofit2.Call

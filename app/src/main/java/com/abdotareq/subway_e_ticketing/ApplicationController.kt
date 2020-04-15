@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.utility
+package com.abdotareq.subway_e_ticketing
 
 import android.app.Application
 import com.abdotareq.subway_e_ticketing.BuildConfig
