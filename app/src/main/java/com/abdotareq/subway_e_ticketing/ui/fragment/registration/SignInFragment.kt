@@ -13,16 +13,12 @@ import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
-import com.abdotareq.subway_e_ticketing.model.Token
+import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModelFactory
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 
 /**
@@ -122,39 +118,33 @@ class SignInFragment : Fragment() {
         val progressDialog = util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
-        //start the call
-        UserApiObj.retrofitService.authenticate(user)?.enqueue(object : Callback<Token?> {
-            override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299 && response.body() != null) {
-                    //user authenticated successfully
-                    progressDialog.dismiss()
+        val registerInterface = object : RegisterInterface {
+            override fun onSuccess(token: String) {
 
-                    //write token into SharedPreferences to use in remember user
-                    SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
-                    SharedPreferenceUtil.setSharedPrefsTokenId(context, response.body()!!.token)
-                    Timber.e("token:    ${response.body()!!.token}")
+                //user authenticated successfully
 
-                    val intent = Intent(context, HomeLandActivity::class.java)
-                    startActivity(intent)
-                    activity!!.finishAffinity()
-                } else if (responseCode == 436) {
-                    //user not authenticated successfully
-                    progressDialog.dismiss()
-                    Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
-                } else {
-                    //user not authenticated successfully
-                    progressDialog.dismiss()
-                    Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
+                //write token into SharedPreferences to use in remember user
+                SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
+                SharedPreferenceUtil.setSharedPrefsTokenId(context, token)
+
+
+                progressDialog.dismiss()
+                val intent = Intent(context, HomeLandActivity::class.java)
+                startActivity(intent)
+                activity!!.finishAffinity()
+            }
+
+            override fun onFail(responseCode: Int) {
+                progressDialog.dismiss()
+                when (responseCode) {
+                    -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
+                    436 -> Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
+                    else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
                 }
             }
+        }
 
-            override fun onFailure(call: Call<Token?>, t: Throwable) {
-                progressDialog.dismiss()
-                Timber.e("getText(R.string.error_message)${t.message}")
-                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
-            }
-        })
+        viewModel.authenticateCall(user, registerInterface)
 
     }
 

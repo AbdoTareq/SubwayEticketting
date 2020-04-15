@@ -4,7 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.model.Token
+import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.util
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import timber.log.Timber
 
 /**
  * ViewModel containing all the logic needed to sign in
@@ -83,5 +91,30 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
         return true
     }
 
+    fun authenticateCall(user: User, registerInterface: RegisterInterface) {
+        //start the call
+        UserApiObj.retrofitService.authenticate(user)?.enqueue(object : Callback<Token?> {
+            override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
+                val responseCode = response.code()
+                if (responseCode in 200..299 && response.body() != null) {
 
+                    Timber.e("token:    ${response.body()!!.token}")
+
+                    registerInterface.onSuccess(response.body()!!.token)
+
+                } else if (responseCode == 436) {
+                    //user not authenticated successfully
+                    registerInterface.onFail(responseCode)
+                } else {
+                    //user not authenticated successfully
+                    registerInterface.onFail(responseCode)
+                }
+            }
+
+            override fun onFailure(call: Call<Token?>, t: Throwable) {
+                Timber.e("getText(R.string.error_message)${t.message}")
+                registerInterface.onFail(-1)
+            }
+        })
+    }
 }
