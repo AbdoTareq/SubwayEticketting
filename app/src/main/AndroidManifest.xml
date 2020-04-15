@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name=".ui.activity.OnBoardActivity"></activity>
+        <activity android:name=".ui.activity.OnBoardActivity"/>
         <activity android:name=".ui.activity.HomeLandActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.SplashScreenActivity">

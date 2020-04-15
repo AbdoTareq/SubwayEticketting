@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
@@ -54,13 +55,12 @@ class SignUpFragment : Fragment() {
 
         viewModelFactory = SignUpViewModelFactory()
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(SignupViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SignupViewModel::class.java)
 
         binding.viewmodel = viewModel
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         /* viewModel.first.observe(viewLifecycleOwner, Observer {
              Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
@@ -122,7 +122,6 @@ class SignUpFragment : Fragment() {
             datePickerDialog.show()
         }
     }
-
 
     /**
      * A method called to handle sign up button clicks

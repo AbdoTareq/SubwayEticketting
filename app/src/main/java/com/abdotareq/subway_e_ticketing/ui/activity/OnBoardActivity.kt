@@ -11,7 +11,6 @@ import com.hololo.tutorial.library.TutorialActivity
 
 class OnBoardActivity : TutorialActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,7 +31,6 @@ class OnBoardActivity : TutorialActivity() {
                 .setBackgroundColor(ContextCompat.getColor(this, R.color.colorYellow)) // int background color
                 .setDrawable(R.drawable.scan_code_image) // int top drawable
                 .build())
-
 
     }
 

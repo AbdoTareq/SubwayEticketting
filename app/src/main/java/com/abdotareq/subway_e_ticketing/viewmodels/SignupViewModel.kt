@@ -12,6 +12,7 @@ import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.Token
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
+import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
@@ -35,6 +36,8 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
     get() = _pass
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
+
+    private val userRepo = UserRepository()
 
     val first = MutableLiveData<String>()
     private val _getFirst = MutableLiveData<String>()
@@ -130,30 +133,7 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
         Timber.e(user.toString())
 
         //start the call
-        UserApiObj.retrofitService.saveUser(user)?.enqueue(object : Callback<Token?> {
-            override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299) {
-                    //user saved successfully
-
-                    Timber.e("token:    ${response.body()!!.token}")
-                    registerInterface.onSuccess(response.body()!!.token)
-
-                } else if (responseCode == 434) {
-                    registerInterface.onFail(responseCode)
-                } else if (responseCode == 435) {
-                    registerInterface.onFail(responseCode)
-                } else {
-                    //user not saved successfully
-                    registerInterface.onFail(responseCode)
-                }
-            }
-
-            override fun onFailure(call: Call<Token?>, t: Throwable) {
-                Timber.e("getText(R.string.error_message)${t.message}")
-                registerInterface.onFail(-1)
-            }
-        })
+        userRepo.signUpCall(user, registerInterface)
     }
 
 }

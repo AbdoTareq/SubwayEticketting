@@ -5,13 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.model.Token
 import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.network.UserApiObj
+import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.utility.util
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 
 /**
@@ -30,11 +26,12 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
 
+    private val userRepo = UserRepository()
+
     val mail = MutableLiveData<String>()
     private val _getMail = MutableLiveData<String>()
     val getMail: LiveData<String>
         get() = _getMail
-
 
     val pass = MutableLiveData<String>()
     private val _getPass = MutableLiveData<String>()
@@ -93,30 +90,8 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
 
     fun authenticateCall(registerInterface: RegisterInterface) {
         val user = User(email = mail.value, password = pass.value)
-
         Timber.e(user.toString())
         //start the call
-        UserApiObj.retrofitService.authenticate(user)?.enqueue(object : Callback<Token?> {
-            override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299 && response.body() != null) {
-
-                    Timber.e("token:    ${response.body()!!.token}")
-                    registerInterface.onSuccess(response.body()!!.token)
-
-                } else if (responseCode == 436) {
-                    //user not authenticated successfully
-                    registerInterface.onFail(responseCode)
-                } else {
-                    //user not authenticated successfully
-                    registerInterface.onFail(responseCode)
-                }
-            }
-
-            override fun onFailure(call: Call<Token?>, t: Throwable) {
-                Timber.e("getText(R.string.error_message)${t.message}")
-                registerInterface.onFail(-1)
-            }
-        })
+        userRepo.authenticate(user,registerInterface)
     }
 }
