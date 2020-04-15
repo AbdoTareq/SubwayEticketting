@@ -47,7 +47,7 @@ class SignInFragment : Fragment() {
         binding.viewmodel = viewModel
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         // Navigates to sign up when button is pressed
         viewModel.eventSignUp.observe(viewLifecycleOwner, Observer {
@@ -107,27 +107,17 @@ class SignInFragment : Fragment() {
      * can't be boolean as it has a thread which method won't wait until it finishes
      */
     private fun authenticate() {
-        val user = User()
-
-        user.email = viewModel.mail.value
-        user.password = viewModel.pass.value
-
-        Timber.e(user.toString())
-
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
         val registerInterface = object : RegisterInterface {
             override fun onSuccess(token: String) {
-
                 //user authenticated successfully
 
                 //write token into SharedPreferences to use in remember user
                 SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
                 SharedPreferenceUtil.setSharedPrefsTokenId(context, token)
-
-
                 progressDialog.dismiss()
                 val intent = Intent(context, HomeLandActivity::class.java)
                 startActivity(intent)
@@ -144,7 +134,7 @@ class SignInFragment : Fragment() {
             }
         }
 
-        viewModel.authenticateCall(user, registerInterface)
+        viewModel.authenticateCall(registerInterface)
 
     }
 

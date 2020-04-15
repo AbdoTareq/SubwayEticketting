@@ -1,6 +1,5 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.registration
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -16,17 +15,11 @@ import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignUpBinding
-import com.abdotareq.subway_e_ticketing.model.Token
-import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.network.UserApiObj
+import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.SignUpViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.SignupViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import timber.log.Timber
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -89,7 +82,7 @@ class SignUpFragment : Fragment() {
 
         viewModel.eventRegister.observe(viewLifecycleOwner, Observer { signUpClicked ->
             if (signUpClicked) {
-                validateFields()
+                signUpBtnClick()
                 viewModel.onRegisterComplete()
             }
         })
@@ -130,58 +123,11 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    /**
-     * A method used to save a new user (sign up)
-     */
-    private fun saveUserCall(user: User?) {
-
-        //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
-        progressDialog.show()
-
-        //start the call
-        UserApiObj.retrofitService.saveUser(user)?.enqueue(object : Callback<Token?> {
-            override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299) {
-                    //user saved successfully
-                    progressDialog.dismiss()
-                    val returnIntent = activity!!.intent
-                    //write token into SharedPreferences
-                    SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
-                    if (response.body() != null) {
-                        SharedPreferenceUtil.setSharedPrefsTokenId(context, response.body()!!.token)
-                    }
-                    val intent = Intent(context, HomeLandActivity::class.java)
-                    startActivity(intent)
-
-                    activity!!.setResult(Activity.RESULT_OK, returnIntent)
-                    Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
-                } else if (responseCode == 434) {
-                    Toast.makeText(context, getText(R.string.pass_less), Toast.LENGTH_LONG).show()
-                    progressDialog.dismiss()
-                } else if (responseCode == 435) {
-                    Toast.makeText(context, getText(R.string.mail_exist), Toast.LENGTH_LONG).show()
-                    progressDialog.dismiss()
-                } else {
-                    //user not saved successfully
-                    progressDialog.dismiss()
-                    Toast.makeText(context, "else onResponse $responseCode", Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Token?>, t: Throwable) {
-                progressDialog.dismiss()
-                Timber.e("getText(R.string.error_message)${t.message}")
-                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
-            }
-        })
-    }
 
     /**
      * A method called to handle sign up button clicks
      */
-    private fun validateFields() {
+    private fun signUpBtnClick() {
         //check for all inputs from user are correct
         // not valid mail
         if (viewModel.first.value.isNullOrEmpty()) {
@@ -212,20 +158,36 @@ class SignUpFragment : Fragment() {
             return
         }
 
-        //create MobileUser object and set it's attributes
-        val user = User()
-        user.first_name = binding.signUpFNameEt.text.toString()
-        user.last_name = binding.signUpLNameEt.text.toString()
-        user.email = binding.signUpMailEt.text.toString()
-        user.password = binding.signUpPassEt.text.toString()
-        user.gender = binding.signUpGenderBtn.text.toString()
-        user.birth_date = binding.signUpCalender.text.toString()
-        user.admin = 0
+        //initialize and show a progress dialog to the user
+        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
+        progressDialog.show()
 
-        Timber.e(user.toString())
+        val registerInterface = object : RegisterInterface {
+            override fun onSuccess(token: String) {
+                //user authenticated successfully
+
+                //write token into SharedPreferences to use in remember user
+                SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
+                SharedPreferenceUtil.setSharedPrefsTokenId(context, token)
+                progressDialog.dismiss()
+                val intent = Intent(context, HomeLandActivity::class.java)
+                startActivity(intent)
+                activity!!.finishAffinity()
+            }
+
+            override fun onFail(responseCode: Int) {
+                progressDialog.dismiss()
+                when (responseCode) {
+                    -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
+                    434 -> Toast.makeText(context, getText(R.string.pass_less), Toast.LENGTH_LONG).show()
+                    435 -> Toast.makeText(context, getText(R.string.mail_exist), Toast.LENGTH_LONG).show()
+                    else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
 
         //sign up method that will call the web service
-        saveUserCall(user)
+        viewModel.saveUserCall(registerInterface)
     }
 
     override fun onDestroyView() {

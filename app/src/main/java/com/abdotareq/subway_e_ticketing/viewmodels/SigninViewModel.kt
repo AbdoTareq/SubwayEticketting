@@ -91,7 +91,10 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
         return true
     }
 
-    fun authenticateCall(user: User, registerInterface: RegisterInterface) {
+    fun authenticateCall(registerInterface: RegisterInterface) {
+        val user = User(email = mail.value, password = pass.value)
+
+        Timber.e(user.toString())
         //start the call
         UserApiObj.retrofitService.authenticate(user)?.enqueue(object : Callback<Token?> {
             override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
@@ -99,7 +102,6 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
                 if (responseCode in 200..299 && response.body() != null) {
 
                     Timber.e("token:    ${response.body()!!.token}")
-
                     registerInterface.onSuccess(response.body()!!.token)
 
                 } else if (responseCode == 436) {
