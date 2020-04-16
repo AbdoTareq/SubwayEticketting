@@ -4,67 +4,64 @@ import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.Token
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
 import timber.log.Timber
+import java.net.SocketTimeoutException
 
 class UserRepository {
     //Make your retrofit setup here
+    private var job = Job()
+
+    // the Coroutine runs using the Main (UI) dispatcher
+    private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
+
 
     //This is the method that calls API using Retrofit
     fun authenticate(user: User, registerInterface: RegisterInterface) {
-        UserApiObj.retrofitService.authenticate(user)?.enqueue(object : Callback<Token?> {
-            override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299 && response.body() != null) {
-
-                    Timber.e("token:    ${response.body()!!.token}")
-                    registerInterface.onSuccess(response.body()!!.token)
-
-                } else if (responseCode == 436) {
-                    //user not authenticated successfully
-                    registerInterface.onFail(responseCode)
-                } else {
-                    //user not authenticated successfully
-                    registerInterface.onFail(responseCode)
-                }
+        coroutineScope.launch {
+            try {
+                val token = UserApiObj.retrofitService.authenticate(user)
+                registerInterface.onSuccess(token!!.token)
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                registerInterface.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                registerInterface.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
             }
+        }
 
-            override fun onFailure(call: Call<Token?>, t: Throwable) {
-                Timber.e("getText(R.string.error_message)${t.message}")
-                registerInterface.onFail(-1)
-            }
-        })
     }
 
     fun signUpCall(user: User, registerInterface: RegisterInterface) {
         //start the call
-        UserApiObj.retrofitService.saveUser(user)?.enqueue(object : Callback<Token?> {
-            override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299) {
-                    //user saved successfully
-
-                    Timber.e("token:    ${response.body()!!.token}")
-                    registerInterface.onSuccess(response.body()!!.token)
-
-                } else if (responseCode == 434) {
-                    registerInterface.onFail(responseCode)
-                } else if (responseCode == 435) {
-                    registerInterface.onFail(responseCode)
-                } else {
-                    //user not saved successfully
-                    registerInterface.onFail(responseCode)
-                }
+        coroutineScope.launch {
+            try {
+                val token = UserApiObj.retrofitService.saveUser(user)
+                registerInterface.onSuccess(token!!.token)
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                registerInterface.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                registerInterface.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
             }
-
-            override fun onFailure(call: Call<Token?>, t: Throwable) {
-                Timber.e("getText(R.string.error_message)${t.message}")
-                registerInterface.onFail(-1)
-            }
-        })
+        }
     }
 
+    fun cancelJob() {
+        job.cancel()
+    }
 
 }

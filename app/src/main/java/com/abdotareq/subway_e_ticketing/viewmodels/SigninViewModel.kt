@@ -8,7 +8,13 @@ import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.utility.util
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import timber.log.Timber
+import java.net.SocketTimeoutException
 
 /**
  * ViewModel containing all the logic needed to sign in
@@ -29,14 +35,8 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
     private val userRepo = UserRepository()
 
     val mail = MutableLiveData<String>()
-    private val _getMail = MutableLiveData<String>()
-    val getMail: LiveData<String>
-        get() = _getMail
 
     val pass = MutableLiveData<String>()
-    private val _getPass = MutableLiveData<String>()
-    val getPass: LiveData<String>
-        get() = _getPass
 
     private val _eventAuthenticate = MutableLiveData<Boolean>()
     val eventAuthenticate: LiveData<Boolean>
@@ -91,7 +91,14 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
     fun authenticateCall(registerInterface: RegisterInterface) {
         val user = User(email = mail.value, password = pass.value)
         Timber.e(user.toString())
-        //start the call
+
+        //start the coroutine
         userRepo.authenticate(user,registerInterface)
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        userRepo.cancelJob()
+    }
+
 }

@@ -31,10 +31,12 @@ private val retrofit = Retrofit.Builder()
  */
 interface UserApiService {
     @POST("users/signup")
-    fun saveUser(@Body user: User?): Call<Token?>?
+    suspend fun saveUser(@Body user: User?): Token?
 
+//    After Retrofit 2.6.0
+//So the magic now is that you can create suspend methods in your Retrofit interface and directly return your data object.
     @POST("users/signin")
-    fun authenticate(@Body user: User?): Call<Token?>?
+    suspend fun authenticate(@Body user: User?): Token?
 
     @POST("users/forgetpassword")
     fun sendVerificationCode(@Body user: User?): Call<ResponseBody?>?

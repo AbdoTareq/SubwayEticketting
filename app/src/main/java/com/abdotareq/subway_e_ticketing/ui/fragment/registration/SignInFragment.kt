@@ -128,6 +128,7 @@ class SignInFragment : Fragment() {
                 progressDialog.dismiss()
                 when (responseCode) {
                     -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
+                    -2 -> Toast.makeText(context, getString(R.string.server_offline_try), Toast.LENGTH_LONG).show()
                     436 -> Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
                     else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
                 }

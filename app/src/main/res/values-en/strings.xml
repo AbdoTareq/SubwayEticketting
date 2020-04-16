@@ -240,4 +240,5 @@
     <string name="tut_buy_tickets">Buy tickets easily from the store in just few seconds</string>
     <string name="tut_scan_code">Scan the ticket code to at the station gates</string>
     <string name="show_tutorial">Show Tutorial</string>
+    <string name="server_offline_try">Server is offline try again</string>
 </resources>

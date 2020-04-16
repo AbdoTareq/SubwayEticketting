@@ -32,47 +32,26 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
 
     /**
      *  Don't expose:   private val _pass = MutableLiveData<String>()
-    val pass: LiveData<String>
-    get() = _pass
+                        val pass: LiveData<String>
+                        get() = _pass
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
 
     private val userRepo = UserRepository()
 
     val first = MutableLiveData<String>()
-    private val _getFirst = MutableLiveData<String>()
-    val getFirst: LiveData<String>
-        get() = _getFirst
 
     val last = MutableLiveData<String>()
-    private val _getLast = MutableLiveData<String>()
-    val getLast: LiveData<String>
-        get() = _getLast
 
     val mail = MutableLiveData<String>()
-    private val _getMail = MutableLiveData<String>()
-    val getMail: LiveData<String>
-        get() = _getMail
 
     val pass = MutableLiveData<String>()
-    private val _getPass = MutableLiveData<String>()
-    val getPass: LiveData<String>
-        get() = _getPass
 
     val confPass = MutableLiveData<String>()
-    private val _getConPass = MutableLiveData<String>()
-    val getConPass: LiveData<String>
-        get() = _getConPass
 
     val gender = MutableLiveData<String>()
-    private val _getGender = MutableLiveData<String>()
-    val getGender: LiveData<String>
-        get() = _getGender
 
     val birthDate = MutableLiveData<String>()
-    private val _getBirthDate = MutableLiveData<String>()
-    val getBirthDate: LiveData<String>
-        get() = _getBirthDate
 
     private val _eventRegister = MutableLiveData<Boolean>()
     val eventRegister: LiveData<Boolean>
@@ -136,4 +115,8 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
         userRepo.signUpCall(user, registerInterface)
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        userRepo.cancelJob()
+    }
 }
