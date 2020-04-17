@@ -82,14 +82,14 @@ class SignInFragment : Fragment() {
     private fun validateFields() {
         // not valid mail
         if (!viewModel.validateMail()) {
-            binding.mailEt.setText("")
-            binding.mailEt.hint = getString(R.string.invalid_mail_warning)
+            binding.mailEt.error = getString(R.string.invalid_mail_warning)
+            binding.mailEt.requestFocus()
             return
         }
         // not valid pass
         if (!viewModel.validatePass()) {
-            binding.passEt.setText("")
-            binding.passEt.hint = getString(R.string.invalid_pass)
+            binding.passChangePass.error = getString(R.string.invalid_pass)
+            binding.passChangePass.requestFocus()
             return
         }
         // data is valid call authenticate
@@ -124,7 +124,11 @@ class SignInFragment : Fragment() {
                 when (responseCode) {
                     -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
                     -2 -> Toast.makeText(context, getString(R.string.server_offline_try), Toast.LENGTH_LONG).show()
-                    436 -> Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
+                    436 -> {
+                        binding.mailEt.error = getString(R.string.wrong_mail_or_pass)
+                        binding.passChangePass.error = getString(R.string.wrong_mail_or_pass)
+                        binding.mailEt.requestFocus()
+                    }
                     else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
                 }
             }

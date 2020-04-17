@@ -44,20 +44,17 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
 
         //check for all inputs from user are correct
         if (!util.isValidPassword(binding.oldPass.text.toString())) {
-            binding.oldPass.setText("")
-            binding.oldPass.hint = getString(R.string.invalid_pass)
-            binding.oldPass.setHintTextColor(getColor(context!!, R.color.colorAccent))
+            binding.first.error = getString(R.string.pass_fix)
+            binding.first.requestFocus() 
             return
         } else if (!util.isValidPassword(binding.newPassword.text.toString())) {
-            binding.newPassword.setText("")
-            binding.newPassword.hint = getString(R.string.invalid_pass)
-            binding.newPassword.setHintTextColor(getColor(context!!, R.color.colorAccent))
+            binding.second.error = getString(R.string.pass_fix)
+            binding.second.requestFocus() 
             return
         } else if (binding.confirmNewPassword.text.toString().isEmpty()
                 || binding.confirmNewPassword.text.toString() != binding.newPassword.text.toString()) {
-            binding.confirmNewPassword.setText("")
-            binding.confirmNewPassword.hint = getString(R.string.fix_confirmPassWarning)
-            binding.confirmNewPassword.setHintTextColor(getColor(context!!, R.color.colorAccent))
+            binding.third.error = getString(R.string.fix_confirmPassWarning)
+            binding.third.requestFocus() 
             return
         }
 
@@ -96,9 +93,8 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
                 } else if (responseCode == 437) {
                     //pass not saved successfully
                     progressDialog.dismiss()
-                    binding.oldPass.setText("")
-//            binding.oldPass.hint = getString(R.string.pass_warning)
-                    binding.oldPass.setHintTextColor(getColor(context!!,R.color.colorAccent))
+                    binding.first.error = getString(R.string.pass_fix)
+                    binding.first.requestFocus()
                     Toast.makeText(context, getString(R.string.wrong_pass), Toast.LENGTH_LONG).show()
                 } else if (responseCode == 438) {
                     //pass not saved successfully

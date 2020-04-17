@@ -118,24 +118,24 @@ class SignUpFragment : Fragment() {
         //check for all inputs from user are correct
         // not valid mail
         if (viewModel.first.value.isNullOrEmpty()) {
-            binding.signUpFNameEt.setText("")
-            binding.signUpFNameEt.hint = getString(R.string.first_name_warrning)
+            binding.signUpFNameEt.error = getString(R.string.first_name_warrning)
+            binding.signUpFNameEt.requestFocus()
             return
         } else if (viewModel.last.value.isNullOrEmpty()) {
-            binding.signUpFNameEt.setText("")
-            binding.signUpFNameEt.hint = getString(R.string.fix_last_name_mess)
+            binding.signUpFNameEt.error = getString(R.string.fix_last_name_mess)
+            binding.signUpFNameEt.requestFocus()
             return
         } else if (!viewModel.validateMail()) {
-            binding.signUpMailEt.setText("")
-            binding.signUpMailEt.hint = getString(R.string.invalid_mail_warning)
+            binding.signUpMailEt.error = getString(R.string.invalid_mail_warning)
+            binding.signUpMailEt.requestFocus()
             return
         } else if (!viewModel.validatePass(viewModel.pass.value.toString())) {
-            binding.signUpPassEt.setText("")
-            binding.signUpPassEt.hint = getString(R.string.invalid_pass)
+            binding.passTi.error = getString(R.string.invalid_pass)
+            binding.passTi.requestFocus()
             return
         } else if (!viewModel.validatePass(viewModel.confPass.value.toString())) {
-            binding.signUpConfirmPassEt.setText("")
-            binding.signUpConfirmPassEt.hint = getString(R.string.invalid_pass)
+            binding.confirmTi.error = getString(R.string.fix_confirmPassWarning)
+            binding.confirmTi.requestFocus()
             return
         } else if (viewModel.gender.value == "Gender") {
             Toast.makeText(context, getString(R.string.select_gender), Toast.LENGTH_LONG).show()

@@ -269,12 +269,12 @@ class ProfileSettingsFragment : Fragment() {
     private fun saveBtnClk() {
         //check for all inputs from user are correct
         if (viewModel.user.value?.first_name.isNullOrEmpty()) {
-            binding.firstNameEt.setText("")
-            binding.firstNameEt.hint = getString(R.string.first_name_warrning)
+            binding.firstNameEt.error = getString(R.string.first_name_warrning)
+            binding.firstNameEt.requestFocus()
             return
         } else if (viewModel.user.value?.last_name.isNullOrEmpty()) {
-            binding.lastNameEt.setText("")
-            binding.lastNameEt.hint = getString(R.string.fix_last_name_mess)
+            binding.lastNameEt.error = getString(R.string.last_name)
+            binding.lastNameEt.requestFocus()
             return
         }
 
