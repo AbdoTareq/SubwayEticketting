@@ -27,19 +27,19 @@ class SplashScreenActivity : AwesomeSplash() {
         // if user logged get his data
         if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this)) {
             getUserData(SharedPreferenceUtil.getSharedPrefsTokenId(this), configSplash)
-        }else{
+        } else {
             //Customize Title
             configSplash.titleSplash = getString(R.string.app_name)
             configSplash.titleTextColor = R.color.colorWhite
             configSplash.titleTextSize = 30f //float value
-            configSplash.animTitleDuration = 500
+            configSplash.animTitleDuration = 2000
             configSplash.animTitleTechnique = Techniques.FadeIn
             //        configSplash.setTitleFont("fonts/segoe_ui.ttf"); //provide string to your font located in assets/fonts/
         }
 
         //Customize Circular Reveal
         configSplash.backgroundColor = R.color.colorPrimary //any color you want form colors.xml
-        configSplash.animCircularRevealDuration = 500 //int ms
+        configSplash.animCircularRevealDuration = 2000 //int ms
         configSplash.revealFlagX = Flags.REVEAL_RIGHT //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
 
@@ -47,7 +47,7 @@ class SplashScreenActivity : AwesomeSplash() {
 
         //Customize Logo
         configSplash.logoSplash = R.drawable.white_logo //or any other drawable
-        configSplash.animLogoSplashDuration = 200 //int ms
+        configSplash.animLogoSplashDuration = 1000 //int ms
         configSplash.animLogoSplashTechnique = Techniques.Landing //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
         //Customize Path
@@ -69,13 +69,14 @@ class SplashScreenActivity : AwesomeSplash() {
         bearerToken += userIdToken
 
         //start the call
-        UserApiObj.retrofitService.getUser(bearerToken).enqueue(object : retrofit2.Callback<User?> {
+        UserApiObj.retrofitService.getUserCallBack(bearerToken).enqueue(object : retrofit2.Callback<User?> {
             override fun onResponse(call: Call<User?>, response: Response<User?>) {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {
                     //get user successfully
                     user = response.body()!!
 
+                    Timber.e("${user}")
                     configSplash.titleSplash = "${getString(R.string.welcome)} ${user?.first_name} ${user?.last_name} "
                     configSplash.animTitleDuration = 2000
                     configSplash.titleTextSize = 30f //float value
@@ -114,6 +115,7 @@ class SplashScreenActivity : AwesomeSplash() {
         } else
             Intent(this@SplashScreenActivity, OnBoardActivity::class.java)
         try {
+            user?.birth_date = user!!.birth_date?.substring(0..9)
             intent.putExtra("user", user); // sending user object.
         } catch (e: Exception) {
             Timber.e("$e")

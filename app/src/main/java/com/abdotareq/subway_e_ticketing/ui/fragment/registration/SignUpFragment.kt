@@ -11,12 +11,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignUpBinding
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.SignUpViewModelFactory
@@ -62,22 +61,11 @@ class SignUpFragment : Fragment() {
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
-        /* viewModel.first.observe(viewLifecycleOwner, Observer {
-             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-         })
-
-         viewModel.last.observe(viewLifecycleOwner, Observer {
-             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-         })
-
-         viewModel.mail.observe(viewLifecycleOwner, Observer {
-             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-         })
- */
-
         viewModel.eventSignIn.observe(viewLifecycleOwner, Observer {
-            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
-            viewModel.onSignInComplete()
+            if (it) {
+                findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToSignInFragment())
+                viewModel.onSignInComplete()
+            }
         })
 
         viewModel.eventRegister.observe(viewLifecycleOwner, Observer { signUpClicked ->

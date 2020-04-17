@@ -33,7 +33,7 @@ interface UserApiService {
     @POST("users/signup")
     suspend fun saveUser(@Body user: User?): Token?
 
-//    After Retrofit 2.6.0
+    //    After Retrofit 2.6.0
 //So the magic now is that you can create suspend methods in your Retrofit interface and directly return your data object.
     @POST("users/signin")
     suspend fun authenticate(@Body user: User?): Token?
@@ -55,10 +55,13 @@ interface UserApiService {
 
     // get user by token as it contains user id
     @GET("users/user")
-    fun getUser(@Header("Authorization") bearerToken: String): Call<User>
+    suspend fun getUser(@Header("Authorization") bearerToken: String): User
+
+    @GET("users/user")
+    fun getUserCallBack(@Header("Authorization") bearerToken: String): Call<User>
 
     @PUT("users/updateuser")
-    fun updateUser(@Body user: User, @Header("Authorization") bearerToken: String): Call<ResponseBody>?
+    suspend fun updateUser(@Body user: User, @Header("Authorization") bearerToken: String): ResponseBody?
 
 }
 

@@ -5,12 +5,10 @@ import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.DialogInterface
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.TextUtils
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
@@ -19,19 +17,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.ui.activity.RegisterActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
+import com.abdotareq.subway_e_ticketing.model.GetUserInterface
+import com.abdotareq.subway_e_ticketing.model.UpdateUserInterface
 import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.network.UserApiObj
+import com.abdotareq.subway_e_ticketing.ui.activity.RegisterActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.ImageUtil
 import com.abdotareq.subway_e_ticketing.utility.util
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.abdotareq.subway_e_ticketing.viewmodels.ProfileViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.ProfileViewModelFactory
 import timber.log.Timber
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -41,8 +40,11 @@ import java.util.*
 /**
  *  [ProfileSettingsFragment] responsible for user profile settings & changes.
  */
-// TODO FIX GENDER
+// TODO FIX photo can't be set or shown from view model bu user object as I couldn't convert string image in user to src property
 class ProfileSettingsFragment : Fragment() {
+
+    private lateinit var viewModelFactory: ProfileViewModelFactory
+    private lateinit var viewModel: ProfileViewModel
 
     private var _binding: FragmentProfileSettingsBinding? = null
 
@@ -50,98 +52,127 @@ class ProfileSettingsFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private var user: User? = null
+    private var user = User()
 
     private var mYear = 0
     private var mMonth: Int = 0
     private var mDay: Int = 0
 
-    private var birthDate: String? = user?.birth_date
-    private var gender = user?.gender
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentProfileSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        getUserData()
+        val application = requireNotNull(activity).application
 
-        callListeners()
+        getUserFromSplash()
+
+        viewModelFactory = ProfileViewModelFactory(user, application)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
+
+        binding.viewModel = viewModel
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.lifecycleOwner = this
+
+        // if failed to get user obj from splash screen get user call
+        if (user.first_name.isNullOrEmpty()) {
+            getUserFromCall(SharedPreferenceUtil.getSharedPrefsTokenId(context))
+        }
+
+        viewModel.eventChangePass.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                openChangePassDialog()
+                viewModel.onChangePassComplete()
+            }
+        })
+
+        viewModel.eventLogout.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                confirmLogOut()
+                viewModel.onLogoutComplete()
+            }
+        })
+
+        viewModel.eventSave.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                saveBtnClk()
+                viewModel.onSaveComplete()
+            }
+        })
+
+        viewModel.eventBirth.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                birthDateDialog()
+                viewModel.onBirthComplete()
+            }
+        })
+
+        viewModel.eventGender.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                genderDialogBuilder(arrayOf("Female", "Male"))
+                viewModel.onGenderComplete()
+            }
+        })
+
+        viewModel.eventChangePhoto.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                pickFromGallery()
+                viewModel.onChangePhotoComplete()
+            }
+        })
 
         return view
     }
 
     // get user obj from splash screen or get user call
-    private fun getUserData() {
+    private fun getUserFromSplash() {
         // receive user obj from splash screen
         try {
             user = activity?.intent?.getParcelableExtra("user") as User
-            showData()
+            viewModel.user.value?.first_name = user.first_name
+            viewModel.user.value?.last_name = user.last_name
+            viewModel.user.value?.email = user.email
+            viewModel.user.value?.gender = user.gender
+
         } catch (e: Exception) {
             Timber.e(" getUser $e")
-            // if failed to get user obj from splash screen get user call
-            getUserData(SharedPreferenceUtil.getSharedPrefsTokenId(context))
         }
-
+        if (user.image != null) {
+            val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
+                binding.profileImage.setImageBitmap(it)
+            })
+            bitMapCon.execute(user.image)
+        }
     }
 
-    private fun callListeners() {
-        val genderList = arrayOf("Female", "Male")
-        if (user!=null){
-            gender =user?.gender
-            birthDate =user?.birth_date
-        }
+    private fun birthDateDialog() {
+        // Get Current Date
+        val datePickerDialog = DatePickerDialog(context!!,
+                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    val calendar = Calendar.getInstance()
+                    calendar[Calendar.YEAR] = year
+                    calendar[Calendar.MONTH] = monthOfYear
+                    calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
+                    val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+                    val currentDateString: String = dateFormat.format(calendar.time)
+                    binding.calender.text = currentDateString
 
-
-        binding.changePassBtn.setOnClickListener {
-            openDialog()
-        }
-
-        binding.logOutBtn.setOnClickListener {
-            confirmLogOut()
-        }
-
-        // save button
-        binding.updateBtn.setOnClickListener {
-            saveBtnClk()
-        }
-
-        binding.pickImage.setOnClickListener {
-            pickFromGallery()
-        }
-
-        binding.genderBtn.setOnClickListener {
-            val builder = android.app.AlertDialog.Builder(context)
-            builder.setTitle(getString(R.string.select_gender))
-            builder.setItems(genderList) { dialogInterface, position ->
-                gender = genderList[position]
-                binding.genderBtn.text = gender
-                user?.gender = gender
-            }
-            val alertDialog = builder.create()
-            alertDialog.show()
-        }
-
-        binding.calender.setOnClickListener {
-            // Get Current Date
-            val datePickerDialog = DatePickerDialog(context!!,
-                    OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                        val calendar = Calendar.getInstance()
-                        calendar[Calendar.YEAR] = year
-                        calendar[Calendar.MONTH] = monthOfYear
-                        calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
-                        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-                        val currentDateString: String = dateFormat.format(calendar.getTime())
-                        binding.calender.text = currentDateString
-                        birthDate = currentDateString
-
-                    }, mYear, mMonth, mDay)
-            datePickerDialog.show()
-        }
-
-
+                }, mYear, mMonth, mDay)
+        datePickerDialog.show()
     }
 
-    private fun getUserData(userIdToken: String) {
+    private fun genderDialogBuilder(genderList: Array<String>) {
+        val builder = android.app.AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.select_gender))
+        builder.setItems(genderList) { _, position ->
+            binding.genderBtn.text = genderList[position]
+        }
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun getUserFromCall(userIdToken: String) {
         var bearerToken = "Bearer "
         bearerToken += userIdToken
 
@@ -150,57 +181,50 @@ class ProfileSettingsFragment : Fragment() {
         progressDialog.show()
 
         //start the call
-        UserApiObj.retrofitService.getUser(bearerToken).enqueue(object : Callback<User?> {
-            override fun onResponse(call: Call<User?>, response: Response<User?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299 && response.body() != null) {
-                    //get user successfully
-                    user = response.body()!!
-                    progressDialog.dismiss()
-                    showData()
+        val getUserInterface = object : GetUserInterface {
+            override fun onSuccess(userPassed: User) {
+                //user authenticated successfully
+                user = userPassed
+                progressDialog.dismiss()
 
-                } else if (responseCode == 438) {
-                    //pass not saved successfully
-                    Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
-                    Timber.e(getString(R.string.user_not_found))
-                    progressDialog.dismiss()
-                } else {
-                    //user not saved successfully
-                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
-                    Timber.e(getString(R.string.else_on_repsonse))
-                    progressDialog.dismiss()
+                binding.firstNameEt.setText(user.first_name)
+                binding.lastNameEt.setText(user.last_name)
+                binding.mail.text = user.email
+                binding.genderBtn.text = user.gender
+                binding.calender.text = user.birth_date?.substring(0..9)
 
+                if (user.image != null) {
+                    val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
+                        binding.profileImage.setImageBitmap(it)
+                    })
+                    bitMapCon.execute(user.image)
+                }
+
+                if (user.image != null) {
+                    val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
+                        binding.profileImage.setImageBitmap(it)
+                    })
+                    bitMapCon.execute(user.image)
+                }
+
+                Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
+                progressDialog.dismiss()
+
+            }
+
+            override fun onFail(responseCode: Int) {
+                progressDialog.dismiss()
+                when (responseCode) {
+                    -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
+                    -2 -> Toast.makeText(context, getString(R.string.server_offline_try), Toast.LENGTH_LONG).show()
+                    436 -> Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
+                    438 -> Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
+                    else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
                 }
             }
-
-            override fun onFailure(call: Call<User?>, t: Throwable) {
-                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
-                Timber.e("$t")
-                progressDialog.dismiss()
-            }
-        })
-    }
-
-    // set profile fields
-    private fun showData() {
-
-        try {
-            binding.firstNameEt.setText(user?.first_name)
-            binding.lastNameEt.setText(user?.last_name)
-            binding.mail.text = user?.email
-            binding.genderBtn.text = user?.gender
-            binding.calender.text = user?.birth_date?.substring(0..9)
-
-            //if image exists
-            if (user!!.image != null) {
-                val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
-                    binding.profileImage.setImageBitmap(it)
-                })
-                bitMapCon.execute(user?.image)
-            }
-        } catch (e: Exception) {
-            Timber.e(e)
         }
+
+        viewModel.getUser(bearerToken, getUserInterface)
 
     }
 
@@ -212,7 +236,6 @@ class ProfileSettingsFragment : Fragment() {
                     //reset the saved user data from the shared preferences
                     SharedPreferenceUtil.setSharedPrefsLoggedIn(context, false)
                     SharedPreferenceUtil.setSharedPrefsTokenId(context, "-1")
-
                     //start the sign in activity
                     val intent = Intent(context, RegisterActivity::class.java)
                     startActivity(intent)
@@ -220,7 +243,6 @@ class ProfileSettingsFragment : Fragment() {
                 }
             }
         }
-
         //Create AlertDialog Builder and the AlertDialog with the desired message
         val builder = context?.let { AlertDialog.Builder(it) }
         val dialog = builder!!.setMessage(getString(R.string.do_u_want_logout))
@@ -233,79 +255,57 @@ class ProfileSettingsFragment : Fragment() {
             //set the positive button with the primary color
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(context!!, R.color.colorPrimary))
         }
-
         //show the dialog
         dialog.show()
     }
 
     // this for change pass dialog
-    private fun openDialog() {
+    private fun openChangePassDialog() {
         val passDialog = ChangePassDialogFragment(binding.mail.text.toString())
-        fragmentManager?.let { passDialog.show(it, "Pass Dialog") }
+        requireActivity().supportFragmentManager
+                .let { passDialog.show(it, "Pass Dialog") }
     }
 
     private fun saveBtnClk() {
         //check for all inputs from user are correct
-        if (TextUtils.isEmpty(binding.firstNameEt.text.toString()) && binding.firstNameEt.text.toString() == "") {
-            binding.firstNameEt.hint = getText(R.string.fix_fist_name)
+        if (viewModel.user.value?.first_name.isNullOrEmpty()) {
+            binding.firstNameEt.setText("")
+            binding.firstNameEt.hint = getString(R.string.first_name_warrning)
             return
-        } else if (TextUtils.isEmpty(binding.lastNameEt.text.toString()) && binding.lastNameEt.text.toString() == "") {
-            binding.lastNameEt.hint = getText(R.string.fix_last_name_mess)
+        } else if (viewModel.user.value?.last_name.isNullOrEmpty()) {
+            binding.lastNameEt.setText("")
+            binding.lastNameEt.hint = getString(R.string.fix_last_name_mess)
             return
         }
-
-        // update the original user with only changed data
-        try {
-            user?.first_name = binding.firstNameEt.text.toString()
-            user?.last_name = binding.lastNameEt.text.toString()
-            user?.gender = binding.genderBtn.text.toString()
-            user?.birth_date = binding.calender.text.toString()
-
-        } catch (e: Exception) {
-            Timber.e("$user")
-        }
-
 
         updateUser()
-
     }
 
     private fun updateUser() {
         var bearerToken = "Bearer "
         bearerToken += SharedPreferenceUtil.getSharedPrefsTokenId(context)
 
-        //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
-        //start the call
-        UserApiObj.retrofitService.updateUser(user!!, bearerToken)?.enqueue(object : Callback<ResponseBody?> {
-            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299 && response.body() != null) {
-                    //get user successfully
-                    progressDialog.dismiss()
-                    Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
-
-                } else if (responseCode == 438) {
-                    //user not saved successfully
-                    Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
-                    Timber.e(getString(R.string.user_not_found))
-                    progressDialog.dismiss()
-                } else {
-                    //user not saved successfully
-                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
-                    Timber.e("$responseCode    $user")
-                    progressDialog.dismiss()
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
-                Timber.e("$t")
+        val profileInterface = object : UpdateUserInterface {
+            override fun onSuccess() {
+                Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
                 progressDialog.dismiss()
             }
-        })
+
+            override fun onFail(responseCode: Int) {
+                progressDialog.dismiss()
+                when (responseCode) {
+                    -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
+                    -2 -> Toast.makeText(context, getString(R.string.server_offline_try), Toast.LENGTH_LONG).show()
+                    436 -> Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
+                    438 -> Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
+                    else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+        viewModel.saveUserCall(bearerToken, profileInterface)
     }
 
     /**
@@ -324,9 +324,6 @@ class ProfileSettingsFragment : Fragment() {
         }
     }
 
-    /**
-     *  to call [getRealPathFromURI] to get image uri is local from phone storage
-     * */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -362,26 +359,7 @@ class ProfileSettingsFragment : Fragment() {
         // how to store image in string format
         val cropImage = ImageUtil.resizeImage(context, selectedImageUri)
         val imageString = Base64.encodeToString(cropImage, 4)
-        user?.image = imageString
-    }
-
-    /**
-     *  method to collect image from gallery after picking [pickFromGallery]
-     * */
-    private fun getRealPathFromURI(uri: Uri?): String? {
-        if (uri == null) {
-            return null
-        }
-        val projection = arrayOf(MediaStore.Images.Media._ID)
-        val cursor: Cursor? = activity!!.contentResolver.query(uri, projection, null, null, null)
-        if (cursor != null) {
-            val columnIndex: Int = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media._ID)
-            cursor.moveToFirst()
-            return cursor.getString(columnIndex)
-        }
-        cursor?.close()
-        return uri.path
+        user.image = imageString
     }
 
     override fun onDestroyView() {

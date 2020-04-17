@@ -1,24 +1,13 @@
 package com.abdotareq.subway_e_ticketing.viewmodels
 
-import android.app.Activity
 import android.app.Application
-import android.content.Intent
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.model.Token
 import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
-import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
-import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 
 /**
@@ -36,7 +25,6 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
                         get() = _pass
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
-
     private val userRepo = UserRepository()
 
     val first = MutableLiveData<String>()

@@ -9,18 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModelFactory
-import timber.log.Timber
 
 /**
  * The Activity Controller Class that is responsible for handling Signing in
@@ -72,8 +69,6 @@ class SignInFragment : Fragment() {
          viewModel.pass.observe(viewLifecycleOwner, Observer {
              Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
          })*/
-
-        //
         viewModel.eventAuthenticate.observe(viewLifecycleOwner, Observer { isAuthenticatedClicked ->
             if (isAuthenticatedClicked) {
                 validateFields()
