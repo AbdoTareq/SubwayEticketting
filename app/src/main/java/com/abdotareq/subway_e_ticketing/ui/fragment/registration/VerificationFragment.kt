@@ -52,7 +52,7 @@ class VerificationFragment : Fragment() {
         continueBtn.setOnClickListener {
             if (codeEt.text.isNullOrEmpty()) {
                 codeEt.hint = getText(R.string.enter_verification)
-                codeEt.setHintTextColor(getColor(context!!, R.color.colorAccent))
+                codeEt.setHintTextColor(getColor(context!!, R.color.primaryTextColor))
             } else {
                 verifyCode(mail, codeEt.text.toString())
             }

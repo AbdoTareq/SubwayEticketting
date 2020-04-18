@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/primaryColor"
         tools:context=".ui.fragment.registration.SignUpFragment">
 
         <TextView
@@ -24,7 +24,7 @@
             android:fontFamily="@font/segoe_ui"
             android:gravity="center"
             android:text="@string/sign_up"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/sign_in_main_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
             android:padding="@dimen/small_margin"
             android:text="@={viewmodel.first}"
             android:textAlignment="viewStart"
-            android:textColorHighlight="@color/colorPrimary"
+            android:textColorHighlight="@color/primaryColor"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toStartOf="@+id/sign_up_l_name_et"
             app:layout_constraintStart_toStartOf="@+id/v_line1"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginEnd="@dimen/small_margin"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/primaryColor"
             android:drawableStart="@drawable/user_icon"
             android:drawablePadding="@dimen/_8sdp"
             android:fontFamily="@font/segoe_ui"
@@ -79,7 +79,7 @@
             android:padding="@dimen/small_margin"
             android:text="@={viewmodel.last}"
             android:textAlignment="viewStart"
-            android:textColorHighlight="@color/colorPrimary"
+            android:textColorHighlight="@color/primaryColor"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/v_line2"
@@ -111,7 +111,7 @@
                 android:padding="@dimen/small_margin"
                 android:text="@={viewmodel.mail}"
                 android:textAlignment="viewStart"
-                android:textColorHighlight="@color/colorPrimary"
+                android:textColorHighlight="@color/primaryColor"
                 tools:targetApi="lollipop" />
 
 
@@ -128,7 +128,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.48000002"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorWhite"
+                app:passwordToggleTint="@color/primaryTextColor"
                 tools:targetApi="lollipop">
 
                 <EditText
@@ -159,7 +159,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.48000002"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorWhite"
+                app:passwordToggleTint="@color/primaryTextColor"
                 tools:targetApi="lollipop">
 
                 <EditText
@@ -245,7 +245,7 @@
             android:gravity="center"
             android:onClick="@{() -> viewmodel.onSignIn()}"
             android:text="@string/signIn"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/sign_in_sub_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />

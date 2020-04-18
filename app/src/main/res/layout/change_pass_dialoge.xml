@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/small_margin"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primaryColor"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -27,7 +27,7 @@
             android:hint="@string/old_password"
             android:inputType="textPassword"
             android:padding="@dimen/small_margin"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/primaryColor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -39,7 +39,7 @@
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/small_margin"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primaryColor"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -52,7 +52,7 @@
             android:hint="@string/new_password"
             android:inputType="textPassword"
             android:padding="@dimen/small_margin"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/primaryColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,7 +65,7 @@
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/small_margin"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/primaryColor"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -78,7 +78,7 @@
             android:hint="@string/confirm_new_pass"
             android:inputType="textPassword"
             android:padding="@dimen/small_margin"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/primaryColor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

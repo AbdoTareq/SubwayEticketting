@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/primaryColor"
     tools:context=".ui.fragment.registration.ChangePassFragment">
 
 
@@ -16,7 +16,7 @@
         android:importantForAutofill="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:passwordToggleTint="@color/colorWhite"
+        app:passwordToggleTint="@color/primaryTextColor"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,7 +47,7 @@
         android:importantForAutofill="no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:passwordToggleTint="@color/colorWhite"
+        app:passwordToggleTint="@color/primaryTextColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass_change_pass"
         app:passwordToggleEnabled="true"

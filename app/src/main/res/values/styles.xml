@@ -1,39 +1,49 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorPrimaryVariant">@color/primaryLightColor</item>
+        <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="fontFamily">@font/segoe_ui</item>
+        <item name="textAppearanceHeadline6">@style/CustomHeadline6</item>
     </style>
 
-    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+    // smaller is text larger
+    <style name="CustomHeadline6" parent="TextAppearance.MaterialComponents.Headline6"></style>
+
+    <style name="CustomHeadline5" parent="TextAppearance.MaterialComponents.Headline5"></style>
+
+    <style name="CustomHeadline4" parent="TextAppearance.MaterialComponents.Headline4"></style>
 
     <style name="ProgressDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/colorYellow</item>
+        <item name="colorAccent">@color/secondaryColor</item>
         <!--        <item name="android:textColorPrimary">@color/white</item>-->
     </style>
 
     <style name="EditTStyle">
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
         <item name="fontFamily">@font/segoe_ui</item>
-        <item name="android:textColorHint">@color/colorLightForHint</item>
-        <item name="backgroundTint">@color/colorLightForHint</item>
+        <item name="android:textColorHint">@color/primaryTextColor</item>
+        <item name="backgroundTint">@color/primaryColor</item>
 
         <!--        <item name="android:textColorPrimary">@color/white</item>-->
     </style>
 
+
     <style name="ButtonStyle">
-        <item name="colorAccent">@color/colorWhite</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="colorAccent">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">@dimen/_16sdp</item>
         <item name="fontFamily">@font/segoe_ui</item>
-        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="backgroundTint">@color/primaryDarkColor</item>
+        <item name="android:textColorHint">@color/primaryTextColor</item>
 
     </style>
 
@@ -49,16 +59,16 @@
 
     <style name="ThemeMaterialNoActionBar" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
     </style>
 
     <style name="ThemeMaterial" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryTextColor</item>
     </style>
 
 

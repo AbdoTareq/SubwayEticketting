@@ -253,7 +253,7 @@ class ProfileSettingsFragment : Fragment() {
         dialog.setOnShowListener { //set the negative button with the red color
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(context!!, android.R.color.holo_red_dark))
             //set the positive button with the primary color
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(context!!, R.color.colorPrimary))
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(context!!, R.color.primaryColor))
         }
         //show the dialog
         dialog.show()

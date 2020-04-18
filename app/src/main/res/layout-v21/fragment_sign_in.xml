@@ -112,42 +112,41 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
+            android:backgroundTint="@color/primaryDarkColor"
             android:onClick="@{() -> viewmodel.onAuthenticate()}"
             android:padding="@dimen/_12sdp"
             android:text="@string/log_in"
             android:textSize="@dimen/sign_in_medium_text_size"
-            android:backgroundTint="@color/primaryDarkColor"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
             app:layout_constraintStart_toStartOf="@+id/linearLayout3"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
         <TextView
             android:id="@+id/sign_in_recover_pass_tv"
+            style="?textAppearanceHeadline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:onClick="@{()->viewmodel.onRecoverPass()}"
             android:text="@string/forget_pass"
             android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/_15sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
         <TextView
             android:id="@+id/sign_in_sign_up_tv"
+            style="?textAppearanceHeadline4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:onClick="@{()->viewmodel.onSignUp()}"
             android:text="@string/create_new_account"
             android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/sign_in_sub_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_recover_pass_tv" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline6"

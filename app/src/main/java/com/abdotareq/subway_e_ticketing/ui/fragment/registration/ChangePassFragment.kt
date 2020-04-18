@@ -70,13 +70,13 @@ class ChangePassFragment : Fragment() {
         if (!util.isValidPassword(passEt.text.toString())) {
             passEt.setText("")
             passEt.hint = getString(R.string.invalid_pass)
-            passEt.setHintTextColor(getColor(context!!, R.color.colorAccent))
+            passEt.setHintTextColor(getColor(context!!, R.color.primaryTextColor))
             return
         } else if (confirmEt.text.toString().isEmpty()
                 || confirmEt.text.toString() != passEt.text.toString()) {
             confirmEt.setText("")
             confirmEt.hint = getString(R.string.fix_confirmPassWarning)
-            confirmEt.setHintTextColor(getColor(context!!, R.color.colorAccent))
+            confirmEt.setHintTextColor(getColor(context!!, R.color.primaryTextColor))
             return
         }
 

@@ -30,7 +30,7 @@ class SplashScreenActivity : AwesomeSplash() {
         } else {
             //Customize Title
             configSplash.titleSplash = getString(R.string.app_name)
-            configSplash.titleTextColor = R.color.colorWhite
+            configSplash.titleTextColor = R.color.primaryTextColor
             configSplash.titleTextSize = 30f //float value
             configSplash.animTitleDuration = 2000
             configSplash.animTitleTechnique = Techniques.FadeIn
@@ -38,7 +38,7 @@ class SplashScreenActivity : AwesomeSplash() {
         }
 
         //Customize Circular Reveal
-        configSplash.backgroundColor = R.color.colorPrimary //any color you want form colors.xml
+        configSplash.backgroundColor = R.color.primaryColor //any color you want form colors.xml
         configSplash.animCircularRevealDuration = 2000 //int ms
         configSplash.revealFlagX = Flags.REVEAL_RIGHT //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
@@ -56,7 +56,7 @@ class SplashScreenActivity : AwesomeSplash() {
 //        configSplash.setOriginalWidth(400); //in relation to your svg (path) resource
 //        configSplash.setAnimPathStrokeDrawingDuration(3000);
 //        configSplash.setPathSplashStrokeSize(3); //I advise value be <5
-//        configSplash.setPathSplashStrokeColor(R.color.colorAccent); //any color you want form colors.xml
+//        configSplash.setPathSplashStrokeColor(R.color.primaryTextColor); //any color you want form colors.xml
 //        configSplash.setAnimPathFillingDuration(3000);
 //        configSplash.setPathSplashFillColor(R.color.design_default_color_on_primary); //path object filling color
 
@@ -97,7 +97,7 @@ class SplashScreenActivity : AwesomeSplash() {
                 Toast.makeText(this@SplashScreenActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
                 Timber.e("$t")
                 configSplash.titleSplash = getString(R.string.app_name)
-                configSplash.titleTextColor = R.color.colorWhite
+                configSplash.titleTextColor = R.color.primaryTextColor
                 configSplash.titleTextSize = 30f //float value
                 configSplash.animTitleDuration = 2000
                 configSplash.animTitleTechnique = Techniques.FadeIn

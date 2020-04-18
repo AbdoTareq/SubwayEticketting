@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/primaryColor"
     tools:context=".ui.fragment.TicketFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/tickets"
         android:textSize="@dimen/_24sdp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/primaryTextColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/primaryColor"
     tools:context=".ui.fragment.HistoryFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/history"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/primaryTextColor"
         android:textSize="@dimen/_24sdp" />
 
 </FrameLayout>
