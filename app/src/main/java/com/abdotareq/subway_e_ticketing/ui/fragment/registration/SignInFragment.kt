@@ -17,7 +17,7 @@ import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFactory
 
 /**
  * The Activity Controller Class that is responsible for handling Signing in

@@ -7,7 +7,7 @@
 
         <variable
             name="ticket"
-            type="com.abdotareq.subway_e_ticketing.model.TicketType" />
+            type="com.abdotareq.subway_e_ticketing.model.Ticket" />
 
         <!--        <variable-->
         <!--            name="clickListener"-->
@@ -31,7 +31,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/ticket_price"
             app:layout_constraintStart_toStartOf="@+id/guideline11"
             app:layout_constraintTop_toTopOf="@+id/ticket_price"
-            app:layout_constraintVertical_bias="0.505" />
+            app:layout_constraintVertical_bias="0.505"
+            app:setTicketStations="@{ticket}" />
 
         <TextView
             android:id="@+id/ticket_price"
@@ -45,7 +46,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:setTicketPrice="@{ticket}" />
 
         <ImageView
             android:id="@+id/imageView2"

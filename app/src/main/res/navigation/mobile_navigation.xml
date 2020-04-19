@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/ticketFragment"
-        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.TicketFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketFragment"
         android:label="fragment_ticket"
         tools:layout="@layout/fragment_ticket"
         />
