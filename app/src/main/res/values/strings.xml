@@ -11,6 +11,7 @@
     <string name="sign_up_with_google">إنشاء حساب باستخدام Google</string>
     <string name="sign_up_with_face">إنشاء حساب باستخدام Facebook</string>
     <string name="sign_in">تسجيل دخول</string>
+    <string name="display_price">%,.0fLE</string>
     <string name="first_name">First Name</string>
     <string name="first_name_warrning">Enter First Name</string>
     <string name="nick_name">اسم الشهرة</string>
@@ -263,6 +264,9 @@
     <string name="buy_tickets">Buy Tickets</string>
     <string name="show_tutorial">Show Tutorial</string>
     <string name="server_offline_try">Server is offline try again</string>
+    <string name="_3le_ticket">3LE Ticket</string>
+    <string name="_0_9_stations">0 - 9 Stations</string>
+    <string name="buy_tickets">Buy Tickets</string>
 
 
 </resources>

@@ -49,6 +49,7 @@
         <item name="boxStrokeColor">@color/primaryTextColor</item>
         <item name="android:textColorHint">@color/primaryTextColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="hintTextColor">@color/primaryTextColor</item>
         <item name="boxStrokeWidth">2dp</item>
     </style>
 
@@ -64,29 +65,6 @@
     </style>
 
 
-    <!--    <style name="Cut" parent="ShapeAppearance.MaterialComponents.MediumComponent">-->
-    <!--        <item name="cornerFamily">cut</item>-->
-    <!--        <item name="cornerSize">12dp</item>-->
-    <!--    </style>-->
-
-    <!--    <style name="Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">-->
-    <!--        <item name="cornerFamily">rounded</item>-->
-    <!--        <item name="cornerSize">16dp</item>-->
-    <!--    </style>-->
-
-    <style name="ThemeMaterialNoActionBar" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryColor</item>
-    </style>
-
-    <style name="ThemeMaterial" parent="Theme.MaterialComponents">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryTextColor</item>
-    </style>
 
 
 </resources>

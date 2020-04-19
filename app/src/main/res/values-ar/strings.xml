@@ -235,4 +235,7 @@
     <string name="tut_scan_code">Scan the ticket code to at the station gates</string>
     <string name="show_tutorial">Show Tutorial</string>
     <string name="server_offline_try">Server is offline try again</string>
+    <string name="_3le_ticket">3LE Ticket</string>
+    <string name="_0_9_stations">0 - 9 Stations</string>
+    <string name="buy_tickets">Buy Tickets</string>
 </resources>

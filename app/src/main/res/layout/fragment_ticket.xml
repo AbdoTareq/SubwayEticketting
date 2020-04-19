@@ -9,14 +9,24 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/tickets_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tickets"
-        android:textSize="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/large_margin"
+        android:text="@string/buy_tickets"
         android:textColor="@color/primaryTextColor"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/_35sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ticket_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tickets_header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
