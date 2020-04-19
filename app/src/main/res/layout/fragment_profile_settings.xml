@@ -32,6 +32,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
+            android:onClick="@{() -> viewModel.onChangePhoto()}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:civ_border_color="#FF000000"
@@ -48,7 +49,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/medium_margin"
-            android:layout_marginEnd="@dimen/medium_margin"
             android:drawableStart="@drawable/user_icon"
             android:drawablePadding="@dimen/_8sdp"
             android:fontFamily="@font/segoe_ui"
@@ -69,7 +69,6 @@
             style="@style/EditTStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/medium_margin"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/medium_margin"
             android:backgroundTint="@color/primaryColor"
@@ -84,7 +83,6 @@
             android:textColorHighlight="@color/primaryColor"
             android:textSize="@dimen/large_font"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/v_line2"
             app:layout_constraintTop_toTopOf="@+id/guideline7"
             tools:targetApi="lollipop" />
@@ -94,6 +92,7 @@
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
             android:drawableStart="@drawable/gender_icon"
             android:fontFamily="@font/segoe_ui"
             android:hint="@string/select_gender"
@@ -111,10 +110,11 @@
 
         <Button
             android:id="@+id/calender"
+            style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:drawableStart="@drawable/calender_icon"
-            style="@style/ButtonStyle"
             android:fontFamily="@font/segoe_ui"
             android:hint="@string/birth_date"
             android:onClick="@{() -> viewModel.onBirth()}"
@@ -140,7 +140,6 @@
             android:padding="15dp"
             android:text="@string/change_pass_button"
             android:textSize="@dimen/very_large_font"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/log_out_btn"
             app:layout_constraintEnd_toEndOf="@+id/gender_btn"
             app:layout_constraintHorizontal_bias="1.0"
@@ -248,7 +247,7 @@
             android:id="@+id/pick_image"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="3dp"
             android:background="@drawable/shape_profile_change"
@@ -257,7 +256,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/profile_image"
             app:layout_constraintStart_toStartOf="@+id/v_line2"
             app:layout_constraintTop_toTopOf="@+id/guideline8"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

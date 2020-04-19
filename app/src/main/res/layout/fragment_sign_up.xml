@@ -43,91 +43,108 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <EditText
-            android:id="@+id/sign_up_f_name_et"
-            style="@style/EditTStyle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fName_ti"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/small_margin"
-            android:drawableStart="@drawable/user_icon"
-            android:drawablePadding="@dimen/_8sdp"
-            android:fontFamily="@font/segoe_ui"
-            android:hint="@string/first_name"
-            android:padding="@dimen/small_margin"
-            android:text="@={viewmodel.first}"
-            android:textAlignment="viewStart"
-            android:textColorHighlight="@color/primaryColor"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-            app:layout_constraintEnd_toStartOf="@+id/sign_up_l_name_et"
+            app:layout_constraintEnd_toStartOf="@+id/lName_ti"
             app:layout_constraintStart_toStartOf="@+id/v_line1"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
-            tools:targetApi="lollipop" />
+            tools:targetApi="lollipop">
 
-        <EditText
-            android:id="@+id/sign_up_l_name_et"
-            style="@style/EditTStyle"
+            <EditText
+                android:id="@+id/sign_up_f_name_et"
+                style="@style/EditTStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/password"
+                android:drawableStart="@drawable/user_icon"
+                android:drawablePadding="@dimen/_8sdp"
+                android:fontFamily="@font/segoe_ui"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:padding="@dimen/small_margin"
+                android:text="@={viewmodel.first}"
+                android:textCursorDrawable="@color/primaryTextColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lName_ti"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
             android:layout_marginEnd="@dimen/small_margin"
-            android:backgroundTint="@color/primaryColor"
-            android:drawableStart="@drawable/user_icon"
-            android:drawablePadding="@dimen/_8sdp"
-            android:fontFamily="@font/segoe_ui"
-            android:hint="@string/last_name"
-            android:padding="@dimen/small_margin"
-            android:text="@={viewmodel.last}"
-            android:textAlignment="viewStart"
-            android:textColorHighlight="@color/primaryColor"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            android:importantForAutofill="no"
+            app:hintTextColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/v_line2"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
-            tools:targetApi="lollipop" />
+            tools:targetApi="lollipop">
+
+            <EditText
+                android:id="@+id/sign_up_l_name_et"
+                style="@style/EditTStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/password"
+                android:drawableStart="@drawable/user_icon"
+                android:drawablePadding="@dimen/_8sdp"
+                android:fontFamily="@font/segoe_ui"
+                android:hint="@string/last_name"
+                android:inputType="textPersonName"
+                android:padding="@dimen/small_margin"
+                android:text="@={viewmodel.last}"
+                android:textCursorDrawable="@color/primaryTextColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/small_margin"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/lName_ti"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_f_name_et">
-
-
-            <EditText
-                android:id="@+id/sign_up_mail_et"
-                style="@style/EditTStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/email_icon"
-                android:drawablePadding="@dimen/_8sdp"
-                android:fontFamily="@font/segoe_ui"
-                android:hint="@string/mail"
-                android:padding="@dimen/small_margin"
-                android:text="@={viewmodel.mail}"
-                android:textAlignment="viewStart"
-                android:textColorHighlight="@color/primaryColor"
-                tools:targetApi="lollipop" />
-
+            app:layout_constraintStart_toStartOf="@+id/fName_ti"
+            app:layout_constraintTop_toBottomOf="@+id/lName_ti">
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/EditTStyle"
-                android:id="@+id/pass_ti"
+                android:id="@+id/mail_Ti"
+                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                tools:targetApi="lollipop">
 
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.48000002"
+                <EditText
+                    android:id="@+id/sign_up_mail_et"
+                    style="@style/EditTStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/email_icon"
+                    android:drawablePadding="@dimen/_8sdp"
+                    android:fontFamily="@font/segoe_ui"
+                    android:hint="@string/mail"
+                    android:inputType="textEmailAddress"
+                    android:padding="@dimen/small_margin"
+                    android:text="@={viewmodel.mail}"
+                    android:textAlignment="viewStart"
+                    android:textColorHighlight="@color/primaryColor"
+                    android:textCursorDrawable="@color/primaryTextColor"
+                    tools:targetApi="lollipop" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pass_ti"
+                style="@style/LoginTextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/primaryTextColor"
                 tools:targetApi="lollipop">
@@ -137,29 +154,24 @@
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/password_icon"
                     android:autofillHints="@string/password"
+                    android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="16dp"
-                    android:text="@={viewmodel.pass}" />
+                    android:text="@={viewmodel.pass}"
+                    android:textCursorDrawable="@color/primaryTextColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/EditTStyle"
                 android:id="@+id/confirm_ti"
+                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.48000002"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/primaryTextColor"
                 tools:targetApi="lollipop">
@@ -169,13 +181,14 @@
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/password_icon"
                     android:autofillHints="@string/password"
+                    android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="10dp"
                     android:hint="@string/confirm_new_pass"
                     android:inputType="textPassword"
                     android:padding="16dp"
-                    android:text="@={viewmodel.confPass}" />
+                    android:text="@={viewmodel.confPass}"
+                    android:textCursorDrawable="@color/primaryTextColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -184,6 +197,7 @@
 
         <Button
             android:id="@+id/sign_up_gender_btn"
+            style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/small_margin"
@@ -192,7 +206,6 @@
             android:text="@={viewmodel.gender}"
             android:textAlignment="center"
             android:textAllCaps="false"
-            style="@style/ButtonStyle"
             android:textSize="@dimen/very_large_font"
             app:layout_constraintBottom_toBottomOf="@+id/sign_up_calender"
             app:layout_constraintEnd_toStartOf="@+id/v_line2"
@@ -202,6 +215,7 @@
 
         <Button
             android:id="@+id/sign_up_calender"
+            style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/small_margin"
@@ -209,7 +223,6 @@
             android:layout_marginRight="@dimen/small_margin"
             android:layout_marginBottom="@dimen/_12sdp"
             android:drawableStart="@drawable/calender_icon"
-            style="@style/ButtonStyle"
             android:text="@={viewmodel.birthDate}"
             android:textAlignment="center"
             android:textAllCaps="false"
@@ -225,7 +238,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="13dp"
-            android:background="@drawable/shape_sign_up"
             android:fontFamily="@font/segoe_ui"
             android:onClick="@{() -> viewmodel.onRegister()}"
             android:padding="15dp"
@@ -245,8 +257,8 @@
             android:gravity="center"
             android:onClick="@{() -> viewmodel.onSignIn()}"
             android:text="@string/signIn"
+            android:textAppearance="@style/CustomHeadline4"
             android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/sign_in_sub_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
 

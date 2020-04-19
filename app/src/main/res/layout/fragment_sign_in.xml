@@ -69,20 +69,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_4sdp"
-                android:hint="@string/mail"
-                >
+                android:hint="@string/mail">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/email_icon"
                     android:drawablePadding="@dimen/_8sdp"
+                    android:inputType="textEmailAddress"
                     android:padding="@dimen/_10sdp"
-                    android:textCursorDrawable="@color/secondaryColor"
+                    android:text="@={viewmodel.mail}"
                     android:textColor="@color/primaryTextColor"
                     android:textColorHint="@color/primaryTextColor"
-                    android:text="@={viewmodel.mail}"
-                    android:textSize="@dimen/very_large_font" />
+                    android:textCursorDrawable="@color/primaryTextColor" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -93,19 +94,20 @@
                 android:hint="@string/password"
                 android:textCursorDrawable="@color/secondaryColor"
                 app:endIconMode="password_toggle"
-                app:endIconTint="@color/secondaryColor">
+                app:endIconTint="@color/primaryTextColor">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pass_et"
+                    style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/primaryTextColor"
-                    android:textColorHint="@color/primaryTextColor"
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="@dimen/_8sdp"
                     android:padding="@dimen/_10sdp"
                     android:text="@={viewmodel.pass}"
-                    android:textSize="@dimen/very_large_font" />
+                    android:textColor="@color/primaryTextColor"
+                    android:textColorHint="@color/primaryTextColor"
+                    android:textCursorDrawable="@color/primaryTextColor" />
             </com.google.android.material.textfield.TextInputLayout>
 
 

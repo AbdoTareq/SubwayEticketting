@@ -40,7 +40,6 @@
         <item name="boxStrokeColor">@color/primaryTextColor</item>
         <item name="android:textColorHint">@color/secondaryTextColor</item>
         <item name="android:textColor">@color/secondaryTextColor</item>
-
         <item name="android:textColorHighlight">@color/secondaryTextColor</item>
         <item name="boxStrokeWidth">2dp</item>
     </style>
