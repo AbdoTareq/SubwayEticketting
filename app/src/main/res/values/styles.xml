@@ -16,6 +16,7 @@
     </style>
 
     // smaller is text larger
+
     <style name="CustomHeadline6" parent="TextAppearance.MaterialComponents.Headline6"></style>
 
     <style name="CustomHeadline5" parent="TextAppearance.MaterialComponents.Headline5"></style>
@@ -30,32 +31,49 @@
     <style name="EditTStyle">
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="fontFamily">@font/segoe_ui</item>
+        <item name="android:textSize">@dimen/very_large_font</item>
         <item name="android:textColorHint">@color/primaryTextColor</item>
-        <item name="backgroundTint">@color/primaryColor</item>
-
-        <!--        <item name="android:textColorPrimary">@color/white</item>-->
     </style>
 
 
+    <style name="ChangePassStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/primaryTextColor</item>
+        <item name="android:textColorHint">@color/secondaryTextColor</item>
+        <item name="android:textColor">@color/secondaryTextColor</item>
+
+        <item name="android:textColorHighlight">@color/secondaryTextColor</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/primaryTextColor</item>
+        <item name="android:textColorHint">@color/primaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+
+
     <style name="ButtonStyle">
+        <item name="strokeColor">@color/secondaryColor</item>
         <item name="colorAccent">@color/primaryTextColor</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">@dimen/_16sdp</item>
         <item name="fontFamily">@font/segoe_ui</item>
         <item name="backgroundTint">@color/primaryDarkColor</item>
-        <item name="android:textColorHint">@color/primaryTextColor</item>
-
     </style>
 
-<!--    <style name="Cut" parent="ShapeAppearance.MaterialComponents.MediumComponent">-->
-<!--        <item name="cornerFamily">cut</item>-->
-<!--        <item name="cornerSize">12dp</item>-->
-<!--    </style>-->
 
-<!--    <style name="Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">-->
-<!--        <item name="cornerFamily">rounded</item>-->
-<!--        <item name="cornerSize">16dp</item>-->
-<!--    </style>-->
+    <!--    <style name="Cut" parent="ShapeAppearance.MaterialComponents.MediumComponent">-->
+    <!--        <item name="cornerFamily">cut</item>-->
+    <!--        <item name="cornerSize">12dp</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">-->
+    <!--        <item name="cornerFamily">rounded</item>-->
+    <!--        <item name="cornerSize">16dp</item>-->
+    <!--    </style>-->
 
     <style name="ThemeMaterialNoActionBar" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->

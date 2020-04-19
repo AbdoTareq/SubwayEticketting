@@ -7,7 +7,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/first"
-        style="@style/EditTStyle"
+        style="@style/ChangePassStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,7 +19,6 @@
 
         <EditText
             android:id="@+id/old_pass"
-            style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/password_24px"
@@ -32,7 +31,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/second"
-        style="@style/EditTStyle"
+        style="@style/ChangePassStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/first"
@@ -44,41 +43,36 @@
 
         <EditText
             android:id="@+id/new_password"
-            style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/password_24px"
             android:drawablePadding="@dimen/small_margin"
             android:hint="@string/new_password"
             android:inputType="textPassword"
-            android:padding="@dimen/small_margin"
-            android:textColor="@color/primaryColor" />
+            android:padding="@dimen/small_margin" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/third"
-        style="@style/EditTStyle"
+        style="@style/ChangePassStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/second"
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/small_margin"
-        android:textColor="@color/primaryColor"
         app:passwordToggleEnabled="true">
 
         <EditText
             android:id="@+id/confirm_new_password"
-            style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/password_24px"
             android:drawablePadding="@dimen/small_margin"
             android:hint="@string/confirm_new_pass"
             android:inputType="textPassword"
-            android:padding="@dimen/small_margin"
-            android:textColor="@color/primaryColor" />
+            android:padding="@dimen/small_margin" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

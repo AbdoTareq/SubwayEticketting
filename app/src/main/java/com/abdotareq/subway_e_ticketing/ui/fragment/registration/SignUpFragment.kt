@@ -122,8 +122,8 @@ class SignUpFragment : Fragment() {
             binding.signUpFNameEt.requestFocus()
             return
         } else if (viewModel.last.value.isNullOrEmpty()) {
-            binding.signUpFNameEt.error = getString(R.string.fix_last_name_mess)
-            binding.signUpFNameEt.requestFocus()
+            binding.signUpLNameEt.error = getString(R.string.fix_last_name_mess)
+            binding.signUpLNameEt.requestFocus()
             return
         } else if (!viewModel.validateMail()) {
             binding.signUpMailEt.error = getString(R.string.invalid_mail_warning)
