@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="ticket"
+            type="com.abdotareq.subway_e_ticketing.model.Ticket" />
+
+        <variable
+            name="clickListener"
+            type="com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:layout_marginBottom="@dimen/very_small_margin"
+        android:background="@drawable/shape_sign_up"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{()-> clickListener.onClick(ticket)}"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ticket_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/_3le_ticket"
+            android:textAppearance="@style/CustomHeadline5"
+            android:textColor="@color/primaryTextColor"
+            app:setTicketPrice="@{ticket}" />
+
+        <TextView
+            android:id="@+id/check_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:clickable="false"
+            android:focusable="false"
+            android:lines="1"
+            android:text="@string/check_in_ain_shams_station_at_15_20_2020_11_26_am"
+            android:textAppearance="@style/CustomHeadline5"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/large_font"
+            app:setTicketStations="@{ticket}" />
+
+        <TextView
+            android:id="@+id/check_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:clickable="false"
+            android:focusable="false"
+            android:lines="1"
+            android:text="@string/check_out_maadi_station_at_15_20_2020_13_26_am"
+            android:textAppearance="@style/CustomHeadline5"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/large_font"
+            app:setTicketStations="@{ticket}" />
+
+
+    </LinearLayout>
+
+
+</layout>

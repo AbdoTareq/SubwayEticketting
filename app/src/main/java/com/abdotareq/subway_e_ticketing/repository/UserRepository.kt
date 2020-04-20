@@ -1,13 +1,10 @@
 package com.abdotareq.subway_e_ticketing.repository
 
-import android.widget.Toast
-import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.GetUserInterface
-import com.abdotareq.subway_e_ticketing.model.UpdateUserInterface
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.model.UpdateUserInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
-import com.abdotareq.subway_e_ticketing.utility.util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -37,6 +34,7 @@ class UserRepository {
                 registerInterface.onFail(-2)
             } catch (e: Exception) {
                 Timber.e(e)
+                registerInterface.onFail(-1)
             }
         }
 

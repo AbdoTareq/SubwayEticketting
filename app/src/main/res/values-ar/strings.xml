@@ -240,4 +240,6 @@
     <string name="buy_tickets">Buy Tickets</string>
     <string name="total_cost">Total Cost</string>
     <string name="buy">Buy</string>
+    <string name="check_in_ain_shams_station_at_15_20_2020_11_26_am">Check-in: Ain Shams Station at 15/20/2020 11:26 Am</string>
+    <string name="check_out_maadi_station_at_15_20_2020_13_26_am">Check-out: Maadi Station at 15/20/2020 13:26 Am</string>
 </resources>
