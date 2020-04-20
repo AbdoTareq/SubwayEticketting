@@ -31,7 +31,7 @@ fun TextView.setTicketPrice(item: History?) {
 @BindingAdapter("setCheckInStation")
 fun TextView.setCheckInStation(item: History?) {
     item?.let {
-        text = "Check-in: ${it.checkInDate}"
+        text = "Check-in: ${it.checkInStation}"
     }
 }
 
@@ -45,14 +45,14 @@ fun TextView.setCheckInDate(item: History?) {
 @BindingAdapter("setCheckOutStation")
 fun TextView.setCheckOutStation(item: History?) {
     item?.let {
-        text = "Check-out: ${it.checkInDate}"
+        text = "Check-out: ${it.checkOutStation}"
     }
 }
 
 @BindingAdapter("setCheckOutDate")
 fun TextView.setCheckOutDate(item: History?) {
     item?.let {
-        text = "at: ${it.checkInDate}"
+        text = "at: ${it.checkOutDate}"
     }
 }
 
