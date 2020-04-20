@@ -9,23 +9,31 @@
             name="ticket"
             type="com.abdotareq.subway_e_ticketing.model.Ticket" />
 
-        <!--        <variable-->
-        <!--            name="clickListener"-->
-        <!--            type="com.example.android.trackmysleepquality.sleeptracker.SleepNightListener" />-->
+        <variable
+            name="clickListener"
+            type="com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:layout_marginBottom="@dimen/very_small_margin"
         android:background="@drawable/shape_sign_up"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{()-> clickListener.onClick(ticket)}"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/stations"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_80sdp"
             android:layout_marginStart="8dp"
+            android:clickable="false"
+            android:focusable="false"
             android:text="@string/_0_9_stations"
+            android:gravity="center"
             android:textAppearance="@style/CustomHeadline5"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="@+id/ticket_price"
@@ -39,6 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_80sdp"
             android:layout_marginStart="16dp"
+            android:clickable="false"
+            android:focusable="false"
             android:gravity="center"
             android:text="@string/_3le_ticket"
             android:textAppearance="@style/CustomHeadline5"
@@ -55,6 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:clickable="false"
+            android:focusable="false"
             app:layout_constraintBottom_toBottomOf="@+id/stations"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/stations"

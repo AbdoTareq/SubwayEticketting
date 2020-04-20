@@ -1,16 +1,15 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
-import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
-import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFactory
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.abdotareq.subway_e_ticketing.databinding.FragmentBuyTicketBinding
+import com.abdotareq.subway_e_ticketing.viewmodels.BuyTicketsViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketsViewModelFactory
 
 
 /**
@@ -20,24 +19,62 @@ import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFact
  */
 class TicketFragment : Fragment() {
 
-    private lateinit var viewModelFactory: SigninViewModelFactory
-    private lateinit var viewModel: SigninViewModel
+    private lateinit var viewModelFactory: BuyTicketsViewModelFactory
+    private lateinit var viewModel: BuyTicketsViewModel
 
-    private var _binding: FragmentTicketBinding? = null
+    private var _binding: FragmentBuyTicketBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentTicketBinding.inflate(inflater, container, false)
+        _binding = FragmentBuyTicketBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        val application = requireNotNull(activity).application
+
+        viewModelFactory = BuyTicketsViewModelFactory(application)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(BuyTicketsViewModel::class.java)
+
+        binding.viewModel = viewModel
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.lifecycleOwner = this
+
+        val adapter = TicketAdapter(TicketListener { price ->
+            viewModel.onBuyTicket(price)
+        })
+
+        binding.ticketList.adapter = adapter
+        // handle list change
+        viewModel.tickets.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
+
+        viewModel.eventBuyTicket.observe(viewLifecycleOwner, Observer {
+            if (it > 0) {
+//                Toast.makeText(context, "price: ${it}", Toast.LENGTH_LONG).show()
+                openChangePassDialog()
+                viewModel.onBuyTicketComplete()
+            }
+        })
+
 
 
 
         return view
     }
 
+    // this for change pass dialog
+    private fun openChangePassDialog() {
+        val passDialog = BuyTicketDialogFragment()
+        requireActivity().supportFragmentManager
+                .let { passDialog.show(it, "Pass Dialog") }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -269,7 +269,8 @@
 
     <string name="ticket_price_holder">%1$s LE \ Ticket</string>
     <string name="station_holder">%1$s Stations</string>
-
+    <string name="total_cost">Total Cost</string>
+    <string name="buy">Buy</string>
 
 
 </resources>

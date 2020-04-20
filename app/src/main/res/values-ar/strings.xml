@@ -238,4 +238,6 @@
     <string name="_3le_ticket">3LE Ticket</string>
     <string name="_0_9_stations">0 - 9 Stations</string>
     <string name="buy_tickets">Buy Tickets</string>
+    <string name="total_cost">Total Cost</string>
+    <string name="buy">Buy</string>
 </resources>

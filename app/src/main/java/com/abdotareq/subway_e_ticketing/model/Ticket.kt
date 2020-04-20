@@ -15,6 +15,6 @@ data class Ticket(@Json(name = "price") var price: Int = 0,
 
                   @Json(name = "color_code") var color_code: String? = null,
 
-                  @Json(name = "ByteArray") var icon: ByteArray) {
+                  @Json(name = "ByteArray") var icon: ByteArray? = null) {
 
 }
