@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="ticket"
-            type="com.abdotareq.subway_e_ticketing.model.Ticket" />
+            name="historyTicket"
+            type="com.abdotareq.subway_e_ticketing.model.HistoryTicket" />
 
-        <variable
-            name="clickListener"
-            type="com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketListener" />
+        <!--        <variable-->
+        <!--            name="clickListener"-->
+        <!--            type="com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketListener" />-->
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/very_small_margin"
@@ -21,29 +22,30 @@
         android:background="@drawable/shape_sign_up"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{()-> clickListener.onClick(ticket)}"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/ticket_price"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginStart="8dp"
             android:clickable="false"
             android:focusable="false"
             android:text="@string/_3le_ticket"
             android:textAppearance="@style/CustomHeadline5"
             android:textColor="@color/primaryTextColor"
-            app:setTicketPrice="@{ticket}" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setTicketPrice="@{historyTicket}" />
+
 
         <TextView
-            android:id="@+id/check_in"
-            android:layout_width="wrap_content"
+            android:id="@+id/check_in_date"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:clickable="false"
             android:focusable="false"
             android:lines="1"
@@ -51,14 +53,40 @@
             android:textAppearance="@style/CustomHeadline5"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/large_font"
-            app:setTicketStations="@{ticket}" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_price"
+            app:setCheckInStation="@{historyTicket}" />
+
+
+        <TextView
+            android:id="@+id/check_out_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:lines="1"
+            android:text="@string/check_out_date"
+            android:textAppearance="@style/CustomHeadline5"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/large_font"
+            app:layout_constraintBottom_toBottomOf="@+id/check_in_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="@+id/check_in_date"
+            app:layout_constraintVertical_bias="0.0"
+            app:setCheckInDate="@{historyTicket}" />
+
 
         <TextView
             android:id="@+id/check_out"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:clickable="false"
             android:focusable="false"
             android:lines="1"
@@ -66,10 +94,41 @@
             android:textAppearance="@style/CustomHeadline5"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/large_font"
-            app:setTicketStations="@{ticket}" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline13"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/check_in_date"
+            app:setCheckOutStation="@{historyTicket}" />
 
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/check_in"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:lines="1"
+            android:text="@string/check_in_date"
+            android:textAppearance="@style/CustomHeadline5"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/large_font"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline13"
+            app:layout_constraintTop_toTopOf="@+id/check_out"
+            app:setCheckOutDate="@{historyTicket}" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

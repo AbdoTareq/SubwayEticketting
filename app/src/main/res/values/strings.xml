@@ -272,8 +272,8 @@
     <string name="station_holder">%1$s Stations</string>
     <string name="total_cost">Total Cost</string>
     <string name="buy">Buy</string>
-    <string name="check_in_ain_shams_station_at_15_20_2020_11_26_am">Check-in: Ain Shams Station at 15/20/2020 11:26 Am</string>
-    <string name="check_out_maadi_station_at_15_20_2020_13_26_am">Check-out: Maadi Station at 15/20/2020 13:26 Am</string>
+    <string name="check_in_ain_shams_station_at_15_20_2020_11_26_am">Check-in: Ain Shams Station </string>
+    <string name="check_out_maadi_station_at_15_20_2020_13_26_am">Check-out: Maadi Station</string>
     <string name="wrong_ticket_price">Wrong Ticket Price</string>
     <string name="invalid_ticket">Invalid Ticket</string>
     <string name="no_tickets_found">No tickets found</string>
@@ -282,6 +282,8 @@
     <string name="invalid_card_number">Invalid card number</string>
     <string name="invalid_date">Invalid date</string>
     <string name="invalid_cvv">InvalidCVV</string>
+    <string name="check_in_date">at 15/20/2020 11:26 Am</string>
+    <string name="check_out_date">at 15/20/2020 13:26 Am</string>
 
 
 </resources>

@@ -4,7 +4,6 @@ import com.squareup.moshi.Json
 
 /**
  * Entity bean for ticket_type
- * @author Mai Ahmed
  */
 
 data class Ticket(@Json(name = "price") var price: Int = 0,

@@ -256,4 +256,6 @@
     <string name="invalid_card_number">Invalid card number</string>
     <string name="invalid_date">Invalid date</string>
     <string name="invalid_cvv">InvalidCVV</string>
+    <string name="check_in_date">at 15/20/2020 11:26 Am</string>
+    <string name="check_out_date">at 15/20/2020 13:26 Am</string>
 </resources>

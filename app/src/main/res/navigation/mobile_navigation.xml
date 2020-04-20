@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_pocket" />
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.HistoryFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
