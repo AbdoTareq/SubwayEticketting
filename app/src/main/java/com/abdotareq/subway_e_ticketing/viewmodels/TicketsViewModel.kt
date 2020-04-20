@@ -33,9 +33,9 @@ class TicketsViewModel(application: Application) : AndroidViewModel(application)
     private val applicationCon = application
 
 
-    private val _eventBuyTicket = MutableLiveData<Int>()
-    val eventBuyTicket: LiveData<Int>
-        get() = _eventBuyTicket
+    private val _eventChooseTicket = MutableLiveData<Int>()
+    val eventChooseTicket: LiveData<Int>
+        get() = _eventChooseTicket
 
     var tickets = MutableLiveData<List<Ticket>>()
 
@@ -43,12 +43,12 @@ class TicketsViewModel(application: Application) : AndroidViewModel(application)
         tickets.value = getTickets().value
     }
 
-    fun onBuyTicketComplete() {
-        _eventBuyTicket.value = 0
+    fun onChooseTicketComplete() {
+        _eventChooseTicket.value = 0
     }
 
-    fun onBuyTicket(price: Int) {
-        _eventBuyTicket.value = price
+    fun onChooseTicket(price: Int) {
+        _eventChooseTicket.value = price
     }
 
     fun getTickets(): LiveData<List<Ticket>> {

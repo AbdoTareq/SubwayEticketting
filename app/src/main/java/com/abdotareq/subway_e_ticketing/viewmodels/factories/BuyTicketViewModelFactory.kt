@@ -19,6 +19,7 @@ package com.abdotareq.subway_e_ticketing.viewmodels.factories
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.abdotareq.subway_e_ticketing.model.Ticket
 import com.abdotareq.subway_e_ticketing.viewmodels.BuyTicketViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.TicketsViewModel
 
@@ -27,11 +28,12 @@ import com.abdotareq.subway_e_ticketing.viewmodels.TicketsViewModel
  *
  * Provides the SleepDatabaseDao and context to the ViewModel.
  */
-class BuyTicketViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
+class BuyTicketViewModelFactory(private val ticket: Ticket,
+                                private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(BuyTicketViewModel::class.java)) {
-            return BuyTicketViewModel(application) as T
+            return BuyTicketViewModel(ticket, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

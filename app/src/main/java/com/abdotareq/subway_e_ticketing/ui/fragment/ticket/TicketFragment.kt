@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
+import com.abdotareq.subway_e_ticketing.model.Ticket
 import com.abdotareq.subway_e_ticketing.viewmodels.TicketsViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
 
@@ -44,7 +45,7 @@ class TicketFragment : Fragment() {
         binding.lifecycleOwner = this
 
         val adapter = TicketAdapter(TicketListener { price ->
-            viewModel.onBuyTicket(price)
+            viewModel.onChooseTicket(price)
         })
 
         binding.ticketList.adapter = adapter
@@ -55,14 +56,18 @@ class TicketFragment : Fragment() {
             }
         })
 
-        viewModel.eventBuyTicket.observe(viewLifecycleOwner, Observer {
-            if (it > 0) {
-//                Toast.makeText(context, "price: ${it}", Toast.LENGTH_LONG).show()
-                openChangePassDialog()
-                viewModel.onBuyTicketComplete()
+        viewModel.eventChooseTicket.observe(viewLifecycleOwner, Observer { ticket_price ->
+            if (ticket_price > 0) {
+
+                var ticketTemp = Ticket()
+                for (ticket in viewModel.tickets.value!!) {
+                    if (ticket_price == ticket.price)
+                        ticketTemp = ticket
+                }
+                openChangePassDialog(ticketTemp)
+                viewModel.onChooseTicketComplete()
             }
         })
-
 
 
 
@@ -70,10 +75,10 @@ class TicketFragment : Fragment() {
     }
 
     // this for change pass dialog
-    private fun openChangePassDialog() {
-        val passDialog = BuyTicketDialogFragment()
+    private fun openChangePassDialog(ticketTemp: Ticket) {
+        val dialog = BuyTicketDialogFragment(ticketTemp)
         requireActivity().supportFragmentManager
-                .let { passDialog.show(it, "Pass Dialog") }
+                .let { dialog.show(it, "Buy Dialog") }
     }
 
     override fun onDestroyView() {

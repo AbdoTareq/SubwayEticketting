@@ -83,7 +83,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/total_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -102,10 +102,11 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/lightBlue"
             android:text="@string/buy"
+            android:textSize="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/total_cost" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
