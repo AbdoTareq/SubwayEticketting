@@ -27,7 +27,7 @@ import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 /**
  * ViewModel for SleepTrackerFragment.
  */
-class BuyTicketsViewModel(application: Application) : AndroidViewModel(application) {
+class TicketsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val ticketRepository = TicketRepository()
     private val applicationCon = application

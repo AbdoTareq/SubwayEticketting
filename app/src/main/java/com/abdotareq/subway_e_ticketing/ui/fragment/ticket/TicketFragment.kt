@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.abdotareq.subway_e_ticketing.databinding.FragmentBuyTicketBinding
-import com.abdotareq.subway_e_ticketing.viewmodels.BuyTicketsViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketsViewModelFactory
+import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
+import com.abdotareq.subway_e_ticketing.viewmodels.TicketsViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
 
 
 /**
@@ -19,24 +19,24 @@ import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketsViewModel
  */
 class TicketFragment : Fragment() {
 
-    private lateinit var viewModelFactory: BuyTicketsViewModelFactory
-    private lateinit var viewModel: BuyTicketsViewModel
+    private lateinit var viewModelFactory: TicketViewModelFactory
+    private lateinit var viewModel: TicketsViewModel
 
-    private var _binding: FragmentBuyTicketBinding? = null
+    private var _binding: FragmentTicketBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentBuyTicketBinding.inflate(inflater, container, false)
+        _binding = FragmentTicketBinding.inflate(inflater, container, false)
         val view = binding.root
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = BuyTicketsViewModelFactory(application)
+        viewModelFactory = TicketViewModelFactory(application)
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(BuyTicketsViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(TicketsViewModel::class.java)
 
         binding.viewModel = viewModel
         // Specify the current activity as the lifecycle owner of the binding. This is used so that

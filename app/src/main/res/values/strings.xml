@@ -71,6 +71,7 @@
     <string name="wrong_code">كود التفعيل خاطئ</string>
     <string name="wrong_mail_or_pass">Wrong mail or pass</string>
     <string name="else_on_repsonse">else onResponse</string>
+    <string name="ticket_num_format"> %d</string>
     <string name="unrecorded_num_warning">هذا الرقم غير مسجل</string>
     <string name="tell_a_friend">اخبر صديق</string>
     <string name="account_settings">إعدادات الحساب</string>
