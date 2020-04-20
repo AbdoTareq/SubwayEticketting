@@ -3,6 +3,8 @@ package com.abdotareq.subway_e_ticketing.ui.activity
 import android.content.Intent
 import android.widget.Toast
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
@@ -82,19 +84,16 @@ class SplashScreenActivity : AwesomeSplash() {
                     configSplash.titleTextSize = 30f //float value
                     configSplash.animTitleTechnique = Techniques.FadeIn
 
-                } else if (responseCode == 438) {
-                    //pass not saved successfully
-                    Toast.makeText(this@SplashScreenActivity, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
-                    Timber.e(getString(R.string.user_not_found))
                 } else {
                     //user not saved successfully
-                    Toast.makeText(this@SplashScreenActivity, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SplashScreenActivity, getErrorMessage(responseCode, application), Toast.LENGTH_LONG).show()
                     Timber.e(getString(R.string.else_on_repsonse))
                 }
             }
 
             override fun onFailure(call: Call<User?>, t: Throwable) {
-                Toast.makeText(this@SplashScreenActivity, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SplashScreenActivity, getErrorMessage(NoNetworkException, application), Toast.LENGTH_LONG).show()
+
                 Timber.e("$t")
                 configSplash.titleSplash = getString(R.string.app_name)
                 configSplash.titleTextColor = R.color.primaryTextColor

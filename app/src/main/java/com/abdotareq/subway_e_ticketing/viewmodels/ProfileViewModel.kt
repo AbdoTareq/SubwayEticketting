@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.GetUserInterface
 import com.abdotareq.subway_e_ticketing.model.UpdateUserInterface
 import com.abdotareq.subway_e_ticketing.model.User
@@ -27,6 +28,8 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
     private val userRepo = UserRepository()
+
+    private val applicationCon = application
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
@@ -131,6 +134,10 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
 //    val displayPropertyBirth = Transformations.map(user) {
 //        it.birth_date?.substring(0..9)
 //    }
+
+    fun getErrorMess(code: Int): String {
+        return getErrorMessage(code,this.applicationCon)
+    }
 
     override fun onCleared() {
         super.onCleared()

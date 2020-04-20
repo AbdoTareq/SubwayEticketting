@@ -21,6 +21,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.GetUserInterface
 import com.abdotareq.subway_e_ticketing.model.UpdateUserInterface
 import com.abdotareq.subway_e_ticketing.model.User
@@ -214,13 +216,8 @@ class ProfileSettingsFragment : Fragment() {
 
             override fun onFail(responseCode: Int) {
                 progressDialog.dismiss()
-                when (responseCode) {
-                    -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
-                    -2 -> Toast.makeText(context, getString(R.string.server_offline_try), Toast.LENGTH_LONG).show()
-                    436 -> Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
-                    438 -> Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
-                    else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
-                }
+                Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
+
             }
         }
 
@@ -296,13 +293,7 @@ class ProfileSettingsFragment : Fragment() {
 
             override fun onFail(responseCode: Int) {
                 progressDialog.dismiss()
-                when (responseCode) {
-                    -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
-                    -2 -> Toast.makeText(context, getString(R.string.server_offline_try), Toast.LENGTH_LONG).show()
-                    436 -> Toast.makeText(context, getText(R.string.wrong_mail_or_pass), Toast.LENGTH_LONG).show()
-                    438 -> Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
-                    else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
-                }
+                Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
             }
         }
         viewModel.saveUserCall(bearerToken, profileInterface)

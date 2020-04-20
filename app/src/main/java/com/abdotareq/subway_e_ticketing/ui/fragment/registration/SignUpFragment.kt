@@ -18,8 +18,8 @@ import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.SignUpViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.SignupViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.SignUpViewModelFactory
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -164,12 +164,7 @@ class SignUpFragment : Fragment() {
 
             override fun onFail(responseCode: Int) {
                 progressDialog.dismiss()
-                when (responseCode) {
-                    -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
-                    434 -> Toast.makeText(context, getText(R.string.pass_less), Toast.LENGTH_LONG).show()
-                    435 -> Toast.makeText(context, getText(R.string.mail_exist), Toast.LENGTH_LONG).show()
-                    else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
-                }
+                Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
             }
         }
 

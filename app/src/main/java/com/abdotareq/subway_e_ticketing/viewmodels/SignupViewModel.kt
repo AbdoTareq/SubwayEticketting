@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
@@ -26,6 +27,8 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
     private val userRepo = UserRepository()
+    private val applicationCon = application
+
 
     val first = MutableLiveData<String>()
 
@@ -102,6 +105,11 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
         //start the call
         userRepo.signUpCall(user, registerInterface)
     }
+
+    fun getErrorMess(code: Int): String {
+        return getErrorMessage(code, this.applicationCon)
+    }
+
 
     override fun onCleared() {
         super.onCleared()

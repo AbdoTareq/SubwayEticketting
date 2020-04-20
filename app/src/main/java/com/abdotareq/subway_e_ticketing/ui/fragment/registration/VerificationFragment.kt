@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentVerificationBinding
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.Token
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
@@ -26,6 +28,7 @@ import timber.log.Timber
 class VerificationFragment : Fragment() {
 
     private var _binding: FragmentVerificationBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -83,24 +86,20 @@ class VerificationFragment : Fragment() {
                     // this how to navigate between fragments using safe args after defining action in navigation xml file
                     // between desired fragments & send args safely
                     findNavController().navigate(VerificationFragmentDirections.actionVerificationFragmentToChangePassFragment(mail, response.body()!!.token))
-                } else if (responseCode == 439) {
-                    //verifyCode not successfully
-                    progressDialog.dismiss()
-                    Timber.e("response.code:    $responseCode")
-                    Toast.makeText(context, getString(R.string.wrong_code), Toast.LENGTH_LONG).show()
+
                 } else {
                     //verifyCode not successfully
                     progressDialog.dismiss()
                     Timber.e("response.code:    $responseCode")
 
-                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<Token?>, t: Throwable) {
                 Timber.e("err:    $t")
                 progressDialog.dismiss()
-                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getErrorMessage(NoNetworkException, activity!!.application), Toast.LENGTH_LONG).show()
             }
         })
     }

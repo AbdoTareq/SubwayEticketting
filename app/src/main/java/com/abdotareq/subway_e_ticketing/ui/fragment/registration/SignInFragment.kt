@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
@@ -121,16 +122,7 @@ class SignInFragment : Fragment() {
 
             override fun onFail(responseCode: Int) {
                 progressDialog.dismiss()
-                when (responseCode) {
-                    -1 -> Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
-                    -2 -> Toast.makeText(context, getString(R.string.server_offline_try), Toast.LENGTH_LONG).show()
-                    436 -> {
-                        binding.mailEt.error = getString(R.string.wrong_mail_or_pass)
-                        binding.passChangePass.error = getString(R.string.wrong_mail_or_pass)
-                        binding.mailEt.requestFocus()
-                    }
-                    else -> Toast.makeText(context, "else onResponse", Toast.LENGTH_LONG).show()
-                }
+                Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
             }
         }
 

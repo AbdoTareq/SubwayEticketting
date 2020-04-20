@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.content.ContextCompat.getColor
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ChangePassDialogeBinding
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.UserPassword
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
@@ -45,16 +48,16 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
         //check for all inputs from user are correct
         if (!util.isValidPassword(binding.oldPass.text.toString())) {
             binding.first.error = getString(R.string.pass_fix)
-            binding.first.requestFocus() 
+            binding.first.requestFocus()
             return
         } else if (!util.isValidPassword(binding.newPassword.text.toString())) {
             binding.second.error = getString(R.string.pass_fix)
-            binding.second.requestFocus() 
+            binding.second.requestFocus()
             return
         } else if (binding.confirmNewPassword.text.toString().isEmpty()
                 || binding.confirmNewPassword.text.toString() != binding.newPassword.text.toString()) {
             binding.third.error = getString(R.string.fix_confirmPassWarning)
-            binding.third.requestFocus() 
+            binding.third.requestFocus()
             return
         }
 
@@ -87,34 +90,17 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
                     // to close pass dialog
                     dismiss()
 
-                } else if (responseCode == 434) {
-                    //pass not saved successfully
-                    Toast.makeText(context, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
-                } else if (responseCode == 437) {
-                    //pass not saved successfully
-                    progressDialog.dismiss()
-                    binding.first.error = getString(R.string.pass_fix)
-                    binding.first.requestFocus()
-                    Toast.makeText(context, getString(R.string.wrong_pass), Toast.LENGTH_LONG).show()
-                } else if (responseCode == 438) {
-                    //pass not saved successfully
-                    progressDialog.dismiss()
-                    Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
-                } else if (responseCode == 440) {
-                    //pass not saved successfully
-                    progressDialog.dismiss()
-                    Toast.makeText(context, getString(R.string.email_does_not_match), Toast.LENGTH_LONG).show()
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss()
                     Timber.i("responseCode: $responseCode ")
-                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 progressDialog.dismiss()
-                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getErrorMessage(NoNetworkException, activity!!.application), Toast.LENGTH_LONG).show()
             }
         })
 

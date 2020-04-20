@@ -4,17 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.utility.util
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import timber.log.Timber
-import java.net.SocketTimeoutException
 
 /**
  * ViewModel containing all the logic needed to sign in
@@ -33,6 +28,8 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
      * */
 
     private val userRepo = UserRepository()
+    private val applicationCon = application
+
 
     val mail = MutableLiveData<String>()
 
@@ -94,6 +91,10 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
 
         //start the coroutine
         userRepo.authenticate(user,registerInterface)
+    }
+
+    fun getErrorMess(code: Int): String {
+        return getErrorMessage(code, this.applicationCon)
     }
 
     override fun onCleared() {

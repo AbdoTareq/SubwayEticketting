@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentChangePassBinding
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.util
@@ -117,37 +120,18 @@ class ChangePassFragment : Fragment() {
                     Toast.makeText(context, "Pass changed", Toast.LENGTH_SHORT).show()
                     // this to finish recover pass activity
                     activity!!.finishAffinity()
-                } else if (responseCode == 434) {
-                    //pass not saved successfully
-                    Timber.e("response.code:    $responseCode")
-
-                    progressDialog.dismiss()
-                    Toast.makeText(context, getString(R.string.pass_less), Toast.LENGTH_LONG).show()
-                } else if (responseCode == 438) {
-                    //pass not saved successfully
-                    Timber.e("response.code:    $responseCode")
-
-                    progressDialog.dismiss()
-                    Toast.makeText(context, getString(R.string.user_not_found), Toast.LENGTH_LONG).show()
-                } else if (responseCode == 440) {
-                    //pass not saved successfully
-                    progressDialog.dismiss()
-                    Timber.e("response.code:    $responseCode")
-
-                    Toast.makeText(context, getString(R.string.email_does_not_match), Toast.LENGTH_LONG).show()
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss()
                     Timber.e("response.code:    $responseCode")
-
-                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 Timber.e("err:    $t")
                 progressDialog.dismiss()
-                Toast.makeText(context, getString(R.string.failure_happened), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getErrorMessage(NoNetworkException, activity!!.application), Toast.LENGTH_LONG).show()
 
             }
         })

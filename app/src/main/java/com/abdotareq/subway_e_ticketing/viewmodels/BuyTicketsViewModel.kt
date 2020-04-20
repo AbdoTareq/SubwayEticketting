@@ -20,6 +20,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.Ticket
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 
@@ -29,6 +30,8 @@ import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 class BuyTicketsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val ticketRepository = TicketRepository()
+    private val applicationCon = application
+
 
     private val _eventBuyTicket = MutableLiveData<Int>()
     val eventBuyTicket: LiveData<Int>
@@ -58,6 +61,10 @@ class BuyTicketsViewModel(application: Application) : AndroidViewModel(applicati
                 ticket3, ticket4, ticket, ticket4, ticket2, ticket3, ticket4, ticket, ticket4, ticket3, ticket4, ticket, ticket4, ticket2, ticket3, ticket4, ticket, ticket4)
 
         return list
+    }
+
+    fun getErrorMess(code: Int): String {
+        return getErrorMessage(code, this.applicationCon)
     }
 
 }

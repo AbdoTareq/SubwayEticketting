@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentForgetPassBinding
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.util
@@ -63,18 +65,19 @@ class ForgetPassFragment : Fragment() {
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss()
-                    Toast.makeText(context, getString(R.string.else_on_repsonse), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 progressDialog.dismiss()
-                Toast.makeText(context, getString(R.string.check_network), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getErrorMessage(ErrorStatus.Codes.NoNetworkException, activity!!.application), Toast.LENGTH_LONG).show()
                 //                //ToDo: Remove Toast
                 Timber.e("FAILED : ${t.message}")
             }
         })
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
