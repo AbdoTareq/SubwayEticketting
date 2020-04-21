@@ -18,20 +18,24 @@ package com.abdotareq.subway_e_ticketing.ui.fragment.history
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.History
 
 // TODO CHANGE TICKET TO Out_Ticket
 @BindingAdapter("setTicketPrice")
 fun TextView.setTicketPrice(item: History?) {
     item?.let {
-        text = "${it.price} LE / Ticket"
+        text = String.format(
+                context!!.getString(R.string.ticket_price_format, it.price))
     }
 }
 
-@BindingAdapter("setCheckInStation")
-fun TextView.setCheckInStation(item: History?) {
+@BindingAdapter("setCheckInStationName")
+fun TextView.setCheckInStationName(item: History?) {
     item?.let {
-        text = "Check-in: ${it.checkInStation}"
+//        text = "Check-in: ${it.checkInStationName}"
+        text = String.format(
+                context!!.getString(R.string.check_in_format, it.checkInStationName))
     }
 }
 
@@ -42,10 +46,13 @@ fun TextView.setCheckInDate(item: History?) {
     }
 }
 
-@BindingAdapter("setCheckOutStation")
-fun TextView.setCheckOutStation(item: History?) {
+@BindingAdapter("setCheckOutStationName")
+fun TextView.setCheckOutStationName(item: History?) {
     item?.let {
-        text = "Check-out: ${it.checkOutStation}"
+//        text = "Check-out: ${it.checkOutStationName}"
+        text = String.format(
+                context!!.getString(R.string.check_out_format, it.checkOutStationName))
+
     }
 }
 

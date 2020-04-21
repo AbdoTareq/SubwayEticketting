@@ -6,14 +6,14 @@ import com.squareup.moshi.Json
  * Entity bean for ticket_type
  */
 
-data class Ticket(@Json(name = "price") var price: Int = 0,
+data class Ticket(@Json(name = "price") val price: Int = 0,
 
-//                  @Json(name = "stations_num") var stations_num: Int = 0,
+                  @Json(name = "ticketInfo") val ticketInfo: String? = null,
 
-                  @Json(name = "color") var color: String? = null,
+                  @Json(name = "color") val color: String? = null,
 
-                  @Json(name = "color_code") var color_code: String? = null,
+                  @Json(name = "color_code") val color_code: String? = null,
 
-                  @Json(name = "ByteArray") var icon: ByteArray? = null) {
+                  @Json(name = "ByteArray") val icon: ByteArray? = null) {
 
 }

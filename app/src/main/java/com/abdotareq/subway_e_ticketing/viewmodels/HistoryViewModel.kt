@@ -46,10 +46,10 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun getHistory(): LiveData<List<History>> {
-        val History = History("1", 4, Date(), Date(), 4,5)
-        val History2 = History("2", 4, Date(), Date(), 4,5)
-        val History3 = History("3", 4, Date(), Date(), 2,6)
-        val History4 = History("4", 4, Date(), Date(), 3,7)
+        val History = History("1", 4, Date(), Date(), 4, "ma", 4, "ac")
+        val History2 = History("2", 4, Date(), Date(), 4, "maadi", 4, "asacs")
+        val History3 = History("3", 4, Date(), Date(), 2, "asd", 6, "asca")
+        val History4 = History("4", 4, Date(), Date(), 3, "kadnckad", 3, "kadnckad")
         val list = MutableLiveData<List<History>>()
         list.value = listOf<History>(History, History2,
                 History3, History4, History, History4, History2, History3, History4, History, History4, History3,
