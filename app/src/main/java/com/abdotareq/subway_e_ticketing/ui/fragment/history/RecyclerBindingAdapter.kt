@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.History
-import com.abdotareq.subway_e_ticketing.viewmodels.TicketApiStatus
+import com.abdotareq.subway_e_ticketing.viewmodels.HistoryApiStatus
 
 
 /**
@@ -19,23 +19,23 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<History>?) {
 }
 
 /**
- * This binding adapter displays the [TicketApiStatus] of the network request in an image view.  When
+ * This binding adapter displays the [HistoryApiStatus] of the network request in an image view.  When
  * the request is loading, it displays a loading_animation.  If the request has an error, it
  * displays a broken image to reflect the connection error.  When the request is finished, it
  * hides the image view.
  */
 @BindingAdapter("ticketApiStatus")
-fun bindStatus(statusImageView: ImageView, status: TicketApiStatus?) {
+fun bindStatus(statusImageView: ImageView, status: HistoryApiStatus?) {
     when (status) {
-        TicketApiStatus.LOADING -> {
+        HistoryApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
-        TicketApiStatus.ERROR -> {
+        HistoryApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        TicketApiStatus.DONE -> {
+        HistoryApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
     }

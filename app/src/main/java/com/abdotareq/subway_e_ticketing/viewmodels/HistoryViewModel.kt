@@ -20,18 +20,14 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.History
 import com.abdotareq.subway_e_ticketing.model.HistoryTicketInterface
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
-import com.abdotareq.subway_e_ticketing.utility.util
 import timber.log.Timber
-import java.util.*
 import kotlin.collections.ArrayList
 
-enum class TicketApiStatus { LOADING, ERROR, DONE }
+enum class HistoryApiStatus { LOADING, ERROR, DONE }
 
 /**
  * ViewModel for SleepTrackerFragment.
@@ -44,10 +40,10 @@ class HistoryViewModel(private val bearerToken: String, application: Application
     private val ticketObj: HistoryTicketInterface
 
     // The internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<TicketApiStatus>()
+    private val _status = MutableLiveData<HistoryApiStatus>()
 
     // The external immutable LiveData for the request status
-    val status: LiveData<TicketApiStatus>
+    val status: LiveData<HistoryApiStatus>
         get() = _status
 
     private val _eventBuyHistory = MutableLiveData<Int>()
@@ -64,15 +60,16 @@ class HistoryViewModel(private val bearerToken: String, application: Application
         get() = _historyTickets
 
     init {
-        _status.value = TicketApiStatus.LOADING
+        _status.value = HistoryApiStatus.LOADING
         ticketObj = object : HistoryTicketInterface {
             override fun onSuccess(historyTickets: List<History>) {
-                _status.value = TicketApiStatus.DONE
                 _historyTickets.value = historyTickets
+                _status.value = HistoryApiStatus.DONE
+
             }
 
             override fun onFail(responseCode: Int) {
-                _status.value = TicketApiStatus.ERROR
+                _status.value = HistoryApiStatus.ERROR
                 _historyTickets.value = ArrayList()
                 Timber.e(getErrorMess(responseCode))
             }
