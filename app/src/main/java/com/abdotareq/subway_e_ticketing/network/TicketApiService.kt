@@ -1,9 +1,6 @@
 package com.abdotareq.subway_e_ticketing.network
 
-import com.abdotareq.subway_e_ticketing.model.History
-import com.abdotareq.subway_e_ticketing.model.TicketType
-import com.abdotareq.subway_e_ticketing.model.Token
-import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -30,11 +27,14 @@ interface TicketApiService {
     //    So the magic now is that you can create suspend methods in your Retrofit interface and directly return your data object.
 
     // get history tickets by token as it contains user id
-    @GET("/tickets/history")
+    @GET("tickets/history")
     suspend fun getHistoryTickets(@Header("Authorization") bearerToken: String): List<History>
 
-    @GET("/tickets/types")
+    @GET("tickets/types")
     suspend fun getTicketsType(@Header("Authorization") bearerToken: String): List<TicketType>
+
+    @GET("tickets/current")
+    suspend fun getInTickets(@Header("Authorization") bearerToken: String): List<InTicket>
 
 
 }

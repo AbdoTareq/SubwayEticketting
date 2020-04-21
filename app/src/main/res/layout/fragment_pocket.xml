@@ -34,11 +34,11 @@
             android:id="@+id/tickets_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/large_margin"
             android:layout_marginEnd="8dp"
             android:text="@string/in_use_tickets"
+            android:textAlignment="center"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,39 +49,38 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/in_use_tickets_list"
             android:layout_width="0dp"
-            tools:listitem="@layout/pocket_in_use_item"
-            tools:itemCount="3"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/very_small_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/very_small_margin"
-            app:historyListData="@{viewModel.historyTickets}"
+            app:checkInListData="@{viewModel.checkInTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tickets_header" />
+            app:layout_constraintTop_toBottomOf="@+id/tickets_header"
+            tools:itemCount="3"
+            tools:listitem="@layout/pocket_in_use_item" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/available_tickets_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/pocket_available_item"
-            tools:itemCount="3"
             android:layout_marginStart="@dimen/very_small_margin"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/very_small_margin"
-            app:historyListData="@{viewModel.historyTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tickets_header2" />
+            app:layout_constraintTop_toBottomOf="@+id/tickets_header2"
+            tools:itemCount="3"
+            tools:listitem="@layout/pocket_available_item" />
 
         <!-- bind connection status image with ticketApiStatus  -->
         <ImageView
             android:id="@+id/status_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:historyApiStatus="@{viewModel.status}"
+            app:PocketApiStatus="@{viewModel.status}"
             app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintEnd_toStartOf="@+id/guideline14"
             app:layout_constraintStart_toStartOf="@+id/guideline4"

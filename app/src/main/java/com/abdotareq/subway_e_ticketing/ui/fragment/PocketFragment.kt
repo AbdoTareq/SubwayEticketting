@@ -5,7 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.databinding.FragmentPocketBinding
+import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
+import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUsePocketAdapter
+import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUseTicketListener
+import com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketAdapter
+import com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketListener
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.viewmodels.PocketViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.TicketsTypeViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.PocketViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
 
 
 /**
@@ -14,11 +26,42 @@ import com.abdotareq.subway_e_ticketing.R
  */
 class PocketFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pocket, container, false)
-    }
+    private lateinit var viewModelFactory: PocketViewModelFactory
+    private lateinit var viewModel: PocketViewModel
 
+    private var _binding: FragmentPocketBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentPocketBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        val application = requireNotNull(activity).application
+
+        val token = SharedPreferenceUtil.getSharedPrefsTokenId(context)
+
+        viewModelFactory = PocketViewModelFactory(token, application)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(PocketViewModel::class.java)
+
+        binding.viewModel = viewModel
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.lifecycleOwner = this
+
+        val adapter = InUsePocketAdapter(InUseTicketListener { price ->
+            viewModel.onChooseCheckInTicket(price)
+        })
+        // handle list change
+        binding.inUseTicketsList.adapter = adapter
+
+
+
+
+        return view
+    }
 
 }

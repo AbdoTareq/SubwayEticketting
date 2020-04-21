@@ -26,11 +26,11 @@ import com.abdotareq.subway_e_ticketing.viewmodels.TicketsTypeViewModel
  *
  * Provides the SleepDatabaseDao and context to the ViewModel.
  */
-class TicketViewModelFactory(private val bearerToken: String, private val application: Application) : ViewModelProvider.Factory {
+class TicketViewModelFactory(private val token: String, private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TicketsTypeViewModel::class.java)) {
-            return TicketsTypeViewModel(bearerToken, application) as T
+            return TicketsTypeViewModel(token, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

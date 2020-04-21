@@ -1,6 +1,7 @@
 package com.abdotareq.subway_e_ticketing.repository
 
 import com.abdotareq.subway_e_ticketing.model.HistoryTicketInterface
+import com.abdotareq.subway_e_ticketing.model.TicketCheckInInterface
 import com.abdotareq.subway_e_ticketing.model.TicketTypeInterface
 import com.abdotareq.subway_e_ticketing.network.TicketApiObj
 import kotlinx.coroutines.CoroutineScope
@@ -58,6 +59,27 @@ class TicketRepository {
             } catch (e: Exception) {
                 Timber.e(e)
                 ticketTypeInterface.onFail(-1)
+            }
+        }
+    }
+
+    // get checked-in tickets
+    fun getInTickets(token: String, inTicketObj: TicketCheckInInterface) {
+        //start the call
+        val bearerToken = "Bearer $token"
+        coroutineScope.launch {
+            try {
+                val historyTickets = TicketApiObj.retrofitService.getInTickets(bearerToken)
+                inTicketObj.onSuccess(historyTickets)
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                inTicketObj.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                inTicketObj.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
+                inTicketObj.onFail(-1)
             }
         }
     }

@@ -21,8 +21,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.History
-import com.abdotareq.subway_e_ticketing.model.HistoryTicketInterface
+import com.abdotareq.subway_e_ticketing.model.InTicket
+import com.abdotareq.subway_e_ticketing.model.TicketCheckInInterface
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 import timber.log.Timber
 import kotlin.collections.ArrayList
@@ -32,44 +32,50 @@ enum class PocketApiStatus { LOADING, ERROR, DONE }
 /**
  * ViewModel for SleepTrackerFragment.
  */
+// todo implement if there is no data user doesn't buy tickets or use it (history screen & Pocket)
 class PocketViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
+
 
     private val ticketRepository = TicketRepository()
     private val applicationCon = application
 
-    private val historyObj: HistoryTicketInterface
+    private val InTicketObj: TicketCheckInInterface
 
     // The internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<HistoryApiStatus>()
+    private val _status = MutableLiveData<PocketApiStatus>()
 
     // The external immutable LiveData for the request status
-    val status: LiveData<HistoryApiStatus>
+    val status: LiveData<PocketApiStatus>
         get() = _status
 
-    private val _eventBuyHistory = MutableLiveData<Int>()
-    val eventBuyHistory: LiveData<Int>
-        get() = _eventBuyHistory
+//    private val _eventBuyHistory = MutableLiveData<Int>()
+//    val eventBuyHistory: LiveData<Int>
+//        get() = _eventBuyHistory
+
+    private val _eventChooseCheckInTicket = MutableLiveData<Int>()
+    val eventChooseCheckInTicket: LiveData<Int>
+        get() = _eventChooseCheckInTicket
 
 
-    // Internally, we use a MutableLiveData, because we will be updating the List of History
+    // Internally, we use a MutableLiveData, because we will be updating the List of InTicket
     // with new values
-    private val _historyTickets = MutableLiveData<List<History>>()
+    private val _checkInTickets = MutableLiveData<List<InTicket>>()
 
     // The external LiveData interface to the property is immutable, so only this class can modify
-    val historyTickets: LiveData<List<History>>
-        get() = _historyTickets
+    val checkInTickets: LiveData<List<InTicket>>
+        get() = _checkInTickets
 
     init {
-        _status.value = HistoryApiStatus.LOADING
-        historyObj = object : HistoryTicketInterface {
-            override fun onSuccess(historyTickets: List<History>) {
-                _historyTickets.value = historyTickets
-                _status.value = HistoryApiStatus.DONE
+        _status.value = PocketApiStatus.LOADING
+        InTicketObj = object : TicketCheckInInterface {
+            override fun onSuccess(checkInTickets: List<InTicket>) {
+                _checkInTickets.value = checkInTickets
+                _status.value = PocketApiStatus.DONE
             }
 
             override fun onFail(responseCode: Int) {
-                _status.value = HistoryApiStatus.ERROR
-                _historyTickets.value = ArrayList()
+                _status.value = PocketApiStatus.ERROR
+                _checkInTickets.value = ArrayList()
                 Timber.e(getErrorMess(responseCode))
             }
         }
@@ -78,7 +84,7 @@ class PocketViewModel(private val bearerToken: String, application: Application)
 
 
     private fun getHistoryTickets() {
-        ticketRepository.getHistoryTickets(bearerToken, historyObj)
+        ticketRepository.getInTickets(bearerToken, InTicketObj)
     }
 
     private fun getErrorMess(code: Int): String {
@@ -89,4 +95,13 @@ class PocketViewModel(private val bearerToken: String, application: Application)
         super.onCleared()
         ticketRepository.cancelJob()
     }
+
+    fun onChooseCheckInTicket(price: Int) {
+        _eventChooseCheckInTicket.value = price
+    }
+
+    fun onChooseCheckInComplete() {
+        _eventChooseCheckInTicket.value = 0
+    }
+
 }

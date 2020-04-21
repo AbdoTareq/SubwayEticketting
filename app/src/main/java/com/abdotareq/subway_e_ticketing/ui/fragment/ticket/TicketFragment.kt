@@ -49,8 +49,8 @@ class TicketFragment : Fragment() {
         val adapter = TicketAdapter(TicketListener { price ->
             viewModel.onChooseTicket(price)
         })
-        binding.ticketList.adapter = adapter
         // handle list change
+        binding.ticketList.adapter = adapter
 
         viewModel.eventChooseTicket.observe(viewLifecycleOwner, Observer { ticket_price ->
             if (ticket_price > 0) {
