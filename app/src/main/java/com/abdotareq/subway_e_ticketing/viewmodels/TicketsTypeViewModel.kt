@@ -20,67 +20,74 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.History
-import com.abdotareq.subway_e_ticketing.model.HistoryTicketInterface
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 import timber.log.Timber
-import kotlin.collections.ArrayList
 
-enum class HistoryApiStatus { LOADING, ERROR, DONE }
+enum class TicketTypeApiStatus { LOADING, ERROR, DONE }
 
 /**
  * ViewModel for SleepTrackerFragment.
  */
-class HistoryViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
+class TicketsTypeViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
 
     private val ticketRepository = TicketRepository()
     private val applicationCon = application
 
-    private val historyObj: HistoryTicketInterface
+    private val ticketObj: TicketTypeInterface
 
     // The internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<HistoryApiStatus>()
+    private val _status = MutableLiveData<TicketTypeApiStatus>()
 
     // The external immutable LiveData for the request status
-    val status: LiveData<HistoryApiStatus>
+    val statusType: LiveData<TicketTypeApiStatus>
         get() = _status
-
-    private val _eventBuyHistory = MutableLiveData<Int>()
-    val eventBuyHistory: LiveData<Int>
-        get() = _eventBuyHistory
-
 
     // Internally, we use a MutableLiveData, because we will be updating the List of History
     // with new values
-    private val _historyTickets = MutableLiveData<List<History>>()
+    private val _ticketsType = MutableLiveData<List<TicketType>>()
+
     // The external LiveData interface to the property is immutable, so only this class can modify
-    val historyTickets: LiveData<List<History>>
-        get() = _historyTickets
+    val ticketsType: LiveData<List<TicketType>>
+        get() = _ticketsType
+
+    private val _eventChooseTicket = MutableLiveData<Int>()
+    val eventChooseTicket: LiveData<Int>
+        get() = _eventChooseTicket
 
     init {
-        _status.value = HistoryApiStatus.LOADING
-        historyObj = object : HistoryTicketInterface {
-            override fun onSuccess(historyTickets: List<History>) {
-                _historyTickets.value = historyTickets
-                _status.value = HistoryApiStatus.DONE
+        _status.value = TicketTypeApiStatus.LOADING
+        ticketObj = object : TicketTypeInterface {
+            override fun onSuccess(ticketsType: List<TicketType>) {
+                _status.value = TicketTypeApiStatus.DONE
+                _ticketsType.value = ticketsType
             }
 
             override fun onFail(responseCode: Int) {
-                _status.value = HistoryApiStatus.ERROR
-                _historyTickets.value = ArrayList()
+                _status.value = TicketTypeApiStatus.ERROR
+                _ticketsType.value = ArrayList()
                 Timber.e(getErrorMess(responseCode))
             }
+
         }
-        getHistoryTickets()
+
+        getTickets()
     }
 
-
-    private fun getHistoryTickets() {
-        ticketRepository.getHistoryTickets(bearerToken, historyObj)
+    fun onChooseTicketComplete() {
+        _eventChooseTicket.value = 0
     }
 
-    private fun getErrorMess(code: Int): String {
+    fun onChooseTicket(price: Int) {
+        _eventChooseTicket.value = price
+    }
+
+    private fun getTickets() {
+        ticketRepository.getTicketsType(bearerToken, ticketObj)
+    }
+
+    fun getErrorMess(code: Int): String {
         return getErrorMessage(code, this.applicationCon)
     }
 
@@ -88,4 +95,5 @@ class HistoryViewModel(private val bearerToken: String, application: Application
         super.onCleared()
         ticketRepository.cancelJob()
     }
+
 }

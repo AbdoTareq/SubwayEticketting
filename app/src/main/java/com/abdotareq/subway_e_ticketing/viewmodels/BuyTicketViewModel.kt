@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.abdotareq.subway_e_ticketing.model.Ticket
+import com.abdotareq.subway_e_ticketing.model.TicketType
 
-class BuyTicketViewModel(private val ticket: Ticket, application: Application) : AndroidViewModel(application) {
+class BuyTicketViewModel(private val ticketType: TicketType, application: Application) : AndroidViewModel(application) {
 
     private val applicationCon = application
 
@@ -41,7 +41,7 @@ class BuyTicketViewModel(private val ticket: Ticket, application: Application) :
     }
 
     fun setTotalCost(ticNum: Int): Int {
-        return ticNum * ticket.price
+        return ticNum * ticketType.price
     }
 
 }

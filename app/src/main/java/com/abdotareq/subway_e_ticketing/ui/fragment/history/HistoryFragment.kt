@@ -46,12 +46,6 @@ class HistoryFragment : Fragment() {
         val adapter = HistoryAdapter()
         binding.historyList.adapter = adapter
         // handle list change
-        viewModel.historyTickets.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-            }
-        })
-
 
         return view
     }

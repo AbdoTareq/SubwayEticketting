@@ -1,7 +1,6 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
 
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.BuyTicketDialogFragmentBinding
-import com.abdotareq.subway_e_ticketing.model.Ticket
+import com.abdotareq.subway_e_ticketing.model.TicketType
 import com.abdotareq.subway_e_ticketing.viewmodels.BuyTicketViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
 
 
-class BuyTicketDialogFragment(val ticket: Ticket) : AppCompatDialogFragment() {
+class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragment() {
 
     private lateinit var viewModelFactory: BuyTicketViewModelFactory
     private lateinit var viewModel: BuyTicketViewModel
@@ -31,7 +30,7 @@ class BuyTicketDialogFragment(val ticket: Ticket) : AppCompatDialogFragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = BuyTicketViewModelFactory(ticket, application)
+        viewModelFactory = BuyTicketViewModelFactory(ticketType, application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(BuyTicketViewModel::class.java)
 
@@ -43,7 +42,7 @@ class BuyTicketDialogFragment(val ticket: Ticket) : AppCompatDialogFragment() {
         // show ticket number
         viewModel.ticketNum.observe(viewLifecycleOwner, Observer {
             if (it > 0) {
-                val cost = viewModel.ticketNum.value!! * ticket.price
+                val cost = viewModel.ticketNum.value!! * ticketType.price
                 Toast.makeText(context, "${viewModel.ticketNum.value}", Toast.LENGTH_SHORT).show()
                 binding.totalCost.text = String.format(
                         context!!.getString(R.string.ticket_cost_format, cost))

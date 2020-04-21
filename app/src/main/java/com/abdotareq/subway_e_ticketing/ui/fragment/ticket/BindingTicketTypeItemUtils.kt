@@ -17,22 +17,22 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
 
 import android.widget.TextView
-import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.model.Ticket
+import com.abdotareq.subway_e_ticketing.model.TicketType
 
 
-@BindingAdapter("setTicketPrice")
-fun TextView.setTicketPrice(item: Ticket?) {
+@BindingAdapter("setTicketTypePrice")
+fun TextView.setTicketTypePrice(item: TicketType?) {
     item?.let {
-        text = "${it.price} LE / Ticket"
+        text = String.format(
+                context!!.getString(R.string.ticket_price_format, it.price))
     }
 }
 
 @BindingAdapter("setTicketStations")
-fun TextView.setTicketStations(item: Ticket?) {
+fun TextView.setTicketStations(item: TicketType?) {
     item?.let {
-        text = "${it.color} Stations"
+        text = "${it.ticketInfo}"
     }
 }

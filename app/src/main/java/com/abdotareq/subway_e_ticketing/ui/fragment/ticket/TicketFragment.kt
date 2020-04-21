@@ -8,20 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
-import com.abdotareq.subway_e_ticketing.model.Ticket
-import com.abdotareq.subway_e_ticketing.viewmodels.TicketsViewModel
+import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.viewmodels.TicketsTypeViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
+import timber.log.Timber
 
 
 /**
  * A simple [Fragment] subclass.
- * Use the [TicketFragment.newInstance] factory method to
- * create an instance of this fragment.
  */
 class TicketFragment : Fragment() {
 
     private lateinit var viewModelFactory: TicketViewModelFactory
-    private lateinit var viewModel: TicketsViewModel
+    private lateinit var viewModel: TicketsTypeViewModel
 
     private var _binding: FragmentTicketBinding? = null
 
@@ -35,9 +35,11 @@ class TicketFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = TicketViewModelFactory(application)
+        val token = SharedPreferenceUtil.getSharedPrefsTokenId(context)
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(TicketsViewModel::class.java)
+        viewModelFactory = TicketViewModelFactory(token, application)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(TicketsTypeViewModel::class.java)
 
         binding.viewModel = viewModel
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
@@ -47,25 +49,19 @@ class TicketFragment : Fragment() {
         val adapter = TicketAdapter(TicketListener { price ->
             viewModel.onChooseTicket(price)
         })
-
         binding.ticketList.adapter = adapter
         // handle list change
-        viewModel.tickets.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-            }
-        })
 
         viewModel.eventChooseTicket.observe(viewLifecycleOwner, Observer { ticket_price ->
             if (ticket_price > 0) {
 
-                var ticketTemp = Ticket()
-                for (ticket in viewModel.tickets.value!!) {
-                    if (ticket_price == ticket.price)
-                        ticketTemp = ticket
-                }
-                openChangePassDialog(ticketTemp)
-                viewModel.onChooseTicketComplete()
+//                var ticketTemp = TicketType()
+//                for (ticket in viewModel.tickets.value!!) {
+//                    if (ticket_price == ticket.price)
+//                        ticketTemp = ticket
+//                }
+//                openChangePassDialog(ticketTemp)
+//                viewModel.onChooseTicketComplete()
             }
         })
 
@@ -75,8 +71,8 @@ class TicketFragment : Fragment() {
     }
 
     // this for change pass dialog
-    private fun openChangePassDialog(ticketTemp: Ticket) {
-        val dialog = BuyTicketDialogFragment(ticketTemp)
+    private fun openChangePassDialog(ticketTypeTemp: TicketType) {
+        val dialog = BuyTicketDialogFragment(ticketTypeTemp)
         requireActivity().supportFragmentManager
                 .let { dialog.show(it, "Buy Dialog") }
     }

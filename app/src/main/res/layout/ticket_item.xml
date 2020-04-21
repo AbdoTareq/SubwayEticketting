@@ -7,7 +7,7 @@
 
         <variable
             name="ticket"
-            type="com.abdotareq.subway_e_ticketing.model.Ticket" />
+            type="com.abdotareq.subway_e_ticketing.model.TicketType" />
 
         <variable
             name="clickListener"
@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setTicketPrice="@{ticket}" />
+            app:setTicketTypePrice="@{ticket}" />
 
         <ImageView
             android:id="@+id/imageView2"

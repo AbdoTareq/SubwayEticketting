@@ -22,9 +22,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.databinding.TicketItemBinding
-import com.abdotareq.subway_e_ticketing.model.Ticket
+import com.abdotareq.subway_e_ticketing.model.TicketType
 
-class TicketAdapter(val clickListener: TicketListener) : ListAdapter<Ticket,
+class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
         TicketAdapter.ViewHolder>(TicketDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -40,7 +40,7 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<Ticket,
     class ViewHolder private constructor(val binding: TicketItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(clickListener: TicketListener, item: Ticket) {
+        fun bind(clickListener: TicketListener, item: TicketType) {
             binding.ticket = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -63,16 +63,16 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<Ticket,
  * Used by ListAdapter to calculate the minumum number of changes between and old list and a new
  * list that's been passed to `submitList`.
  */
-class TicketDiffCallback : DiffUtil.ItemCallback<Ticket>() {
-    override fun areItemsTheSame(oldItem: Ticket, newItem: Ticket): Boolean {
+class TicketDiffCallback : DiffUtil.ItemCallback<TicketType>() {
+    override fun areItemsTheSame(oldItem: TicketType, newItem: TicketType): Boolean {
         return oldItem.price == newItem.price
     }
 
-    override fun areContentsTheSame(oldItem: Ticket, newItem: Ticket): Boolean {
+    override fun areContentsTheSame(oldItem: TicketType, newItem: TicketType): Boolean {
         return oldItem == newItem
     }
 }
 
 class TicketListener(val clickListener: (price: Int) -> Unit) {
-    fun onClick(ticket: Ticket) = clickListener(ticket.price)
+    fun onClick(ticketType: TicketType) = clickListener(ticketType.price)
 }

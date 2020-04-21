@@ -1,6 +1,7 @@
 package com.abdotareq.subway_e_ticketing.repository
 
 import com.abdotareq.subway_e_ticketing.model.HistoryTicketInterface
+import com.abdotareq.subway_e_ticketing.model.TicketTypeInterface
 import com.abdotareq.subway_e_ticketing.network.TicketApiObj
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +20,6 @@ class TicketRepository {
     private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
 
     //This is the method that calls API using Retrofit
-
     fun getHistoryTickets(token: String, historyTicketInterface: HistoryTicketInterface) {
         //start the call
         val bearerToken = "Bearer $token"
@@ -37,6 +37,27 @@ class TicketRepository {
             } catch (e: Exception) {
                 Timber.e(e)
                 historyTicketInterface.onFail(-1)
+            }
+        }
+    }
+
+    //This is the method that calls API using Retrofit
+    fun getTicketsType(token: String, ticketTypeInterface: TicketTypeInterface) {
+        //start the call
+        val bearerToken = "Bearer $token"
+        coroutineScope.launch {
+            try {
+                val historyTickets = TicketApiObj.retrofitService.getTicketsType(bearerToken)
+                ticketTypeInterface.onSuccess(historyTickets)
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                ticketTypeInterface.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                ticketTypeInterface.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
+                ticketTypeInterface.onFail(-1)
             }
         }
     }
