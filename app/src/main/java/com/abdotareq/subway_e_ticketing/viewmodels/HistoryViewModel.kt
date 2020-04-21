@@ -26,6 +26,8 @@ import com.abdotareq.subway_e_ticketing.model.Ticket
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 import java.util.*
 
+enum class TicketApiStatus { LOADING, ERROR, DONE }
+
 /**
  * ViewModel for SleepTrackerFragment.
  */
@@ -34,6 +36,11 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     private val ticketRepository = TicketRepository()
     private val applicationCon = application
 
+    // The internal MutableLiveData that stores the status of the most recent request
+    private val _status = MutableLiveData<TicketApiStatus>()
+    // The external immutable LiveData for the request status
+    val status: LiveData<TicketApiStatus>
+        get() = _status
 
     private val _eventBuyHistory = MutableLiveData<Int>()
     val eventBuyHistory: LiveData<Int>
