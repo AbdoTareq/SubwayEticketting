@@ -28,15 +28,17 @@
         <TextView
             android:id="@+id/stations"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_80sdp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:clickable="false"
             android:focusable="false"
-            android:text="@string/_0_9_stations"
             android:gravity="center"
+            android:text="@string/_0_9_stations"
             android:textAppearance="@style/CustomHeadline5"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="@+id/ticket_price"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintStart_toStartOf="@+id/guideline11"
             app:layout_constraintTop_toTopOf="@+id/ticket_price"
             app:layout_constraintVertical_bias="0.505"
@@ -61,7 +63,7 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -80,7 +82,7 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent=".5"
+            app:layout_constraintGuide_percent="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

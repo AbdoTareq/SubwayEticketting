@@ -55,13 +55,13 @@ class TicketFragment : Fragment() {
         viewModel.eventChooseTicket.observe(viewLifecycleOwner, Observer { ticket_price ->
             if (ticket_price > 0) {
 
-//                var ticketTemp = TicketType()
-//                for (ticket in viewModel.tickets.value!!) {
-//                    if (ticket_price == ticket.price)
-//                        ticketTemp = ticket
-//                }
-//                openChangePassDialog(ticketTemp)
-//                viewModel.onChooseTicketComplete()
+                var ticketTemp = TicketType()
+                for (ticket in viewModel.ticketsType.value!!) {
+                    if (ticket_price == ticket.price)
+                        ticketTemp = ticket
+                }
+                openChangePassDialog(ticketTemp)
+                viewModel.onChooseTicketComplete()
             }
         })
 
@@ -78,6 +78,8 @@ class TicketFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        // this to save user data before destroy fragment or replace ir
+        // (when select another fragment from bottom navigation view)
         super.onDestroyView()
         _binding = null
     }

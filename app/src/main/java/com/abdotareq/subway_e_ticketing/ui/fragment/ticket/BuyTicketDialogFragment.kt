@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.BuyTicketDialogFragmentBinding
 import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.viewmodels.BuyTicketViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
 
@@ -50,6 +51,13 @@ class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragm
 
         })
 
+        // to convert stringImage to bitMap
+        if (ticketType.icon != null) {
+            val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
+                binding.ticketIcon.setImageBitmap(it)
+            })
+            bitMapCon.execute(ticketType.icon)
+        }
 
         return view
     }
