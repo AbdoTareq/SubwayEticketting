@@ -9,6 +9,8 @@ class ErrorStatus {
 
         private const val SocketTimeoutServerOffline = -2
 
+        private const val Forbidden = 403
+
         private const val PasswordLessThan_8 = 434
 
         private const val EmailAlreadyExist = 435
@@ -42,6 +44,8 @@ class ErrorStatus {
         fun getErrorMessage(errorCode: Int, applicationCon: Application): String {
             return when (errorCode) {
                 NoNetworkException -> applicationCon.getString(R.string.check_network)
+                Forbidden -> applicationCon.getString(R.string.forbidden)
+
                 SocketTimeoutServerOffline -> applicationCon.getString(R.string.server_offline_try)
                 PasswordLessThan_8 -> applicationCon.getString(R.string.pass_less)
                 EmailAlreadyExist -> applicationCon.getString(R.string.mail_exist)

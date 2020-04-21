@@ -78,7 +78,6 @@ class SplashScreenActivity : AwesomeSplash() {
                     //get user successfully
                     user = response.body()!!
 
-                    Timber.e("${user}")
                     configSplash.titleSplash = "${getString(R.string.welcome)} ${user?.first_name} ${user?.last_name} "
                     configSplash.animTitleDuration = 2000
                     configSplash.titleTextSize = 30f //float value

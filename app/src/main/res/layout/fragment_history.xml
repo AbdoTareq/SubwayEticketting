@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tickets_header"
-            app:listData="@{viewModel.historys}"
+            app:listData="@{viewModel.historyTickets}"
             tools:listitem="@layout/history_item" />
 
         <!-- bind connection status image with ticketApiStatus  -->

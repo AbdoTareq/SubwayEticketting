@@ -26,11 +26,11 @@ import com.abdotareq.subway_e_ticketing.viewmodels.HistoryViewModel
  *
  * Provides the SleepDatabaseDao and context to the ViewModel.
  */
-class HistoryViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
+class HistoryViewModelFactory(private val bearerToken: String, private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HistoryViewModel::class.java)) {
-            return HistoryViewModel(application) as T
+            return HistoryViewModel(bearerToken, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -20,24 +20,32 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.History
-import com.abdotareq.subway_e_ticketing.model.Ticket
+import com.abdotareq.subway_e_ticketing.model.HistoryTicketInterface
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
+import com.abdotareq.subway_e_ticketing.utility.util
+import timber.log.Timber
 import java.util.*
+import kotlin.collections.ArrayList
 
 enum class TicketApiStatus { LOADING, ERROR, DONE }
 
 /**
  * ViewModel for SleepTrackerFragment.
  */
-class HistoryViewModel(application: Application) : AndroidViewModel(application) {
+class HistoryViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
 
     private val ticketRepository = TicketRepository()
     private val applicationCon = application
 
+    private val ticketObj: HistoryTicketInterface
+
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<TicketApiStatus>()
+
     // The external immutable LiveData for the request status
     val status: LiveData<TicketApiStatus>
         get() = _status
@@ -46,27 +54,44 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
     val eventBuyHistory: LiveData<Int>
         get() = _eventBuyHistory
 
-    var Historys = MutableLiveData<List<History>>()
+
+    // Internally, we use a MutableLiveData, because we will be updating the List of History
+    // with new values
+    private val _historyTickets = MutableLiveData<List<History>>()
+
+    // The external LiveData interface to the property is immutable, so only this class can modify
+    val historyTickets: LiveData<List<History>>
+        get() = _historyTickets
 
     init {
-        Historys.value = getHistory().value
+        _status.value = TicketApiStatus.LOADING
+        ticketObj = object : HistoryTicketInterface {
+            override fun onSuccess(historyTickets: List<History>) {
+                _status.value = TicketApiStatus.DONE
+                _historyTickets.value = historyTickets
+            }
+
+            override fun onFail(responseCode: Int) {
+                _status.value = TicketApiStatus.ERROR
+                _historyTickets.value = ArrayList()
+                Timber.e(getErrorMess(responseCode))
+            }
+        }
+        getHistoryTickets()
     }
 
-    fun getHistory(): LiveData<List<History>> {
-        val History = History("1", 4, Date(), Date(), 4, "ma", 4, "ac")
-        val History2 = History("2", 4, Date(), Date(), 4, "maadi", 4, "asacs")
-        val History3 = History("3", 4, Date(), Date(), 2, "asd", 6, "asca")
-        val History4 = History("4", 4, Date(), Date(), 3, "kadnckad", 3, "kadnckad")
-        val list = MutableLiveData<List<History>>()
-        list.value = listOf<History>(History, History2,
-                History3, History4, History, History4, History2, History3, History4, History, History4, History3,
-                History4, History, History4, History2, History3, History4, History, History4)
 
-        return list
+    fun getHistoryTickets() {
+        ticketRepository.getHistoryTickets(bearerToken, ticketObj)
     }
 
-    fun getErrorMess(code: Int): String {
+
+    private fun getErrorMess(code: Int): String {
         return getErrorMessage(code, this.applicationCon)
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        ticketRepository.cancelJob()
+    }
 }
