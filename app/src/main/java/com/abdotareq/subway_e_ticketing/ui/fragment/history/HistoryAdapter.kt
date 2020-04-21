@@ -62,7 +62,7 @@ class HistoryAdapter : ListAdapter<History,
  * Used by ListAdapter to calculate the minumum number of changes between and old list and a new
  * list that's been passed to `submitList`.
  */
-class HistoryDiffCallback : DiffUtil.ItemCallback<History>() {
+private class HistoryDiffCallback : DiffUtil.ItemCallback<History>() {
     override fun areItemsTheSame(oldItem: History, newItem: History): Boolean {
         return oldItem.id == newItem.id
     }

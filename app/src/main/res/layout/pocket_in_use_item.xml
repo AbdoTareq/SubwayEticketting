@@ -9,9 +9,9 @@
             name="inTicket"
             type="com.abdotareq.subway_e_ticketing.model.InTicket" />
 
-        <!--        <variable-->
-        <!--            name="clickListener"-->
-        <!--            type="com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketListener" />-->
+        <variable
+            name="clickListener"
+            type="com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUseTicketListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +22,7 @@
         android:background="@drawable/shape_sign_up"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="@{()-> clickListener.onClick(inTicket)}"
         android:orientation="vertical">
 
         <TextView

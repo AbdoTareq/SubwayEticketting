@@ -14,34 +14,35 @@
  * limitations under the License.
  */
 
-package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
+package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.abdotareq.subway_e_ticketing.databinding.TicketItemBinding
+import com.abdotareq.subway_e_ticketing.databinding.PocketInUseItemBinding
+import com.abdotareq.subway_e_ticketing.model.InTicket
 import com.abdotareq.subway_e_ticketing.model.TicketType
 
-class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
-        TicketAdapter.ViewHolder>(TicketDiffCallback()) {
+class InUsePocketAdapter(val clickListener: InUseTicketListener) : ListAdapter<InTicket,
+        InUsePocketAdapter.ViewHolder>(InUseTicketDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
 
-        holder.bind(clickListener,item)
+        holder.bind(clickListener, item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: TicketItemBinding)
+    class ViewHolder private constructor(val binding: PocketInUseItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(clickListener: TicketListener, item: TicketType) {
-            binding.ticket = item
+        fun bind(clickListener: InUseTicketListener, item: InTicket) {
+            binding.inTicket = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
@@ -49,7 +50,7 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = TicketItemBinding.inflate(layoutInflater, parent, false)
+                val binding = PocketInUseItemBinding.inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
             }
@@ -63,16 +64,16 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
  * Used by ListAdapter to calculate the minumum number of changes between and old list and a new
  * list that's been passed to `submitList`.
  */
-private class TicketDiffCallback : DiffUtil.ItemCallback<TicketType>() {
-    override fun areItemsTheSame(oldItem: TicketType, newItem: TicketType): Boolean {
+private class InUseTicketDiffCallback : DiffUtil.ItemCallback<InTicket>() {
+    override fun areItemsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
         return oldItem.price == newItem.price
     }
 
-    override fun areContentsTheSame(oldItem: TicketType, newItem: TicketType): Boolean {
+    override fun areContentsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
         return oldItem == newItem
     }
 }
 
-class TicketListener(val clickListener: (price: Int) -> Unit) {
-    fun onClick(ticketType: TicketType) = clickListener(ticketType.price)
+class InUseTicketListener(val clickListener: (price: Int) -> Unit) {
+    fun onClick(inTicket: InTicket) = clickListener(inTicket.price)
 }
