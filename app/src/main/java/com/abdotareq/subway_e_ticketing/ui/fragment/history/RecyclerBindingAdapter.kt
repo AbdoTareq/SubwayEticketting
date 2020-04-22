@@ -35,6 +35,10 @@ fun bindStatus(statusImageView: ImageView, status: HistoryApiStatus?) {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
+        HistoryApiStatus.EMPTY -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.empty_box)
+        }
         HistoryApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
