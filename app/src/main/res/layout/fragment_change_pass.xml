@@ -10,18 +10,18 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pass_change_pass"
-        style="@style/EditTStyle"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:importantForAutofill="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:passwordToggleTint="@color/primaryTextColor"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.48000002"
         app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/primaryTextColor"
         tools:targetApi="lollipop">
 
         <EditText
@@ -31,26 +31,28 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_24sdp"
             android:layout_marginRight="@dimen/_24sdp"
+            android:layout_marginBottom="@dimen/small_margin"
             android:drawableStart="@drawable/password_icon"
             android:drawablePadding="10dp"
             android:hint="@string/new_pass"
             android:inputType="textPassword"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textCursorDrawable="@color/primaryTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
-        style="@style/EditTStyle"
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:importantForAutofill="no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:passwordToggleTint="@color/primaryTextColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pass_change_pass"
         app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/primaryTextColor"
         tools:targetApi="lollipop">
 
         <EditText
@@ -64,7 +66,8 @@
             android:drawablePadding="10dp"
             android:hint="@string/confirm_new_pass"
             android:inputType="textPassword"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textCursorDrawable="@color/primaryTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

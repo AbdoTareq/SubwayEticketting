@@ -72,17 +72,15 @@
                 android:hint="@string/mail">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
                     style="@style/EditTStyle"
-
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/email_icon"
                     android:drawablePadding="@dimen/_8sdp"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_10sdp"
                     android:text="@={viewmodel.mail}"
-                     />
-
+                    android:textCursorDrawable="@color/primaryTextColor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

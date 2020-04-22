@@ -10,10 +10,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentChangePassBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.User
@@ -104,8 +104,6 @@ class ChangePassFragment : Fragment() {
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
-        Timber.e("err:    $bearerToken")
-
         //start the call
         UserApiObj.retrofitService.changePass(user, bearerToken)?.enqueue(object : retrofit2.Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
@@ -113,13 +111,8 @@ class ChangePassFragment : Fragment() {
                 if (responseCode in 200..299 && response.body() != null) {
                     //pass changed successfully
                     progressDialog.dismiss()
-                    val intent = Intent(context, SignInFragment::class.java)
-//                    intent.putExtra("token", response.body()!!.token)
-//                    intent.putExtra("mail", mail)
-                    startActivity(intent)
+                    findNavController().navigate(ChangePassFragmentDirections.actionChangePassFragmentToSignInFragment())
                     Toast.makeText(context, "Pass changed", Toast.LENGTH_SHORT).show()
-                    // this to finish recover pass activity
-                    activity!!.finishAffinity()
                 } else {
                     //user not saved successfully
                     progressDialog.dismiss()

@@ -35,7 +35,6 @@ class ScanPocketActivity : AppCompatActivity() {
             binding.price.text = String.format(getString(R.string.ticket_price_format, checkInTicket.price))
             binding.instructions.text = String.format(getString(R.string.scan_mess_format, getString(R.string.exit), getString(R.string.check_out)))
 
-
         } catch (e: Exception) {
             Timber.e(e)
             num = 2
