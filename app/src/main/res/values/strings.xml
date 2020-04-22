@@ -76,6 +76,7 @@
     <string name="ticket_cost_format">Total cost : %d</string>
     <string name="check_in_format">Check-in : %s</string>
     <string name="check_out_format">Check-out : %s</string>
+    <string name="scan_mess_format">Scan this QR code at %s gate to %s</string>
     <string name="unrecorded_num_warning">هذا الرقم غير مسجل</string>
     <string name="tell_a_friend">اخبر صديق</string>
     <string name="account_settings">إعدادات الحساب</string>
@@ -291,10 +292,13 @@
     <string name="forbidden">Forbidden check your authorization check bearer token</string>
     <string name="in_use_tickets">In-Use Tickets</string>
     <string name="available_tickets">Available Tickets</string>
-    <string name="use">Use</string>
-    <string name="check_out">Check-out</string>
+    <string name="use">use</string>
+    <string name="check_out">Check Out</string>
     <string name="forbidden_mess">Forbidden check your authorization check bearer token</string>
-    <string name="check_in">Check-in</string>
+    <string name="check_in">Check In</string>
+    <string name="scan_this_qr_code">Scan this QR code</string>
+    <string name="entrance">entrance</string>
+    <string name="exit">exit</string>
 
 
 </resources>
