@@ -50,7 +50,6 @@
                 android:id="@+id/decrement"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/googlepay_button_no_shadow_background_image"
                 android:onClick="@{()->viewModel.decrementTicket()}"
                 android:padding="0dp"
                 android:text="—"
@@ -71,7 +70,6 @@
                 android:id="@+id/increment"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/googlepay_button_no_shadow_background"
                 android:onClick="@{()->viewModel.incrementTicket()}"
                 android:padding="0dp"
                 android:text="+"
@@ -91,14 +89,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ticket_icon" />
 
-        <include
+        <ImageButton
             android:id="@+id/googlePayButton"
-            layout="@layout/buy_with_googlepay_button"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_45sdp"
             android:layout_marginStart="32dp"
+            android:padding="@dimen/_16sdp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/googlepay_button_no_shadow_background_image"
             android:layout_marginEnd="32dp"
+            android:src="@drawable/buy_with_googlepay_button_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/total_cost" />
