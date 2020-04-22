@@ -52,7 +52,9 @@ class SignUpFragment : Fragment() {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        viewModelFactory = SignUpViewModelFactory()
+        val application = requireNotNull(activity).application
+
+        viewModelFactory = SignUpViewModelFactory(application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(SignupViewModel::class.java)
 

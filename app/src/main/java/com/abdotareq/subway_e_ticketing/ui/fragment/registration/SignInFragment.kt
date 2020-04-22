@@ -38,7 +38,9 @@ class SignInFragment : Fragment() {
         _binding = FragmentSignInBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        viewModelFactory = SigninViewModelFactory()
+        val application = requireNotNull(activity).application
+
+        viewModelFactory = SigninViewModelFactory(application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(SigninViewModel::class.java)
 
@@ -109,8 +111,6 @@ class SignInFragment : Fragment() {
 
         val registerInterface = object : RegisterInterface {
             override fun onSuccess(token: String) {
-                //user authenticated successfully
-
                 //write token into SharedPreferences to use in remember user
                 SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
                 SharedPreferenceUtil.setSharedPrefsTokenId(context, token)

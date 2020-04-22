@@ -22,10 +22,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel
 
-class SigninViewModelFactory() : ViewModelProvider.Factory {
+class SigninViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SigninViewModel::class.java)) {
-            return SigninViewModel(application = Application()) as T
+            return SigninViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

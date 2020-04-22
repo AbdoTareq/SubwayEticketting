@@ -30,7 +30,6 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
     private val userRepo = UserRepository()
     private val applicationCon = application
 
-
     val mail = MutableLiveData<String>()
 
     val pass = MutableLiveData<String>()
@@ -94,7 +93,7 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun getErrorMess(code: Int): String {
-        return getErrorMessage(code, this.applicationCon)
+        return getErrorMessage(code, applicationCon)
     }
 
     override fun onCleared() {

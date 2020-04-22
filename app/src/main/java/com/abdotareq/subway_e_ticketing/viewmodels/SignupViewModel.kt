@@ -22,13 +22,12 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
 
     /**
      *  Don't expose:   private val _pass = MutableLiveData<String>()
-                        val pass: LiveData<String>
-                        get() = _pass
+    val pass: LiveData<String>
+    get() = _pass
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
     private val userRepo = UserRepository()
     private val applicationCon = application
-
 
     val first = MutableLiveData<String>()
 
@@ -107,7 +106,7 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun getErrorMess(code: Int): String {
-        return getErrorMessage(code, this.applicationCon)
+        return getErrorMessage(code, applicationCon)
     }
 
 
