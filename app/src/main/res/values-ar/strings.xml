@@ -261,4 +261,6 @@
     <string name="scan_this_qr_code">Scan this QR code</string>
     <string name="entrance">entrance</string>
     <string name="exit">exit</string>
+    <string name="buy_with_googlepay_button_content_description">Buy with Google Pay</string>
+    <string name="googlepay_button_content_description">Google Pay</string>
 </resources>
