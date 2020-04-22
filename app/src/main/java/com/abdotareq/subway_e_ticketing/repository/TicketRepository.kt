@@ -1,7 +1,8 @@
 package com.abdotareq.subway_e_ticketing.repository
 
+import com.abdotareq.subway_e_ticketing.model.BoughtTicketInterface
 import com.abdotareq.subway_e_ticketing.model.HistoryTicketInterface
-import com.abdotareq.subway_e_ticketing.model.TicketCheckInInterface
+import com.abdotareq.subway_e_ticketing.model.CheckInTicketInterface
 import com.abdotareq.subway_e_ticketing.model.TicketTypeInterface
 import com.abdotareq.subway_e_ticketing.network.TicketApiObj
 import kotlinx.coroutines.CoroutineScope
@@ -48,8 +49,8 @@ class TicketRepository {
         val bearerToken = "Bearer $token"
         coroutineScope.launch {
             try {
-                val historyTickets = TicketApiObj.retrofitService.getTicketsType(bearerToken)
-                ticketTypeInterface.onSuccess(historyTickets)
+                val ticketsType = TicketApiObj.retrofitService.getTicketsType(bearerToken)
+                ticketTypeInterface.onSuccess(ticketsType)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
                 ticketTypeInterface.onFail(e.code())
@@ -64,13 +65,13 @@ class TicketRepository {
     }
 
     // get checked-in tickets
-    fun getInTickets(token: String, inTicketObj: TicketCheckInInterface) {
+    fun getInTickets(token: String, inTicketObj: CheckInTicketInterface) {
         //start the call
         val bearerToken = "Bearer $token"
         coroutineScope.launch {
             try {
-                val historyTickets = TicketApiObj.retrofitService.getInTickets(bearerToken)
-                inTicketObj.onSuccess(historyTickets)
+                val checkInTickets = TicketApiObj.retrofitService.getInTickets(bearerToken)
+                inTicketObj.onSuccess(checkInTickets)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
                 inTicketObj.onFail(e.code())
@@ -80,6 +81,27 @@ class TicketRepository {
             } catch (e: Exception) {
                 Timber.e(e)
                 inTicketObj.onFail(-1)
+            }
+        }
+    }
+
+    // get checked-in tickets
+    fun getBoughtTickets(token: String, boughtTicketInterface: BoughtTicketInterface) {
+        //start the call
+        val bearerToken = "Bearer $token"
+        coroutineScope.launch {
+            try {
+                val boughtTickets = TicketApiObj.retrofitService.getBoughtTickets(bearerToken)
+                boughtTicketInterface.onSuccess(boughtTickets)
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                boughtTicketInterface.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                boughtTicketInterface.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
+                boughtTicketInterface.onFail(-1)
             }
         }
     }

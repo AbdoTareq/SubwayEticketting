@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentPocketBinding
 import com.abdotareq.subway_e_ticketing.model.InTicket
+import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailablePocketAdapter
+import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailableTicketListener
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUsePocketAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUseTicketListener
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
@@ -49,11 +51,17 @@ class PocketFragment : Fragment() {
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
-        val adapter = InUsePocketAdapter(InUseTicketListener { price ->
+        val inUseAdapter = InUsePocketAdapter(InUseTicketListener { price ->
             viewModel.onChooseCheckInTicket(price)
         })
         // handle list change
-        binding.inUseTicketsList.adapter = adapter
+        binding.inUseTicketsList.adapter = inUseAdapter
+
+         val availableAdapter = AvailablePocketAdapter(AvailableTicketListener { price ->
+            viewModel.onChooseCheckInTicket(price)
+        })
+        // handle list change
+        binding.availableTicketsList.adapter = availableAdapter
 
         viewModel.eventChooseCheckInTicket.observe(viewLifecycleOwner, Observer { ticket_price ->
             if (ticket_price > 0) {

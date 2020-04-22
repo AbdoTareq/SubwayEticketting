@@ -20,9 +20,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.model.BoughtTicket
+import com.abdotareq.subway_e_ticketing.model.BoughtTicketInterface
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.InTicket
-import com.abdotareq.subway_e_ticketing.model.TicketCheckInInterface
+import com.abdotareq.subway_e_ticketing.model.CheckInTicketInterface
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 import timber.log.Timber
 import kotlin.collections.ArrayList
@@ -39,7 +41,8 @@ class PocketViewModel(private val bearerToken: String, application: Application)
     private val ticketRepository = TicketRepository()
     private val applicationCon = application
 
-    private val InTicketObj: TicketCheckInInterface
+    private val checkInTicketInterface: CheckInTicketInterface
+    private val boughtTicketInterface: BoughtTicketInterface
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<PocketApiStatus>()
@@ -60,14 +63,18 @@ class PocketViewModel(private val bearerToken: String, application: Application)
     // Internally, we use a MutableLiveData, because we will be updating the List of InTicket
     // with new values
     private val _checkInTickets = MutableLiveData<List<InTicket>>()
-
     // The external LiveData interface to the property is immutable, so only this class can modify
     val checkInTickets: LiveData<List<InTicket>>
         get() = _checkInTickets
 
+    private val _boughtTickets = MutableLiveData<List<BoughtTicket>>()
+    // The external LiveData interface to the property is immutable, so only this class can modify
+    val boughtTickets: LiveData<List<BoughtTicket>>
+        get() = _boughtTickets
+
     init {
         _status.value = PocketApiStatus.LOADING
-        InTicketObj = object : TicketCheckInInterface {
+        checkInTicketInterface = object : CheckInTicketInterface {
             override fun onSuccess(checkInTickets: List<InTicket>) {
                 _checkInTickets.value = checkInTickets
                 _status.value = PocketApiStatus.DONE
@@ -79,12 +86,26 @@ class PocketViewModel(private val bearerToken: String, application: Application)
                 Timber.e(getErrorMess(responseCode))
             }
         }
-        getHistoryTickets()
+
+        boughtTicketInterface = object : BoughtTicketInterface {
+            override fun onSuccess(boughtTickets: List<BoughtTicket>) {
+                _boughtTickets.value = boughtTickets
+                _status.value = PocketApiStatus.DONE
+            }
+
+            override fun onFail(responseCode: Int) {
+                _status.value = PocketApiStatus.ERROR
+                _boughtTickets.value = ArrayList()
+                Timber.e(getErrorMess(responseCode))
+            }
+        }
+        getTickets()
     }
 
 
-    private fun getHistoryTickets() {
-        ticketRepository.getInTickets(bearerToken, InTicketObj)
+    private fun getTickets() {
+        ticketRepository.getInTickets(bearerToken, checkInTicketInterface)
+        ticketRepository.getBoughtTickets(bearerToken, boughtTicketInterface)
     }
 
     private fun getErrorMess(code: Int): String {

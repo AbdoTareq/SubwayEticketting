@@ -10,7 +10,12 @@ interface TicketTypeInterface {
     fun onFail(responseCode: Int)
 }
 
-interface TicketCheckInInterface {
+interface CheckInTicketInterface {
     fun onSuccess(checkInTickets: List<InTicket>)
+    fun onFail(responseCode: Int)
+}
+
+interface BoughtTicketInterface {
+    fun onSuccess(boughtTickets: List<BoughtTicket>)
     fun onFail(responseCode: Int)
 }

@@ -44,7 +44,7 @@ class ErrorStatus {
         fun getErrorMessage(errorCode: Int, applicationCon: Application): String {
             return when (errorCode) {
                 NoNetworkException -> applicationCon.getString(R.string.check_network)
-                Forbidden -> applicationCon.getString(R.string.forbidden)
+                Forbidden -> applicationCon.getString(R.string.forbidden_mess)
 
                 SocketTimeoutServerOffline -> applicationCon.getString(R.string.server_offline_try)
                 PasswordLessThan_8 -> applicationCon.getString(R.string.pass_less)

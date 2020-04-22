@@ -288,11 +288,12 @@
     <string name="invalid_cvv">InvalidCVV</string>
     <string name="check_in_date">at 15/20/2020 11:26 Am</string>
     <string name="check_out_date">at 15/20/2020 13:26 Am</string>
-    <string name="forbidden">Forbidden</string>
+    <string name="forbidden">Forbidden check your authorization check bearer token</string>
     <string name="in_use_tickets">In-Use Tickets</string>
     <string name="available_tickets">Available Tickets</string>
     <string name="use">Use</string>
     <string name="check_out">Check-out</string>
+    <string name="forbidden_mess">Forbidden check your authorization check bearer token</string>
 
 
 </resources>

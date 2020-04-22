@@ -69,6 +69,7 @@
             android:layout_marginStart="@dimen/very_small_margin"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/very_small_margin"
+            app:availableListData="@{viewModel.boughtTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

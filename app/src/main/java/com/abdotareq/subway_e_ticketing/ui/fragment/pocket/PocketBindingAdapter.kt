@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.InTicket
 import com.abdotareq.subway_e_ticketing.model.TicketType
 import com.abdotareq.subway_e_ticketing.viewmodels.PocketApiStatus
@@ -15,8 +16,14 @@ import com.abdotareq.subway_e_ticketing.viewmodels.TicketTypeApiStatus
  * When there is no tickets history data (data is null), hide the [RecyclerView], otherwise show it.
  */
 @BindingAdapter("checkInListData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
+fun bindCheckInRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
     val adapter = recyclerView.adapter as InUsePocketAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("availableListData")
+fun bindAvailableRecyclerView(recyclerView: RecyclerView, data: List<BoughtTicket>?) {
+    val adapter = recyclerView.adapter as AvailablePocketAdapter
     adapter.submitList(data)
 }
 

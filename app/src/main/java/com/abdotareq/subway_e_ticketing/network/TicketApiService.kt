@@ -36,6 +36,9 @@ interface TicketApiService {
     @GET("tickets/current")
     suspend fun getInTickets(@Header("Authorization") bearerToken: String): List<InTicket>
 
+    @GET("tickets")
+    suspend fun getBoughtTickets(@Header("Authorization") bearerToken: String): List<BoughtTicket>
+
 
 }
 
