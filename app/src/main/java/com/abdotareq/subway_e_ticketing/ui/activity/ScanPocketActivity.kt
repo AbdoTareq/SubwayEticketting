@@ -1,8 +1,10 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
+import android.R.attr.bitmap
 import android.os.Bundle
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidmads.library.qrgenearator.QRGSaver
 import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ActivityScanPocketBinding
@@ -44,12 +46,15 @@ class ScanPocketActivity : AppCompatActivity() {
             binding.instructions.text = String.format(getString(R.string.scan_mess_format, getString(R.string.entrance), getString(R.string.use)))
         }
 
-
         // Initializing the QR Encoder with your value to be encoded, type you required and Dimension
         val qrgEncoder = if (num == 1)
             QRGEncoder(checkInTicket.id, null, QRGContents.Type.TEXT, 650)
         else
             QRGEncoder(boughtTicket.id, null, QRGContents.Type.TEXT, 650)
+
+        // to control it's colors
+//        qrgEncoder.setColorBlack(Color.RED);
+//        qrgEncoder.setColorWhite(Color.BLUE);
 
         try {
             // Getting QR-Code as Bitmap
@@ -59,5 +64,10 @@ class ScanPocketActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Timber.e(e)
         }
+
+        // Save with location, value, bitmap returned and type of Image(JPG/PNG).
+//        val qrgSaver = QRGSaver()
+//        qrgSaver.save(savePath, edtValue.getText().toString().trim(), bitmap, QRGContents.ImageType.IMAGE_JPEG)
+
     }
 }

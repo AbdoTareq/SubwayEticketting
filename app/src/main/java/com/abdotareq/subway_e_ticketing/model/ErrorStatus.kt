@@ -5,6 +5,7 @@ import com.abdotareq.subway_e_ticketing.R
 
 class ErrorStatus {
     object Codes {
+
         const val NoNetworkException = -1
 
         private const val SocketTimeoutServerOffline = -2
@@ -29,7 +30,7 @@ class ErrorStatus {
 
         private const val InvalidTicket = 442
 
-        private const val NoTicketsFound = 443
+        const val NoTicketsFound = 443
 
         private const val CardsNotFound = 445
 

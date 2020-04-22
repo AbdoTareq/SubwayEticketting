@@ -20,16 +20,14 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.abdotareq.subway_e_ticketing.model.BoughtTicket
-import com.abdotareq.subway_e_ticketing.model.BoughtTicketInterface
+import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.InTicket
-import com.abdotareq.subway_e_ticketing.model.CheckInTicketInterface
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 import timber.log.Timber
 import kotlin.collections.ArrayList
 
-enum class PocketApiStatus { LOADING, ERROR, DONE }
+enum class InUseApiStatus { LOADING, ERROR, DONE, EMPTY }
+enum class BoughtApiStatus { LOADING, ERROR, DONE, EMPTY }
 
 /**
  * ViewModel for SleepTrackerFragment.
@@ -45,15 +43,19 @@ class PocketViewModel(private val bearerToken: String, application: Application)
     private val boughtTicketInterface: BoughtTicketInterface
 
     // The internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<PocketApiStatus>()
+    private val _inUseStatus = MutableLiveData<InUseApiStatus>()
 
     // The external immutable LiveData for the request status
-    val status: LiveData<PocketApiStatus>
-        get() = _status
+    val inUseStatus: LiveData<InUseApiStatus>
+        get() = _inUseStatus
 
-//    private val _eventBuyHistory = MutableLiveData<Int>()
-//    val eventBuyHistory: LiveData<Int>
-//        get() = _eventBuyHistory
+    // The internal MutableLiveData that stores the status of the most recent request
+    private val _boughtStatus = MutableLiveData<BoughtApiStatus>()
+
+    // The external immutable LiveData for the request status
+    val boughtStatus: LiveData<BoughtApiStatus>
+        get() = _boughtStatus
+
 
     private val _eventChooseCheckInTicket = MutableLiveData<String>()
     val eventChooseCheckInTicket: LiveData<String>
@@ -80,28 +82,35 @@ class PocketViewModel(private val bearerToken: String, application: Application)
         get() = _boughtTickets
 
     init {
-        _status.value = PocketApiStatus.LOADING
+        _inUseStatus.value = InUseApiStatus.LOADING
         checkInTicketInterface = object : CheckInTicketInterface {
             override fun onSuccess(checkInTickets: List<InTicket>) {
                 _checkInTickets.value = checkInTickets
-                _status.value = PocketApiStatus.DONE
+                _inUseStatus.value = InUseApiStatus.DONE
             }
 
             override fun onFail(responseCode: Int) {
-                _status.value = PocketApiStatus.ERROR
+                if (responseCode == ErrorStatus.Codes.NoTicketsFound)
+                    _inUseStatus.value = InUseApiStatus.EMPTY
+                else
+                    _inUseStatus.value = InUseApiStatus.ERROR
                 _checkInTickets.value = ArrayList()
                 Timber.e(getErrorMess(responseCode))
             }
         }
 
+        _boughtStatus.value = BoughtApiStatus.LOADING
         boughtTicketInterface = object : BoughtTicketInterface {
             override fun onSuccess(boughtTickets: List<BoughtTicket>) {
                 _boughtTickets.value = boughtTickets
-                _status.value = PocketApiStatus.DONE
+                _boughtStatus.value = BoughtApiStatus.DONE
             }
 
             override fun onFail(responseCode: Int) {
-                _status.value = PocketApiStatus.ERROR
+                if (responseCode == ErrorStatus.Codes.NoTicketsFound)
+                    _boughtStatus.value = BoughtApiStatus.EMPTY
+                else
+                    _boughtStatus.value = BoughtApiStatus.ERROR
                 _boughtTickets.value = ArrayList()
                 Timber.e(getErrorMess(responseCode))
             }
