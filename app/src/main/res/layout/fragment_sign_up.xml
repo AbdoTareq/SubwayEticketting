@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.abdotareq.subway_e_ticketing.viewmodels.SignupViewModel" />
     </data>
 
@@ -66,7 +66,7 @@
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
-                android:text="@={viewmodel.first}"
+                android:text="@={viewModel.first}"
                 android:textCursorDrawable="@color/primaryTextColor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +96,7 @@
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
-                android:text="@={viewmodel.last}"
+                android:text="@={viewModel.last}"
                 android:textCursorDrawable="@color/primaryTextColor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -130,7 +130,7 @@
                     android:hint="@string/mail"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/small_margin"
-                    android:text="@={viewmodel.mail}"
+                    android:text="@={viewModel.mail}"
                     android:textAlignment="viewStart"
                     android:textColorHighlight="@color/primaryColor"
                     android:textCursorDrawable="@color/primaryTextColor"
@@ -160,7 +160,7 @@
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="16dp"
-                    android:text="@={viewmodel.pass}"
+                    android:text="@={viewModel.pass}"
                     android:textCursorDrawable="@color/primaryTextColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -187,7 +187,7 @@
                     android:hint="@string/confirm_new_pass"
                     android:inputType="textPassword"
                     android:padding="16dp"
-                    android:text="@={viewmodel.confPass}"
+                    android:text="@={viewModel.confPass}"
                     android:textCursorDrawable="@color/primaryTextColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -203,7 +203,7 @@
             android:layout_marginLeft="@dimen/small_margin"
             android:layout_marginRight="@dimen/small_margin"
             android:drawableStart="@drawable/gender_icon"
-            android:text="@={viewmodel.gender}"
+            android:text="@={viewModel.gender}"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textSize="@dimen/very_large_font"
@@ -223,7 +223,7 @@
             android:layout_marginRight="@dimen/small_margin"
             android:layout_marginBottom="@dimen/_12sdp"
             android:drawableStart="@drawable/calender_icon"
-            android:text="@={viewmodel.birthDate}"
+            android:text="@={viewModel.birthDate}"
             android:textAlignment="center"
             android:textAllCaps="false"
             app:layout_constraintBottom_toTopOf="@+id/sign_up_btn"
@@ -239,7 +239,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="13dp"
             android:fontFamily="@font/segoe_ui"
-            android:onClick="@{() -> viewmodel.onRegister()}"
+            android:onClick="@{() -> viewModel.onRegister()}"
             android:padding="15dp"
             android:shadowColor="@android:color/transparent"
             android:text="@string/sign_up"
@@ -255,7 +255,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/segoe_ui"
             android:gravity="center"
-            android:onClick="@{() -> viewmodel.onSignIn()}"
+            android:onClick="@{() -> viewModel.onSignIn()}"
             android:text="@string/signIn"
             android:textAppearance="@style/CustomHeadline4"
             android:textColor="@color/primaryTextColor"

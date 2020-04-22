@@ -81,7 +81,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="32dp"
         android:background="@drawable/shape_sign_up"
         android:text="@string/continue_pass"

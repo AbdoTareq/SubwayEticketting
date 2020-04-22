@@ -128,11 +128,6 @@ class PocketViewModel(private val bearerToken: String, application: Application)
         return getErrorMessage(code, this.applicationCon)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        ticketRepository.cancelJob()
-    }
-
     fun onChooseCheckInTicket(id: String) {
         _eventChooseCheckInTicket.value = id
     }
@@ -149,4 +144,8 @@ class PocketViewModel(private val bearerToken: String, application: Application)
         _eventChooseBoughtTicket.value = ""
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        ticketRepository.cancelJob()
+    }
 }

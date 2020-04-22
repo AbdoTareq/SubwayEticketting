@@ -91,7 +91,7 @@ class PocketFragment : Fragment() {
                     if (ticket_id == ticket.id)
                         ticketTemp = ticket
                 }
-                viewModel.onChooseCheckInComplete()
+                viewModel.onChooseBoughtTicketComplete()
                 val intent = Intent(context,ScanPocketActivity::class.java)
                 intent.putExtra("boughtTicket", ticketTemp)// sending ticket object.
                 startActivity(intent)

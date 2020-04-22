@@ -30,7 +30,7 @@
     <string name="message3">Activation code has been sent to:</string>
     <string name="message4">Please enter the activation code</string>
     <string name="confirm_new_pass">Confirm Password</string>
-    <string name="new_pass">Enter your new password</string>
+    <string name="new_pass">New password</string>
     <string name="change_pass_button">change Password</string>
     <string name="base_url">https://subway-ticketing-system.herokuapp.com/</string>
     <string name="news_title">Title</string>
