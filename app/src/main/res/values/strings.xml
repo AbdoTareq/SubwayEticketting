@@ -294,6 +294,7 @@
     <string name="use">Use</string>
     <string name="check_out">Check-out</string>
     <string name="forbidden_mess">Forbidden check your authorization check bearer token</string>
+    <string name="check_in">Check-in</string>
 
 
 </resources>

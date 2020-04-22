@@ -66,7 +66,7 @@ class InUsePocketAdapter(val clickListener: InUseTicketListener) : ListAdapter<I
  */
 private class InUseTicketDiffCallback : DiffUtil.ItemCallback<InTicket>() {
     override fun areItemsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
-        return oldItem.price == newItem.price
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
@@ -74,6 +74,6 @@ private class InUseTicketDiffCallback : DiffUtil.ItemCallback<InTicket>() {
     }
 }
 
-class InUseTicketListener(val clickListener: (price: Int) -> Unit) {
-    fun onClick(inTicket: InTicket) = clickListener(inTicket.price)
+class InUseTicketListener(val clickListener: (id: String) -> Unit) {
+    fun onClick(inTicket: InTicket) = clickListener(inTicket.id!!)
 }

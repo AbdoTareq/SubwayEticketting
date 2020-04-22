@@ -55,19 +55,26 @@ class PocketViewModel(private val bearerToken: String, application: Application)
 //    val eventBuyHistory: LiveData<Int>
 //        get() = _eventBuyHistory
 
-    private val _eventChooseCheckInTicket = MutableLiveData<Int>()
-    val eventChooseCheckInTicket: LiveData<Int>
+    private val _eventChooseCheckInTicket = MutableLiveData<String>()
+    val eventChooseCheckInTicket: LiveData<String>
         get() = _eventChooseCheckInTicket
+
+
+    private val _eventChooseBoughtTicket = MutableLiveData<String>()
+    val eventChooseBoughtTicket: LiveData<String>
+        get() = _eventChooseBoughtTicket
 
 
     // Internally, we use a MutableLiveData, because we will be updating the List of InTicket
     // with new values
     private val _checkInTickets = MutableLiveData<List<InTicket>>()
+
     // The external LiveData interface to the property is immutable, so only this class can modify
     val checkInTickets: LiveData<List<InTicket>>
         get() = _checkInTickets
 
     private val _boughtTickets = MutableLiveData<List<BoughtTicket>>()
+
     // The external LiveData interface to the property is immutable, so only this class can modify
     val boughtTickets: LiveData<List<BoughtTicket>>
         get() = _boughtTickets
@@ -117,12 +124,20 @@ class PocketViewModel(private val bearerToken: String, application: Application)
         ticketRepository.cancelJob()
     }
 
-    fun onChooseCheckInTicket(price: Int) {
-        _eventChooseCheckInTicket.value = price
+    fun onChooseCheckInTicket(id: String) {
+        _eventChooseCheckInTicket.value = id
     }
 
     fun onChooseCheckInComplete() {
-        _eventChooseCheckInTicket.value = 0
+        _eventChooseCheckInTicket.value = ""
+    }
+
+    fun onChooseBoughtTicket(id: String) {
+        _eventChooseBoughtTicket.value = id
+    }
+
+    fun onChooseBoughtTicketComplete() {
+        _eventChooseBoughtTicket.value = ""
     }
 
 }

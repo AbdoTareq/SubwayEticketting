@@ -17,11 +17,13 @@
 
     // smaller is text larger
 
-    <style name="CustomHeadline6" parent="TextAppearance.MaterialComponents.Headline6"/>
+    <style name="CustomHeadline6" parent="TextAppearance.MaterialComponents.Headline6" />
 
-    <style name="CustomHeadline5" parent="TextAppearance.MaterialComponents.Headline5"/>
+    <style name="CustomHeadline5" parent="TextAppearance.MaterialComponents.Headline5" />
 
-    <style name="CustomHeadline4" parent="TextAppearance.MaterialComponents.Headline4"/>
+    <style name="CustomHeadline4" parent="TextAppearance.MaterialComponents.Headline4" />
+
+    <style name="CustomHeadline3" parent="TextAppearance.MaterialComponents.Headline3" />
 
     <style name="ProgressDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/secondaryColor</item>
@@ -54,7 +56,6 @@
     </style>
 
 
-
     <style name="ButtonStyle">
         <item name="strokeColor">@color/secondaryColor</item>
         <item name="colorAccent">@color/primaryTextColor</item>
@@ -63,8 +64,6 @@
         <item name="fontFamily">@font/segoe_ui</item>
         <item name="backgroundTint">@color/primaryDarkColor</item>
     </style>
-
-
 
 
 </resources>
