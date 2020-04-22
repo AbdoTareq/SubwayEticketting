@@ -5,19 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentPocketBinding
-import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
+import com.abdotareq.subway_e_ticketing.model.InTicket
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUsePocketAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUseTicketListener
-import com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketAdapter
-import com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketListener
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.PocketViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.TicketsTypeViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.PocketViewModelFactory
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
+import timber.log.Timber
 
 
 /**
@@ -58,6 +55,18 @@ class PocketFragment : Fragment() {
         // handle list change
         binding.inUseTicketsList.adapter = adapter
 
+        viewModel.eventChooseCheckInTicket.observe(viewLifecycleOwner, Observer { ticket_price ->
+            if (ticket_price > 0) {
+
+                var ticketTemp = InTicket()
+                for (ticket in viewModel.checkInTickets.value!!) {
+                    if (ticket_price == ticket.price)
+                        ticketTemp = ticket
+                }
+                Timber.e("${ticketTemp}")
+                viewModel.onChooseCheckInComplete()
+            }
+        })
 
 
 
