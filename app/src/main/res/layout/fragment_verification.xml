@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.abdotareq.subway_e_ticketing.viewmodels.VerificationViewModel" />
+            type="com.abdotareq.subway_e_ticketing.viewmodels.register.VerificationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:fontFamily="@font/segoe_ui"
             android:text="@{viewModel.mail}"
             android:textAlignment="center"
             android:textSize="@dimen/_18sdp"
@@ -35,7 +34,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:fontFamily="@font/segoe_ui"
             android:text="@string/message3"
             android:textAlignment="center"
             android:textSize="@dimen/_18sdp"
@@ -50,7 +48,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/very_large_margin"
-            android:fontFamily="@font/segoe_ui"
             android:text="@string/message4"
             android:textAlignment="center"
             android:textSize="@dimen/_18sdp"
@@ -78,10 +75,10 @@
                 android:id="@+id/verification_et"
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
-                android:text="@={viewModel.code}"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_10sdp"
+                android:text="@={viewModel.code}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -90,8 +87,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
-            android:text="@string/continue_pass"
             android:onClick="@{()-> viewModel.onContinue()}"
+            android:text="@string/continue_pass"
             app:layout_constraintEnd_toEndOf="@+id/verification_ti"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/verification_ti"

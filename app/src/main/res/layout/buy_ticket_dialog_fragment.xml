@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.abdotareq.subway_e_ticketing.viewmodels.BuyTicketViewModel" />
+            type="com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

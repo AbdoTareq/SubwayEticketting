@@ -12,18 +12,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentVerificationBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.model.Token
-import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.util
-import com.abdotareq.subway_e_ticketing.viewmodels.VerificationViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.register.VerificationViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.VerificationViewModelFactory
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import timber.log.Timber
 
 class VerificationFragment : Fragment() {
 
@@ -33,12 +26,8 @@ class VerificationFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-//    private lateinit var codeEt: EditText
-//    private lateinit var continueBtn: Button
-
     private lateinit var viewModelFactory: VerificationViewModelFactory
     private lateinit var viewModel: VerificationViewModel
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentVerificationBinding.inflate(inflater, container, false)
@@ -58,11 +47,6 @@ class VerificationFragment : Fragment() {
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
-
-//        codeEt = binding.verificationEt
-//        continueBtn = binding.verificationContinueBtn
-
-//        binding.verificationMailTv.text = mail
 
         viewModel.eventContinue.observe(viewLifecycleOwner, Observer {
             if (it) {

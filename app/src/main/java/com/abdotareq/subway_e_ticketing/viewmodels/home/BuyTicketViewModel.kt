@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.viewmodels
+package com.abdotareq.subway_e_ticketing.viewmodels.home
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

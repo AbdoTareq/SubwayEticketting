@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.viewmodels
+package com.abdotareq.subway_e_ticketing.viewmodels.register
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -9,7 +9,6 @@ import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
-import com.abdotareq.subway_e_ticketing.utility.util
 import timber.log.Timber
 
 /**
@@ -19,7 +18,7 @@ import timber.log.Timber
  * reference to applications across rotation since Application is never recreated during actiivty
  * or fragment lifecycle events.
  */
-class VerificationViewModel(mailProperty: String, application: Application) : AndroidViewModel(application) {
+class ChangePassViewModel(mailProperty: String, tokenProperty: String, application: Application) : AndroidViewModel(application) {
 
     private val userRepo = UserRepository()
     private val applicationCon = application
@@ -28,37 +27,45 @@ class VerificationViewModel(mailProperty: String, application: Application) : An
     val mail: LiveData<String>
         get() = _mail
 
-    val code = MutableLiveData<String>()
+    private val _token = MutableLiveData<String>()
+    val token: LiveData<String>
+        get() = _token
+
+    val pass = MutableLiveData<String>()
+
+    val confirmPass = MutableLiveData<String>()
 
     init {
         _mail.value = mailProperty
+        _token.value = tokenProperty
     }
 
-    private val _eventContinue = MutableLiveData<Boolean>()
-    val eventContinue: LiveData<Boolean>
-        get() = _eventContinue
+    private val _eventChangePass = MutableLiveData<Boolean>()
+    val eventChangePass: LiveData<Boolean>
+        get() = _eventChangePass
 
-    fun onContinueComplete() {
-        _eventContinue.value = false
+    fun onChangePassComplete() {
+        _eventChangePass.value = false
     }
 
-    fun onContinue() {
-        _eventContinue.value = true
+    fun onChangePass() {
+        _eventChangePass.value = true
     }
 
-    fun validateCode(): Boolean {
-        if (code.value.isNullOrEmpty()) {
-            return false
-        }
-        return true
-    }
+//    fun validateCode(): Boolean {
+//        if (code.value.isNullOrEmpty()) {
+//            return false
+//        }
+//        return true
+//    }
 
-    fun verifyCode(registerInterface: RegisterInterface) {
-        val user = User(email = _mail.value, otp_token = code.value)
+    fun changePass(userInterface: UserInterface) {
+        val bearerToken = "Bearer " + _token.value
+        val user = User(email = _mail.value, password = pass.value)
         Timber.e(user.toString())
 
         // start the coroutine
-        userRepo.verifyCode(user, registerInterface)
+        userRepo.changePass(user, bearerToken, userInterface)
     }
 
     fun getErrorMess(code: Int): String {

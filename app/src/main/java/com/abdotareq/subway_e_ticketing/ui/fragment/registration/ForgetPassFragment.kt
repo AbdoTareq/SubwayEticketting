@@ -14,9 +14,8 @@ import com.abdotareq.subway_e_ticketing.databinding.FragmentForgetPassBinding
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.utility.util
-import com.abdotareq.subway_e_ticketing.viewmodels.ForgetPassViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.register.ForgetPassViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.ForgetPassViewModelFactory
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFactory
 
 /**
  *  [ForgetPassFragment] responsible for sending verification code to user mail

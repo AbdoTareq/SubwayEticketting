@@ -10,9 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
 import com.abdotareq.subway_e_ticketing.model.TicketType
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
-import com.abdotareq.subway_e_ticketing.viewmodels.TicketsTypeViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.home.TicketsTypeViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
-import timber.log.Timber
 
 
 /**

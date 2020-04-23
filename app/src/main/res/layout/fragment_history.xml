@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.abdotareq.subway_e_ticketing.viewmodels.HistoryViewModel" />
+            type="com.abdotareq.subway_e_ticketing.viewmodels.home.HistoryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

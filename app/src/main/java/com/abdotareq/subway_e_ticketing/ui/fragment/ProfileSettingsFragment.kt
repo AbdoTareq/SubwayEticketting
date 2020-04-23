@@ -29,7 +29,7 @@ import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.ImageUtil
 import com.abdotareq.subway_e_ticketing.utility.util
-import com.abdotareq.subway_e_ticketing.viewmodels.ProfileViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.ProfileViewModelFactory
 import timber.log.Timber
 import java.text.DateFormat

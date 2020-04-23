@@ -12,12 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
-import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.register.SigninViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFactory
 
 /**

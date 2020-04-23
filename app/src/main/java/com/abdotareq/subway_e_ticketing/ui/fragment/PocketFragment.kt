@@ -17,9 +17,8 @@ import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailableTicketListen
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUsePocketAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUseTicketListener
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
-import com.abdotareq.subway_e_ticketing.viewmodels.PocketViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.home.PocketViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.PocketViewModelFactory
-import timber.log.Timber
 
 
 /**

@@ -21,7 +21,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.viewmodels.ProfileViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel
 
 class ProfileViewModelFactory(
         private val user: User,

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.abdotareq.subway_e_ticketing.viewmodels.ProfileViewModel" />
+            type="com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel" />
 
     </data>
 
@@ -57,10 +57,8 @@
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/password"
                 android:drawableStart="@drawable/user_icon"
                 android:drawablePadding="@dimen/_8sdp"
-                android:fontFamily="@font/segoe_ui"
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
@@ -88,10 +86,8 @@
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/password"
                 android:drawableStart="@drawable/user_icon"
                 android:drawablePadding="@dimen/_8sdp"
-                android:fontFamily="@font/segoe_ui"
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"

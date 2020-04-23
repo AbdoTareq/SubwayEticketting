@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.abdotareq.subway_e_ticketing.viewmodels.SignupViewModel" />
+            type="com.abdotareq.subway_e_ticketing.viewmodels.register.SignupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/very_large_margin"
-            android:fontFamily="@font/segoe_ui"
             android:gravity="center"
             android:text="@string/sign_up"
             android:textAppearance="@style/CustomHeadline3"
@@ -33,7 +32,6 @@
             style="@style/EditTStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/segoe_ui"
             android:gravity="center"
             android:text="@string/message2"
             android:textSize="@dimen/sign_in_sub_text_size"
@@ -61,7 +59,6 @@
                 android:autofillHints="@string/password"
                 android:drawableStart="@drawable/user_icon"
                 android:drawablePadding="@dimen/_8sdp"
-                android:fontFamily="@font/segoe_ui"
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
@@ -91,7 +88,6 @@
                 android:autofillHints="@string/password"
                 android:drawableStart="@drawable/user_icon"
                 android:drawablePadding="@dimen/_8sdp"
-                android:fontFamily="@font/segoe_ui"
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
@@ -124,7 +120,6 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/email_icon"
                     android:drawablePadding="@dimen/_8sdp"
-                    android:fontFamily="@font/segoe_ui"
                     android:hint="@string/mail"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/small_margin"
@@ -230,7 +225,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="13dp"
-            android:fontFamily="@font/segoe_ui"
             android:onClick="@{() -> viewModel.onRegister()}"
             android:padding="15dp"
             android:text="@string/sign_up"
@@ -243,7 +237,6 @@
             android:id="@+id/sign_up_sign_in_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/segoe_ui"
             android:gravity="center"
             android:onClick="@{() -> viewModel.onSignIn()}"
             android:text="@string/signIn"

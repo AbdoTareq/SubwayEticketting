@@ -4,24 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentChangePassBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.network.UserApiObj
+import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.utility.util
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Response
-import timber.log.Timber
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ChangePassViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.register.ChangePassViewModel
 
 class ChangePassFragment : Fragment() {
 
@@ -31,9 +26,8 @@ class ChangePassFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var passEt: EditText
-    private lateinit var confirmEt: EditText
-    private lateinit var confirmBtn: Button
+    private lateinit var viewModelFactory: ChangePassViewModelFactory
+    private lateinit var viewModel: ChangePassViewModel
 
     private var bearerToken: String = "Bearer "
 
@@ -41,9 +35,7 @@ class ChangePassFragment : Fragment() {
         _binding = FragmentChangePassBinding.inflate(inflater, container, false)
         val view = binding.root
 
-
         // take the token to send it with bearer in header to change pass
-
         val safeArgs: ChangePassFragmentArgs by navArgs()
         val token = safeArgs.token
         val mail = safeArgs.mail
@@ -53,13 +45,23 @@ class ChangePassFragment : Fragment() {
 
         Toast.makeText(context, "header: $bearerToken", Toast.LENGTH_SHORT).show()
 
-        passEt = binding.passChangePassEt
-        confirmEt = binding.passChangeConfirmPassEt
-        confirmBtn = binding.changePassConfirmBtn
+        val application = requireNotNull(activity).application
 
-        confirmBtn.setOnClickListener {
-            confirmBtnClick(mail)
-        }
+        viewModelFactory = ChangePassViewModelFactory(mail, token, application)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ChangePassViewModel::class.java)
+
+        binding.viewModel = viewModel
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.lifecycleOwner = this
+
+        viewModel.eventChangePass.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                viewModel.onChangePassComplete()
+                confirmBtnClick()
+            }
+        })
 
         return view
     }
@@ -67,68 +69,42 @@ class ChangePassFragment : Fragment() {
     /**
      * A method called to handle sign up button clicks
      */
-    private fun confirmBtnClick(mail: String?) {
+    private fun confirmBtnClick() {
         //check for all inputs from user are correct
-        if (!util.isValidPassword(passEt.text.toString())) {
-            passEt.setText("")
-            passEt.hint = getString(R.string.invalid_pass)
-            passEt.setHintTextColor(getColor(context!!, R.color.primaryTextColor))
+        if (!util.isValidPassword(viewModel.pass.value)) {
+            binding.passTi.error = getString(R.string.invalid_pass)
+            binding.passTi.requestFocus()
             return
-        } else if (confirmEt.text.toString().isEmpty()
-                || confirmEt.text.toString() != passEt.text.toString()) {
-            confirmEt.setText("")
-            confirmEt.hint = getString(R.string.fix_confirmPassWarning)
-            confirmEt.setHintTextColor(getColor(context!!, R.color.primaryTextColor))
+        } else if (viewModel.confirmPass.value!!.isEmpty()
+                || viewModel.confirmPass.value!! != viewModel.pass.value!!) {
+            binding.confirmTi.error = getString(R.string.confirm_message)
+            binding.confirmTi.requestFocus()
             return
         }
-
-        //create MobileUser object and set it's attributes
-        val user = User()
-        user.email = mail
-        user.password = passEt.text.toString()
-        // this constructor iz wrong as it's for mail and otp verify
-        // val user = User(mail, passEt.text.toString())
-
-
-        Timber.e(user.toString())
-
-        //sign up method that will call the web service
-        changePassCall(user)
-
-
-    }
-
-    private fun changePassCall(user: User) {
 
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
-        //start the call
-        UserApiObj.retrofitService.changePassCall(user, bearerToken)?.enqueue(object : retrofit2.Callback<ResponseBody?> {
-            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299 && response.body() != null) {
-                    //pass changed successfully
-                    progressDialog.dismiss()
-                    findNavController().navigate(ChangePassFragmentDirections.actionChangePassFragmentToSignInFragment())
-                    Toast.makeText(context, "Pass changed", Toast.LENGTH_SHORT).show()
-                } else {
-                    //user not saved successfully
-                    progressDialog.dismiss()
-                    Timber.e("response.code:    $responseCode")
-                    Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
-                }
-            }
 
-            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                Timber.e("err:    $t")
+        val userInterface = object : UserInterface {
+            override fun onSuccess() {
+                //pass changed successfully
                 progressDialog.dismiss()
-                Toast.makeText(context, getErrorMessage(NoNetworkException, activity!!.application), Toast.LENGTH_LONG).show()
-
+                findNavController().navigate(ChangePassFragmentDirections.actionChangePassFragmentToSignInFragment())
+                Toast.makeText(context, "Pass changed", Toast.LENGTH_SHORT).show()
             }
-        })
+
+            override fun onFail(responseCode: Int) {
+                progressDialog.dismiss()
+                Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
+            }
+
+        }
+
+        viewModel.changePass(userInterface)
 
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

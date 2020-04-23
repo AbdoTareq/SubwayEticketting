@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel" />
+            type="com.abdotareq.subway_e_ticketing.viewmodels.register.SigninViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

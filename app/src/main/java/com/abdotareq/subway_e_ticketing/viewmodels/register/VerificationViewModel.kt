@@ -1,14 +1,13 @@
-package com.abdotareq.subway_e_ticketing.viewmodels
+package com.abdotareq.subway_e_ticketing.viewmodels.register
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
-import com.abdotareq.subway_e_ticketing.utility.util
 import timber.log.Timber
 
 /**
@@ -18,38 +17,46 @@ import timber.log.Timber
  * reference to applications across rotation since Application is never recreated during actiivty
  * or fragment lifecycle events.
  */
-class ForgetPassViewModel(application: Application) : AndroidViewModel(application) {
+class VerificationViewModel(mailProperty: String, application: Application) : AndroidViewModel(application) {
 
     private val userRepo = UserRepository()
     private val applicationCon = application
 
-    val mail = MutableLiveData<String>()
+    private val _mail = MutableLiveData<String>()
+    val mail: LiveData<String>
+        get() = _mail
 
-    private val _eventSendCode = MutableLiveData<Boolean>()
-    val eventSendCode: LiveData<Boolean>
-        get() = _eventSendCode
+    val code = MutableLiveData<String>()
 
-    fun onSendCodeComplete() {
-        _eventSendCode.value = false
+    init {
+        _mail.value = mailProperty
     }
 
-    fun onSendCode() {
-        _eventSendCode.value = true
+    private val _eventContinue = MutableLiveData<Boolean>()
+    val eventContinue: LiveData<Boolean>
+        get() = _eventContinue
+
+    fun onContinueComplete() {
+        _eventContinue.value = false
     }
 
-    fun validateMail(): Boolean {
-        if (mail.value.isNullOrEmpty() || util.isValidEmail(mail.value)) {
+    fun onContinue() {
+        _eventContinue.value = true
+    }
+
+    fun validateCode(): Boolean {
+        if (code.value.isNullOrEmpty()) {
             return false
         }
         return true
     }
 
-    fun forgetPass(userInterface: UserInterface) {
-        val user = User(email = mail.value)
+    fun verifyCode(registerInterface: RegisterInterface) {
+        val user = User(email = _mail.value, otp_token = code.value)
         Timber.e(user.toString())
 
-        //start the coroutine
-        userRepo.sendVerificationCode(user, userInterface)
+        // start the coroutine
+        userRepo.verifyCode(user, registerInterface)
     }
 
     fun getErrorMess(code: Int): String {

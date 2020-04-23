@@ -20,7 +20,7 @@ package com.abdotareq.subway_e_ticketing.viewmodels.factories
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.abdotareq.subway_e_ticketing.viewmodels.SigninViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.register.SigninViewModel
 
 class SigninViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

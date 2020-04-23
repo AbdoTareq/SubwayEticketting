@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.TicketType
-import com.abdotareq.subway_e_ticketing.viewmodels.TicketTypeApiStatus
+import com.abdotareq.subway_e_ticketing.viewmodels.home.TicketTypeApiStatus
 
 
 /**

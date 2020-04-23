@@ -19,8 +19,7 @@ package com.abdotareq.subway_e_ticketing.viewmodels.factories
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.abdotareq.subway_e_ticketing.viewmodels.HistoryViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.PocketViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.home.PocketViewModel
 
 /**
  * This is pretty much boiler plate code for a ViewModel Factory.

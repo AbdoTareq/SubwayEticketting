@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ import com.abdotareq.subway_e_ticketing.databinding.BuyTicketDialogFragmentBindi
 import com.abdotareq.subway_e_ticketing.model.TicketType
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.payment.PaymentsUtil
-import com.abdotareq.subway_e_ticketing.viewmodels.BuyTicketViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.wallet.*
@@ -25,7 +24,6 @@ import kotlinx.android.synthetic.main.buy_ticket_dialog_fragment.*
 import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
-import kotlin.math.roundToLong
 
 
 class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragment() {

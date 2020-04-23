@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.InTicket
-import com.abdotareq.subway_e_ticketing.viewmodels.BoughtApiStatus
-import com.abdotareq.subway_e_ticketing.viewmodels.InUseApiStatus
+import com.abdotareq.subway_e_ticketing.viewmodels.home.BoughtApiStatus
+import com.abdotareq.subway_e_ticketing.viewmodels.home.InUseApiStatus
 
 
 /**

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.abdotareq.subway_e_ticketing.viewmodels.ForgetPassViewModel" />
+            type="com.abdotareq.subway_e_ticketing.viewmodels.register.ForgetPassViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +49,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
-            android:fontFamily="@font/segoe_ui"
             android:padding="15dp"
             android:onClick="@{()->viewModel.onSendCode()}"
             android:text="@string/send_verification_code"
