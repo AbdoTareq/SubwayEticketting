@@ -15,6 +15,8 @@ import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.ForgetPassViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ForgetPassViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFactory
 
 /**
  *  [ForgetPassFragment] responsible for sending verification code to user mail
@@ -28,6 +30,7 @@ class ForgetPassFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var viewModelFactory: ForgetPassViewModelFactory
     private lateinit var viewModel: ForgetPassViewModel
 
 
@@ -37,7 +40,9 @@ class ForgetPassFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModel = ViewModelProvider(this).get(ForgetPassViewModel::class.java)
+        viewModelFactory = ForgetPassViewModelFactory(application)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ForgetPassViewModel::class.java)
 
         binding.viewModel = viewModel
         // Specify the current activity as the lifecycle owner of the binding. This is used so that

@@ -53,7 +53,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline2"
             tools:targetApi="lollipop">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/sign_up_f_name_et"
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline2"
             tools:targetApi="lollipop">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/sign_up_l_name_et"
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
@@ -117,7 +117,7 @@
                 android:importantForAutofill="no"
                 tools:targetApi="lollipop">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sign_up_mail_et"
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
@@ -144,7 +144,7 @@
                 app:passwordToggleEnabled="true"
                 tools:targetApi="lollipop">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sign_up_pass_et"
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
@@ -170,7 +170,7 @@
                 app:passwordToggleEnabled="true"
                 tools:targetApi="lollipop">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sign_up_confirm_pass_et"
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"

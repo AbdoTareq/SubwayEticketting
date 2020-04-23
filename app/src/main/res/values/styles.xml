@@ -11,9 +11,10 @@
         <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
         <item name="colorOnSecondary">@color/secondaryTextColor</item>
         <item name="android:fontFamily">@font/segoe_ui</item>
-        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
         <item name="fontFamily">@font/segoe_ui</item>
-        <item name="textAppearanceHeadline6">@style/CustomHeadline6</item>
+        <item name="textAppearanceHeadline6">@style/CustomHeadline5</item>
+        <item name="textAppearanceHeadline4">@style/CustomHeadline4</item>
+        <item name="textAppearanceHeadline3">@style/CustomHeadline3</item>
     </style>
 
     // smaller is text larger

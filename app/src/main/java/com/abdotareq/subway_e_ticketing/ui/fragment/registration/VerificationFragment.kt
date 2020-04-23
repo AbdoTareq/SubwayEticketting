@@ -4,22 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentVerificationBinding
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.Token
-import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.viewmodels.VerificationViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.VerificationViewModelFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,75 +33,76 @@ class VerificationFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var mailTv: TextView
-    private lateinit var codeEt: EditText
-    private lateinit var continueBtn: Button
+//    private lateinit var codeEt: EditText
+//    private lateinit var continueBtn: Button
+
+    private lateinit var viewModelFactory: VerificationViewModelFactory
+    private lateinit var viewModel: VerificationViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentVerificationBinding.inflate(inflater, container, false)
         val view = binding.root
 
-
         // this how to receive with safe args
         val safeArgs: VerificationFragmentArgs by navArgs()
         val mail = safeArgs.mail
 
-        mailTv = binding.verificationMailTv
-        codeEt = binding.verificationEt
-        continueBtn = binding.verificationContinueBtn
+        val application = requireNotNull(activity).application
 
-        mailTv.text = mail
+        viewModelFactory = VerificationViewModelFactory(mail, application)
 
-        continueBtn.setOnClickListener {
-            if (codeEt.text.isNullOrEmpty()) {
-                codeEt.hint = getText(R.string.enter_verification)
-                codeEt.setHintTextColor(getColor(context!!, R.color.primaryTextColor))
-            } else {
-                verifyCode(mail, codeEt.text.toString())
+        viewModel = ViewModelProvider(this, viewModelFactory).get(VerificationViewModel::class.java)
+
+        binding.viewModel = viewModel
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+        binding.lifecycleOwner = this
+
+//        codeEt = binding.verificationEt
+//        continueBtn = binding.verificationContinueBtn
+
+//        binding.verificationMailTv.text = mail
+
+        viewModel.eventContinue.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                viewModel.onContinueComplete()
+                if (viewModel.validateCode())
+                    verifyCode()
+                else {
+                    binding.verificationEt.error = getString(R.string.wrong_code)
+                    binding.verificationEt.requestFocus()
+                }
             }
-        }
+        })
+
+
         return view
     }
 
     // call to verify the user
-    private fun verifyCode(mail: String, code: String) {
-        val user = User()
-        user.email = mail
-        user.otp_token = code
+    private fun verifyCode() {
 
         //initialize and show a progress dialog to the user
         val progressDialog = util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
 
-        //start the call
-        UserApiObj.retrofitService.verifyCodeCall(user)?.enqueue(object : Callback<Token?> {
-            override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299 && response.body() != null) {
-                    //verifyCode successfully
-                    progressDialog.dismiss()
-                    //ToDo: Remove Toast
-
-                    Toast.makeText(context, "token: " + response.body()!!.token, Toast.LENGTH_SHORT).show()
-                    // this how to navigate between fragments using safe args after defining action in navigation xml file
-                    // between desired fragments & send args safely
-                    findNavController().navigate(VerificationFragmentDirections.actionVerificationFragmentToChangePassFragment(mail, response.body()!!.token))
-
-                } else {
-                    //verifyCode not successfully
-                    progressDialog.dismiss()
-                    Timber.e("response.code:    $responseCode")
-
-                    Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Token?>, t: Throwable) {
-                Timber.e("err:    $t")
+        val registerInterface = object : RegisterInterface {
+            override fun onSuccess(token: String) {
                 progressDialog.dismiss()
-                Toast.makeText(context, getErrorMessage(NoNetworkException, activity!!.application), Toast.LENGTH_LONG).show()
+                // this how to navigate between fragments using safe args after defining action in navigation xml file
+                // between desired fragments & send args safely
+                findNavController().navigate(VerificationFragmentDirections
+                        .actionVerificationFragmentToChangePassFragment(viewModel.mail.value!!, token))
             }
-        })
+
+            override fun onFail(responseCode: Int) {
+                progressDialog.dismiss()
+                Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
+            }
+        }
+        viewModel.verifyCode(registerInterface)
+
     }
 
     override fun onDestroyView() {

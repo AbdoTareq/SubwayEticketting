@@ -16,7 +16,7 @@
         android:layout_marginEnd="@dimen/small_margin"
         app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/old_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_marginEnd="@dimen/small_margin"
         app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/new_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         android:layout_marginEnd="@dimen/small_margin"
         app:passwordToggleEnabled="true">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/confirm_new_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

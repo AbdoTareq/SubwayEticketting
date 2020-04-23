@@ -52,7 +52,6 @@
             android:lines="1"
             android:text="@string/check_in_ain_shams_station_at_15_20_2020_11_26_am"
             android:textAppearance="@style/CustomHeadline5"
-
             android:textSize="@dimen/large_font"
             app:layout_constraintEnd_toStartOf="@+id/guideline13"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +69,6 @@
             android:lines="1"
             android:text="@string/check_out_date"
             android:textAppearance="@style/CustomHeadline5"
-
             android:textSize="@dimen/large_font"
             app:layout_constraintBottom_toBottomOf="@+id/check_in_date"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +89,6 @@
             android:lines="1"
             android:text="@string/check_out_maadi_station_at_15_20_2020_13_26_am"
             android:textAppearance="@style/CustomHeadline5"
-
             android:textSize="@dimen/large_font"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline13"

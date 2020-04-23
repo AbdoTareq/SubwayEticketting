@@ -23,7 +23,7 @@
         app:passwordToggleEnabled="true"
         tools:targetApi="lollipop">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pass_change_pass_et"
             style="@style/EditTStyle"
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         app:passwordToggleEnabled="true"
         tools:targetApi="lollipop">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pass_change_confirm_pass_et"
             style="@style/EditTStyle"
             android:layout_width="match_parent"

@@ -52,7 +52,7 @@
             app:layout_constraintTop_toTopOf="@+id/last_ti"
             tools:targetApi="lollipop">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/first_name_et"
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
             app:layout_constraintTop_toTopOf="@+id/guideline7"
             tools:targetApi="lollipop">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/last_name_et"
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
@@ -222,16 +222,14 @@
 
         <TextView
             android:id="@+id/mail"
-            style="@style/EditTStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/email_icon"
             android:drawablePadding="@dimen/_8sdp"
-            android:enabled="false"
             android:hint="@string/mail"
             android:padding="@dimen/small_margin"
             android:text="@={viewModel.user.email}"
-            android:textSize="@dimen/very_large_font"
+            android:textAppearance="@style/CustomHeadline6"
             app:layout_constraintBottom_toTopOf="@+id/gender_btn"
             app:layout_constraintEnd_toEndOf="@+id/last_ti"
             app:layout_constraintStart_toStartOf="@+id/first_ti"

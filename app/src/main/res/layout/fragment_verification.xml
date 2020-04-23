@@ -1,92 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    tools:context=".ui.fragment.registration.VerificationFragment">
+    <data>
 
+        <variable
+            name="viewModel"
+            type="com.abdotareq.subway_e_ticketing.viewmodels.VerificationViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/verification_mail_tv"
-        style="@style/EditTStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:fontFamily="@font/segoe_ui"
-        android:textAlignment="center"
-        android:textSize="@dimen/_18sdp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView3" />
-
-    <TextView
-        style="@style/EditTStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:fontFamily="@font/segoe_ui"
-        android:text="@string/message3"
-        android:textAlignment="center"
-        android:textSize="@dimen/_18sdp"
-        app:layout_constraintBottom_toTopOf="@+id/verification_mail_tv"
-        app:layout_constraintEnd_toEndOf="@+id/verification_mail_tv"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/verification_mail_tv" />
-
-    <TextView
-        android:id="@+id/textView3"
-        style="@style/EditTStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/very_large_margin"
-        android:fontFamily="@font/segoe_ui"
-        android:text="@string/message4"
-        android:textAlignment="center"
-        android:textSize="@dimen/_18sdp"
-        app:layout_constraintBottom_toTopOf="@+id/verification_ti"
-        app:layout_constraintEnd_toEndOf="@+id/verification_ti"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/verification_ti" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/verification_ti"
-        style="@style/LoginTextInputLayoutStyle"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="@dimen/_4sdp"
-        android:hint="@string/enter_verification"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.registration.VerificationFragment">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/verification_et"
+        <TextView
+            android:id="@+id/verification_mail_tv"
             style="@style/EditTStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:fontFamily="@font/segoe_ui"
+            android:text="@{viewModel.mail}"
+            android:textAlignment="center"
+            android:textSize="@dimen/_18sdp"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView3" />
+
+        <TextView
+            style="@style/EditTStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:fontFamily="@font/segoe_ui"
+            android:text="@string/message3"
+            android:textAlignment="center"
+            android:textSize="@dimen/_18sdp"
+            app:layout_constraintBottom_toTopOf="@+id/verification_mail_tv"
+            app:layout_constraintEnd_toEndOf="@+id/verification_mail_tv"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/verification_mail_tv" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/EditTStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/very_large_margin"
+            android:fontFamily="@font/segoe_ui"
+            android:text="@string/message4"
+            android:textAlignment="center"
+            android:textSize="@dimen/_18sdp"
+            app:layout_constraintBottom_toTopOf="@+id/verification_ti"
+            app:layout_constraintEnd_toEndOf="@+id/verification_ti"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/verification_ti" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/verification_ti"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:hint="@string/enter_verification"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/verification_continue_btn"
-        style="@style/ButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:text="@string/continue_pass"
-        app:layout_constraintEnd_toEndOf="@+id/verification_ti"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/verification_ti"
-        app:layout_constraintTop_toBottomOf="@+id/verification_ti"
-        tools:targetApi="lollipop" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/verification_et"
+                style="@style/EditTStyle"
+                android:layout_width="match_parent"
+                android:text="@={viewModel.code}"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/verification_continue_btn"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:text="@string/continue_pass"
+            android:onClick="@{()-> viewModel.onContinue()}"
+            app:layout_constraintEnd_toEndOf="@+id/verification_ti"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/verification_ti"
+            app:layout_constraintTop_toBottomOf="@+id/verification_ti"
+            tools:targetApi="lollipop" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

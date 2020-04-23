@@ -37,7 +37,6 @@
             android:focusable="false"
             android:text="@string/_3le_ticket"
             android:textAppearance="@style/CustomHeadline5"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
