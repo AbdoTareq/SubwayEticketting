@@ -1,6 +1,6 @@
 package com.abdotareq.subway_e_ticketing.model
 
-interface UpdateUserInterface {
+interface UserInterface {
     fun onSuccess()
     fun onFail(responseCode: Int)
 }
@@ -10,3 +10,7 @@ interface GetUserInterface {
     fun onFail(responseCode: Int)
 }
 
+interface RegisterInterface {
+    fun onSuccess(token: String)
+    fun onFail(responseCode: Int)
+}

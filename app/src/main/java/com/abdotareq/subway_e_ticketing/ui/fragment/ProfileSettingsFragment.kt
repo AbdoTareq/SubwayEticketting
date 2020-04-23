@@ -21,10 +21,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.GetUserInterface
-import com.abdotareq.subway_e_ticketing.model.UpdateUserInterface
+import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.ui.activity.RegisterActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
@@ -284,7 +282,7 @@ class ProfileSettingsFragment : Fragment() {
         val progressDialog = util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
-        val profileInterface = object : UpdateUserInterface {
+        val profileInterface = object : UserInterface {
             override fun onSuccess() {
                 Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
                 progressDialog.dismiss()

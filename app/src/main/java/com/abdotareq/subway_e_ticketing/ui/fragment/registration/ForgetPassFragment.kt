@@ -53,7 +53,7 @@ class ForgetPassFragment : Fragment() {
         progressDialog.show()
 
         //start the call
-        UserApiObj.retrofitService.sendVerificationCode(user)?.enqueue(object : Callback<ResponseBody?> {
+        UserApiObj.retrofitService.sendVerificationCodeCall(user)?.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {

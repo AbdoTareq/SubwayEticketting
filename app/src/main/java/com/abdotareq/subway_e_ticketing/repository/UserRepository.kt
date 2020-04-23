@@ -2,7 +2,7 @@ package com.abdotareq.subway_e_ticketing.repository
 
 import com.abdotareq.subway_e_ticketing.model.GetUserInterface
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.model.UpdateUserInterface
+import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import kotlinx.coroutines.CoroutineScope
@@ -59,21 +59,21 @@ class UserRepository {
         }
     }
 
-    fun updateUser(bearerToken: String, user: User, updateUserInterface: UpdateUserInterface) {
+    fun updateUser(bearerToken: String, user: User, userInterface: UserInterface) {
         //start the call
         coroutineScope.launch {
             try {
                 UserApiObj.retrofitService.updateUser(user, bearerToken)
-                updateUserInterface.onSuccess()
+                userInterface.onSuccess()
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                updateUserInterface.onFail(e.code())
+                userInterface.onFail(e.code())
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                updateUserInterface.onFail(-2)
+                userInterface.onFail(-2)
             } catch (e: Exception) {
                 Timber.e(e)
-                updateUserInterface.onFail(-1)
+                userInterface.onFail(-1)
             }
         }
 
@@ -97,6 +97,27 @@ class UserRepository {
             }
         }
     }
+
+    fun sendVerificationCode(user: User, userInterface: UserInterface) {
+        //start the call
+        coroutineScope.launch {
+            try {
+                UserApiObj.retrofitService.sendVerificationCode(user)
+                userInterface.onSuccess()
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                userInterface.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                userInterface.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
+                userInterface.onFail(-1)
+            }
+        }
+    }
+
+    
 
     fun cancelJob() {
         job.cancel()

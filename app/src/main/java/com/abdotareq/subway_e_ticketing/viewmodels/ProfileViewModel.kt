@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.GetUserInterface
-import com.abdotareq.subway_e_ticketing.model.UpdateUserInterface
+import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import timber.log.Timber
@@ -115,13 +115,13 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
     /**
      * A method used to save a new user (sign up)
      */
-    fun saveUserCall(bearerToken: String, updateUserInterface: UpdateUserInterface) {
+    fun saveUserCall(bearerToken: String, userInterface: UserInterface) {
         //create MobileUser object and set it's attributes
 
         Timber.e("${user.value}")
 
         //start the call
-        userRepo.updateUser(bearerToken, _user.value!!, updateUserInterface)
+        userRepo.updateUser(bearerToken, _user.value!!, userInterface)
     }
 
     fun getUser(bearerToken: String, getUserInterface: GetUserInterface) {
