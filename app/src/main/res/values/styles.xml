@@ -46,7 +46,9 @@
     </style>
 
 
-    <style name="ButtonStyle">
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+
+        <item name="android:labelTextSize">@style/CustomHeadline3</item>
 
     </style>
 

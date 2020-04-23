@@ -91,8 +91,8 @@ class SignInFragment : Fragment() {
         }
         // not valid pass
         if (!viewModel.validatePass()) {
-            binding.passChangePass.error = getString(R.string.invalid_pass)
-            binding.passChangePass.requestFocus()
+            binding.passTi.error = getString(R.string.invalid_pass)
+            binding.passTi.requestFocus()
             return
         }
         // data is valid call authenticate

@@ -11,9 +11,9 @@ public class SharedPreferenceUtil {
     public final static String LOGGED_IN_FLAG = "LOGGED_IN_FLAG";
     public final static String USER_ID_FLAG = "USER_ID_FLAG";
 
-    //write token into SharedPreferences to use in remember user
-    public static void setSharedPrefsLoggedIn(Context context, boolean isChecked) {
+    public final static String USER_NIGHT_MODE = "USER_NIGHT_MODE";
 
+    public static void setSharedPrefsLoggedIn(Context context, boolean isChecked) {
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean(LOGGED_IN_FLAG, isChecked);
@@ -21,13 +21,27 @@ public class SharedPreferenceUtil {
 
     }
 
-    //get token from SharedPreferences to use in remember user
     public static boolean getSharedPrefsLoggedIn(Context context) {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
         return settings.getBoolean(LOGGED_IN_FLAG, false);
     }
 
+    public static void setSharedPrefsNightMode(Context context, boolean isChecked) {
+        SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean(USER_NIGHT_MODE, isChecked);
+        editor.apply();
+
+    }
+
+    public static boolean getSharedPrefsNightMode(Context context) {
+
+        SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
+        return settings.getBoolean(USER_NIGHT_MODE, false);
+    }
+
+    //write token into SharedPreferences to use in remember user
     public static void setSharedPrefsTokenId(Context context, String token) {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
@@ -37,10 +51,11 @@ public class SharedPreferenceUtil {
 
     }
 
+    //get token from SharedPreferences to use in remember user
     public static String getSharedPrefsTokenId(Context context) {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
-        return settings.getString(USER_ID_FLAG,"-1");
+        return settings.getString(USER_ID_FLAG, "-1");
 
     }
 

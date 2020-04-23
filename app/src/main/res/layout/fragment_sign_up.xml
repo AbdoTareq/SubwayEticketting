@@ -47,6 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toStartOf="@+id/lName_ti"
             app:layout_constraintStart_toStartOf="@+id/v_line1"
             app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -64,8 +65,7 @@
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
-                android:text="@={viewModel.first}"
-                 />
+                android:text="@={viewModel.first}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,6 +74,7 @@
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginEnd="@dimen/small_margin"
             android:importantForAutofill="no"
             app:hintTextColor="@color/primaryTextColor"
@@ -94,8 +95,7 @@
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
-                android:text="@={viewModel.last}"
-                 />
+                android:text="@={viewModel.last}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -199,7 +199,6 @@
             android:text="@={viewModel.gender}"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="@dimen/very_large_font"
             app:layout_constraintBottom_toBottomOf="@+id/sign_up_calender"
             app:layout_constraintEnd_toStartOf="@+id/v_line2"
             app:layout_constraintStart_toStartOf="@+id/v_line1"

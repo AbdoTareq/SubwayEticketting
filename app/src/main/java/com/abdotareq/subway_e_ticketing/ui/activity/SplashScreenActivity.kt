@@ -28,7 +28,11 @@ class SplashScreenActivity : AwesomeSplash() {
 
         userRepository = UserRepository()
 
-//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        // this for settings dark mode
+        if (SharedPreferenceUtil.getSharedPrefsNightMode(this))
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
 
         /* you don't have to override every property */
@@ -42,7 +46,7 @@ class SplashScreenActivity : AwesomeSplash() {
         }
 
         //Customize Circular Reveal
-        configSplash.backgroundColor = R.color.darkGray //any color you want form colors.xml
+        configSplash.backgroundColor = R.color.primaryColor //any color you want form colors.xml
         configSplash.animCircularRevealDuration = 2000 //int ms
         configSplash.revealFlagX = Flags.REVEAL_RIGHT //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
@@ -55,14 +59,14 @@ class SplashScreenActivity : AwesomeSplash() {
         configSplash.animLogoSplashTechnique = Techniques.Landing //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
         //Customize Path
-     /*   configSplash.setPathSplash(R.string.account_Settings.toString()); //set path String
-        configSplash.setOriginalHeight(400); //in relation to your svg (path) resource
-        configSplash.setOriginalWidth(400); //in relation to your svg (path) resource
-        configSplash.setAnimPathStrokeDrawingDuration(3000);
-        configSplash.setPathSplashStrokeSize(3); //I advise value be <5
-        configSplash.setPathSplashStrokeColor(R.color.primaryTextColor); //any color you want form colors.xml
-        configSplash.setAnimPathFillingDuration(3000);
-        configSplash.setPathSplashFillColor(R.color.design_default_color_on_primary); //path object filling color*/
+        /*   configSplash.setPathSplash(R.string.account_Settings.toString()); //set path String
+           configSplash.setOriginalHeight(400); //in relation to your svg (path) resource
+           configSplash.setOriginalWidth(400); //in relation to your svg (path) resource
+           configSplash.setAnimPathStrokeDrawingDuration(3000);
+           configSplash.setPathSplashStrokeSize(3); //I advise value be <5
+           configSplash.setPathSplashStrokeColor(R.color.primaryTextColor); //any color you want form colors.xml
+           configSplash.setAnimPathFillingDuration(3000);
+           configSplash.setPathSplashFillColor(R.color.design_default_color_on_primary); //path object filling color*/
 
         configSplash.titleTextColor = R.color.secondaryTextColor
         configSplash.titleTextSize = 30f //float value
@@ -80,6 +84,7 @@ class SplashScreenActivity : AwesomeSplash() {
                 user = userPassed
                 configSplash.titleSplash = "${getString(R.string.welcome)} ${user?.first_name} ${user?.last_name} "
             }
+
             override fun onFail(responseCode: Int) {
                 Toast.makeText(this@SplashScreenActivity, getErrorMessage(responseCode, application), Toast.LENGTH_LONG).show()
                 configSplash.titleSplash = getString(R.string.app_name)

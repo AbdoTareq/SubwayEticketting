@@ -82,7 +82,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pass_change_pass"
+                android:id="@+id/pass_ti"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,6 +106,7 @@
         <Button
             android:id="@+id/sign_in_btn"
             android:layout_width="0dp"
+            style="@style/ButtonStyle"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
             android:onClick="@{() -> viewmodel.onAuthenticate()}"

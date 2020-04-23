@@ -45,6 +45,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/last_ti"
             app:layout_constraintEnd_toStartOf="@+id/v_line2"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +64,7 @@
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
-                android:text="@={viewModel.user.first_name}"
-                 />
+                android:text="@={viewModel.user.first_name}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,6 +73,7 @@
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/small_margin"
             android:importantForAutofill="no"
@@ -102,6 +103,7 @@
         <Button
             android:id="@+id/gender_btn"
             android:layout_width="0dp"
+            style="@style/ButtonStyle"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:drawableStart="@drawable/gender_icon"
