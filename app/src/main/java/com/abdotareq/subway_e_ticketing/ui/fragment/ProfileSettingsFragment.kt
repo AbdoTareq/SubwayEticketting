@@ -185,7 +185,6 @@ class ProfileSettingsFragment : Fragment() {
         //start the call
         val getUserInterface = object : GetUserInterface {
             override fun onSuccess(userPassed: User) {
-                //user authenticated successfully
                 user = userPassed
                 progressDialog.dismiss()
 
