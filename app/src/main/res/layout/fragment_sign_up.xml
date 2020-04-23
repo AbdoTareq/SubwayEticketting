@@ -13,7 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primaryColor"
         tools:context=".ui.fragment.registration.SignUpFragment">
 
         <TextView
@@ -24,8 +23,7 @@
             android:fontFamily="@font/segoe_ui"
             android:gravity="center"
             android:text="@string/sign_up"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/sign_in_main_text_size"
+            android:textAppearance="@style/CustomHeadline3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
@@ -67,7 +65,7 @@
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
                 android:text="@={viewModel.first}"
-                android:textCursorDrawable="@color/primaryTextColor" />
+                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,7 +95,7 @@
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
                 android:text="@={viewModel.last}"
-                android:textCursorDrawable="@color/primaryTextColor" />
+                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,8 +130,6 @@
                     android:padding="@dimen/small_margin"
                     android:text="@={viewModel.mail}"
                     android:textAlignment="viewStart"
-                    android:textColorHighlight="@color/primaryColor"
-                    android:textCursorDrawable="@color/primaryTextColor"
                     tools:targetApi="lollipop" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -146,7 +142,6 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/primaryTextColor"
                 tools:targetApi="lollipop">
 
                 <EditText
@@ -161,7 +156,7 @@
                     android:inputType="textPassword"
                     android:padding="16dp"
                     android:text="@={viewModel.pass}"
-                    android:textCursorDrawable="@color/primaryTextColor" />
+                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -173,7 +168,6 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/primaryTextColor"
                 tools:targetApi="lollipop">
 
                 <EditText
@@ -188,7 +182,7 @@
                     android:inputType="textPassword"
                     android:padding="16dp"
                     android:text="@={viewModel.confPass}"
-                    android:textCursorDrawable="@color/primaryTextColor" />
+                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -197,7 +191,6 @@
 
         <Button
             android:id="@+id/sign_up_gender_btn"
-            style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/small_margin"
@@ -241,9 +234,7 @@
             android:fontFamily="@font/segoe_ui"
             android:onClick="@{() -> viewModel.onRegister()}"
             android:padding="15dp"
-            android:shadowColor="@android:color/transparent"
             android:text="@string/sign_up"
-            android:textSize="@dimen/sign_in_medium_text_size"
             app:layout_constraintBottom_toTopOf="@+id/sign_up_sign_in_tv"
             app:layout_constraintEnd_toEndOf="@+id/sign_up_calender"
             app:layout_constraintStart_toStartOf="@+id/sign_up_gender_btn"
@@ -258,7 +249,6 @@
             android:onClick="@{() -> viewModel.onSignIn()}"
             android:text="@string/signIn"
             android:textAppearance="@style/CustomHeadline4"
-            android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
 

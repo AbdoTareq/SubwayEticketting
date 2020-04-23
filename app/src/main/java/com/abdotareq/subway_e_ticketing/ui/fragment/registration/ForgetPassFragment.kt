@@ -36,9 +36,13 @@ class ForgetPassFragment : Fragment() {
         _binding = FragmentForgetPassBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // this for view binding to replace findviewbyid
         binding.forgetPassSendVerificationBtn.setOnClickListener {
-            sendVerificationCode(binding.forgetPassMailEt.text.toString())
+            if (!util.isValidEmail(binding.forgetPassMailEt.text.toString()))
+                sendVerificationCode(binding.forgetPassMailEt.text.toString())
+            else {
+                binding.forgetPassMailEt.error = getString(R.string.invalid_mail_warning)
+                binding.forgetPassMailEt.requestFocus()
+            }
         }
 
         return view

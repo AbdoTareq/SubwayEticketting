@@ -14,7 +14,6 @@
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/small_margin"
-        android:textColor="@color/primaryColor"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -26,7 +25,7 @@
             android:hint="@string/old_password"
             android:inputType="textPassword"
             android:padding="@dimen/small_margin"
-            android:textColor="@color/primaryColor" />
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -38,7 +37,6 @@
         android:layout_marginStart="@dimen/small_margin"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="@dimen/small_margin"
-        android:textColor="@color/primaryColor"
         app:passwordToggleEnabled="true">
 
         <EditText
@@ -81,14 +79,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/third"
-        android:textColor="@color/primaryTextColor"
         android:layout_alignStart="@+id/third"
         android:layout_alignEnd="@+id/third"
-        android:text="@string/change_pass_button"
         android:layout_marginTop="@dimen/medium_margin"
         android:layout_marginEnd="3dp"
-        android:background="@drawable/shape_sign_up"
         android:hint="@string/confirm_new_pass"
-        android:padding="@dimen/_8sdp" />
+        android:padding="@dimen/_8sdp"
+        android:text="@string/change_pass_button"
+         />
 
 </RelativeLayout>

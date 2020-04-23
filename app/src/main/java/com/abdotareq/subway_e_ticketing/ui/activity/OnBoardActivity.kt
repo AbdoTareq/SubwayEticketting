@@ -16,7 +16,7 @@ class OnBoardActivity : TutorialActivity() {
 
         addFragment(Step.Builder().setTitle(getString(R.string.create_new_account))
                 .setContent(getString(R.string.tut_acc_mess))
-                .setBackgroundColor(ContextCompat.getColor(this, R.color.primaryColor)) // int background color
+                .setBackgroundColor(ContextCompat.getColor(this, R.color.darkGray)) // int background color
                 .setDrawable(R.drawable.create_account_image) // int top drawable
                 .build())
 
@@ -28,7 +28,7 @@ class OnBoardActivity : TutorialActivity() {
 
         addFragment(Step.Builder().setTitle(getString(R.string.scan_code))
                 .setContent(getString(R.string.tut_scan_code))
-                .setBackgroundColor(ContextCompat.getColor(this, R.color.secondaryColor)) // int background color
+                .setBackgroundColor(ContextCompat.getColor(this, R.color.darkOrange)) // int background color
                 .setDrawable(R.drawable.scan_code_image) // int top drawable
                 .build())
 

@@ -13,7 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primaryColor"
         tools:context=".ui.fragment.ticket.TicketFragment">
 
         <TextView
@@ -22,7 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
             android:text="@string/history"
-            android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/_35sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

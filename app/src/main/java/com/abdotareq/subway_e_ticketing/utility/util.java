@@ -28,7 +28,7 @@ public class util {
         return Pattern.compile("^(?=.*\\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,12}$").matcher(target).matches();
     }
 
-    // return true when mail is valid
+    // return true when mail isn't valid
     public static boolean isValidEmail(CharSequence target) {String regExpn = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
             + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
             + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."

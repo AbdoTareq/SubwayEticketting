@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primaryColor"
+
         tools:context=".ui.fragment.registration.SignInFragment">
 
         <TextView
@@ -24,7 +24,6 @@
             android:layout_marginTop="@dimen/large_margin"
             android:gravity="center"
             android:text="@string/signIn"
-            android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
@@ -36,7 +35,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/message2"
-            android:textColor="@color/primaryTextColor"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -79,8 +78,7 @@
                     android:drawablePadding="@dimen/_8sdp"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_10sdp"
-                    android:text="@={viewmodel.mail}"
-                    android:textCursorDrawable="@color/primaryTextColor" />
+                    android:text="@={viewmodel.mail}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -89,9 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
-                android:textCursorDrawable="@color/secondaryColor"
-                app:endIconMode="password_toggle"
-                app:endIconTint="@color/primaryTextColor">
+                app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pass_et"
@@ -101,10 +97,7 @@
                     android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="@dimen/_8sdp"
                     android:padding="@dimen/_10sdp"
-                    android:text="@={viewmodel.pass}"
-                    android:textColor="@color/primaryTextColor"
-                    android:textColorHint="@color/primaryTextColor"
-                    android:textCursorDrawable="@color/primaryTextColor" />
+                    android:text="@={viewmodel.pass}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -115,11 +108,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
-            android:backgroundTint="@color/primaryDarkColor"
             android:onClick="@{() -> viewmodel.onAuthenticate()}"
             android:padding="@dimen/_12sdp"
             android:text="@string/log_in"
-            android:textSize="@dimen/sign_in_medium_text_size"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
             app:layout_constraintStart_toStartOf="@+id/linearLayout3"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
@@ -132,7 +123,7 @@
             android:layout_marginTop="@dimen/small_margin"
             android:onClick="@{()->viewmodel.onRecoverPass()}"
             android:text="@string/forget_pass"
-            android:textColor="@color/primaryTextColor"
+
             android:textSize="@dimen/_15sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +137,7 @@
             android:gravity="center"
             android:onClick="@{()->viewmodel.onSignUp()}"
             android:text="@string/create_new_account"
-            android:textColor="@color/primaryTextColor"
+
             android:textSize="@dimen/sign_in_sub_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

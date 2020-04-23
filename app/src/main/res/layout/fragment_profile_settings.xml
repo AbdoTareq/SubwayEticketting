@@ -14,7 +14,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primaryColor"
         tools:context=".ui.fragment.ProfileSettingsFragment">
 
         <TextView
@@ -23,7 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/account_info"
-            android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/large_margin"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,8 +33,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{() -> viewModel.onChangePhoto()}"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +64,7 @@
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
                 android:text="@={viewModel.user.first_name}"
-                android:textCursorDrawable="@color/primaryTextColor" />
+                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,6 +73,7 @@
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/small_margin"
             android:importantForAutofill="no"
             app:hintTextColor="@color/primaryTextColor"
@@ -97,28 +94,22 @@
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
-                android:text="@={viewModel.user.last_name}"
-                android:textCursorDrawable="@color/primaryTextColor" />
+                android:text="@={viewModel.user.last_name}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <Button
             android:id="@+id/gender_btn"
-            style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
             android:drawableStart="@drawable/gender_icon"
-            android:fontFamily="@font/segoe_ui"
             android:hint="@string/select_gender"
             android:onClick="@{() -> viewModel.onGender()}"
-            android:padding="@dimen/small_margin"
             android:text="@={viewModel.user.gender}"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="@dimen/large_font"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/calender"
             app:layout_constraintEnd_toEndOf="@+id/first_ti"
             app:layout_constraintStart_toStartOf="@+id/first_ti"
@@ -131,14 +122,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:drawableStart="@drawable/calender_icon"
-            android:fontFamily="@font/segoe_ui"
             android:hint="@string/birth_date"
             android:onClick="@{() -> viewModel.onBirth()}"
             android:padding="@dimen/small_margin"
             android:text="@={viewModel.user.birth_date}"
             android:textAllCaps="false"
-            android:textSize="@dimen/large_font"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/guideline9"
             app:layout_constraintEnd_toEndOf="@+id/last_ti"
             app:layout_constraintStart_toStartOf="@+id/last_ti"
@@ -151,7 +139,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/shape_sign_up"
             android:onClick="@{() -> viewModel.onChangePass()}"
             android:padding="15dp"
             android:text="@string/change_pass_button"
@@ -166,11 +153,9 @@
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/shape_sign_up"
             android:onClick="@{() -> viewModel.onSave()}"
             android:padding="15dp"
             android:text="@string/save"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/change_pass_btn"
             app:layout_constraintEnd_toEndOf="@+id/calender"
             app:layout_constraintHorizontal_bias="1.0"
@@ -184,12 +169,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/shape_sign_up"
+
             android:onClick="@{()->viewModel.onLogout()}"
             android:padding="15dp"
             android:text="@string/log_out"
-            android:textSize="@dimen/very_large_font"
-            android:textStyle="bold"
+
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
             app:layout_constraintEnd_toEndOf="@+id/calender"
             app:layout_constraintHorizontal_bias="1.0"
@@ -262,10 +246,9 @@
             android:id="@+id/pick_image"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="3dp"
-            android:background="@drawable/shape_profile_change"
+            android:layout_marginBottom="4dp"
             android:onClick="@{() -> viewModel.onChangePhoto()}"
             android:src="@drawable/change_pic1"
             app:layout_constraintBottom_toBottomOf="@+id/profile_image"

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -11,6 +11,7 @@
         <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
         <item name="colorOnSecondary">@color/secondaryTextColor</item>
         <item name="android:fontFamily">@font/segoe_ui</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">true</item>
         <item name="fontFamily">@font/segoe_ui</item>
         <item name="textAppearanceHeadline6">@style/CustomHeadline6</item>
     </style>
@@ -31,37 +32,22 @@
     </style>
 
     <style name="EditTStyle">
-        <item name="android:textColor">@color/primaryTextColor</item>
-        <item name="fontFamily">@font/segoe_ui</item>
-        <item name="android:textSize">@dimen/very_large_font</item>
-        <item name="android:textColorHint">@color/primaryTextColor</item>
+
     </style>
 
 
     <style name="ChangePassStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxStrokeColor">@color/primaryTextColor</item>
-        <item name="android:textColorHint">@color/secondaryTextColor</item>
-        <item name="android:textColor">@color/secondaryTextColor</item>
-        <item name="android:textColorHighlight">@color/secondaryTextColor</item>
-        <item name="boxStrokeWidth">2dp</item>
+
     </style>
 
 
     <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxStrokeColor">@color/primaryTextColor</item>
-        <item name="android:textColorHint">@color/primaryTextColor</item>
-        <item name="android:textColor">@color/primaryTextColor</item>
-        <item name="hintTextColor">@color/primaryTextColor</item>
-        <item name="boxStrokeWidth">2dp</item>
+
     </style>
 
 
     <style name="ButtonStyle">
-        <item name="strokeColor">@color/secondaryColor</item>
-        <item name="colorAccent">@color/primaryTextColor</item>
-        <item name="android:textColor">@color/primaryTextColor</item>
-        <item name="fontFamily">@font/segoe_ui</item>
-        <item name="backgroundTint">@color/primaryDarkColor</item>
+
     </style>
 
 

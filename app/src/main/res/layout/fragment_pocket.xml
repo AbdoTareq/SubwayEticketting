@@ -13,7 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/primaryColor"
         tools:context=".ui.fragment.ticket.TicketFragment">
 
         <TextView
@@ -24,7 +23,6 @@
             android:layout_marginEnd="8dp"
             android:text="@string/available_tickets"
             android:textAlignment="center"
-            android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +37,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/in_use_tickets"
             android:textAlignment="center"
-            android:textColor="@color/primaryTextColor"
+
             android:textSize="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

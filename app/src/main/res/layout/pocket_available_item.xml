@@ -20,6 +20,7 @@
         android:layout_marginTop="@dimen/very_small_margin"
         android:layout_marginBottom="@dimen/very_small_margin"
         android:background="@drawable/shape_sign_up"
+        android:backgroundTint="@color/lightBlue"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{()-> clickListener.onClick(boughtTicket)}"
@@ -36,7 +37,7 @@
             android:focusable="false"
             android:text="@string/_3le_ticket"
             android:textAppearance="@style/CustomHeadline5"
-            android:textColor="@color/primaryTextColor"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +53,7 @@
             android:lines="1"
             android:text="@string/use"
             android:textAppearance="@style/CustomHeadline5"
-            android:textColor="@color/primaryTextColor"
+
             android:textSize="@dimen/medium_margin"
             app:layout_constraintBottom_toBottomOf="@+id/ticket_price"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
