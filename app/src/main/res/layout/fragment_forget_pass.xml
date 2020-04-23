@@ -1,53 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.registration.ForgetPassFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mail_Ti"
-        style="@style/LoginTextInputLayoutStyle"
+        <variable
+            name="viewModel"
+            type="com.abdotareq.subway_e_ticketing.viewmodels.ForgetPassViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginEnd="@dimen/_32sdp"
-        android:layout_marginBottom="@dimen/_4sdp"
-        android:hint="@string/mail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.registration.ForgetPassFragment">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/forget_pass_mail_et"
-            style="@style/EditTStyle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mail_Ti"
+            style="@style/LoginTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/email_icon"
-            android:drawablePadding="@dimen/_8sdp"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/_10sdp"
-             />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="@dimen/_32sdp"
+            android:layout_marginEnd="@dimen/_32sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:hint="@string/mail"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/forget_pass_send_verification_btn"
-        style="@style/ButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:fontFamily="@font/segoe_ui"
-        android:padding="15dp"
-        android:text="@string/send_verification_code"
-        app:layout_constraintEnd_toEndOf="@+id/mail_Ti"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/mail_Ti"
-        app:layout_constraintTop_toBottomOf="@+id/mail_Ti"
-        tools:targetApi="lollipop" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/forget_pass_mail_et"
+                style="@style/EditTStyle"
+                android:text="@={viewModel.mail}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/email_icon"
+                android:drawablePadding="@dimen/_8sdp"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_10sdp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/forget_pass_send_verification_btn"
+            style="@style/ButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:fontFamily="@font/segoe_ui"
+            android:padding="15dp"
+            android:onClick="@{()->viewModel.onSendCode()}"
+            android:text="@string/send_verification_code"
+            app:layout_constraintEnd_toEndOf="@+id/mail_Ti"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/mail_Ti"
+            app:layout_constraintTop_toBottomOf="@+id/mail_Ti"
+            tools:targetApi="lollipop" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
