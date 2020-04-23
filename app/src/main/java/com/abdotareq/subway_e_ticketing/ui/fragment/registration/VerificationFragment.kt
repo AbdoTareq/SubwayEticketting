@@ -74,7 +74,7 @@ class VerificationFragment : Fragment() {
         progressDialog.show()
 
         //start the call
-        UserApiObj.retrofitService.verifyCode(user)?.enqueue(object : Callback<Token?> {
+        UserApiObj.retrofitService.verifyCodeCall(user)?.enqueue(object : Callback<Token?> {
             override fun onResponse(call: Call<Token?>, response: Response<Token?>) {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {

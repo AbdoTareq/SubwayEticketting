@@ -37,7 +37,6 @@ class UserRepository {
                 registerInterface.onFail(-1)
             }
         }
-
     }
 
     fun signUpCall(user: User, registerInterface: RegisterInterface) {
@@ -117,7 +116,43 @@ class UserRepository {
         }
     }
 
-    
+    fun verifyCode(user: User, registerInterface: RegisterInterface) {
+        coroutineScope.launch {
+            try {
+                val token = UserApiObj.retrofitService.verifyCode(user)
+                registerInterface.onSuccess(token!!.token)
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                registerInterface.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                registerInterface.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
+                registerInterface.onFail(-1)
+            }
+        }
+    }
+
+    fun changePass(user: User, bearerToken: String, userInterface: UserInterface) {
+        //start the call
+        coroutineScope.launch {
+            try {
+                UserApiObj.retrofitService.changePass(user, bearerToken)
+                userInterface.onSuccess()
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                userInterface.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                userInterface.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
+                userInterface.onFail(-1)
+            }
+        }
+    }
+
 
     fun cancelJob() {
         job.cancel()

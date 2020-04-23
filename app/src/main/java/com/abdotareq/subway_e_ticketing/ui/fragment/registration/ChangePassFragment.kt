@@ -1,6 +1,5 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.registration
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -105,7 +104,7 @@ class ChangePassFragment : Fragment() {
         val progressDialog = util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
         //start the call
-        UserApiObj.retrofitService.changePass(user, bearerToken)?.enqueue(object : retrofit2.Callback<ResponseBody?> {
+        UserApiObj.retrofitService.changePassCall(user, bearerToken)?.enqueue(object : retrofit2.Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 val responseCode = response.code()
                 if (responseCode in 200..299 && response.body() != null) {

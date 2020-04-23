@@ -44,14 +44,19 @@ interface UserApiService {
     @POST("users/forgetpassword")
     suspend fun sendVerificationCode(@Body user: User?): ResponseBody?
 
+    @POST("users/verifyotp")
+    fun verifyCodeCall(@Body user: User?): Call<Token?>?
 
     @POST("users/verifyotp")
-    fun verifyCode(@Body user: User?): Call<Token?>?
+    suspend fun verifyCode(@Body user: User?): Token?
 
     // "Used to Change Password after verifying the 6-digit code"
     // be careful that header has key(Authorization) & value ("Bearer " + token)
     @POST("users/changepassword")
-    fun changePass(@Body user: User?, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
+    fun changePassCall(@Body user: User?, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
+
+    @POST("users/changepassword")
+    suspend fun changePass(@Body user: User?, @Header("Authorization") bearerToken: String?): ResponseBody?
 
     // Used to Update Password From User Settings menu
     @POST("users/updatepassword")
