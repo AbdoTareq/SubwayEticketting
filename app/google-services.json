@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "9451048394",
+    "firebase_url": "https://sub-way-ticketing.firebaseio.com",
+    "project_id": "sub-way-ticketing",
+    "storage_bucket": "sub-way-ticketing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9451048394:android:bf6ce858441fb8db8a1333",
+        "android_client_info": {
+          "package_name": "com.abdotareq.subwaye_ticketting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9451048394-sbqr0ln9m5in74vfujp0rikpmtq1rjbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3KkiafdBPcIHG0oz-m_z2FWMKuhZrdkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9451048394-sbqr0ln9m5in74vfujp0rikpmtq1rjbo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

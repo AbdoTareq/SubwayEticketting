@@ -2,9 +2,12 @@ package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.content.ContextCompat
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.crashlytics.android.Crashlytics
 import com.hololo.tutorial.library.Step
 import com.hololo.tutorial.library.TutorialActivity
 
@@ -13,6 +16,17 @@ class OnBoardActivity : TutorialActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // for firebase crash reports
+//        val crashButton = Button(this)
+//        crashButton.text = "Crash!"
+//        crashButton.setOnClickListener {
+//            Crashlytics.getInstance().crash() // Force a crash
+//        }
+//
+//        addContentView(crashButton, ViewGroup.LayoutParams(
+//                ViewGroup.LayoutParams.MATCH_PARENT,
+//                ViewGroup.LayoutParams.WRAP_CONTENT))
 
         addFragment(Step.Builder().setTitle(getString(R.string.create_new_account))
                 .setContent(getString(R.string.tut_acc_mess))
