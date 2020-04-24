@@ -13,20 +13,12 @@ import com.daimajia.androidanimations.library.Techniques
 import com.viksaa.sssplash.lib.activity.AwesomeSplash
 import com.viksaa.sssplash.lib.cnst.Flags
 import com.viksaa.sssplash.lib.model.ConfigSplash
-import timber.log.Timber
 
 class SplashScreenActivity : AwesomeSplash() {
-
-    private lateinit var userRepository: UserRepository
-    private lateinit var getUserInterface: GetUserInterface
-
-    private var user: User? = null
 
     //DO NOT OVERRIDE onCreate()!
     //if you need to start some services do it in initSplash()!
     override fun initSplash(configSplash: ConfigSplash) {
-
-        userRepository = UserRepository()
 
         // this for settings dark mode
         if (SharedPreferenceUtil.getSharedPrefsNightMode(this))
@@ -38,8 +30,10 @@ class SplashScreenActivity : AwesomeSplash() {
         /* you don't have to override every property */
 
         // if user logged get his data
-        if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this)) {
-            getUserData(SharedPreferenceUtil.getSharedPrefsTokenId(this), configSplash)
+        if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this)
+                && !SharedPreferenceUtil.getSharedPrefsName(this).isNullOrEmpty()) {
+            configSplash.titleSplash =
+                    "${getString(R.string.welcome)} ${SharedPreferenceUtil.getSharedPrefsName(this)} "
         } else {
             //Customize Title
             configSplash.titleSplash = getString(R.string.app_name)
@@ -75,24 +69,6 @@ class SplashScreenActivity : AwesomeSplash() {
 
     }
 
-    private fun getUserData(userIdToken: String, configSplash: ConfigSplash) {
-        var bearerToken = "Bearer "
-        bearerToken += userIdToken
-
-        getUserInterface = object : GetUserInterface {
-            override fun onSuccess(userPassed: User) {
-                user = userPassed
-                configSplash.titleSplash = "${getString(R.string.welcome)} ${user?.first_name} ${user?.last_name} "
-            }
-
-            override fun onFail(responseCode: Int) {
-                Toast.makeText(this@SplashScreenActivity, getErrorMessage(responseCode, application), Toast.LENGTH_LONG).show()
-                configSplash.titleSplash = getString(R.string.app_name)
-            }
-        }
-        userRepository.getUserData(bearerToken, getUserInterface)
-    }
-
     override fun animationsFinished() {
         //transit to another activity here
         //or do whatever you want
@@ -100,12 +76,7 @@ class SplashScreenActivity : AwesomeSplash() {
             Intent(this@SplashScreenActivity, HomeLandActivity::class.java)
         } else
             Intent(this@SplashScreenActivity, OnBoardActivity::class.java)
-        try {
-//            user?.birth_date = user!!.birth_date?.substring(0..9)
-//            intent.putExtra("user", user) // sending user object.
-        } catch (e: Exception) {
-            Timber.e("$e")
-        }
+
         startActivity(intent)
         finish()
 

@@ -10,6 +10,7 @@ public class SharedPreferenceUtil {
 
     public final static String LOGGED_IN_FLAG = "LOGGED_IN_FLAG";
     public final static String USER_ID_FLAG = "USER_ID_FLAG";
+    public final static String USER_NAME_FLAG = "USER_NAME_FLAG";
 
     public final static String USER_NIGHT_MODE = "USER_NIGHT_MODE";
 
@@ -56,6 +57,24 @@ public class SharedPreferenceUtil {
 
         SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
         return settings.getString(USER_ID_FLAG, "-1");
+
+    }
+
+    //write token into SharedPreferences to use in remember user
+    public static void setSharedPrefsName(Context context, String name) {
+
+        SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(USER_NAME_FLAG, name);
+        editor.apply();
+
+    }
+
+    //get token from SharedPreferences to use in remember user
+    public static String getSharedPrefsName(Context context) {
+
+        SharedPreferences settings = context.getSharedPreferences("PREFS_NAME", 0);
+        return settings.getString(USER_NAME_FLAG, "");
 
     }
 

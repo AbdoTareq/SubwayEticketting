@@ -159,6 +159,7 @@ class SignUpFragment : Fragment() {
                 SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
                 SharedPreferenceUtil.setSharedPrefsTokenId(context, token)
                 progressDialog.dismiss()
+                SharedPreferenceUtil.setSharedPrefsName(context, "${viewModel.first.value} ${viewModel.last.value} ")
                 val intent = Intent(context, HomeLandActivity::class.java)
                 startActivity(intent)
                 activity!!.finishAffinity()

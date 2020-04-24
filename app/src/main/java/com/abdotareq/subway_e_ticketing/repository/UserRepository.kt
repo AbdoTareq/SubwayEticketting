@@ -75,21 +75,21 @@ class UserRepository {
 
     }
 
-    fun getUserData(bearerToken: String, updateUserInterface: GetUserInterface) {
+    fun getUserData(bearerToken: String, getUserInterface: GetUserInterface) {
         //start the call
         coroutineScope.launch {
             try {
                 val user = UserApiObj.retrofitService.getUser(bearerToken)
-                updateUserInterface.onSuccess(user)
+                getUserInterface.onSuccess(user)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                updateUserInterface.onFail(e.code())
+                getUserInterface.onFail(e.code())
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                updateUserInterface.onFail(-2)
+                getUserInterface.onFail(-2)
             } catch (e: Exception) {
                 Timber.e(e)
-                updateUserInterface.onFail(-1)
+                getUserInterface.onFail(-1)
             }
         }
     }

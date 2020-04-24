@@ -64,8 +64,6 @@ class ProfileSettingsFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        getUserFromSplash()
-
         viewModelFactory = ProfileViewModelFactory(user, application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
@@ -76,9 +74,7 @@ class ProfileSettingsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         // if failed to get user obj from splash screen get user call
-        if (user.first_name.isNullOrEmpty()) {
-            getUserFromCall(SharedPreferenceUtil.getSharedPrefsTokenId(context))
-        }
+        getUserFromCall(SharedPreferenceUtil.getSharedPrefsTokenId(context))
 
         viewModel.eventChangePass.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -123,27 +119,6 @@ class ProfileSettingsFragment : Fragment() {
         })
 
         return view
-    }
-
-    // get user obj from splash screen or get user call
-    private fun getUserFromSplash() {
-        // receive user obj from splash screen
-        try {
-            user = activity?.intent?.getParcelableExtra("user") as User
-            viewModel.user.value?.first_name = user.first_name
-            viewModel.user.value?.last_name = user.last_name
-            viewModel.user.value?.email = user.email
-            viewModel.user.value?.gender = user.gender
-
-        } catch (e: Exception) {
-            Timber.e(" getUser $e")
-        }
-        if (user.image != null) {
-            val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
-                binding.profileImage.setImageBitmap(it)
-            })
-            bitMapCon.execute(user.image)
-        }
     }
 
     private fun birthDateDialog() {
@@ -192,12 +167,7 @@ class ProfileSettingsFragment : Fragment() {
                 binding.genderBtn.text = user.gender
                 binding.calender.text = user.birth_date?.substring(0..9)
 
-                if (user.image != null) {
-                    val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
-                        binding.profileImage.setImageBitmap(it)
-                    })
-                    bitMapCon.execute(user.image)
-                }
+                SharedPreferenceUtil.setSharedPrefsName(context, "${user.first_name} ${user.last_name} ")
 
                 if (user.image != null) {
                     val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
@@ -276,6 +246,8 @@ class ProfileSettingsFragment : Fragment() {
     private fun updateUser() {
         var bearerToken = "Bearer "
         bearerToken += SharedPreferenceUtil.getSharedPrefsTokenId(context)
+
+        Timber.e("bearerToken $bearerToken")
 
         val progressDialog = util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
