@@ -19,3 +19,8 @@ interface BoughtTicketInterface {
     fun onSuccess(boughtTickets: List<BoughtTicket>)
     fun onFail(responseCode: String)
 }
+
+interface BuyInterface {
+    fun onSuccess()
+    fun onFail(responseCode: String)
+}

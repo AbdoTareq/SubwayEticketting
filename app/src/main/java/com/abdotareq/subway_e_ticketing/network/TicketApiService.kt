@@ -39,6 +39,12 @@ interface TicketApiService {
     @GET("tickets")
     suspend fun getBoughtTickets(@Header("Authorization") bearerToken: String): List<BoughtTicket>
 
+    @POST("tickets/insertmulti")
+    suspend fun insertMultiTickets(@Header("Authorization") bearerToken: String,
+                                   @Query("ownerEmail") ownerEmail: String,
+                                   @Query("price") price: Int,
+                                   @Query("number") number: Int)
+
 
 }
 

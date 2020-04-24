@@ -1,9 +1,6 @@
 package com.abdotareq.subway_e_ticketing.repository
 
-import com.abdotareq.subway_e_ticketing.model.BoughtTicketInterface
-import com.abdotareq.subway_e_ticketing.model.HistoryTicketInterface
-import com.abdotareq.subway_e_ticketing.model.CheckInTicketInterface
-import com.abdotareq.subway_e_ticketing.model.TicketTypeInterface
+import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.network.TicketApiObj
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -85,7 +82,6 @@ class TicketRepository {
         }
     }
 
-    // get checked-in tickets
     fun getBoughtTickets(token: String, boughtTicketInterface: BoughtTicketInterface) {
         //start the call
         val bearerToken = "Bearer $token"
@@ -102,6 +98,26 @@ class TicketRepository {
             } catch (e: Exception) {
                 Timber.e(e)
                 boughtTicketInterface.onFail(e.toString())
+            }
+        }
+    }
+
+    fun buyTickets(token: String, buyInterface: BuyInterface, ownerEmail: String, price: Int, ticketsNumber: Int) {
+        //start the call
+        val bearerToken = "Bearer $token"
+        coroutineScope.launch {
+            try {
+                TicketApiObj.retrofitService.insertMultiTickets(bearerToken, ownerEmail, price, ticketsNumber)
+                buyInterface.onSuccess()
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                buyInterface.onFail("${e.code()}")
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                buyInterface.onFail("-2")
+            } catch (e: Exception) {
+                Timber.e(e)
+                buyInterface.onFail(e.toString())
             }
         }
     }
