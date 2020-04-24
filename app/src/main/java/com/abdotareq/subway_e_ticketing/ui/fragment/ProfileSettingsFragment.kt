@@ -166,15 +166,14 @@ class ProfileSettingsFragment : Fragment() {
                 binding.mail.text = user.email
                 binding.genderBtn.text = user.gender
                 binding.calender.text = user.birth_date?.substring(0..9)
-
-                SharedPreferenceUtil.setSharedPrefsName(context, "${user.first_name} ${user.last_name} ")
-
                 if (user.image != null) {
                     val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
                         binding.profileImage.setImageBitmap(it)
                     })
                     bitMapCon.execute(user.image)
                 }
+
+                SharedPreferenceUtil.setSharedPrefsName(context, "${user.first_name} ${user.last_name} ")
 
                 progressDialog.dismiss()
             }
@@ -211,7 +210,7 @@ class ProfileSettingsFragment : Fragment() {
                 Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
             }
         }
-        viewModel.saveUserCall(bearerToken, user.id, profileInterface)
+        viewModel.saveUserCall(bearerToken, user.image, user.id, profileInterface)
     }
 
     private fun saveBtnClk() {
@@ -228,7 +227,7 @@ class ProfileSettingsFragment : Fragment() {
 
         updateUser()
     }
-    
+
     private fun openChangePassDialog() {
         val passDialog = ChangePassDialogFragment(binding.mail.text.toString())
         requireActivity().supportFragmentManager
@@ -296,6 +295,13 @@ class ProfileSettingsFragment : Fragment() {
                     binding.profileImage.setImageURI(selectedImageUri)
 
                     convertImageToString(selectedImageUri)
+
+                    if (user.image != null) {
+                        val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
+                            binding.profileImage.setImageBitmap(it)
+                        })
+                        bitMapCon.execute(user.image)
+                    }
 
                 } catch (e: Exception) {
                     Timber.e("error happened    $e")

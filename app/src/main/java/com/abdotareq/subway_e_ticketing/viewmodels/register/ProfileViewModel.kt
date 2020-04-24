@@ -115,10 +115,11 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
     /**
      * A method used to save a new user (sign up)
      */
-    fun saveUserCall(bearerToken: String, userId: Int, userInterface: UserInterface) {
+    fun saveUserCall(bearerToken: String, userImage: String?, userId: Int, userInterface: UserInterface) {
         //create MobileUser object and set it's attributes
 
         _user.value!!.id = userId
+        _user.value!!.image = userImage
         Timber.e("${_user.value}")
 
         //start the call
