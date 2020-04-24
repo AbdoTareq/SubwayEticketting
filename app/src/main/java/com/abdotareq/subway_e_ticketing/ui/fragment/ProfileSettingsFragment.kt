@@ -206,9 +206,7 @@ class ProfileSettingsFragment : Fragment() {
                     bitMapCon.execute(user.image)
                 }
 
-                Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
                 progressDialog.dismiss()
-
             }
 
             override fun onFail(responseCode: Int) {

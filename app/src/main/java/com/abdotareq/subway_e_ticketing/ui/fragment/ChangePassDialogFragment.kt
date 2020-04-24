@@ -6,19 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.core.content.ContextCompat.getColor
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ChangePassDialogeBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.NoNetworkException
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.model.UserPassword
-import com.abdotareq.subway_e_ticketing.network.UserApiObj
+import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.util
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Response
 import timber.log.Timber
 
 class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment() {
@@ -27,16 +22,18 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
 
     private var mail: String = mailToString
 
+    private lateinit var userRepository: UserRepository
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ChangePassDialogeBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        userRepository = UserRepository()
 
         binding.confirmBtn.setOnClickListener {
             Timber.i("${binding.oldPass.text}  new: ${binding.newPassword.text}   CONFIRM: ${binding.confirmNewPassword.text}")
 
             checkPass()
-
 
         }
 
@@ -75,34 +72,27 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
         val progressDialog = util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
 
-        val userPass = UserPassword(oldPass, newPass, mail)
-
-        Timber.i("$userPass")
-
-        //start the call
-        UserApiObj.retrofitService.updatePass(userPass, bearerToken)?.enqueue(object : retrofit2.Callback<ResponseBody?> {
-            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-                val responseCode = response.code()
-                if (responseCode in 200..299 && response.body() != null) {
-                    //pass changed successfully
-                    Toast.makeText(context, "Pass changed", Toast.LENGTH_SHORT).show()
-                    progressDialog.dismiss()
-                    // to close pass dialog
-                    dismiss()
-
-                } else {
-                    //user not saved successfully
-                    progressDialog.dismiss()
-                    Timber.i("responseCode: $responseCode ")
-                    Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+        val userInterface = object : UserInterface {
+            override fun onSuccess() {
+                //pass changed successfully
+                Toast.makeText(context, "Pass changed", Toast.LENGTH_SHORT).show()
                 progressDialog.dismiss()
-                Toast.makeText(context, getErrorMessage(NoNetworkException, activity!!.application), Toast.LENGTH_LONG).show()
+                // to close pass dialog
+                dismiss()
             }
-        })
+
+            override fun onFail(responseCode: Int) {
+                progressDialog.dismiss()
+                Timber.i("responseCode: $responseCode ")
+                Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
+            }
+        }
+
+        val userPass = UserPassword(oldPass, newPass, mail)
+        userRepository.updatePass(userPass, bearerToken, userInterface)
+
+        Timber.e("$userPass")
+
 
     }
 

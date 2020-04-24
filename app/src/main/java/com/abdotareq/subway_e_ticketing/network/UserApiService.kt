@@ -39,13 +39,7 @@ interface UserApiService {
     suspend fun authenticate(@Body user: User?): Token?
 
     @POST("users/forgetpassword")
-    fun sendVerificationCodeCall(@Body user: User?): Call<ResponseBody?>?
-
-    @POST("users/forgetpassword")
     suspend fun sendVerificationCode(@Body user: User?): ResponseBody?
-
-    @POST("users/verifyotp")
-    fun verifyCodeCall(@Body user: User?): Call<Token?>?
 
     @POST("users/verifyotp")
     suspend fun verifyCode(@Body user: User?): Token?
@@ -53,14 +47,14 @@ interface UserApiService {
     // "Used to Change Password after verifying the 6-digit code"
     // be careful that header has key(Authorization) & value ("Bearer " + token)
     @POST("users/changepassword")
-    fun changePassCall(@Body user: User?, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
-
-    @POST("users/changepassword")
     suspend fun changePass(@Body user: User?, @Header("Authorization") bearerToken: String?): ResponseBody?
 
     // Used to Update Password From User Settings menu
     @POST("users/updatepassword")
-    fun updatePass(@Body userPassword: UserPassword, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
+    fun updatePassCall(@Body userPassword: UserPassword, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
+
+    @POST("users/updatepassword")
+    suspend fun updatePass(@Body userPassword: UserPassword, @Header("Authorization") bearerToken: String?): ResponseBody
 
     // get user by token as it contains user id
     @GET("users/user")

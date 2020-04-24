@@ -1,9 +1,6 @@
 package com.abdotareq.subway_e_ticketing.repository
 
-import com.abdotareq.subway_e_ticketing.model.GetUserInterface
-import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.model.UserInterface
-import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -153,6 +150,24 @@ class UserRepository {
         }
     }
 
+    fun updatePass(userPassword: UserPassword, bearerToken: String, userInterface: UserInterface) {
+        //start the call
+        coroutineScope.launch {
+            try {
+                UserApiObj.retrofitService.updatePass(userPassword, bearerToken)
+                userInterface.onSuccess()
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                userInterface.onFail(e.code())
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                userInterface.onFail(-2)
+            } catch (e: Exception) {
+                Timber.e(e)
+                userInterface.onFail(-1)
+            }
+        }
+    }
 
     fun cancelJob() {
         job.cancel()
