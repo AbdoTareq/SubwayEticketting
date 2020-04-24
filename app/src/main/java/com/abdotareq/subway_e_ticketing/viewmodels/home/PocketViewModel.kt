@@ -32,7 +32,6 @@ enum class BoughtApiStatus { LOADING, ERROR, DONE, EMPTY }
 /**
  * ViewModel for SleepTrackerFragment.
  */
-// todo implement if there is no data user doesn't buy tickets or use it (history screen & Pocket)
 class PocketViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
 
 

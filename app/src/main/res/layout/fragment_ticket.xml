@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.ticket.TicketFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/tickets_header"
             android:layout_width="wrap_content"

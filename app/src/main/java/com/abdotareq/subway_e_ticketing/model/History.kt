@@ -1,20 +1,13 @@
 package com.abdotareq.subway_e_ticketing.model
 
-import android.os.Build
 import android.os.Parcelable
-import androidx.annotation.RequiresApi
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.JsonReader
-import com.squareup.moshi.JsonWriter
 import kotlinx.android.parcel.Parcelize
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
 /**
- * Document for out_tickets Collection with JPA annotations for out_ticket
+ * out_tickets
  */
 @Parcelize
 data class History(@Json(name = "id") val id: String? = null,

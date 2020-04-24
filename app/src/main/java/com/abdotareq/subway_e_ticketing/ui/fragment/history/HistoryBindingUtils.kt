@@ -21,7 +21,6 @@ import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.History
 
-// TODO CHANGE TICKET TO Out_Ticket
 @BindingAdapter("setTicketPrice")
 fun TextView.setTicketPrice(item: History?) {
     item?.let {

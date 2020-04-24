@@ -44,7 +44,6 @@
     <string name="news_image">صورة الخبر</string>
     <string name="user_name">Name</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="my_complains">بلاغاتي</string>
     <string name="add_complain">تقديم بلاغ</string>

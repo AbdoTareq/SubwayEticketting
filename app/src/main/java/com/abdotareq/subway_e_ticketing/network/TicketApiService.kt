@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 
-// TODO (04) Create the ApiObj object using Retrofit to implement the UserApiService
+// Create the ApiObj object using Retrofit to implement the UserApiService
 private const val BASE_URL = "https://subway-ticketing-system.herokuapp.com/"
 
 // moshi for auto convert response to objects
