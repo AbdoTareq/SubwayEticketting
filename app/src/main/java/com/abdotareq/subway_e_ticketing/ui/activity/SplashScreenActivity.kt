@@ -101,8 +101,8 @@ class SplashScreenActivity : AwesomeSplash() {
         } else
             Intent(this@SplashScreenActivity, OnBoardActivity::class.java)
         try {
-            user?.birth_date = user!!.birth_date?.substring(0..9)
-            intent.putExtra("user", user) // sending user object.
+//            user?.birth_date = user!!.birth_date?.substring(0..9)
+//            intent.putExtra("user", user) // sending user object.
         } catch (e: Exception) {
             Timber.e("$e")
         }
