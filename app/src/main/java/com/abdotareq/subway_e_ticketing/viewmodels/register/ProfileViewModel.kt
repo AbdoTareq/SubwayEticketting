@@ -115,10 +115,11 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
     /**
      * A method used to save a new user (sign up)
      */
-    fun saveUserCall(bearerToken: String, userInterface: UserInterface) {
+    fun saveUserCall(bearerToken: String, userId: Int, userInterface: UserInterface) {
         //create MobileUser object and set it's attributes
 
-        Timber.e("${user.value}")
+        _user.value!!.id = userId
+        Timber.e("${_user.value}")
 
         //start the call
         userRepo.updateUser(bearerToken, _user.value!!, userInterface)
@@ -136,7 +137,7 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
 //    }
 
     fun getErrorMess(code: Int): String {
-        return getErrorMessage(code,this.applicationCon)
+        return getErrorMessage(code, this.applicationCon)
     }
 
     override fun onCleared() {

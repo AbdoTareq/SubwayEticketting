@@ -74,7 +74,7 @@ class ProfileSettingsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         // if failed to get user obj from splash screen get user call
-        getUserFromCall(SharedPreferenceUtil.getSharedPrefsTokenId(context))
+        getUser(SharedPreferenceUtil.getSharedPrefsTokenId(context))
 
         viewModel.eventChangePass.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -147,7 +147,7 @@ class ProfileSettingsFragment : Fragment() {
         alertDialog.show()
     }
 
-    private fun getUserFromCall(userIdToken: String) {
+    private fun getUser(userIdToken: String) {
         var bearerToken = "Bearer "
         bearerToken += userIdToken
 
@@ -190,6 +190,51 @@ class ProfileSettingsFragment : Fragment() {
 
     }
 
+    private fun updateUser() {
+        var bearerToken = "Bearer "
+        bearerToken += SharedPreferenceUtil.getSharedPrefsTokenId(context)
+
+        Timber.e("bearerToken $bearerToken")
+
+        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
+        progressDialog.show()
+
+        val profileInterface = object : UserInterface {
+            override fun onSuccess() {
+                Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
+                progressDialog.dismiss()
+                SharedPreferenceUtil.setSharedPrefsName(context, "${user.first_name} ${user.last_name} ")
+            }
+
+            override fun onFail(responseCode: Int) {
+                progressDialog.dismiss()
+                Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
+            }
+        }
+        viewModel.saveUserCall(bearerToken, user.id, profileInterface)
+    }
+
+    private fun saveBtnClk() {
+        //check for all inputs from user are correct
+        if (viewModel.user.value?.first_name.isNullOrEmpty()) {
+            binding.firstNameEt.error = getString(R.string.first_name_warrning)
+            binding.firstNameEt.requestFocus()
+            return
+        } else if (viewModel.user.value?.last_name.isNullOrEmpty()) {
+            binding.lastNameEt.error = getString(R.string.last_name)
+            binding.lastNameEt.requestFocus()
+            return
+        }
+
+        updateUser()
+    }
+    
+    private fun openChangePassDialog() {
+        val passDialog = ChangePassDialogFragment(binding.mail.text.toString())
+        requireActivity().supportFragmentManager
+                .let { passDialog.show(it, "Pass Dialog") }
+    }
+
     private fun confirmLogOut() {
         //create a dialog interface to notify user that he is going to log out
         val dialogClickListener = DialogInterface.OnClickListener { _, which ->
@@ -219,51 +264,6 @@ class ProfileSettingsFragment : Fragment() {
         }
         //show the dialog
         dialog.show()
-    }
-
-    // this for change pass dialog
-    private fun openChangePassDialog() {
-        val passDialog = ChangePassDialogFragment(binding.mail.text.toString())
-        requireActivity().supportFragmentManager
-                .let { passDialog.show(it, "Pass Dialog") }
-    }
-
-    private fun saveBtnClk() {
-        //check for all inputs from user are correct
-        if (viewModel.user.value?.first_name.isNullOrEmpty()) {
-            binding.firstNameEt.error = getString(R.string.first_name_warrning)
-            binding.firstNameEt.requestFocus()
-            return
-        } else if (viewModel.user.value?.last_name.isNullOrEmpty()) {
-            binding.lastNameEt.error = getString(R.string.last_name)
-            binding.lastNameEt.requestFocus()
-            return
-        }
-
-        updateUser()
-    }
-
-    private fun updateUser() {
-        var bearerToken = "Bearer "
-        bearerToken += SharedPreferenceUtil.getSharedPrefsTokenId(context)
-
-        Timber.e("bearerToken $bearerToken")
-
-        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
-        progressDialog.show()
-
-        val profileInterface = object : UserInterface {
-            override fun onSuccess() {
-                Toast.makeText(context, getString(R.string.data_saved), Toast.LENGTH_LONG).show()
-                progressDialog.dismiss()
-            }
-
-            override fun onFail(responseCode: Int) {
-                progressDialog.dismiss()
-                Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
-            }
-        }
-        viewModel.saveUserCall(bearerToken, profileInterface)
     }
 
     /**
