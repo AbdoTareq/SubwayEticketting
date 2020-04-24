@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.abdotareq.subway_e_ticketing.utility.imageUtil.payment
+package com.google.android.gms.samples.wallet
 
 import com.google.android.gms.wallet.WalletConstants
 
@@ -75,14 +75,14 @@ object Constants {
      *
      * @value #COUNTRY_CODE Your local country
      */
-    const val COUNTRY_CODE = "EG"
+    const val COUNTRY_CODE = "US"
 
     /**
      * Required by the API, but not visible to the user.
      *
      * @value #CURRENCY_CODE Your local currency
      */
-    const val CURRENCY_CODE = "EGP"
+    const val CURRENCY_CODE = "USD"
 
     /**
      * Supported countries for shipping (use ISO 3166-1 alpha-2 country codes). Relevant only when
@@ -90,7 +90,7 @@ object Constants {
      *
      * @value #SHIPPING_SUPPORTED_COUNTRIES
      */
-    val SHIPPING_SUPPORTED_COUNTRIES = listOf("EG", "US")
+    val SHIPPING_SUPPORTED_COUNTRIES = listOf("US", "GB")
 
     /**
      * The name of your payment processor/gateway. Please refer to their documentation for more

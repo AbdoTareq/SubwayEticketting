@@ -54,7 +54,7 @@
                 android:padding="0dp"
                 android:text="—"
 
-                 />
+                />
 
             <TextView
                 android:id="@+id/display"
@@ -89,18 +89,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ticket_icon" />
 
-        <ImageButton
+
+        <RelativeLayout
             android:id="@+id/googlePayButton"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginStart="32dp"
-            android:padding="@dimen/_16sdp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:src="@drawable/buy_with_googlepay_button_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/total_cost" />
+            android:layout_width="match_parent"
+            android:layout_height="48sp"
+            android:background="@drawable/googlepay_button_no_shadow_background"
+            android:clickable="true"
+            android:contentDescription="@string/buy_with_googlepay_button_content_description"
+            android:focusable="true"
+            android:padding="2sp"
+            app:layout_constraintTop_toBottomOf="@+id/total_cost">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:weightSum="2">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:duplicateParentState="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/buy_with_googlepay_button_content" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:duplicateParentState="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/googlepay_button_overlay" />
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

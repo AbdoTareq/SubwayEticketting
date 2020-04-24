@@ -13,8 +13,7 @@
   <color name="darkBlue">#266fc3</color>
   <color name="darkGray">#323c46</color>
   <color name="darkOrange">#FFFF6C22</color>
-
-
+  
 
   <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#ffffff</color>
 

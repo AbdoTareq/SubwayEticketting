@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.abdotareq.subway_e_ticketing.utility.imageUtil.payment
+package com.google.android.gms.samples.wallet
 
 import android.app.Activity
-import com.abdotareq.subway_e_ticketing.utility.imageUtil.payment.Constants
 import com.google.android.gms.wallet.PaymentsClient
 import com.google.android.gms.wallet.Wallet
 import org.json.JSONArray

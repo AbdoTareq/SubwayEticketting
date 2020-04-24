@@ -43,7 +43,7 @@
     <dimen name="sign_in_main_text_size">@dimen/_40sdp</dimen>
     <dimen name="sign_in_sub_text_size">@dimen/_20sdp</dimen>
     <dimen name="sign_in_medium_text_size">@dimen/_16sdp</dimen>
-
+    <dimen name="buy_button_height">48sp</dimen>
 
 
 </resources>

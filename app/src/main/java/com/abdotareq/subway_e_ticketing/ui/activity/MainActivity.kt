@@ -1,37 +1,31 @@
-package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
+package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AlertDialog
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.BuyTicketDialogFragmentBinding
-import com.abdotareq.subway_e_ticketing.model.TicketType
-import com.abdotareq.subway_e_ticketing.ui.activity.MainActivity
-import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.payment.Json
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
-import com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.samples.wallet.PaymentsUtil
 import com.google.android.gms.samples.wallet.microsToString
 import com.google.android.gms.wallet.*
-import kotlinx.android.synthetic.main.buy_ticket_dialog_fragment.*
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import kotlin.math.roundToLong
 
 
-class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragment() {
+/**
+ * Checkout implementation for the app
+ */
+class MainActivity : Activity() {
 
     /**
      * A client for interacting with the Google Pay API.
@@ -51,63 +45,26 @@ class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragm
      */
     private val LOAD_PAYMENT_DATA_REQUEST_CODE = 991
 
-    private lateinit var viewModelFactory: BuyTicketViewModelFactory
-    private lateinit var viewModel: BuyTicketViewModel
+    /**
+     * Initialize the Google Pay API on creation of the activity
+     *
+     * @see Activity.onCreate
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    private lateinit var binding: BuyTicketDialogFragmentBinding
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = BuyTicketDialogFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-
-        val application = requireNotNull(activity).application
-
-        viewModelFactory = BuyTicketViewModelFactory(ticketType, application)
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(BuyTicketViewModel::class.java)
-
-        binding.viewModel = viewModel
-        // Specify the current activity as the lifecycle owner of the binding. This is used so that
-        // the binding can observe LiveData updates
-        binding.lifecycleOwner = this
-
-        // show ticket number
-        viewModel.ticketNum.observe(viewLifecycleOwner, Observer {
-            if (it > 0) {
-                val cost = viewModel.ticketNum.value!! * ticketType.price
-                Toast.makeText(context, "${viewModel.ticketNum.value}", Toast.LENGTH_SHORT).show()
-                binding.totalCost.text = String.format(
-                        context!!.getString(R.string.ticket_cost_format, cost))
-            }
-
-        })
-
-        // to convert stringImage to bitMap
-        if (ticketType.icon != null) {
-            val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
-                binding.ticketIcon.setImageBitmap(it)
-            })
-            bitMapCon.execute(ticketType.icon)
-        }
+        // Set up the mock information for our item in the UI.
+        selectedGarment = fetchRandomGarment()
+        displayGarment(selectedGarment)
 
         // Initialize a Google Pay API client for an environment suitable for testing.
         // It's recommended to create the PaymentsClient object inside of the onCreate method.
-        paymentsClient = PaymentsUtil.createPaymentsClient(activity!!)
+        paymentsClient = PaymentsUtil.createPaymentsClient(this)
         possiblyShowGooglePayButton()
 
-        // Set up the mock information for our item in the UI.
-//        selectedGarment = fetchRandomGarment()
-//
-//        binding.googlePayButton.setOnClickListener { requestPayment() }
-
-        binding.totalCost.setOnClickListener {
-            val intent = Intent(context,MainActivity::class.java)
-            startActivity(intent)
-        }
-
-        return view
+        googlePayButton.setOnClickListener { requestPayment() }
     }
-
 
     /**
      * Determine the viewer's ability to pay with a payment method supported by your app and display a
@@ -145,7 +102,7 @@ class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragm
             googlePayButton.visibility = View.VISIBLE
         } else {
             Toast.makeText(
-                    context,
+                    this,
                     "Unfortunately, Google Pay is not available on this device",
                     Toast.LENGTH_LONG).show();
         }
@@ -173,7 +130,7 @@ class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragm
         // onActivityResult will be called with the result.
         if (request != null) {
             AutoResolveHelper.resolveTask(
-                    paymentsClient.loadPaymentData(request), activity!!, LOAD_PAYMENT_DATA_REQUEST_CODE)
+                    paymentsClient.loadPaymentData(request), this, LOAD_PAYMENT_DATA_REQUEST_CODE)
         }
     }
 
@@ -235,7 +192,7 @@ class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragm
                             .getJSONObject("tokenizationData")
                             .getString("token") == "examplePaymentMethodToken") {
 
-                AlertDialog.Builder(context)
+                AlertDialog.Builder(this)
                         .setTitle("Warning")
                         .setMessage("Gateway name set to \"example\" - please modify " +
                                 "Constants.java and replace it with your own gateway.")
@@ -248,7 +205,7 @@ class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragm
                     .getJSONObject("billingAddress").getString("name")
             Log.d("BillingName", billingName)
 
-            Toast.makeText(context, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
 
             // Logging token string.
             Log.d("GooglePaymentToken", paymentMethodData
@@ -274,14 +231,24 @@ class BuyTicketDialogFragment(val ticketType: TicketType) : AppCompatDialogFragm
         Log.w("loadPaymentData failed", String.format("Error code: %d", statusCode))
     }
 
-    private fun fetchRandomGarment(): JSONObject {
+    private fun fetchRandomGarment() : JSONObject {
         if (!::garmentList.isInitialized) {
-            garmentList = Json.readFromResources(context!!, R.raw.tshirts)
+            garmentList = Json.readFromResources(this, R.raw.tshirts)
         }
 
-        val randomIndex: Int = Math.round(Math.random() * (garmentList.length() - 1)).toInt()
+        val randomIndex:Int = Math.round(Math.random() * (garmentList.length() - 1)).toInt()
         return garmentList.getJSONObject(randomIndex)
     }
 
+    private fun displayGarment(garment:JSONObject) {
+        detailTitle.setText(garment.getString("title"))
+        detailPrice.setText("\$${garment.getString("price")}")
 
+        val escapedHtmlText:String = Html.fromHtml(garment.getString("description")).toString()
+        detailDescription.setText(Html.fromHtml(escapedHtmlText))
+
+        val imageUri = "@drawable/${garment.getString("image")}"
+        val imageResource = resources.getIdentifier(imageUri, null, packageName)
+        detailImage.setImageResource(imageResource)
+    }
 }
