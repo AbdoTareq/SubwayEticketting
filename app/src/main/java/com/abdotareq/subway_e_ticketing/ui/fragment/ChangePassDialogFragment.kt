@@ -81,7 +81,7 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
                 dismiss()
             }
 
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 progressDialog.dismiss()
                 Timber.i("responseCode: $responseCode ")
                 Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()

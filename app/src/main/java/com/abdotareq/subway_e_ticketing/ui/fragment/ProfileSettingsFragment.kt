@@ -178,7 +178,7 @@ class ProfileSettingsFragment : Fragment() {
                 progressDialog.dismiss()
             }
 
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 progressDialog.dismiss()
                 Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
 
@@ -205,7 +205,7 @@ class ProfileSettingsFragment : Fragment() {
                 SharedPreferenceUtil.setSharedPrefsName(context, "${user.first_name} ${user.last_name} ")
             }
 
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 progressDialog.dismiss()
                 Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
             }

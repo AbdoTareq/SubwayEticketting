@@ -59,7 +59,7 @@ class VerificationViewModel(mailProperty: String, application: Application) : An
         userRepo.verifyCode(user, registerInterface)
     }
 
-    fun getErrorMess(code: Int): String {
+    fun getErrorMess(code: String): String {
         return getErrorMessage(code, applicationCon)
     }
 

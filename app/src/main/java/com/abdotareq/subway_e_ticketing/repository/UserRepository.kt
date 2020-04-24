@@ -25,13 +25,13 @@ class UserRepository {
                 registerInterface.onSuccess(token!!.token)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                registerInterface.onFail(e.code())
+                registerInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                registerInterface.onFail(-2)
+                registerInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                registerInterface.onFail(-1)
+                registerInterface.onFail(e.toString())
             }
         }
     }
@@ -44,13 +44,13 @@ class UserRepository {
                 registerInterface.onSuccess(token!!.token)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                registerInterface.onFail(e.code())
+                registerInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                registerInterface.onFail(-2)
+                registerInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                registerInterface.onFail(-1)
+                registerInterface.onFail(e.toString())
             }
         }
     }
@@ -63,13 +63,13 @@ class UserRepository {
                 userInterface.onSuccess()
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                userInterface.onFail(e.code())
+                userInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                userInterface.onFail(-2)
+                userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                userInterface.onFail(-1)
+                userInterface.onFail(e.toString())
             }
         }
 
@@ -83,13 +83,13 @@ class UserRepository {
                 getUserInterface.onSuccess(user)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                getUserInterface.onFail(e.code())
+                getUserInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                getUserInterface.onFail(-2)
+                getUserInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                getUserInterface.onFail(-1)
+                getUserInterface.onFail(e.toString())
             }
         }
     }
@@ -102,13 +102,13 @@ class UserRepository {
                 userInterface.onSuccess()
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                userInterface.onFail(e.code())
+                userInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                userInterface.onFail(-2)
+                userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                userInterface.onFail(-1)
+                userInterface.onFail(e.toString())
             }
         }
     }
@@ -120,13 +120,13 @@ class UserRepository {
                 registerInterface.onSuccess(token!!.token)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                registerInterface.onFail(e.code())
+                registerInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                registerInterface.onFail(-2)
+                registerInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                registerInterface.onFail(-1)
+                registerInterface.onFail(e.toString())
             }
         }
     }
@@ -139,13 +139,13 @@ class UserRepository {
                 userInterface.onSuccess()
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                userInterface.onFail(e.code())
+                userInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                userInterface.onFail(-2)
+                userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                userInterface.onFail(-1)
+                userInterface.onFail(e.toString())
             }
         }
     }
@@ -158,13 +158,13 @@ class UserRepository {
                 userInterface.onSuccess()
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                userInterface.onFail(e.code())
+                userInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                userInterface.onFail(-2)
+                userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                userInterface.onFail(-1)
+                userInterface.onFail(e.toString())
             }
         }
     }

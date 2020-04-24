@@ -31,14 +31,14 @@ class TicketRepository {
                 historyTicketInterface.onSuccess(historyTickets)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                historyTicketInterface.onFail(e.code())
+                historyTicketInterface.onFail("${e.code()}")
 
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                historyTicketInterface.onFail(-2)
+                historyTicketInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                historyTicketInterface.onFail(-1)
+                historyTicketInterface.onFail(e.toString())
             }
         }
     }
@@ -53,13 +53,13 @@ class TicketRepository {
                 ticketTypeInterface.onSuccess(ticketsType)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                ticketTypeInterface.onFail(e.code())
+                ticketTypeInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                ticketTypeInterface.onFail(-2)
+                ticketTypeInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                ticketTypeInterface.onFail(-1)
+                ticketTypeInterface.onFail(e.toString())
             }
         }
     }
@@ -74,13 +74,13 @@ class TicketRepository {
                 inTicketObj.onSuccess(checkInTickets)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                inTicketObj.onFail(e.code())
+                inTicketObj.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                inTicketObj.onFail(-2)
+                inTicketObj.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                inTicketObj.onFail(-1)
+                inTicketObj.onFail(e.toString())
             }
         }
     }
@@ -95,13 +95,13 @@ class TicketRepository {
                 boughtTicketInterface.onSuccess(boughtTickets)
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
-                boughtTicketInterface.onFail(e.code())
+                boughtTicketInterface.onFail("${e.code()}")
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
-                boughtTicketInterface.onFail(-2)
+                boughtTicketInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                boughtTicketInterface.onFail(-1)
+                boughtTicketInterface.onFail(e.toString())
             }
         }
     }

@@ -137,7 +137,7 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
 //        it.birth_date?.substring(0..9)
 //    }
 
-    fun getErrorMess(code: Int): String {
+    fun getErrorMess(code: String): String {
         return getErrorMessage(code, this.applicationCon)
     }
 

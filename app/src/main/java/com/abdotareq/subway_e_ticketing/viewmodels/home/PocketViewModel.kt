@@ -88,7 +88,7 @@ class PocketViewModel(private val bearerToken: String, application: Application)
                 _inUseStatus.value = InUseApiStatus.DONE
             }
 
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 if (responseCode == ErrorStatus.Codes.NoTicketsFound)
                     _inUseStatus.value = InUseApiStatus.EMPTY
                 else
@@ -105,7 +105,7 @@ class PocketViewModel(private val bearerToken: String, application: Application)
                 _boughtStatus.value = BoughtApiStatus.DONE
             }
 
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 if (responseCode == ErrorStatus.Codes.NoTicketsFound)
                     _boughtStatus.value = BoughtApiStatus.EMPTY
                 else
@@ -123,7 +123,7 @@ class PocketViewModel(private val bearerToken: String, application: Application)
         ticketRepository.getBoughtTickets(bearerToken, boughtTicketInterface)
     }
 
-    private fun getErrorMess(code: Int): String {
+    private fun getErrorMess(code: String): String {
         return getErrorMessage(code, this.applicationCon)
     }
 

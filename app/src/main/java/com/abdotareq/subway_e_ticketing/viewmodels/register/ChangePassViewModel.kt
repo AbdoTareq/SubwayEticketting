@@ -68,7 +68,7 @@ class ChangePassViewModel(mailProperty: String, tokenProperty: String, applicati
         userRepo.changePass(user, bearerToken, userInterface)
     }
 
-    fun getErrorMess(code: Int): String {
+    fun getErrorMess(code: String): String {
         return getErrorMessage(code, applicationCon)
     }
 

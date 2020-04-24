@@ -52,7 +52,7 @@ class ForgetPassViewModel(application: Application) : AndroidViewModel(applicati
         userRepo.sendVerificationCode(user, userInterface)
     }
 
-    fun getErrorMess(code: Int): String {
+    fun getErrorMess(code: String): String {
         return getErrorMessage(code, applicationCon)
     }
 

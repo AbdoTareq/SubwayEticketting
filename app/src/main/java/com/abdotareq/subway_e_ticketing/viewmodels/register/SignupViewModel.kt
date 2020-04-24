@@ -105,7 +105,7 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
         userRepo.signUpCall(user, registerInterface)
     }
 
-    fun getErrorMess(code: Int): String {
+    fun getErrorMess(code: String): String {
         return getErrorMessage(code, applicationCon)
     }
 

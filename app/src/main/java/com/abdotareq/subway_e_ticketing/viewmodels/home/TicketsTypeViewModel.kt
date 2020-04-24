@@ -64,7 +64,7 @@ class TicketsTypeViewModel(private val bearerToken: String, application: Applica
                 _ticketsType.value = ticketsType
             }
 
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 _status.value = TicketTypeApiStatus.ERROR
                 _ticketsType.value = ArrayList()
                 Timber.e(getErrorMess(responseCode))
@@ -87,7 +87,7 @@ class TicketsTypeViewModel(private val bearerToken: String, application: Applica
         ticketRepository.getTicketsType(bearerToken, ticketObj)
     }
 
-    fun getErrorMess(code: Int): String {
+    fun getErrorMess(code: String): String {
         return getErrorMessage(code, this.applicationCon)
     }
 

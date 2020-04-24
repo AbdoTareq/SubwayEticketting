@@ -165,7 +165,7 @@ class SignUpFragment : Fragment() {
                 activity!!.finishAffinity()
             }
 
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 progressDialog.dismiss()
                 Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
             }

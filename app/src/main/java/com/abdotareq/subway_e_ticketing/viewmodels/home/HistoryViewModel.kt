@@ -67,7 +67,7 @@ class HistoryViewModel(private val bearerToken: String, application: Application
                 _historyTickets.value = historyTickets
                 _status.value = HistoryApiStatus.DONE
             }
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 if (responseCode == ErrorStatus.Codes.NoTicketsFound)
                     _status.value = HistoryApiStatus.EMPTY
                 else
@@ -84,7 +84,7 @@ class HistoryViewModel(private val bearerToken: String, application: Application
         ticketRepository.getHistoryTickets(bearerToken, historyObj)
     }
 
-    private fun getErrorMess(code: Int): String {
+    private fun getErrorMess(code: String): String {
         return getErrorMessage(code, this.applicationCon)
     }
 

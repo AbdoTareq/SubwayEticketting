@@ -80,7 +80,7 @@ class VerificationFragment : Fragment() {
                         .actionVerificationFragmentToChangePassFragment(viewModel.mail.value!!, token))
             }
 
-            override fun onFail(responseCode: Int) {
+            override fun onFail(responseCode: String) {
                 progressDialog.dismiss()
                 Toast.makeText(context, getErrorMessage(responseCode, activity!!.application), Toast.LENGTH_LONG).show()
             }

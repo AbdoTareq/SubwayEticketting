@@ -92,7 +92,7 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
         userRepo.authenticate(user,registerInterface)
     }
 
-    fun getErrorMess(code: Int): String {
+    fun getErrorMess(code: String): String {
         return getErrorMessage(code, applicationCon)
     }
 
