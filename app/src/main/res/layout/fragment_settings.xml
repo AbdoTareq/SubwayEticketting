@@ -10,30 +10,54 @@
 
     <TextView
         android:id="@+id/showTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="32dp"
         android:text="@string/show_tutorial"
         android:textSize="@dimen/_24sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/switchButton"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/switchButton"
+        app:layout_constraintTop_toBottomOf="@+id/switchButton" />
+
+    <TextView
+        android:id="@+id/invite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:text="@string/invite_friends"
+        android:textSize="@dimen/_24sdp"
+        app:layout_constraintEnd_toEndOf="@+id/showTitle"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="@+id/showTitle"
+        app:layout_constraintTop_toBottomOf="@+id/showTitle" />
+
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:text="@string/rate_us"
+        android:textSize="@dimen/_24sdp"
+        app:layout_constraintEnd_toEndOf="@+id/invite"
+        app:layout_constraintStart_toStartOf="@+id/invite"
+        app:layout_constraintTop_toBottomOf="@+id/invite" />
 
     <Switch
         android:id="@+id/switchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
         android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="226dp"
         android:layout_marginEnd="@dimen/medium_margin"
         android:text="@string/turn_dark_mode"
-        android:padding="@dimen/small_margin"
-        app:layout_constraintBottom_toTopOf="@+id/showTitle"
+        android:textSize="@dimen/_24sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </Switch>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
