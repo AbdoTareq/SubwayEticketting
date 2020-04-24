@@ -8,6 +8,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
@@ -15,13 +16,9 @@ import retrofit2.http.*
 // Create the ApiObj object using Retrofit to implement the UserApiService
 private const val BASE_URL = "https://subway-ticketing-system.herokuapp.com/"
 
-// moshi for auto convert response to objects
-private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
 
 private val retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BASE_URL)
         .build()
 

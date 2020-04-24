@@ -219,7 +219,9 @@
         <TextView
             android:id="@+id/mail"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:drawableStart="@drawable/email_icon"
             android:drawablePadding="@dimen/_8sdp"
             android:hint="@string/mail"
