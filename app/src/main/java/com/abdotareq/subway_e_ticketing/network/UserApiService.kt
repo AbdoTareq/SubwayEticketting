@@ -3,13 +3,8 @@ package com.abdotareq.subway_e_ticketing.network
 import com.abdotareq.subway_e_ticketing.model.Token
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.model.UserPassword
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
 
@@ -36,7 +31,7 @@ interface UserApiService {
     suspend fun authenticate(@Body user: User?): Token?
 
     @POST("users/forgetpassword")
-    suspend fun sendVerificationCode(@Body user: User?): ResponseBody?
+    suspend fun sendVerificationCode(@Body user: User?)
 
     @POST("users/verifyotp")
     suspend fun verifyCode(@Body user: User?): Token?
@@ -44,21 +39,18 @@ interface UserApiService {
     // "Used to Change Password after verifying the 6-digit code"
     // be careful that header has key(Authorization) & value ("Bearer " + token)
     @POST("users/changepassword")
-    suspend fun changePass(@Body user: User?, @Header("Authorization") bearerToken: String?): ResponseBody?
+    suspend fun changePass(@Body user: User?, @Header("Authorization") bearerToken: String?)
 
     // Used to Update Password From User Settings menu
     @POST("users/updatepassword")
-    fun updatePassCall(@Body userPassword: UserPassword, @Header("Authorization") bearerToken: String?): Call<ResponseBody?>?
-
-    @POST("users/updatepassword")
-    suspend fun updatePass(@Body userPassword: UserPassword, @Header("Authorization") bearerToken: String?): ResponseBody
+    suspend fun updatePass(@Body userPassword: UserPassword, @Header("Authorization") bearerToken: String?)
 
     // get user by token as it contains user id
     @GET("users/user")
     suspend fun getUser(@Header("Authorization") bearerToken: String): User
 
     @PUT("users/updateuser")
-    suspend fun updateUser(@Body user: User, @Header("Authorization") bearerToken: String): ResponseBody?
+    suspend fun updateUser(@Body user: User, @Header("Authorization") bearerToken: String)
 
 }
 

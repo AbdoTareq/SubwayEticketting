@@ -107,7 +107,6 @@ class TicketRepository {
         val bearerToken = "Bearer $token"
         coroutineScope.launch {
             try {
-                Timber.e("ticketsNumber: $ticketsNumber")
                 TicketApiObj.retrofitService.insertMultiTickets(bearerToken, ownerEmail, price, ticketsNumber)
                 buyInterface.onSuccess()
             } catch (e: HttpException) {

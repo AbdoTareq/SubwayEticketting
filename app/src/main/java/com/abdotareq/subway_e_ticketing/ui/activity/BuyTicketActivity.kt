@@ -293,8 +293,8 @@ class BuyTicketActivity : AppCompatActivity() {
         val buyInterface = object : BuyInterface {
             override fun onSuccess() {
                 progressDialog.dismiss()
-                Toast.makeText(this@BuyTicketActivity, "${viewModel.ticketNum.value} tickets" +
-                        "${getString(R.string.tickets_added_to_your_pocket)} ", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@BuyTicketActivity, String
+                        .format(getString(R.string.tickets_added_to_your_pocket, viewModel.ticketNum.value)), Toast.LENGTH_LONG).show()
             }
 
             override fun onFail(responseCode: String) {

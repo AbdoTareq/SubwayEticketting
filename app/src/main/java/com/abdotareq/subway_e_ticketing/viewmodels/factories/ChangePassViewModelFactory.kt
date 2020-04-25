@@ -21,7 +21,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ChangePassViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.register.VerificationViewModel
 
 class ChangePassViewModelFactory(private val mail: String, private val token: String, private val application: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
