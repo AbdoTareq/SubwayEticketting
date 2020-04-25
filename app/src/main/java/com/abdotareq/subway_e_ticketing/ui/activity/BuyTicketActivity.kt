@@ -11,8 +11,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ActivityBuyBinding
+import com.abdotareq.subway_e_ticketing.model.BuyInterface
 import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
+import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel
 import com.google.android.gms.common.api.ApiException
@@ -53,17 +56,19 @@ class BuyTicketActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBuyBinding
 
+    var ticket = TicketType()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBuyBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        val ticket = intent.getParcelableExtra<TicketType>("ticket")
+        ticket = intent.getParcelableExtra("ticket")!!
 
         val application = requireNotNull(this).application
 
-        viewModelFactory = BuyTicketViewModelFactory(ticket!!, application)
+        viewModelFactory = BuyTicketViewModelFactory(ticket, application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(BuyTicketViewModel::class.java)
 
@@ -81,14 +86,19 @@ class BuyTicketActivity : AppCompatActivity() {
             }
         })
 
-        displayTicket(ticket)
+        displayTicket()
 
         // Initialize a Google Pay API client for an environment suitable for testing.
         // It's recommended to create the PaymentsClient object inside of the onCreate method.
         paymentsClient = PaymentsUtil.createPaymentsClient(this)
         possiblyShowGooglePayButton()
 
-        googlePayButton.setOnClickListener { requestPayment(ticket) }
+        googlePayButton.setOnClickListener {
+            if (viewModel.ticketNum.value!! > 0)
+                requestPayment()
+            else
+                Toast.makeText(this, getString(R.string.choose_tickets_number), Toast.LENGTH_LONG).show()
+        }
     }
 
     /**
@@ -133,14 +143,14 @@ class BuyTicketActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestPayment(ticketType: TicketType) {
+    private fun requestPayment() {
 
         // Disables the button to prevent multiple clicks.
         googlePayButton.isClickable = false
 
         // The price provided to the API should include taxes and shipping.
         // This price is not displayed to the user.
-        val price = ticketType.price.toString()
+        val price = ticket.price.toString()
 
         val paymentDataRequestJson = PaymentsUtil.getPaymentDataRequest(price)
         if (paymentDataRequestJson == null) {
@@ -176,6 +186,7 @@ class BuyTicketActivity : AppCompatActivity() {
                     Activity.RESULT_OK ->
                         data?.let { intent ->
                             PaymentData.getFromIntent(intent)?.let(::handlePaymentSuccess)
+                            buy()
                         }
                     Activity.RESULT_CANCELED -> {
                         // Nothing to do here normally - the user simply cancelled without selecting a
@@ -234,7 +245,8 @@ class BuyTicketActivity : AppCompatActivity() {
                     .getJSONObject("billingAddress").getString("name")
             Timber.e(billingName)
 
-            Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
+            buy()
+//            Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
 
             // Logging token string.
             Timber.e("GooglePaymentToken ${paymentMethodData
@@ -260,17 +272,36 @@ class BuyTicketActivity : AppCompatActivity() {
         Timber.tag("loadPaymentData failed").e(String.format("Error code: %d", statusCode))
     }
 
-    private fun displayTicket(ticketType: TicketType) {
-        detailTitle.text = ticketType.ticketInfo
+    private fun displayTicket() {
+        detailTitle.text = ticket.ticketInfo
         detailPrice.text = String.format(
-                this.getString(R.string.ticket_price_format, ticketType.price))
+                this.getString(R.string.ticket_price_format, ticket.price))
 
-        if (ticketType.icon != null) {
+        if (ticket.icon != null) {
             val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
                 binding.ticketImage.setImageBitmap(it)
             })
-            bitMapCon.execute(ticketType.icon)
+            bitMapCon.execute(ticket.icon)
         }
     }
 
+    // handle buy tickets
+    private fun buy() {
+        //initialize and show a progress dialog to the user
+        val progressDialog = util.initProgress(this, getString(R.string.progMessage))
+        progressDialog.show()
+
+        val buyInterface = object : BuyInterface {
+            override fun onSuccess() {
+                progressDialog.dismiss()
+                Toast.makeText(this@BuyTicketActivity, "Tickets Added to your pocket", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onFail(responseCode: String) {
+                progressDialog.dismiss()
+                Toast.makeText(this@BuyTicketActivity, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
+            }
+        }
+        viewModel.buy(SharedPreferenceUtil.getSharedPrefsTokenId(this), buyInterface, "", ticket.price)
+    }
 }
