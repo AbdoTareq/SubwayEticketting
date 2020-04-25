@@ -15,12 +15,12 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/his_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/very_small_margin"
         android:layout_marginBottom="@dimen/very_small_margin"
         android:background="@drawable/shape_sign_up"
-        android:backgroundTint="@color/lightBlue"
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical">

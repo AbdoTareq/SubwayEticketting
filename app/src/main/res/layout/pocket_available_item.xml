@@ -9,18 +9,18 @@
             name="boughtTicket"
             type="com.abdotareq.subway_e_ticketing.model.BoughtTicket" />
 
-                <variable
-                    name="clickListener"
-                    type="com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailableTicketListener" />
+        <variable
+            name="clickListener"
+            type="com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailableTicketListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bought_element"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/very_small_margin"
         android:layout_marginBottom="@dimen/very_small_margin"
         android:background="@drawable/shape_sign_up"
-        android:backgroundTint="@color/lightBlue"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{()-> clickListener.onClick(boughtTicket)}"
@@ -37,7 +37,6 @@
             android:focusable="false"
             android:text="@string/_3le_ticket"
             android:textAppearance="@style/CustomHeadline5"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -53,7 +52,6 @@
             android:lines="1"
             android:text="@string/use"
             android:textAppearance="@style/CustomHeadline5"
-
             android:textSize="@dimen/medium_margin"
             app:layout_constraintBottom_toBottomOf="@+id/ticket_price"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"

@@ -16,11 +16,14 @@
 
 package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.TicketItemBinding
 import com.abdotareq.subway_e_ticketing.model.TicketType
 
@@ -30,7 +33,7 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
 
-        holder.bind(clickListener,item)
+        holder.bind(clickListener, item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,6 +53,8 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = TicketItemBinding.inflate(layoutInflater, parent, false)
+                // add animation
+                binding.ticketI.animation = AnimationUtils.loadAnimation(parent.context, R.anim.fade_scale_animation)
 
                 return ViewHolder(binding)
             }

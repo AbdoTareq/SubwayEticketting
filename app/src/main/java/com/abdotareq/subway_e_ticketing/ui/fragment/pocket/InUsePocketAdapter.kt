@@ -18,9 +18,11 @@ package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.PocketInUseItemBinding
 import com.abdotareq.subway_e_ticketing.model.InTicket
 import com.abdotareq.subway_e_ticketing.model.TicketType
@@ -51,6 +53,8 @@ class InUsePocketAdapter(val clickListener: InUseTicketListener) : ListAdapter<I
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = PocketInUseItemBinding.inflate(layoutInflater, parent, false)
+                // add animation
+                binding.checkInTicket.animation = AnimationUtils.loadAnimation(parent.context, R.anim.slide_in_right)
 
                 return ViewHolder(binding)
             }
