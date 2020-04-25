@@ -122,6 +122,10 @@ dependencies {
     // Add the Firebase Crashlytics dependency.
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
+    // for rating
+    implementation 'com.mikhaellopez:ratebottomsheet:1.0.3'
+
+
 
 }
 repositories {

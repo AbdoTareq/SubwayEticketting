@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSettingsBinding
 import com.abdotareq.subway_e_ticketing.ui.activity.OnBoardActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.mikhaellopez.ratebottomsheet.RateBottomSheet
+import com.mikhaellopez.ratebottomsheet.RateBottomSheetManager
 
 
 /**
@@ -49,6 +51,14 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        binding.rate.setOnClickListener {
+            RateBottomSheetManager(context!!)
+                    .setDebugForceOpenEnable(true) // False by default
+
+            // Show bottom sheet if meets conditions
+            // With AppCompatActivity or Fragment
+            RateBottomSheet.showRateBottomSheetIfMeetsConditions(this)
+        }
 
         return view
     }
