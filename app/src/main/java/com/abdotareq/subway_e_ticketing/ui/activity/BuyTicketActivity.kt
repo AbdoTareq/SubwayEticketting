@@ -186,7 +186,6 @@ class BuyTicketActivity : AppCompatActivity() {
                     Activity.RESULT_OK ->
                         data?.let { intent ->
                             PaymentData.getFromIntent(intent)?.let(::handlePaymentSuccess)
-                            buy()
                         }
                     Activity.RESULT_CANCELED -> {
                         // Nothing to do here normally - the user simply cancelled without selecting a
