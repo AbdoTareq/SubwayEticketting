@@ -3,35 +3,30 @@ package com.abdotareq.subway_e_ticketing.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ActivityBuyBinding
 import com.abdotareq.subway_e_ticketing.model.TicketType
-import com.abdotareq.subway_e_ticketing.utility.payment.Json
+import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.samples.wallet.PaymentsUtil
-import com.google.android.gms.samples.wallet.microsToString
 import com.google.android.gms.wallet.*
 import kotlinx.android.synthetic.main.activity_buy.*
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import timber.log.Timber
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
-
 
 /**
  * Checkout implementation for the app
  */
-class MainActivity : AppCompatActivity() {
+class BuyTicketActivity : AppCompatActivity() {
 
     /**
      * A client for interacting with the Google Pay API.
@@ -39,10 +34,6 @@ class MainActivity : AppCompatActivity() {
      * @see [PaymentsClient](https://developers.google.com/android/reference/com/google/android/gms/wallet/PaymentsClient)
      */
     private lateinit var paymentsClient: PaymentsClient
-    private val shippingCost = (90 * 1000000).toLong()
-
-    private lateinit var garmentList: JSONArray
-    private lateinit var selectedGarment: JSONObject
 
     /**
      * Arbitrarily-picked constant integer you define to track a request for payment data activity.
@@ -69,8 +60,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val ticket = intent.getParcelableExtra<TicketType>("ticket")
-        Toast.makeText(this, ticket?.price.toString(), Toast.LENGTH_LONG).show()
-
 
         val application = requireNotNull(this).application
 
@@ -81,20 +70,25 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
-
         binding.lifecycleOwner = this
 
+        // show ticket number
+        viewModel.ticketNum.observe(this, Observer {
+            if (it > 0) {
+                val cost = viewModel.ticketNum.value!! * ticket.price
+                binding.totalCost.text = String.format(
+                        this.getString(R.string.ticket_cost_format, cost))
+            }
+        })
 
-        // Set up the mock information for our item in the UI.
-        selectedGarment = fetchRandomGarment()
-        displayGarment(selectedGarment)
+        displayTicket(ticket)
 
         // Initialize a Google Pay API client for an environment suitable for testing.
         // It's recommended to create the PaymentsClient object inside of the onCreate method.
         paymentsClient = PaymentsUtil.createPaymentsClient(this)
         possiblyShowGooglePayButton()
 
-        googlePayButton.setOnClickListener { requestPayment() }
+        googlePayButton.setOnClickListener { requestPayment(ticket) }
     }
 
     /**
@@ -139,15 +133,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun requestPayment() {
+    private fun requestPayment(ticketType: TicketType) {
 
         // Disables the button to prevent multiple clicks.
         googlePayButton.isClickable = false
 
         // The price provided to the API should include taxes and shipping.
         // This price is not displayed to the user.
-        val garmentPriceMicros = (selectedGarment.getDouble("price") * 1000000).roundToLong()
-        val price = (garmentPriceMicros + shippingCost).microsToString()
+        val price = ticketType.price.toString()
 
         val paymentDataRequestJson = PaymentsUtil.getPaymentDataRequest(price)
         if (paymentDataRequestJson == null) {
@@ -174,6 +167,7 @@ class MainActivity : AppCompatActivity() {
      * @see [Getting a result
      * from an Activity](https://developer.android.com/training/basics/intents/result)
      */
+    // here we implement buy ticket
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             // value passed in AutoResolveHelper
@@ -186,11 +180,14 @@ class MainActivity : AppCompatActivity() {
                     Activity.RESULT_CANCELED -> {
                         // Nothing to do here normally - the user simply cancelled without selecting a
                         // payment method.
+                        Toast.makeText(this, "Payment Cancelled", Toast.LENGTH_LONG).show()
                     }
 
                     AutoResolveHelper.RESULT_ERROR -> {
                         AutoResolveHelper.getStatusFromIntent(data)?.let {
                             handleError(it.statusCode)
+                            Toast.makeText(this, "Error in Payment ${it.statusCode}", Toast.LENGTH_LONG).show()
+
                         }
                     }
                 }
@@ -226,7 +223,7 @@ class MainActivity : AppCompatActivity() {
 
                 AlertDialog.Builder(this)
                         .setTitle("Warning")
-                        .setMessage("Gateway name set to \"example\" - please modify " +
+                        .setMessage("Gateway name set to \"Fayoum GateWay\"  modify " +
                                 "Constants.java and replace it with your own gateway.")
                         .setPositiveButton("OK", null)
                         .create()
@@ -263,25 +260,17 @@ class MainActivity : AppCompatActivity() {
         Timber.tag("loadPaymentData failed").e(String.format("Error code: %d", statusCode))
     }
 
-    private fun fetchRandomGarment(): JSONObject {
-        if (!::garmentList.isInitialized) {
-            garmentList = Json.readFromResources(this, R.raw.tshirts)
+    private fun displayTicket(ticketType: TicketType) {
+        detailTitle.text = ticketType.ticketInfo
+        detailPrice.text = String.format(
+                this.getString(R.string.ticket_price_format, ticketType.price))
+
+        if (ticketType.icon != null) {
+            val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
+                binding.ticketImage.setImageBitmap(it)
+            })
+            bitMapCon.execute(ticketType.icon)
         }
-
-        val randomIndex: Int = (Math.random() * (garmentList.length() - 1)).roundToInt().toInt()
-        return garmentList.getJSONObject(randomIndex)
-    }
-
-    private fun displayGarment(garment: JSONObject) {
-        detailTitle.text = garment.getString("title")
-        detailPrice.text = "\$${garment.getString("price")}"
-
-//        val escapedHtmlText: String = Html.fromHtml(garment.getString("description")).toString()
-//        detailDescription.text = Html.fromHtml(escapedHtmlText)
-
-        val imageUri = "@drawable/${garment.getString("image")}"
-        val imageResource = resources.getIdentifier(imageUri, null, packageName)
-        detailImage.setImageResource(imageResource)
     }
 
 }

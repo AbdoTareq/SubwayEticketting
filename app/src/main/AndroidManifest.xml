@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity"></activity>
+        <activity android:name=".ui.activity.BuyTicketActivity"></activity>
         <activity android:name=".ui.activity.ScanPocketActivity" />
         <activity android:name=".ui.activity.OnBoardActivity" />
         <activity android:name=".ui.activity.HomeLandActivity" />

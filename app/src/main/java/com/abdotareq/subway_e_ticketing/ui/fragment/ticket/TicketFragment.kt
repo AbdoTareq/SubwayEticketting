@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
 import com.abdotareq.subway_e_ticketing.model.TicketType
-import com.abdotareq.subway_e_ticketing.ui.activity.MainActivity
+import com.abdotareq.subway_e_ticketing.ui.activity.BuyTicketActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.home.TicketsTypeViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
@@ -61,7 +61,7 @@ class TicketFragment : Fragment() {
                     if (ticket_price == ticket.price)
                         ticketTemp = ticket
                 }
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(context, BuyTicketActivity::class.java)
                 intent.putExtra("ticket", ticketTemp)
                 startActivity(intent)
                 viewModel.onChooseTicketComplete()
