@@ -1,5 +1,6 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
 import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.ui.activity.MainActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.home.TicketsTypeViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
@@ -59,7 +61,9 @@ class TicketFragment : Fragment() {
                     if (ticket_price == ticket.price)
                         ticketTemp = ticket
                 }
-                openChangePassDialog(ticketTemp)
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra("ticket", ticketTemp)
+                startActivity(intent)
                 viewModel.onChooseTicketComplete()
             }
         })

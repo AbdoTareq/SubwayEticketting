@@ -2,30 +2,36 @@ package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.databinding.ActivityBuyBinding
+import com.abdotareq.subway_e_ticketing.model.TicketType
 import com.abdotareq.subway_e_ticketing.utility.payment.Json
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.samples.wallet.PaymentsUtil
 import com.google.android.gms.samples.wallet.microsToString
 import com.google.android.gms.wallet.*
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_buy.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import timber.log.Timber
+import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 
 
 /**
  * Checkout implementation for the app
  */
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
     /**
      * A client for interacting with the Google Pay API.
@@ -50,9 +56,34 @@ class MainActivity : Activity() {
      *
      * @see Activity.onCreate
      */
+
+    private lateinit var viewModelFactory: BuyTicketViewModelFactory
+    private lateinit var viewModel: BuyTicketViewModel
+
+    private lateinit var binding: ActivityBuyBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityBuyBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        val ticket = intent.getParcelableExtra<TicketType>("ticket")
+        Toast.makeText(this, ticket?.price.toString(), Toast.LENGTH_LONG).show()
+
+
+        val application = requireNotNull(this).application
+
+        viewModelFactory = BuyTicketViewModelFactory(ticket!!, application)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(BuyTicketViewModel::class.java)
+
+        binding.viewModel = viewModel
+        // Specify the current activity as the lifecycle owner of the binding. This is used so that
+        // the binding can observe LiveData updates
+
+        binding.lifecycleOwner = this
+
 
         // Set up the mock information for our item in the UI.
         selectedGarment = fetchRandomGarment()
@@ -85,7 +116,7 @@ class MainActivity : Activity() {
                 completedTask.getResult(ApiException::class.java)?.let(::setGooglePayAvailable)
             } catch (exception: ApiException) {
                 // Process error
-                Log.w("isReadyToPay failed", exception)
+                Timber.tag("isReadyToPay failed").e(exception)
             }
         }
     }
@@ -104,7 +135,7 @@ class MainActivity : Activity() {
             Toast.makeText(
                     this,
                     "Unfortunately, Google Pay is not available on this device",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_LONG).show()
         }
     }
 
@@ -120,7 +151,7 @@ class MainActivity : Activity() {
 
         val paymentDataRequestJson = PaymentsUtil.getPaymentDataRequest(price)
         if (paymentDataRequestJson == null) {
-            Log.e("RequestPayment", "Can't fetch payment data request")
+            Timber.tag("RequestPayment").e("Can't fetch payment data request")
             return
         }
         val request = PaymentDataRequest.fromJson(paymentDataRequestJson.toString())
@@ -167,6 +198,7 @@ class MainActivity : Activity() {
                 googlePayButton.isClickable = true
             }
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     /**
@@ -203,17 +235,17 @@ class MainActivity : Activity() {
 
             val billingName = paymentMethodData.getJSONObject("info")
                     .getJSONObject("billingAddress").getString("name")
-            Log.d("BillingName", billingName)
+            Timber.e(billingName)
 
             Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
 
             // Logging token string.
-            Log.d("GooglePaymentToken", paymentMethodData
+            Timber.e("GooglePaymentToken ${paymentMethodData
                     .getJSONObject("tokenizationData")
-                    .getString("token"))
+                    .getString("token")}")
 
         } catch (e: JSONException) {
-            Log.e("handlePaymentSuccess", "Error: " + e.toString())
+            Timber.e("Error: %s", e.toString())
         }
 
     }
@@ -228,27 +260,28 @@ class MainActivity : Activity() {
      * Wallet Constants Library](https://developers.google.com/android/reference/com/google/android/gms/wallet/WalletConstants.constant-summary)
      */
     private fun handleError(statusCode: Int) {
-        Log.w("loadPaymentData failed", String.format("Error code: %d", statusCode))
+        Timber.tag("loadPaymentData failed").e(String.format("Error code: %d", statusCode))
     }
 
-    private fun fetchRandomGarment() : JSONObject {
+    private fun fetchRandomGarment(): JSONObject {
         if (!::garmentList.isInitialized) {
             garmentList = Json.readFromResources(this, R.raw.tshirts)
         }
 
-        val randomIndex:Int = Math.round(Math.random() * (garmentList.length() - 1)).toInt()
+        val randomIndex: Int = (Math.random() * (garmentList.length() - 1)).roundToInt().toInt()
         return garmentList.getJSONObject(randomIndex)
     }
 
-    private fun displayGarment(garment:JSONObject) {
-        detailTitle.setText(garment.getString("title"))
-        detailPrice.setText("\$${garment.getString("price")}")
+    private fun displayGarment(garment: JSONObject) {
+        detailTitle.text = garment.getString("title")
+        detailPrice.text = "\$${garment.getString("price")}"
 
-        val escapedHtmlText:String = Html.fromHtml(garment.getString("description")).toString()
-        detailDescription.setText(Html.fromHtml(escapedHtmlText))
+//        val escapedHtmlText: String = Html.fromHtml(garment.getString("description")).toString()
+//        detailDescription.text = Html.fromHtml(escapedHtmlText)
 
         val imageUri = "@drawable/${garment.getString("image")}"
         val imageResource = resources.getIdentifier(imageUri, null, packageName)
         detailImage.setImageResource(imageResource)
     }
+
 }
