@@ -68,16 +68,7 @@ class TicketFragment : Fragment() {
             }
         })
 
-
-
         return view
-    }
-
-    // this for change pass dialog
-    private fun openChangePassDialog(ticketTypeTemp: TicketType) {
-        val dialog = BuyTicketDialogFragment(ticketTypeTemp)
-        requireActivity().supportFragmentManager
-                .let { dialog.show(it, "Buy Dialog") }
     }
 
     override fun onDestroyView() {
