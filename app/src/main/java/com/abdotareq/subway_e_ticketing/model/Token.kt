@@ -1,8 +1,11 @@
 package com.abdotareq.subway_e_ticketing.model
 
-import com.squareup.moshi.Json
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
+// this is for release to be working
+@Keep
 data class Token(
-        @Json(name = "token")
+        @SerializedName( "token")
         var token: String
         )

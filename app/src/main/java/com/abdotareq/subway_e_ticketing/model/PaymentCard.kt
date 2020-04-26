@@ -1,24 +1,28 @@
 package com.abdotareq.subway_e_ticketing.model
 
-import com.squareup.moshi.Json
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 /**
  * Entity bean for payment_info Table with JPA annotations
  *
  */
-data class PaymentCard(@Json(name = "id")
+// this is for release to be working
+@Keep
+
+data class PaymentCard(@SerializedName( "id")
                        val id: Int = 0,
 
-                       @Json(name = "userId")
+                       @SerializedName( "userId")
                        val userId: Int = 0,
 
-                       @Json(name = "cardNumber")
+                       @SerializedName( "cardNumber")
                        val cardNumber: String? = null,
 
-                       @Json(name = "expireDate")
+                       @SerializedName( "expireDate")
                        val expireDate: String? = null,
 
-                       @Json(name = "cvv")
+                       @SerializedName( "cvv")
                        val cvv: String? = null) {
 
 }

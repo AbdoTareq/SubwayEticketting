@@ -1,38 +1,38 @@
 package com.abdotareq.subway_e_ticketing.model
 
-import android.os.Parcelable
-import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
-@Parcelize
-data class User(@Json(name = "id")
+// this is for release to be working
+@Keep
+data class User(@SerializedName("id")
                 var id: Int = 0,
-                @Json(name = "email")
+                @SerializedName( "email")
                 var email: String? = null,
 
-                @Json(name = "password")
+                @SerializedName( "password")
                 var password: String? = null,
 
-                @Json(name = "first_name")
+                @SerializedName( "first_name")
                 var first_name: String? = null,
 
-                @Json(name = "last_name")
+                @SerializedName( "last_name")
                 var last_name: String? = null,
 
-                @Json(name = "image")
+                @SerializedName( "image")
                 var image: String? = null,
 
-                @Json(name = "birth_date")
+                @SerializedName( "birth_date")
                 var birth_date: String? = null,
 
-                @Json(name = "gender")
+                @SerializedName( "gender")
                 var gender: String? = null,
 
-                @Json(name = "admin")
+                @SerializedName( "admin")
                 var admin: Int = 0,
 
-                @Json(name = "otp_token")
-                var otp_token: String? = null) : Parcelable {
+                @SerializedName( "otp_token")
+                var otp_token: String? = null) {
 
     override fun toString(): String {
         return ("User [id=" + id + ", email=" + email + ", password=" + password + ", first_name=" + first_name

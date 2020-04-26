@@ -1,25 +1,28 @@
 package com.abdotareq.subway_e_ticketing.model
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 /**
  * Document for in_tickets Collection with JPA annotations
  */
+// this is for release to be working
+@Keep
 @Parcelize
-data class InTicket(@Json(name = "id") val id: String? = null,
-                    @Json(name = "buyDate") val buyDate: Date? = null,
-                    @Json(name = "color") val color: String? = null,
+data class InTicket(@SerializedName( "id") val id: String? = null,
+                    @SerializedName( "buyDate") val buyDate: Date? = null,
+                    @SerializedName( "color") val color: String? = null,
 
-                    @Json(name = "price") val price: Int = 0,
-                    @Json(name = "checkInDate") val checkInDate: Date? = null,
-                    @Json(name = "checkInStationId") val checkInStationId: Int = 0,
-                    @Json(name = "checkInStationName") val checkInStationName: String? = null,
+                    @SerializedName( "price") val price: Int = 0,
+                    @SerializedName( "checkInDate") val checkInDate: Date? = null,
+                    @SerializedName( "checkInStationId") val checkInStationId: Int = 0,
+                    @SerializedName( "checkInStationName") val checkInStationName: String? = null,
 
-                    @Json(name = "buyerId") val buyerId: Int = 0,
-                    @Json(name = "ownerId") val ownerId: Int = 0,
-                    @Json(name = "ownerName") val ownerName: String? = null) : Parcelable {
+                    @SerializedName( "buyerId") val buyerId: Int = 0,
+                    @SerializedName( "ownerId") val ownerId: Int = 0,
+                    @SerializedName( "ownerName") val ownerName: String? = null) : Parcelable {
 
 }
