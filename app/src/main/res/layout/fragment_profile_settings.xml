@@ -57,7 +57,7 @@
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/user_icon"
+
                 android:drawablePadding="@dimen/_8sdp"
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
@@ -86,7 +86,7 @@
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/user_icon"
+
                 android:drawablePadding="@dimen/_8sdp"
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
@@ -222,7 +222,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:drawableStart="@drawable/email_icon"
+
             android:drawablePadding="@dimen/_8sdp"
             android:hint="@string/mail"
             android:padding="@dimen/small_margin"

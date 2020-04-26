@@ -13,7 +13,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         tools:context=".ui.fragment.registration.SignInFragment">
 
         <TextView
@@ -35,7 +34,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/message2"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -43,12 +41,14 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
+            android:layout_height="0dp"
+            android:background="@color/primaryColor"
             android:src="@drawable/white_logo"
+            app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            android:contentDescription="@string/app_log_is_train" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -74,7 +74,6 @@
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/email_icon"
                     android:drawablePadding="@dimen/_8sdp"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_10sdp"
@@ -94,7 +93,6 @@
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/password_icon"
                     android:drawablePadding="@dimen/_8sdp"
                     android:padding="@dimen/_10sdp"
                     android:text="@={viewmodel.pass}" />
@@ -105,8 +103,8 @@
 
         <Button
             android:id="@+id/sign_in_btn"
-            android:layout_width="0dp"
             style="@style/ButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/medium_margin"
             android:onClick="@{() -> viewmodel.onAuthenticate()}"

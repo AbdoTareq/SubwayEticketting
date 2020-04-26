@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.ui.fragment
+package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,10 +12,6 @@ import com.abdotareq.subway_e_ticketing.databinding.FragmentPocketBinding
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.InTicket
 import com.abdotareq.subway_e_ticketing.ui.activity.ScanPocketActivity
-import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailablePocketAdapter
-import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailableTicketListener
-import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUsePocketAdapter
-import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUseTicketListener
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.home.PocketViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.PocketViewModelFactory

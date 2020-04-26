@@ -305,6 +305,7 @@
     <string name="tickets_added_to_your_pocket">%d tickets added to your pocket</string>
     <string name="plus">+</string>
     <string name="minus">—</string>
+    <string name="app_log_is_train">App log is train</string>
 
 
 </resources>

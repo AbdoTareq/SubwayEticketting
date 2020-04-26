@@ -39,7 +39,7 @@
                 android:layout_marginLeft="@dimen/_24sdp"
                 android:layout_marginRight="@dimen/_24sdp"
                 android:layout_marginBottom="@dimen/small_margin"
-                android:drawableStart="@drawable/password_icon"
+
                 android:drawablePadding="10dp"
                 android:inputType="textPassword"
                 android:padding="16dp"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_24sdp"
                 android:layout_marginRight="@dimen/_24sdp"
-                android:drawableStart="@drawable/password_icon"
+
                 android:drawablePadding="10dp"
                 android:inputType="textPassword"
                 android:padding="16dp"

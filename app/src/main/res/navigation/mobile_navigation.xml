@@ -16,7 +16,7 @@
         />
     <fragment
         android:id="@+id/pocketFragment"
-        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.PocketFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.pocket.PocketFragment"
         android:label="fragment_pocket"
         tools:layout="@layout/fragment_pocket" />
     <fragment

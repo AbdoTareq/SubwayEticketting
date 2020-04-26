@@ -57,7 +57,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/password"
-                android:drawableStart="@drawable/user_icon"
                 android:drawablePadding="@dimen/_8sdp"
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
@@ -86,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/password"
-                android:drawableStart="@drawable/user_icon"
+
                 android:drawablePadding="@dimen/_8sdp"
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
@@ -118,7 +117,7 @@
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/email_icon"
+
                     android:drawablePadding="@dimen/_8sdp"
                     android:hint="@string/mail"
                     android:inputType="textEmailAddress"
@@ -145,13 +144,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/password"
-                    android:drawableStart="@drawable/password_icon"
+
                     android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="16dp"
-                    android:text="@={viewModel.pass}"
-                     />
+                    android:text="@={viewModel.pass}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,13 +169,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/password"
-                    android:drawableStart="@drawable/password_icon"
+
                     android:drawablePadding="10dp"
                     android:hint="@string/confirm_new_pass"
                     android:inputType="textPassword"
                     android:padding="16dp"
-                    android:text="@={viewModel.confPass}"
-                     />
+                    android:text="@={viewModel.confPass}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

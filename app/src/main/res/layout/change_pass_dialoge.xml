@@ -20,12 +20,10 @@
             android:id="@+id/old_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/password_24px"
             android:drawablePadding="@dimen/small_margin"
             android:hint="@string/old_password"
             android:inputType="textPassword"
-            android:padding="@dimen/small_margin"
-            />
+            android:padding="@dimen/small_margin" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -43,7 +41,7 @@
             android:id="@+id/new_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/password_24px"
+
             android:drawablePadding="@dimen/small_margin"
             android:hint="@string/new_password"
             android:inputType="textPassword"
@@ -66,7 +64,7 @@
             android:id="@+id/confirm_new_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/password_24px"
+
             android:drawablePadding="@dimen/small_margin"
             android:hint="@string/confirm_new_pass"
             android:inputType="textPassword"
@@ -85,7 +83,6 @@
         android:layout_marginEnd="3dp"
         android:hint="@string/confirm_new_pass"
         android:padding="@dimen/_8sdp"
-        android:text="@string/change_pass_button"
-         />
+        android:text="@string/change_pass_button" />
 
 </RelativeLayout>
