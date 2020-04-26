@@ -79,4 +79,6 @@
     <string name="ticket_description">Ticket Description</string>
     <string name="choose_tickets_number">Choose tickets number</string>
     <string name="tickets_added_to_your_pocket">%d tickets added to your pocket</string>
+    <string name="plus">+</string>
+    <string name="minus">—</string>
 </resources>

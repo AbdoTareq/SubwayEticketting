@@ -35,6 +35,7 @@ class SettingsFragment : Fragment() {
         binding.showTitle.setOnClickListener {
             val intent = Intent(context, OnBoardActivity::class.java)
             startActivity(intent)
+            activity!!.finishAffinity()
         }
 
         binding.switchButton.isChecked = SharedPreferenceUtil.getSharedPrefsNightMode(context)

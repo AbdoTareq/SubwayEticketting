@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.android.gms.samples.wallet
+package com.abdotareq.subway_e_ticketing.utility.payment
 
 import android.app.Activity
 import com.google.android.gms.wallet.PaymentsClient

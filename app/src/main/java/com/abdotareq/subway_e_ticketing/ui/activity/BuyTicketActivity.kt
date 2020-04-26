@@ -19,7 +19,7 @@ import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.samples.wallet.PaymentsUtil
+import com.abdotareq.subway_e_ticketing.utility.payment.PaymentsUtil
 import com.google.android.gms.wallet.*
 import kotlinx.android.synthetic.main.activity_buy.*
 import org.json.JSONException
