@@ -27,7 +27,11 @@ import org.json.JSONObject
 import timber.log.Timber
 
 /**
- * Checkout implementation for the app
+ * [BuyTicketActivity] to buy tickets
+ *
+ * I've tried 2 times to switch this activity to fragment but I failed every time on google pay button
+ * is't an ordinary button that can be clicked so {binding.googlePayButton} won't work & if I transfer
+ * it to Image button it'll work but payment will never be complete
  */
 class BuyTicketActivity : AppCompatActivity() {
 
