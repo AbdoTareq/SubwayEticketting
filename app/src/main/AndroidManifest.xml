@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.BuyTicketActivity" />
-        <activity android:name=".ui.activity.ScanPocketActivity" />
         <activity android:name=".ui.activity.OnBoardActivity" />
         <activity android:name=".ui.activity.HomeLandActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />

@@ -16,7 +16,6 @@
 
 package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -54,7 +53,7 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = TicketItemBinding.inflate(layoutInflater, parent, false)
                 // add animation
-                binding.ticketI.animation = AnimationUtils.loadAnimation(parent.context, R.anim.fade_scale_animation)
+                binding.ticketI.animation = AnimationUtils.loadAnimation(parent.context, R.anim.slide_down)
 
                 return ViewHolder(binding)
             }

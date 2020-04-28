@@ -1,46 +1,47 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
-import android.R.attr.bitmap
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
-import androidmads.library.qrgenearator.QRGSaver
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.ActivityScanPocketBinding
-import com.abdotareq.subway_e_ticketing.model.BoughtTicket
-import com.abdotareq.subway_e_ticketing.model.InTicket
+import com.abdotareq.subway_e_ticketing.databinding.FragmentScanPocketBinding
 import timber.log.Timber
 
 
-class ScanPocketActivity : AppCompatActivity() {
+class ScanTicketFragment : Fragment() {
 
-    private lateinit var binding: ActivityScanPocketBinding
 
     private var num: Int = 0
 
-    private var checkInTicket = InTicket()
-    private var boughtTicket = BoughtTicket()
+    private var _binding: FragmentScanPocketBinding? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityScanPocketBinding.inflate(layoutInflater)
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentScanPocketBinding.inflate(inflater, container, false)
         val view = binding.root
-        setContentView(view)
 
         // get ticket
-        try {
+        val safeArgs: ScanTicketFragmentArgs by navArgs()
+        val checkInTicket = safeArgs.inTicket
+        val boughtTicket = safeArgs.boughtTicket
+
+        if (checkInTicket != null) {
             num = 1
-            checkInTicket = intent?.getParcelableExtra("checkInTicket") as InTicket
             Timber.e("$checkInTicket")
             binding.title.text = getString(R.string.check_out)
             binding.price.text = String.format(getString(R.string.ticket_price_format, checkInTicket.price))
             binding.instructions.text = String.format(getString(R.string.scan_mess_format, getString(R.string.exit), getString(R.string.check_out)))
-
-        } catch (e: Exception) {
-            Timber.e(e)
+        } else if (boughtTicket != null) {
             num = 2
-            boughtTicket = intent?.getParcelableExtra("boughtTicket") as BoughtTicket
+            Timber.e("$boughtTicket")
             binding.title.text = getString(R.string.check_in)
             binding.price.text = String.format(getString(R.string.ticket_price_format, boughtTicket.price))
             binding.instructions.text = String.format(getString(R.string.scan_mess_format, getString(R.string.entrance), getString(R.string.use)))
@@ -48,9 +49,9 @@ class ScanPocketActivity : AppCompatActivity() {
 
         // Initializing the QR Encoder with your value to be encoded, type you required and Dimension
         val qrgEncoder = if (num == 1)
-            QRGEncoder(checkInTicket.id, null, QRGContents.Type.TEXT, 650)
+            QRGEncoder(checkInTicket!!.id, null, QRGContents.Type.TEXT, 650)
         else
-            QRGEncoder(boughtTicket.id, null, QRGContents.Type.TEXT, 650)
+            QRGEncoder(boughtTicket!!.id, null, QRGContents.Type.TEXT, 650)
 
         // to control it's colors
 //        qrgEncoder.setColorBlack(Color.RED);
@@ -69,5 +70,6 @@ class ScanPocketActivity : AppCompatActivity() {
 //        val qrgSaver = QRGSaver()
 //        qrgSaver.save(savePath, edtValue.getText().toString().trim(), bitmap, QRGContents.ImageType.IMAGE_JPEG)
 
+        return view
     }
 }

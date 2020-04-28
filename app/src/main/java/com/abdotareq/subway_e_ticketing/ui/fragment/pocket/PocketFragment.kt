@@ -1,6 +1,5 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.databinding.FragmentPocketBinding
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.InTicket
-import com.abdotareq.subway_e_ticketing.ui.activity.ScanPocketActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.home.PocketViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.PocketViewModelFactory
@@ -71,9 +70,11 @@ class PocketFragment : Fragment() {
                         ticketTemp = ticket
                 }
                 viewModel.onChooseCheckInComplete()
-                val intent = Intent(context,ScanPocketActivity::class.java)
-                intent.putExtra("checkInTicket", ticketTemp) // sending ticket object.
-                startActivity(intent)
+//                val intent = Intent(context,ScanPocketFragment::class.java)
+//                intent.putExtra("checkInTicket", ticketTemp) // sending ticket object.
+//                startActivity(intent)
+                findNavController().navigate(PocketFragmentDirections
+                        .actionPocketFragmentToScanPocketFragment(ticketTemp, null))
             }
         })
 
@@ -87,9 +88,9 @@ class PocketFragment : Fragment() {
                         ticketTemp = ticket
                 }
                 viewModel.onChooseBoughtTicketComplete()
-                val intent = Intent(context,ScanPocketActivity::class.java)
-                intent.putExtra("boughtTicket", ticketTemp)// sending ticket object.
-                startActivity(intent)
+                findNavController().navigate(PocketFragmentDirections
+                        .actionPocketFragmentToScanPocketFragment(null, ticketTemp))
+
             }
         })
 

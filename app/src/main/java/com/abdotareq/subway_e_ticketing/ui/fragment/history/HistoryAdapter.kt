@@ -51,7 +51,7 @@ class HistoryAdapter : ListAdapter<History,
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = HistoryItemBinding.inflate(layoutInflater, parent, false)
-                binding.hisTicket.animation = AnimationUtils.loadAnimation(parent.context, R.anim.fade_scale_animation)
+                binding.hisTicket.animation = AnimationUtils.loadAnimation(parent.context, R.anim.slide_down)
 
                 return ViewHolder(binding)
             }

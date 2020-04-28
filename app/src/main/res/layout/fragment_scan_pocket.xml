@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.abdotareq.subway_e_ticketing.ui.activity.ScanPocketActivity">
+    tools:context="com.abdotareq.subway_e_ticketing.ui.activity.ScanTicketFragment">
 
 
     <TextView
@@ -14,8 +14,6 @@
         android:layout_marginTop="16dp"
         android:text="@string/check_in"
         android:textAppearance="@style/CustomHeadline3"
-
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
