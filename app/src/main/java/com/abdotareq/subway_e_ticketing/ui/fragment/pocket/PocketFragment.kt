@@ -70,9 +70,6 @@ class PocketFragment : Fragment() {
                         ticketTemp = ticket
                 }
                 viewModel.onChooseCheckInComplete()
-//                val intent = Intent(context,ScanPocketFragment::class.java)
-//                intent.putExtra("checkInTicket", ticketTemp) // sending ticket object.
-//                startActivity(intent)
                 findNavController().navigate(PocketFragmentDirections
                         .actionPocketFragmentToScanPocketFragment(ticketTemp, null))
             }

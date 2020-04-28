@@ -1,9 +1,11 @@
 package com.abdotareq.subway_e_ticketing
 
 import android.app.Application
-import com.abdotareq.subway_e_ticketing.BuildConfig
+import com.crashlytics.android.Crashlytics
+import com.crashlytics.android.core.CrashlyticsCore
+import io.fabric.sdk.android.Fabric
 import timber.log.Timber
-import timber.log.Timber.DebugTree
+
 
 /**
  * Controller responsible to start timber debug tree
@@ -13,9 +15,22 @@ class ApplicationController : Application() {
     override fun onCreate() {
         super.onCreate()
 
-//        this condition to prevent logs in release
+        configureCrashReporting()
+
+    }
+
+    // this method to configure debug behavior to enable timber and disable firebase in debug mode
+    // and vice versa in release mode
+    private fun configureCrashReporting() {
+        val crashlyticsCore = CrashlyticsCore.Builder()
+                .disabled(BuildConfig.DEBUG)
+                .build()
+        Fabric.with(this, Crashlytics.Builder().core(crashlyticsCore).build())
+
+        // this condition to prevent logs in release
         if (BuildConfig.DEBUG) {
-            Timber.plant(DebugTree())
+            Timber.plant(Timber.DebugTree())
         }
+
     }
 }
