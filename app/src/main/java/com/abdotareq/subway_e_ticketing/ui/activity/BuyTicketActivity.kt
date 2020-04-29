@@ -1,12 +1,17 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
@@ -14,12 +19,14 @@ import com.abdotareq.subway_e_ticketing.databinding.ActivityBuyBinding
 import com.abdotareq.subway_e_ticketing.model.BuyInterface
 import com.abdotareq.subway_e_ticketing.model.TicketType
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.utility.createChannel
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.util
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel
 import com.google.android.gms.common.api.ApiException
 import com.abdotareq.subway_e_ticketing.utility.payment.PaymentsUtil
+import com.abdotareq.subway_e_ticketing.utility.sendNotification
 import com.google.android.gms.wallet.*
 import kotlinx.android.synthetic.main.activity_buy.*
 import org.json.JSONException
@@ -297,8 +304,20 @@ class BuyTicketActivity : AppCompatActivity() {
         val buyInterface = object : BuyInterface {
             override fun onSuccess() {
                 progressDialog.dismiss()
-                Toast.makeText(this@BuyTicketActivity, String
-                        .format(getString(R.string.tickets_added_to_your_pocket, viewModel.ticketNum.value)), Toast.LENGTH_LONG).show()
+                // TODO: Step 1.7 call create channel
+                val notificationManager = ContextCompat.getSystemService(
+                        this@BuyTicketActivity,
+                        NotificationManager::class.java
+                ) as NotificationManager
+                notificationManager.createChannel(
+                        getString(R.string.buy_notification_channel_id),
+                        getString(R.string.buy_notification_channel_name),
+                        this@BuyTicketActivity
+                )
+                notificationManager.sendNotification(
+                        getString(R.string.buy_notification_channel_name)
+                        , String.format(getString(R.string.tickets_added_to_your_pocket, viewModel.ticketNum.value))
+                        , this@BuyTicketActivity)
             }
 
             override fun onFail(responseCode: String) {
@@ -308,4 +327,6 @@ class BuyTicketActivity : AppCompatActivity() {
         }
         viewModel.buy(SharedPreferenceUtil.getSharedPrefsTokenId(this), buyInterface, "", ticket.price)
     }
+
+
 }

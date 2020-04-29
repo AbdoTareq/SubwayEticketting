@@ -16,12 +16,15 @@
 
 package com.abdotareq.subway_e_ticketing.utility
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.navigation.NavDeepLinkBuilder
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 
@@ -40,15 +43,12 @@ fun NotificationManager.sendNotification(notificationTitle: String, messageBody:
     // Create the content intent for the notification, which launches
     // this activity
     // TODO: Step 1.11 create intent
-    val contentIntent = Intent(applicationContext, HomeLandActivity::class.java)
     // TODO: Step 1.12 create PendingIntent to open the app when click the notification
-    val contentPendingIntent =
-            PendingIntent.getActivity(
-                    applicationContext,
-                    NOTIFICATION_ID,
-                    contentIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT
-            )
+    val pendingIntent = NavDeepLinkBuilder(applicationContext)
+            .setComponentName(HomeLandActivity::class.java)
+            .setGraph(R.navigation.mobile_navigation)
+            .setDestination(R.id.pocketFragment)
+            .createPendingIntent()
 
 
     // TODO: Step 2.0 add style
@@ -77,7 +77,7 @@ fun NotificationManager.sendNotification(notificationTitle: String, messageBody:
             .setContentText(messageBody)
 
             // TODO: Step 1.13 set content intent
-            .setContentIntent(contentPendingIntent)
+            .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
             // TODO: Step 2.1 add style to builder
@@ -110,4 +110,31 @@ fun NotificationManager.sendNotification(notificationTitle: String, messageBody:
  */
 fun NotificationManager.cancelNotifications() {
     cancelAll()
+}
+
+/**    [channelId] unique channel id
+ *     [channelName]  channel name which users will also see in their settings screen
+ */
+fun NotificationManager.createChannel(channelId: String, channelName: String, applicationContext: Context) {
+    // TODO: Step 1.6 START create a channel
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val notificationChannel =
+                NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+                        // TODO: Step 2.6 disable badges for this channel
+                        .apply {
+                            setShowBadge(true)
+                        }
+        notificationChannel.enableLights(true)
+        notificationChannel.enableVibration(true)
+        notificationChannel.lightColor = R.color.primaryColor
+        notificationChannel.description = applicationContext.getString(R.string.buy_notification_channel_name)
+
+        val notificationManager =
+                applicationContext.getSystemService(NotificationManager::class.java)
+        notificationManager!!.createNotificationChannel(notificationChannel)
+
+    }
+    // TODO: Step 1.6 END create a channel
+
+
 }
