@@ -1,11 +1,8 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.app.Activity
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -304,20 +301,7 @@ class BuyTicketActivity : AppCompatActivity() {
         val buyInterface = object : BuyInterface {
             override fun onSuccess() {
                 progressDialog.dismiss()
-                // TODO: Step 1.7 call create channel
-                val notificationManager = ContextCompat.getSystemService(
-                        this@BuyTicketActivity,
-                        NotificationManager::class.java
-                ) as NotificationManager
-                notificationManager.createChannel(
-                        getString(R.string.buy_notification_channel_id),
-                        getString(R.string.buy_notification_channel_name),
-                        this@BuyTicketActivity
-                )
-                notificationManager.sendNotification(
-                        getString(R.string.buy_notification_channel_name)
-                        , String.format(getString(R.string.tickets_added_to_your_pocket, viewModel.ticketNum.value))
-                        , this@BuyTicketActivity)
+                createNotification()
             }
 
             override fun onFail(responseCode: String) {
@@ -328,5 +312,25 @@ class BuyTicketActivity : AppCompatActivity() {
         viewModel.buy(SharedPreferenceUtil.getSharedPrefsTokenId(this), buyInterface, "", ticket.price)
     }
 
+    private fun createNotification() {
+        val notificationManager = ContextCompat.getSystemService(
+                this@BuyTicketActivity,
+                NotificationManager::class.java
+        ) as NotificationManager
+        createChannel(
+                getString(R.string.buy_notification_channel_id),
+                getString(R.string.buy_notification_channel_name),
+                this@BuyTicketActivity
+        )
+        notificationManager.sendNotification(
+                getString(R.string.buy_notification_channel_name)
+                , String.format(getString(R.string.tickets_added_to_your_pocket, viewModel.ticketNum.value))
+                , getString(R.string.buy_notification_channel_id)
+                , this@BuyTicketActivity)
+    }
+
 
 }
+
+
+
