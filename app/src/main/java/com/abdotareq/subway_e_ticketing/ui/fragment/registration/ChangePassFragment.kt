@@ -43,8 +43,6 @@ class ChangePassFragment : Fragment() {
         // take the token to send it with bearer in header to change pass
         bearerToken += token
 
-        Toast.makeText(context, "header: $bearerToken", Toast.LENGTH_SHORT).show()
-
         val application = requireNotNull(activity).application
 
         viewModelFactory = ChangePassViewModelFactory(mail, token, application)
@@ -91,7 +89,7 @@ class ChangePassFragment : Fragment() {
                 //pass changed successfully
                 progressDialog.dismiss()
                 findNavController().navigate(ChangePassFragmentDirections.actionChangePassFragmentToSignInFragment())
-                Toast.makeText(context, "Pass changed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Pass changed", Toast.LENGTH_LONG).show()
             }
 
             override fun onFail(responseCode: String) {
@@ -104,7 +102,6 @@ class ChangePassFragment : Fragment() {
         viewModel.changePass(userInterface)
 
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -15,7 +15,6 @@ import timber.log.Timber
 
 class ScanTicketFragment : Fragment() {
 
-
     private var num: Int = 0
 
     private var _binding: FragmentScanPocketBinding? = null
