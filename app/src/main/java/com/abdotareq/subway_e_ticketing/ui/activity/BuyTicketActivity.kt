@@ -1,29 +1,22 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.app.Activity
-import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ActivityBuyBinding
-import com.abdotareq.subway_e_ticketing.model.BuyInterface
 import com.abdotareq.subway_e_ticketing.model.TicketType
-import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
-import com.abdotareq.subway_e_ticketing.utility.createChannel
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.payment.PaymentsUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.BuyTicketViewModel
 import com.google.android.gms.common.api.ApiException
-import com.abdotareq.subway_e_ticketing.utility.payment.PaymentsUtil
-import com.abdotareq.subway_e_ticketing.utility.sendNotification
 import com.google.android.gms.wallet.*
 import kotlinx.android.synthetic.main.activity_buy.*
 import org.json.JSONException
@@ -252,7 +245,7 @@ class BuyTicketActivity : AppCompatActivity() {
                     .getJSONObject("billingAddress").getString("name")
             Timber.e(billingName)
 
-            buy()
+            viewModel.buy("", ticket.price)
 //            Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
 
             // Logging token string.
@@ -290,43 +283,6 @@ class BuyTicketActivity : AppCompatActivity() {
             })
             bitMapCon.execute(ticket.icon)
         }
-    }
-
-    // handle buy tickets
-    private fun buy() {
-        //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(this, getString(R.string.progMessage))
-        progressDialog.show()
-
-        val buyInterface = object : BuyInterface {
-            override fun onSuccess() {
-                progressDialog.dismiss()
-                createNotification()
-            }
-
-            override fun onFail(responseCode: String) {
-                progressDialog.dismiss()
-                Toast.makeText(this@BuyTicketActivity, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
-            }
-        }
-        viewModel.buy(SharedPreferenceUtil.getSharedPrefsTokenId(this), buyInterface, "", ticket.price)
-    }
-
-    private fun createNotification() {
-        val notificationManager = ContextCompat.getSystemService(
-                this@BuyTicketActivity,
-                NotificationManager::class.java
-        ) as NotificationManager
-        createChannel(
-                getString(R.string.buy_notification_channel_id),
-                getString(R.string.buy_notification_channel_name),
-                this@BuyTicketActivity
-        )
-        notificationManager.sendNotification(
-                getString(R.string.buy_notification_channel_name)
-                , String.format(getString(R.string.tickets_added_to_your_pocket, viewModel.ticketNum.value))
-                , getString(R.string.buy_notification_channel_id)
-                , this@BuyTicketActivity)
     }
 
 
