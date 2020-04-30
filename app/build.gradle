@@ -78,6 +78,9 @@ dependencies {
     // for navigation and safe arguments
     implementation "android.arch.navigation:navigation-fragment-ktx:2.2.1"
     implementation "android.arch.navigation:navigation-ui-ktx:2.2.1"
+    // fix java.lang.IllegalStateException: You must call setGraph() before calling getGraph() bug
+    implementation "androidx.navigation:navigation-fragment:2.3.0-alpha05"
+    implementation "androidx.navigation:navigation-ui:2.3.0-alpha05"
 
     // Timber logs library
     implementation 'com.jakewharton.timber:timber:4.7.1'
