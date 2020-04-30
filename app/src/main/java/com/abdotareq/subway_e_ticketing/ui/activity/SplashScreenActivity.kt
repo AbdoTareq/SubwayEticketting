@@ -1,13 +1,8 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.content.Intent
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.GetUserInterface
-import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.daimajia.androidanimations.library.Techniques
 import com.viksaa.sssplash.lib.activity.AwesomeSplash
