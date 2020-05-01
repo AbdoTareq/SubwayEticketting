@@ -1,16 +1,13 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSettingsBinding
+import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.ui.activity.OnBoardActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.mikhaellopez.ratebottomsheet.RateBottomSheet
@@ -35,7 +32,7 @@ class SettingsFragment : Fragment() {
         binding.showTitle.setOnClickListener {
             val intent = Intent(context, OnBoardActivity::class.java)
             startActivity(intent)
-            activity!!.finishAffinity()
+            requireActivity().finishAffinity()
         }
 
         binding.switchButton.isChecked = SharedPreferenceUtil.getSharedPrefsNightMode(context)
@@ -44,16 +41,15 @@ class SettingsFragment : Fragment() {
             if (isChecked) {
                 // The toggle is enabled
                 SharedPreferenceUtil.setSharedPrefsNightMode(context, true)
-                Toast.makeText(context, "You should restart the app to take effect", Toast.LENGTH_LONG).show()
             } else {
                 // The toggle is disabled
                 SharedPreferenceUtil.setSharedPrefsNightMode(context, false)
-                Toast.makeText(context, "You should restart the app to take effect", Toast.LENGTH_LONG).show()
             }
+            restartApp()
         }
 
         binding.rate.setOnClickListener {
-            RateBottomSheetManager(context!!)
+            RateBottomSheetManager(requireContext())
                     .setDebugForceOpenEnable(true) // False by default
 
             // Show bottom sheet if meets conditions
@@ -62,6 +58,12 @@ class SettingsFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun restartApp() {
+        val intent = Intent(context,HomeLandActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     override fun onDestroyView() {
