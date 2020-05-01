@@ -31,6 +31,8 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+        // add animation
+        holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_up)
 
         holder.bind(clickListener, item)
     }
@@ -52,8 +54,6 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = TicketItemBinding.inflate(layoutInflater, parent, false)
-                // add animation
-                binding.ticketI.animation = AnimationUtils.loadAnimation(parent.context, R.anim.slide_down)
 
                 return ViewHolder(binding)
             }

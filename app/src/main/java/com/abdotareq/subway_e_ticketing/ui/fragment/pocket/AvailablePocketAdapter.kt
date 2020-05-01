@@ -16,7 +16,9 @@
 
 package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
@@ -34,6 +36,9 @@ class AvailablePocketAdapter(val clickListener: AvailableTicketListener) : ListA
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+
+        // add animation
+        holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_left)
 
         holder.bind(clickListener, item)
     }
@@ -55,9 +60,6 @@ class AvailablePocketAdapter(val clickListener: AvailableTicketListener) : ListA
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = PocketAvailableItemBinding.inflate(layoutInflater, parent, false)
-                // add animation
-                binding.boughtElement.animation = AnimationUtils.loadAnimation(parent.context, R.anim.slide_in_left)
-
                 return ViewHolder(binding)
             }
         }

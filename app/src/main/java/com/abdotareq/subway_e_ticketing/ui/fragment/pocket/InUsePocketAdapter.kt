@@ -32,6 +32,8 @@ class InUsePocketAdapter(val clickListener: InUseTicketListener) : ListAdapter<I
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+        // add animation
+        holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_right)
 
         holder.bind(clickListener, item)
     }
@@ -53,8 +55,6 @@ class InUsePocketAdapter(val clickListener: InUseTicketListener) : ListAdapter<I
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = PocketInUseItemBinding.inflate(layoutInflater, parent, false)
-                // add animation
-                binding.checkInTicket.animation = AnimationUtils.loadAnimation(parent.context, R.anim.slide_in_right)
 
                 return ViewHolder(binding)
             }
