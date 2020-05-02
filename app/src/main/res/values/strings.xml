@@ -68,6 +68,7 @@
     <string name="else_on_repsonse">else onResponse</string>
     <string name="ticket_num_format"> %d</string>
     <string name="ticket_price_format"> %d LE / Ticket</string>
+    <string name="ticket_title_format"> %s Ticket</string>
     <string name="ticket_cost_format">Total cost : %d LE</string>
     <string name="check_in_format">Check-in : %s</string>
     <string name="check_out_format">Check-out : %s</string>

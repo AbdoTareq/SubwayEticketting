@@ -14,10 +14,8 @@
             type="com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketListener" />
     </data>
 
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
-        style="@style/CardStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -26,78 +24,84 @@
         android:onClick="@{()-> clickListener.onClick(ticket)}"
         app:strokeColor="@{ticket.color}">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <View
+                android:id="@+id/view2"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="0dp"
+                android:background="#c0c0c0"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView5"
+                app:setTicketColor="@{ticket}" />
+
+            <!-- Title, secondary and supporting text -->
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/small_ticket"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    app:setTicketTitle="@{ticket}" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/_0_9_stations"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    app:setTicketStations="@{ticket}" />
-
-            </LinearLayout>
+                android:layout_marginStart="8dp"
+                android:padding="16dp"
+                android:text="@string/small_ticket"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintStart_toStartOf="@id/view2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setTicketTitle="@{ticket}" />
 
             <View
+                android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="#c0c0c0" />
+                android:background="#c0c0c0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-            <!-- Buttons -->
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
                 android:clickable="false"
                 android:focusable="false"
                 android:orientation="horizontal"
-                android:weightSum="2">
-
-                <com.google.android.material.button.MaterialButton
-                    style="?attr/borderlessButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-
-                    android:layout_weight="1"
-                    android:text="@string/buy_tickets"
-                    android:textAlignment="viewStart" />
+                android:weightSum="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/view">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|start"
+                    android:padding="16dp"
+                    android:text="@string/_3le_ticket"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    app:setTicketTypePrice="@{ticket}" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|end"
-                    android:text="@string/_3le_ticket"
-                    app:setTicketTypePrice="@{ticket}" />
+                    android:padding="16dp"
+                    android:text="@string/_0_9_stations"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:setTicketStations="@{ticket}" />
+
 
             </LinearLayout>
 
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

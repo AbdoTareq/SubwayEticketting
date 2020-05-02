@@ -1,24 +1,6 @@
-/*
- * Copyright 2018, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
-import android.animation.ObjectAnimator
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
@@ -26,10 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.PocketAvailableItemBinding
-import com.abdotareq.subway_e_ticketing.databinding.PocketInUseItemBinding
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
-import com.abdotareq.subway_e_ticketing.model.InTicket
-import com.abdotareq.subway_e_ticketing.model.TicketType
 
 class AvailablePocketAdapter(val clickListener: AvailableTicketListener) : ListAdapter<BoughtTicket,
         AvailablePocketAdapter.ViewHolder>(AvailableTicketDiffCallback()) {
