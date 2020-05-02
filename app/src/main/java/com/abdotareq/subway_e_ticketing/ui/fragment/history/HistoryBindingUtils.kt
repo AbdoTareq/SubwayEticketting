@@ -1,9 +1,12 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.history
 
+import android.graphics.Color
+import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.History
+import com.abdotareq.subway_e_ticketing.model.TicketType
 
 @BindingAdapter("setTicketPrice")
 fun TextView.setTicketPrice(item: History?) {
@@ -43,6 +46,13 @@ fun TextView.setCheckOutStationName(item: History?) {
 fun TextView.setCheckOutDate(item: History?) {
     item?.let {
         text = "at: ${it.checkOutDate}"
+    }
+}
+
+@BindingAdapter("setHistoryColor")
+fun View.setHistoryColor(item: History?) {
+    item?.let {
+//        setBackgroundColor(Color.parseColor("#${it.color}"))
     }
 }
 
