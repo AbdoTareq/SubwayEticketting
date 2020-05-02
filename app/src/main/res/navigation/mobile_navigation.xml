@@ -33,12 +33,12 @@
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/profileSettingsFragment"
-        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.ProfileSettingsFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.settings.ProfileSettingsFragment"
         android:label="fragment_profile_settings"
         tools:layout="@layout/fragment_profile_settings" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.SettingsFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
@@ -58,9 +58,9 @@
 
     <fragment
         android:id="@+id/appSettingsFragment"
-        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.AppSettingsFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.settings.AppSettingsFragment"
         android:label="fragment_app_settings"
-        tools:layout="@layout/fragment_app_settings" >
+        tools:layout="@layout/fragment_app_settings">
         <action
             android:id="@+id/action_appSettingsFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"

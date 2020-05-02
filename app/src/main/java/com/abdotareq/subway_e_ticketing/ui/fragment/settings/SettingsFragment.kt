@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.ui.fragment
+package com.abdotareq.subway_e_ticketing.ui.fragment.settings
 
 import android.content.Intent
 import android.os.Bundle

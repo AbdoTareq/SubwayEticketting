@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.SettingsFragment">
+    tools:context=".ui.fragment.settings.SettingsFragment">
 
     <Button
         android:id="@+id/showTitle"

@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.ui.fragment
+package com.abdotareq.subway_e_ticketing.ui.fragment.settings
 
 import android.app.Activity
 import android.app.DatePickerDialog
