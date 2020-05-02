@@ -1,5 +1,6 @@
 package com.abdotareq.subway_e_ticketing.model
 
+import android.graphics.Color
 import android.os.Parcelable
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
@@ -19,4 +20,8 @@ data class TicketType(@SerializedName( "price") val price: Int = 0,
 
                       @SerializedName( "ticketInfo") val ticketInfo: String? = null
 
-) : Parcelable
+) : Parcelable{
+    fun getColor():Int{
+        return Color.parseColor("#${color_code}")
+    }
+}
