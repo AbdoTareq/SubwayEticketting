@@ -308,6 +308,7 @@
     <string name="app_log_is_train">App log is train</string>
     <string name="buy_notification_channel_id" translatable="false">buy_channel</string>
     <string name="buy_notification_channel_name" translatable="false">Buy Tickets</string>
+    <string name="small_ticket">Small Ticket</string>
 
 
 </resources>

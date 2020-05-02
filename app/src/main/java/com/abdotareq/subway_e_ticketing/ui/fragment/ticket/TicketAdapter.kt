@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.TicketItemBinding
+import com.abdotareq.subway_e_ticketing.databinding.TicketItemNewBinding
 import com.abdotareq.subway_e_ticketing.model.TicketType
 
 class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
@@ -41,7 +41,7 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: TicketItemBinding)
+    class ViewHolder private constructor(val binding: TicketItemNewBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(clickListener: TicketListener, item: TicketType) {
@@ -53,7 +53,7 @@ class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = TicketItemBinding.inflate(layoutInflater, parent, false)
+                val binding = TicketItemNewBinding.inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
             }

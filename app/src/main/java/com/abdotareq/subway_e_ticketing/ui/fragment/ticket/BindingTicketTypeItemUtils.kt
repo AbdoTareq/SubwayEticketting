@@ -16,7 +16,11 @@
 
 package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
 
+import android.graphics.Color
+import android.os.Build
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.cardview.widget.CardView
 import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.TicketType
@@ -36,3 +40,11 @@ fun TextView.setTicketStations(item: TicketType?) {
         text = "${it.ticketInfo}"
     }
 }
+
+@BindingAdapter("setTicketTitle")
+fun TextView.setTicketTitle(item: TicketType?) {
+    item?.let {
+        text = "${it.color}"
+    }
+}
+

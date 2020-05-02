@@ -19,6 +19,4 @@ data class TicketType(@SerializedName( "price") val price: Int = 0,
 
                       @SerializedName( "ticketInfo") val ticketInfo: String? = null
 
-) : Parcelable {
-
-}
+) : Parcelable

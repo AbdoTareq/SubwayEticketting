@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tickets_header"
             app:ticketTypeListData="@{viewModel.ticketsType}"
-            tools:listitem="@layout/ticket_item" />
+            tools:listitem="@layout/ticket_item_new" />
 
         <!-- bind connection status image with ticketApiStatus  -->
         <ImageView
