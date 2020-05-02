@@ -23,6 +23,4 @@ data class InTicket(@SerializedName( "id") val id: String? = null,
 
                     @SerializedName( "buyerId") val buyerId: Int = 0,
                     @SerializedName( "ownerId") val ownerId: Int = 0,
-                    @SerializedName( "ownerName") val ownerName: String? = null) : Parcelable {
-
-}
+                    @SerializedName( "ownerName") val ownerName: String? = null) : Parcelable
