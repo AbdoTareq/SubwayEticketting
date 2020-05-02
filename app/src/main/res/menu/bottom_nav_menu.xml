@@ -5,9 +5,9 @@
      through fragment id in navigation graph -->
 
     <item
-        android:id="@id/settingsFragment"
+        android:id="@id/appSettingsFragment"
         android:icon="@drawable/ic_settings_state"
-        android:title="@string/tickets" />
+        android:title="@string/settings" />
     <item
         android:id="@id/profileSettingsFragment"
         android:icon="@drawable/ic_profile_state"
@@ -15,7 +15,6 @@
     <item
         android:id="@id/ticketFragment"
         android:title="@string/tickets" />
-
     <item
         android:id="@id/pocketFragment"
         android:icon="@drawable/ic_pocket_state"

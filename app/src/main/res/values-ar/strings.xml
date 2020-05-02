@@ -76,4 +76,5 @@
     <string name="minus">—</string>
     <string name="app_log_is_train">App log is train</string>
     <string name="small_ticket">Small Ticket</string>
+    <string name="settings">Settings</string>
 </resources>

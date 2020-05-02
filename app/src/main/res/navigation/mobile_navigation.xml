@@ -12,13 +12,12 @@
         android:id="@+id/ticketFragment"
         android:name="com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketFragment"
         android:label="fragment_ticket"
-        tools:layout="@layout/fragment_ticket"
-        />
+        tools:layout="@layout/fragment_ticket" />
     <fragment
         android:id="@+id/pocketFragment"
         android:name="com.abdotareq.subway_e_ticketing.ui.fragment.pocket.PocketFragment"
         android:label="fragment_pocket"
-        tools:layout="@layout/fragment_pocket" >
+        tools:layout="@layout/fragment_pocket">
         <action
             android:id="@+id/action_pocketFragment_to_scanPocketFragment"
             app:destination="@id/scanPocketFragment"
@@ -36,7 +35,7 @@
         android:id="@+id/profileSettingsFragment"
         android:name="com.abdotareq.subway_e_ticketing.ui.fragment.ProfileSettingsFragment"
         android:label="fragment_profile_settings"
-        tools:layout="@layout/fragment_profile_settings"/>
+        tools:layout="@layout/fragment_profile_settings" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.abdotareq.subway_e_ticketing.ui.fragment.SettingsFragment"
@@ -46,8 +45,9 @@
         android:id="@+id/scanPocketFragment"
         android:name="com.abdotareq.subway_e_ticketing.ui.activity.ScanTicketFragment"
         android:label="fragment_scan_pocket"
-        tools:layout="@layout/fragment_scan_pocket" >
-        <argument android:name="inTicket"
+        tools:layout="@layout/fragment_scan_pocket">
+        <argument
+            android:name="inTicket"
             app:argType="com.abdotareq.subway_e_ticketing.model.InTicket"
             app:nullable="true" />
         <argument
@@ -56,5 +56,25 @@
             app:nullable="true" />
     </fragment>
 
+    <fragment
+        android:id="@+id/appSettingsFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.AppSettingsFragment"
+        android:label="fragment_app_settings"
+        tools:layout="@layout/fragment_app_settings" >
+        <action
+            android:id="@+id/action_appSettingsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:exitAnim="@anim/slide_out_up"
+            app:popEnterAnim="@anim/slide_in_up"
+            app:popExitAnim="@anim/slide_out_down" />
+        <action
+            android:id="@+id/action_appSettingsFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/slide_out_down"
+            app:popEnterAnim="@anim/slide_in_down"
+            app:popExitAnim="@anim/slide_out_up" />
+    </fragment>
 
 </navigation>
