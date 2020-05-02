@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSettingsBinding
-import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.ui.activity.OnBoardActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.mikhaellopez.ratebottomsheet.RateBottomSheet
@@ -37,7 +36,7 @@ class SettingsFragment : Fragment() {
 
         binding.switchButton.isChecked = SharedPreferenceUtil.getSharedPrefsNightMode(context)
 
-        binding.switchButton.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // The toggle is enabled
                 SharedPreferenceUtil.setSharedPrefsNightMode(context, true)
@@ -61,9 +60,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun restartApp() {
-        val intent = Intent(context,HomeLandActivity::class.java)
-        startActivity(intent)
-        requireActivity().finish()
+        requireActivity().recreate()
     }
 
     override fun onDestroyView() {

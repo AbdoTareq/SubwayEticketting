@@ -1,11 +1,15 @@
 package com.abdotareq.subway_e_ticketing.network
 
-import com.abdotareq.subway_e_ticketing.model.*
-import okhttp3.ResponseBody
-import retrofit2.Call
+import com.abdotareq.subway_e_ticketing.model.BoughtTicket
+import com.abdotareq.subway_e_ticketing.model.History
+import com.abdotareq.subway_e_ticketing.model.InTicket
+import com.abdotareq.subway_e_ticketing.model.TicketType
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 
 // Create the ApiObj object using Retrofit to implement the UserApiService
