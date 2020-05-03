@@ -76,5 +76,10 @@
             app:popEnterAnim="@anim/slide_in_down"
             app:popExitAnim="@anim/slide_out_up" />
     </fragment>
+    <fragment
+        android:id="@+id/ticketHelperFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.TicketHelperFragment"
+        android:label="fragment_ticket_helper"
+        tools:layout="@layout/fragment_ticket_helper" />
 
 </navigation>

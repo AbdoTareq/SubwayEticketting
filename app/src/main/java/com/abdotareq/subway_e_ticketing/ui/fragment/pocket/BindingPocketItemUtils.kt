@@ -1,5 +1,6 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
+import android.graphics.Color
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -19,7 +20,7 @@ fun TextView.setTicketInUsePrice(item: InTicket?) {
 @BindingAdapter("setTicketInUseColor")
 fun View.setTicketInUseColor(item: InTicket?) {
     item?.let {
-//        setBackgroundColor(Color.parseColor("#${it.color}"))
+        setBackgroundColor(Color.parseColor("#${it.color}"))
     }
 }
 
@@ -35,7 +36,7 @@ fun TextView.setTicketAvailablePrice(item: BoughtTicket?) {
 @BindingAdapter("setTicketAvailableColor")
 fun View.setTicketAvailableColor(item: BoughtTicket?) {
     item?.let {
-//        setBackgroundColor(Color.parseColor("#${it.color}"))
+        setBackgroundColor(Color.parseColor("#${it.color}"))
     }
 }
 

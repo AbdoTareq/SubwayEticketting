@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.databinding.FragmentAppSettingsBinding
-import com.abdotareq.subway_e_ticketing.ui.fragment.AppSettingsFragmentDirections
 
 /**
  * A simple [Fragment] subclass.

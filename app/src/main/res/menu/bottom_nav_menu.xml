@@ -9,9 +9,9 @@
         android:icon="@drawable/ic_settings_state"
         android:title="@string/settings" />
     <item
-        android:id="@id/profileSettingsFragment"
+        android:id="@id/ticketHelperFragment"
         android:icon="@drawable/ic_profile_state"
-        android:title="@string/profile" />
+        android:title="@string/ticket_choose_helper" />
     <item
         android:id="@id/ticketFragment"
         android:title="@string/tickets" />

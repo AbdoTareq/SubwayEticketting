@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
-            android:onClick="@{()-> clickListener.onClick(boughtTicket)}"
             android:orientation="vertical">
 
             <View
