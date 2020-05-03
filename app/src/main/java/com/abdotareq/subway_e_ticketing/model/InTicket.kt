@@ -12,15 +12,16 @@ import java.util.*
 // this is for release to be working
 @Keep
 @Parcelize
-data class InTicket(@SerializedName( "id") val id: String? = null,
-                    @SerializedName( "buyDate") val buyDate: Date? = null,
-                    @SerializedName( "color") val color: String? = null,
+data class InTicket(@SerializedName("id") val id: String? = null,
+                    @SerializedName("buyDate") val buyDate: Date? = null,
+                    @SerializedName("color") val color: String? = null,
+                    @SerializedName("color_code") val color_code: String? = null,
 
-                    @SerializedName( "price") val price: Int = 0,
-                    @SerializedName( "checkInDate") val checkInDate: Date? = null,
-                    @SerializedName( "checkInStationId") val checkInStationId: Int = 0,
-                    @SerializedName( "checkInStationName") val checkInStationName: String? = null,
+                    @SerializedName("price") val price: Int = 0,
+                    @SerializedName("checkInDate") val checkInDate: Date? = null,
+                    @SerializedName("checkInStationId") val checkInStationId: Int = 0,
+                    @SerializedName("checkInStationName") val checkInStationName: String? = null,
 
-                    @SerializedName( "buyerId") val buyerId: Int = 0,
-                    @SerializedName( "ownerId") val ownerId: Int = 0,
-                    @SerializedName( "ownerName") val ownerName: String? = null) : Parcelable
+                    @SerializedName("buyerId") val buyerId: Int = 0,
+                    @SerializedName("ownerId") val ownerId: Int = 0,
+                    @SerializedName("ownerName") val ownerName: String? = null) : Parcelable

@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.InTicket
+import timber.log.Timber
 
 // this for price in in-use item in pocket recycle view
 @BindingAdapter("setTicketInUsePrice")
@@ -20,7 +21,11 @@ fun TextView.setTicketInUsePrice(item: InTicket?) {
 @BindingAdapter("setTicketInUseColor")
 fun View.setTicketInUseColor(item: InTicket?) {
     item?.let {
-        setBackgroundColor(Color.parseColor("#${it.color}"))
+        try {
+            setBackgroundColor(Color.parseColor("#${it.color_code}"))
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
     }
 }
 
@@ -36,7 +41,11 @@ fun TextView.setTicketAvailablePrice(item: BoughtTicket?) {
 @BindingAdapter("setTicketAvailableColor")
 fun View.setTicketAvailableColor(item: BoughtTicket?) {
     item?.let {
-        setBackgroundColor(Color.parseColor("#${it.color}"))
+        try {
+            setBackgroundColor(Color.parseColor("#${it.color_code}"))
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
     }
 }
 

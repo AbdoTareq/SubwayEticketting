@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.History
 import com.abdotareq.subway_e_ticketing.model.TicketType
+import timber.log.Timber
 
 @BindingAdapter("setTicketPrice")
 fun TextView.setTicketPrice(item: History?) {
@@ -52,7 +53,11 @@ fun TextView.setCheckOutDate(item: History?) {
 @BindingAdapter("setHistoryColor")
 fun View.setHistoryColor(item: History?) {
     item?.let {
-//        setBackgroundColor(Color.parseColor("#${it.color}"))
+        try {
+            setBackgroundColor(Color.parseColor("#${it.color_code}"))
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
     }
 }
 

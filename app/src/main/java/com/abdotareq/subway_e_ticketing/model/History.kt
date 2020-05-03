@@ -17,6 +17,8 @@ import java.util.*
 data class History(@SerializedName( "id") val id: String? = null,
                    @SerializedName( "buyDate") val buyDate: Date? = null,
                    @SerializedName( "color") val color: String? = null,
+                   @SerializedName("color_code") val color_code: String?= null,
+
                    @SerializedName( "price") val price: Int = 0,
 
                    @SerializedName( "checkInDate") val checkInDate: Date? = null,
