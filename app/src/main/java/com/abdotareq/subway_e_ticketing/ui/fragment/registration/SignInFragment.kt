@@ -15,7 +15,7 @@ import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.viewmodels.register.SigninViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFactory
 
@@ -105,7 +105,7 @@ class SignInFragment : Fragment() {
      */
     private fun authenticate() {
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
+        val progressDialog = Util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
         val registerInterface = object : RegisterInterface {

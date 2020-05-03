@@ -13,7 +13,7 @@ import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentForgetPassBinding
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.UserInterface
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ForgetPassViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.ForgetPassViewModelFactory
 
@@ -61,7 +61,7 @@ class ForgetPassFragment : Fragment() {
     // send send Verification Code to user mail
     private fun sendVerificationCode(mail: String) {
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(context, getString(R.string.loading))
+        val progressDialog = Util.initProgress(context, getString(R.string.loading))
 
         val userInterface: UserInterface = object : UserInterface {
             override fun onSuccess() {

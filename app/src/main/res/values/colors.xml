@@ -17,5 +17,8 @@
 
   <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#ffffff</color>
 
+<!--If you want to change the default colors just override these colors in your colors.xml or wherever you want like this.-->
+<!--  <color name="searchDialogResultColor">#6b00c0</color>-->
+<!--  <color name="searchDialogResultHighlightColor">#000</color>-->
 
 </resources>

@@ -13,7 +13,7 @@ import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.model.UserPassword
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.Util
 import timber.log.Timber
 
 class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment() {
@@ -43,11 +43,11 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
     private fun checkPass() {
 
         //check for all inputs from user are correct
-        if (!util.isValidPassword(binding.oldPass.text.toString())) {
+        if (!Util.isValidPassword(binding.oldPass.text.toString())) {
             binding.first.error = getString(R.string.pass_fix)
             binding.first.requestFocus()
             return
-        } else if (!util.isValidPassword(binding.newPassword.text.toString())) {
+        } else if (!Util.isValidPassword(binding.newPassword.text.toString())) {
             binding.second.error = getString(R.string.pass_fix)
             binding.second.requestFocus()
             return
@@ -69,7 +69,7 @@ class ChangePassDialogFragment(mailToString: String) : AppCompatDialogFragment()
         bearerToken += SharedPreferenceUtil.getSharedPrefsTokenId(context)
 
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(context, getString(R.string.loading))
+        val progressDialog = Util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
 
         val userInterface = object : UserInterface {

@@ -8,7 +8,7 @@ import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.Util
 import timber.log.Timber
 
 /**
@@ -73,14 +73,14 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun validateMail(): Boolean {
-        if (mail.value.isNullOrEmpty() || util.isValidEmail(mail.value)) {
+        if (mail.value.isNullOrEmpty() || Util.isValidEmail(mail.value)) {
             return false
         }
         return true
     }
 
     fun validatePass(pass: String): Boolean {
-        if (pass.isEmpty() || !util.isValidPassword(pass)) {
+        if (pass.isEmpty() || !Util.isValidPassword(pass)) {
             return false
         }
         return true

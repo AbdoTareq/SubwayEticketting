@@ -14,7 +14,7 @@ import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentVerificationBinding
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.viewmodels.register.VerificationViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.VerificationViewModelFactory
 
@@ -68,7 +68,7 @@ class VerificationFragment : Fragment() {
     private fun verifyCode() {
 
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(context, getString(R.string.loading))
+        val progressDialog = Util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
 
         val registerInterface = object : RegisterInterface {

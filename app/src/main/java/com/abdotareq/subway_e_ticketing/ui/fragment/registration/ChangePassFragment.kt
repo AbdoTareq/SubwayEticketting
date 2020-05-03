@@ -14,7 +14,7 @@ import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentChangePassBinding
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.UserInterface
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.ChangePassViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ChangePassViewModel
 
@@ -69,7 +69,7 @@ class ChangePassFragment : Fragment() {
      */
     private fun confirmBtnClick() {
         //check for all inputs from user are correct
-        if (!util.isValidPassword(viewModel.pass.value)) {
+        if (!Util.isValidPassword(viewModel.pass.value)) {
             binding.passTi.error = getString(R.string.invalid_pass)
             binding.passTi.requestFocus()
             return
@@ -81,7 +81,7 @@ class ChangePassFragment : Fragment() {
         }
 
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(context, getString(R.string.loading))
+        val progressDialog = Util.initProgress(context, getString(R.string.loading))
         progressDialog.show()
 
         val userInterface = object : UserInterface {

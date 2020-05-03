@@ -127,7 +127,7 @@ dependencies {
     implementation 'com.mikhaellopez:ratebottomsheet:1.0.3'
 
     // for search dialog
-    implementation 'com.github.ajithvgiri:search-dialog:v1.3'
+    implementation 'com.github.mirrajabi:search-dialog:1.2.4'
     
 
 }

@@ -6,13 +6,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentOverviewBinding
+import com.abdotareq.subway_e_ticketing.model.BoughtTicket
+import com.abdotareq.subway_e_ticketing.model.MetroStation
+import com.abdotareq.subway_e_ticketing.model.SearchModel
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.utility.Util.animateInstructions
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.OverviewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.OverviewViewModel
+import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
+import ir.mirrajabi.searchdialog.core.SearchResultListener
+import kotlinx.android.synthetic.main.fragment_scan_pocket.*
 
 
 /**
@@ -46,23 +55,49 @@ class OverviewFragment : Fragment() {
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
-        animateInstructions()
+        animateInstructions(binding.instructions)
 
         binding.start.setOnClickListener {
-
+            SimpleSearchDialogCompat(requireContext(), getString(R.string.chooseStation), getString(R.string.search_stattions),
+                    null, initData(), SearchResultListener { dialog, item, position ->
+                binding.start.text = item.title
+                viewModel.startStationId.value = getStationId(item)
+                Toast.makeText(context,"${getStationId(item)}",Toast.LENGTH_LONG).show()
+                dialog.dismiss()
+            }).show()
         }
+
+        binding.destination.setOnClickListener {
+            SimpleSearchDialogCompat(requireContext(), getString(R.string.chooseStation), getString(R.string.search_stattions),
+                    null, initData(), SearchResultListener { dialog, item, position ->
+                binding.destination.text = item.title
+                viewModel.destinationStationId.value = getStationId(item)
+                Toast.makeText(context,"${getStationId(item)}",Toast.LENGTH_LONG).show()
+                dialog.dismiss()
+            }).show()
+        }
+
 
 
         return view
     }
 
-    private fun animateInstructions() {
-        val animator = ObjectAnimator.ofFloat(binding.instructions, View.ALPHA, 0f)
-        animator.duration = 10000
-        animator.repeatCount = 1
-        animator.repeatMode = ObjectAnimator.REVERSE
-        animator.start()
+    private fun getStationId(item: SearchModel): Int {
+        for (i in viewModel.allStations.value!!) {
+            if (item.title == i.stationName) {
+                return i.stationId
+            }
+        }
+        return -1
     }
+
+    private fun initData(): ArrayList<SearchModel> {
+        val list = ArrayList<SearchModel>()
+        for (item in viewModel.stationsSearchList.value!!)
+            list.add(SearchModel(item))
+        return list
+    }
+
 
 
     override fun onDestroyView() {

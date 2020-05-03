@@ -28,7 +28,7 @@ import com.abdotareq.subway_e_ticketing.ui.activity.RegisterActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.ImageUtil
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.ProfileViewModelFactory
 import timber.log.Timber
@@ -152,7 +152,7 @@ class ProfileSettingsFragment : Fragment() {
         bearerToken += userIdToken
 
         //initialize and show a progress dialog to the user
-        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
+        val progressDialog = Util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
         //start the call
@@ -195,7 +195,7 @@ class ProfileSettingsFragment : Fragment() {
 
         Timber.e("bearerToken $bearerToken")
 
-        val progressDialog = util.initProgress(context, getString(R.string.progMessage))
+        val progressDialog = Util.initProgress(context, getString(R.string.progMessage))
         progressDialog.show()
 
         val profileInterface = object : UserInterface {
@@ -285,7 +285,7 @@ class ProfileSettingsFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
 
-            val dialog = util.initProgress(context, getString(R.string.prog_image_message))
+            val dialog = Util.initProgress(context, getString(R.string.prog_image_message))
             dialog.show()
 
             if (requestCode == 10) {

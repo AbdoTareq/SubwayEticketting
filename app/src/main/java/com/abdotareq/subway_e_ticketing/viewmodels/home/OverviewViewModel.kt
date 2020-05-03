@@ -1,6 +1,7 @@
 package com.abdotareq.subway_e_ticketing.viewmodels.home
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,7 @@ import com.abdotareq.subway_e_ticketing.model.MetroStation
 import com.abdotareq.subway_e_ticketing.model.TripDetailInterface
 import com.abdotareq.subway_e_ticketing.model.TripDetails
 import com.abdotareq.subway_e_ticketing.repository.StationRepository
+import timber.log.Timber
 
 enum class OverviewApiStatus { LOADING, ERROR, DONE }
 
@@ -57,21 +59,28 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
         stationsObj = object : AllStationsInterface {
             override fun onSuccess(stations: List<MetroStation>) {
                 _stationsSearchList.value = stationsSearchList(stations)
+                _allStations.value = stations
+                _status.value = OverviewApiStatus.DONE
             }
 
             override fun onFail(responseCode: String) {
-                TODO("Not yet implemented")
+                _status.value = OverviewApiStatus.ERROR
+                _allStations.value = ArrayList()
+                _stationsSearchList.value = ArrayList()
+                Toast.makeText(application, getErrorMess(responseCode), Toast.LENGTH_LONG).show()
+                Timber.e(getErrorMess(responseCode))
             }
         }
-        tripDetailsObj = object : TripDetailInterface {
-            override fun onSuccess(tripDetails: TripDetails) {
-                TODO("Not yet implemented")
-            }
+        tripDetailsObj =
+                object : TripDetailInterface {
+                    override fun onSuccess(tripDetails: TripDetails) {
+                        TODO("Not yet implemented")
+                    }
 
-            override fun onFail(responseCode: String) {
-                TODO("Not yet implemented")
-            }
-        }
+                    override fun onFail(responseCode: String) {
+                        TODO("Not yet implemented")
+                    }
+                }
 
         getAllStations()
     }

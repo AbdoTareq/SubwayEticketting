@@ -8,7 +8,7 @@ import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
-import com.abdotareq.subway_e_ticketing.utility.util
+import com.abdotareq.subway_e_ticketing.utility.Util
 import timber.log.Timber
 
 /**
@@ -38,7 +38,7 @@ class ForgetPassViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun validateMail(): Boolean {
-        if (mail.value.isNullOrEmpty() || util.isValidEmail(mail.value)) {
+        if (mail.value.isNullOrEmpty() || Util.isValidEmail(mail.value)) {
             return false
         }
         return true
