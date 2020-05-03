@@ -87,7 +87,6 @@
                 android:id="@+id/check_out"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 android:clickable="false"
@@ -97,9 +96,9 @@
                 android:textAppearance="@style/CustomHeadline5"
                 android:textSize="@dimen/large_font"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline13"
+                app:layout_constraintEnd_toEndOf="@+id/check_in_date"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/check_in_date"
                 app:layout_constraintTop_toBottomOf="@+id/check_in_date"
                 app:setCheckOutStationName="@{historyTicket}" />
 

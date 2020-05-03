@@ -5,23 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketHelperBinding
+import com.abdotareq.subway_e_ticketing.databinding.FragmentOverviewBinding
 
 
 /**
  * A simple [Fragment] subclass.
- * Use the [TicketHelperFragment.newInstance] factory method to
+ * Use the [OverviewFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TicketHelperFragment : Fragment() {
-    private var _binding: FragmentTicketHelperBinding? = null
+class OverviewFragment : Fragment() {
+    private var _binding: FragmentOverviewBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentTicketHelperBinding.inflate(inflater, container, false)
+        _binding = FragmentOverviewBinding.inflate(inflater, container, false)
         val view = binding.root
 
 

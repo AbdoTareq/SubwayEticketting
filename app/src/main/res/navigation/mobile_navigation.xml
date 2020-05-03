@@ -78,8 +78,8 @@
     </fragment>
     <fragment
         android:id="@+id/ticketHelperFragment"
-        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.TicketHelperFragment"
+        android:name="com.abdotareq.subway_e_ticketing.ui.fragment.OverviewFragment"
         android:label="fragment_ticket_helper"
-        tools:layout="@layout/fragment_ticket_helper" />
+        tools:layout="@layout/fragment_overview" />
 
 </navigation>

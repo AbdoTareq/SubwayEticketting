@@ -318,6 +318,14 @@
     <string name="start_station">Start</string>
     <string name="destination">Destination</string>
     <string name="overview">Overview</string>
+    <string name="stations_number">Stations Number:</string>
+    <string name="estimated_time">Estimated Time:</string>
+    <string name="switch_stations">Switch Stations:</string>
+    <string name="_15">15</string>
+    <string name="_60_minutes">60 Minutes</string>
+    <string name="moneeb">Moneeb</string>
+    <string name="buy_now">Buy ?</string>
+    <string name="please_choose_start_and_destination_to_proceed">Please choose Start and Destination to proceed</string>
 
 
 </resources>
