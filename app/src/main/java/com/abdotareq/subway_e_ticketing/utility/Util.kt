@@ -50,11 +50,4 @@ object Util {
         return formatter.format(date)
     }
 
-    fun animateInstructions(view: View) {
-        val animator = ObjectAnimator.ofFloat(view, View.ALPHA, 0f)
-        animator.duration = 1500
-        animator.repeatCount = ObjectAnimator.INFINITE
-        animator.repeatMode = ObjectAnimator.REVERSE
-        animator.start()
-    }
 }

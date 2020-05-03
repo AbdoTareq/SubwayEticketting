@@ -2,6 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- With data binding and LiveData, we can track the buttons' visibility states
+                 from the ViewModel. The click handler is in the ViewModel as well, and
+                 you can set it for the Views using this lambda pattern. -->
     <data>
 
         <variable
@@ -12,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.abdotareq.subway_e_ticketing.ui.fragment.OverviewFragment">
+        tools:context="com.abdotareq.subway_e_ticketing.ui.fragment.overview.OverviewFragment">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/overview"
@@ -24,10 +27,11 @@
             android:layout_marginEnd="8dp"
             android:clickable="true"
             android:focusable="true"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:setIsVisible="@{viewModel.detailsVisible}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/his_ticket"
@@ -39,9 +43,9 @@
                     android:id="@+id/ticket_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="8dp"
                     android:clickable="false"
                     android:focusable="false"
                     android:text="@string/overview"
@@ -73,12 +77,12 @@
                     android:clickable="false"
                     android:focusable="false"
                     android:lines="1"
-                    android:text="@string/_15"
+                    android:text="@string/_"
                     android:textAlignment="center"
                     android:textAppearance="@style/CustomHeadline5"
                     app:layout_constraintBottom_toBottomOf="@+id/check_in_date"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/check_in_date"
+                    app:layout_constraintStart_toStartOf="@+id/guideline13"
                     app:layout_constraintTop_toTopOf="@+id/check_in_date"
                     app:layout_constraintVertical_bias="0.0" />
 
@@ -126,29 +130,32 @@
                     android:clickable="false"
                     android:focusable="false"
                     android:lines="1"
-                    android:text="@string/_60_minutes"
+                    android:text="@string/_"
                     android:textAlignment="center"
                     android:textAppearance="@style/CustomHeadline5"
                     app:layout_constraintBottom_toBottomOf="@+id/check_out"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/check_out"
-                    app:layout_constraintTop_toTopOf="@+id/check_out" />
+                    app:layout_constraintHorizontal_bias="0.508"
+                    app:layout_constraintStart_toStartOf="@+id/guideline13"
+                    app:layout_constraintTop_toTopOf="@+id/check_out"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="8dp"
                     android:clickable="false"
                     android:focusable="false"
                     android:lines="1"
-                    android:text="@string/moneeb"
+                    android:text="@string/_"
                     android:textAppearance="@style/CustomHeadline5"
-                    android:textSize="@dimen/large_font"
                     app:layout_constraintBottom_toBottomOf="@+id/textView7"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.504"
                     app:layout_constraintStart_toStartOf="@+id/guideline13"
-                    app:layout_constraintTop_toTopOf="@+id/textView7" />
+                    app:layout_constraintTop_toTopOf="@+id/textView7"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline13"
@@ -170,10 +177,11 @@
             android:layout_marginTop="32dp"
             android:clickable="true"
             android:focusable="true"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/overview"
             app:layout_constraintStart_toStartOf="@+id/overview"
-            app:layout_constraintTop_toBottomOf="@+id/overview">
+            app:layout_constraintTop_toBottomOf="@+id/overview"
+            app:setIsVisible="@{viewModel.detailsVisible}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -275,6 +283,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:enabled="false"
             android:text="@string/destination"
             android:textAppearance="@style/CustomHeadline5"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
@@ -293,10 +302,11 @@
             android:layout_marginEnd="8dp"
             android:text="@string/buy_now"
             android:textAppearance="@style/CustomHeadline5"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline20" />
+            app:layout_constraintTop_toTopOf="@+id/guideline20"
+            app:setIsVisible="@{viewModel.detailsVisible}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline12"
@@ -331,7 +341,8 @@
             android:textAppearance="@style/CustomHeadline6"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:setIsVisible="@{!viewModel.detailsVisible}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

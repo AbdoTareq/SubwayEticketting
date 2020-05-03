@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.abdotareq.subway_e_ticketing.model.AllStationsInterface
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.MetroStation
@@ -32,10 +33,6 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<OverviewApiStatus>()
 
-    // The external immutable LiveData for the request status
-    val statusType: LiveData<OverviewApiStatus>
-        get() = _status
-
     // Internally, we use a MutableLiveData, because we will be updating the List of History
     // with new values
     private val _allStations = MutableLiveData<List<MetroStation>>()
@@ -50,11 +47,21 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
     val stationsSearchList: LiveData<ArrayList<String>>
         get() = _stationsSearchList
 
-    private val _eventChooseStartStation = MutableLiveData<Int>()
-    val eventChooseStartStation: LiveData<Int>
-        get() = _eventChooseStartStation
+    private val _eventChooseStartDestination = MutableLiveData<Boolean>()
+    val eventChooseStartDestination: LiveData<Boolean>
+        get() = _eventChooseStartDestination
+
+    // this to control details & buy visibility
+    val destinationVisible = Transformations.map(startStationId) {
+        null != it
+    }
+    val detailsVisible = Transformations.map(destinationStationId) {
+        null != it
+    }
+
 
     init {
+
         _status.value = OverviewApiStatus.LOADING
         stationsObj = object : AllStationsInterface {
             override fun onSuccess(stations: List<MetroStation>) {
@@ -92,12 +99,12 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
         return list
     }
 
-    fun onChooseStartStationComplete() {
-        _eventChooseStartStation.value = -1
+    fun onChooseStartDestinationComplete() {
+        _eventChooseStartDestination.value = false
     }
 
-    fun onChooseStartStation(stationId: Int) {
-        _eventChooseStartStation.value = stationId
+    fun onChooseStartDestination() {
+        _eventChooseStartDestination.value = true
     }
 
     private fun getAllStations() {
