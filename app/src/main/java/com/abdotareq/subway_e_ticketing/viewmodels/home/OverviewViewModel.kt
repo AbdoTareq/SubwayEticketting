@@ -9,12 +9,12 @@ import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
 import timber.log.Timber
 
-enum class TicketTypeApiStatus { LOADING, ERROR, DONE }
+enum class OverviewApiStatus { LOADING, ERROR, DONE }
 
 /**
  * ViewModel for SleepTrackerFragment.
  */
-class TicketsTypeViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
+class OverviewViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
 
     private val ticketRepository = TicketRepository()
     private val applicationCon = application
