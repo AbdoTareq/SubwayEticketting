@@ -4,32 +4,32 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class MetroStation(@SerializedName("STATION_ID")
+data class MetroStation(@SerializedName("stationId")
                         var stationId: Int = 0,
 
-                        @SerializedName("STATION_NAME")
+                        @SerializedName("stationName")
                         var stationName: String? = null,
 
-                        @SerializedName("LINE_NUMBER")
+                        @SerializedName("lineNumber")
                         var lineNumber: Int = 0,
 
-                        @SerializedName("PREVIOUS_STATION")
+                        @SerializedName("previousStation")
                         var previousStation: Int? = null,
 
-                        @SerializedName("NEXT_STATION")
+                        @SerializedName("nextStation")
                         var nextStation: Int? = null,
 
-                        @SerializedName("IS_DOUBLE_LINE")
+                        @SerializedName("doubleLineStation")
                         var doubleLineStation: Int = 0,
 
-                        @SerializedName("COMMON_STATION_ID")
+                        @SerializedName("commonStationId")
                         var commonStationId: Int? = null,
 
-                        @SerializedName("COMMON_LINE_NUMBER")
+                        @SerializedName("commonLineNumber")
                         var commonLineNumber: Int? = null,
 
-                        @SerializedName("LATITUDE")
+                        @SerializedName("latitude")
                         var latitude: Double = 0.0,
 
-                        @SerializedName("LONGITUDE")
+                        @SerializedName("longitude")
                         var longitude: Double = 0.0)

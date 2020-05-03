@@ -33,4 +33,11 @@ class AppSettingsFragment : Fragment() {
         return view
     }
 
+
+    override fun onDestroyView() {
+        // this to save user data before destroy fragment or replace ir
+        // (when select another fragment from bottom navigation view)
+        super.onDestroyView()
+        _binding = null
+    }
 }
