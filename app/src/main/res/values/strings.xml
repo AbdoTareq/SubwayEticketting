@@ -329,6 +329,8 @@
     <string name="chooseStation">Choose Station</string>
     <string name="search_stattions">Search stations</string>
     <string name="_">_</string>
+    <string name="no_swithing">No Switching Stations</string>
+    <string name="overview_status">overview status</string>
 
 
 </resources>

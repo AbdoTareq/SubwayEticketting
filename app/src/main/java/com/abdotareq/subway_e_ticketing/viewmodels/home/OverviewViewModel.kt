@@ -6,15 +6,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.abdotareq.subway_e_ticketing.model.AllStationsInterface
+import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.MetroStation
-import com.abdotareq.subway_e_ticketing.model.TripDetailInterface
-import com.abdotareq.subway_e_ticketing.model.TripDetails
+import com.abdotareq.subway_e_ticketing.network.TicketApiService
 import com.abdotareq.subway_e_ticketing.repository.StationRepository
 import timber.log.Timber
 
-enum class OverviewApiStatus { LOADING, ERROR, DONE }
+enum class StationsApiStatus { LOADING, ERROR, DONE }
+enum class TripDetailsApiStatus { LOADING, ERROR, DONE }
 
 /**
  * ViewModel for SleepTrackerFragment.
@@ -29,21 +29,24 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
 
     val startStationId = MutableLiveData<Int>()
     val destinationStationId = MutableLiveData<Int>()
+    var trip = MutableLiveData<TripDetails?>()
+    var stationsNum = MutableLiveData<String>()
+    var stationsTime = MutableLiveData<String>()
+    var stationsSwitching = MutableLiveData<String>()
 
-    // The internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<OverviewApiStatus>()
+    private val _statusStations = MutableLiveData<StationsApiStatus>()
+    val statusStations: LiveData<StationsApiStatus>
+        get() = _statusStations
 
-    // Internally, we use a MutableLiveData, because we will be updating the List of History
-    // with new values
+     private val _statusTrip = MutableLiveData<TripDetailsApiStatus>()
+    val statusTrip: LiveData<TripDetailsApiStatus>
+        get() = _statusTrip
+
     private val _allStations = MutableLiveData<List<MetroStation>>()
-
-    // The external LiveData interface to the property is immutable, so only this class can modify
     val allStations: LiveData<List<MetroStation>>
         get() = _allStations
 
     private val _stationsSearchList = MutableLiveData<ArrayList<String>>()
-
-    // The external LiveData interface to the property is immutable, so only this class can modify
     val stationsSearchList: LiveData<ArrayList<String>>
         get() = _stationsSearchList
 
@@ -51,27 +54,27 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
     val eventChooseStartDestination: LiveData<Boolean>
         get() = _eventChooseStartDestination
 
-    // this to control details & buy visibility
-    val destinationVisible = Transformations.map(startStationId) {
-        null != it
-    }
-    val detailsVisible = Transformations.map(destinationStationId) {
-        null != it
-    }
+    private val _eventBuy = MutableLiveData<Boolean>()
+    val eventBuy: LiveData<Boolean>
+        get() = _eventBuy
 
+    // this to control details & buy visibility
+    val detailsVisible = Transformations.map(trip) {
+        onChooseStartDestination()
+        null != it
+    }
 
     init {
-
-        _status.value = OverviewApiStatus.LOADING
+        _statusStations.value = StationsApiStatus.LOADING
         stationsObj = object : AllStationsInterface {
             override fun onSuccess(stations: List<MetroStation>) {
                 _stationsSearchList.value = stationsSearchList(stations)
                 _allStations.value = stations
-                _status.value = OverviewApiStatus.DONE
+                _statusStations.value = StationsApiStatus.DONE
             }
 
             override fun onFail(responseCode: String) {
-                _status.value = OverviewApiStatus.ERROR
+                _statusStations.value = StationsApiStatus.ERROR
                 _allStations.value = ArrayList()
                 _stationsSearchList.value = ArrayList()
                 Toast.makeText(application, getErrorMess(responseCode), Toast.LENGTH_LONG).show()
@@ -81,11 +84,24 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
         tripDetailsObj =
                 object : TripDetailInterface {
                     override fun onSuccess(tripDetails: TripDetails) {
-                        TODO("Not yet implemented")
+                        _statusTrip.value = TripDetailsApiStatus.DONE
+                        trip.value = tripDetails
+                        stationsNum.value = tripDetails.stationsNum.toString()
+                        stationsTime.value = tripDetails.estimatedTime
+                        stationsSwitching.value = ""
+
+                        if (tripDetails.switchStations!!.isNotEmpty())
+                            for (i in tripDetails.switchStations!!)
+                                stationsSwitching.value += "${i} "
+                        else
+                            stationsSwitching.value += applicationCon.getString(R.string.no_swithing)
+
+                        Timber.e("${stationsSwitching.value} ")
                     }
 
                     override fun onFail(responseCode: String) {
-                        TODO("Not yet implemented")
+                        _statusTrip.value = TripDetailsApiStatus.ERROR
+                        Timber.e(getErrorMess(responseCode))
                     }
                 }
 
@@ -101,10 +117,19 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
 
     fun onChooseStartDestinationComplete() {
         _eventChooseStartDestination.value = false
+        getTripDetails()
     }
 
-    fun onChooseStartDestination() {
+    private fun onChooseStartDestination() {
         _eventChooseStartDestination.value = true
+    }
+
+    fun onEventBuyComplete() {
+        _eventBuy.value = false
+    }
+
+    fun onEventBuy() {
+        _eventBuy.value = true
     }
 
     private fun getAllStations() {
@@ -112,6 +137,7 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
     }
 
     private fun getTripDetails() {
+        _statusTrip.value = TripDetailsApiStatus.LOADING
         stationsRepository.getTripDetails(bearerToken, tripDetailsObj,
                 startStationId.value!!, destinationStationId.value!!)
     }

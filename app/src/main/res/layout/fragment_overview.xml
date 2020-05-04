@@ -19,33 +19,35 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/overview"
-            style="@style/CardStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:clickable="true"
             android:focusable="true"
             android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/instructions"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:setIsVisible="@{viewModel.detailsVisible}">
+            app:setIsVisible="@{viewModel.detailsVisible}"
+            app:tripApiStatus="@{viewModel.statusTrip}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/his_ticket"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/ticket_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="16dp"
                     android:clickable="false"
                     android:focusable="false"
                     android:text="@string/overview"
@@ -77,7 +79,7 @@
                     android:clickable="false"
                     android:focusable="false"
                     android:lines="1"
-                    android:text="@string/_"
+                    android:text="@{viewModel.stationsNum}"
                     android:textAlignment="center"
                     android:textAppearance="@style/CustomHeadline5"
                     app:layout_constraintBottom_toBottomOf="@+id/check_in_date"
@@ -108,13 +110,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
                     android:clickable="false"
                     android:focusable="false"
                     android:lines="1"
                     android:text="@string/switch_stations"
                     android:textAppearance="@style/CustomHeadline5"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/check_in_date"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/check_in_date"
@@ -124,38 +124,36 @@
                     android:id="@+id/check_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="13dp"
                     android:clickable="false"
                     android:focusable="false"
                     android:lines="1"
-                    android:text="@string/_"
+                    android:text="@{viewModel.stationsTime}"
                     android:textAlignment="center"
                     android:textAppearance="@style/CustomHeadline5"
                     app:layout_constraintBottom_toBottomOf="@+id/check_out"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/check_out_date"
                     app:layout_constraintHorizontal_bias="0.508"
-                    app:layout_constraintStart_toStartOf="@+id/guideline13"
+                    app:layout_constraintStart_toStartOf="@+id/check_out_date"
                     app:layout_constraintTop_toTopOf="@+id/check_out"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:id="@+id/switching"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
                     android:clickable="false"
                     android:focusable="false"
-                    android:lines="1"
-                    android:text="@string/_"
+                    android:text="@{viewModel.stationsSwitching.toString()}"
+                    android:textAlignment="center"
                     android:textAppearance="@style/CustomHeadline5"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.504"
-                    app:layout_constraintStart_toStartOf="@+id/guideline13"
-                    app:layout_constraintTop_toTopOf="@+id/textView7"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintStart_toStartOf="@+id/textView7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline13"
@@ -170,127 +168,40 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/ticket"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="@+id/overview"
-            app:layout_constraintStart_toStartOf="@+id/overview"
-            app:layout_constraintTop_toBottomOf="@+id/overview"
-            app:setIsVisible="@{viewModel.detailsVisible}">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:orientation="vertical">
-
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="@dimen/_10sdp"
-                    android:layout_height="0dp"
-                    android:background="#c0c0c0"
-                    app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView5" />
-
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:padding="16dp"
-                    android:text="@string/small_ticket"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    app:layout_constraintStart_toStartOf="@id/view2"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginStart="16dp"
-                    android:background="#c0c0c0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/view2"
-                    app:layout_constraintTop_toBottomOf="@+id/view">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center|start"
-                        android:padding="16dp"
-                        android:text="@string/_3le_ticket"
-                        android:textAppearance="?attr/textAppearanceBody1" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center|end"
-                        android:padding="16dp"
-                        android:text="@string/_0_9_stations"
-                        android:textAppearance="?attr/textAppearanceBody1"
-                        android:textColor="?android:attr/textColorSecondary" />
-
-
-                </LinearLayout>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
         <Button
             android:id="@+id/start"
             style="@style/ButtonStyleTicketHelper"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/start_station"
             android:textAppearance="@style/CustomHeadline5"
-            app:layout_constraintBottom_toBottomOf="@+id/destination"
+            app:layout_constraintBottom_toTopOf="@+id/guideline20"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/destination" />
+            app:layout_constraintTop_toTopOf="@+id/guideline21"
+            app:startApiStatus="@{viewModel.statusStations}"
+            app:tripApiStatus="@{viewModel.statusTrip}" />
 
         <Button
             android:id="@+id/destination"
             style="@style/ButtonStyleTicketHelper"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:enabled="false"
             android:text="@string/destination"
             android:textAppearance="@style/CustomHeadline5"
-            app:layout_constraintBottom_toTopOf="@+id/guideline20"
+            app:layout_constraintBottom_toBottomOf="@+id/start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline12"
-            app:layout_constraintTop_toTopOf="@+id/guideline21" />
+            app:layout_constraintTop_toTopOf="@+id/start" />
 
         <Button
             android:id="@+id/buy"
@@ -300,13 +211,15 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:onClick="@{()-> viewModel.onEventBuy()}"
             android:text="@string/buy_now"
             android:textAppearance="@style/CustomHeadline5"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline20"
-            app:setIsVisible="@{viewModel.detailsVisible}" />
+            app:setIsVisible="@{viewModel.detailsVisible}"
+            app:tripApiStatus="@{viewModel.statusTrip}" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline12"
@@ -342,7 +255,25 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:setIsVisible="@{!viewModel.detailsVisible}" />
+            app:setIsVisible="@{!viewModel.detailsVisible}"
+            app:startApiStatus="@{viewModel.statusStations}"
+            app:tripApiStatus="@{viewModel.statusTrip}" />
+
+        <!-- bind connection status image with ticketApiStatus  -->
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/overview_status"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/guideline20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/overview"
+            app:StationImageApiStatus="@{viewModel.statusStations}"
+            app:tripImageApiStatus="@{viewModel.statusTrip}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

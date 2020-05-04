@@ -1,15 +1,18 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.overview
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentOverviewBinding
 import com.abdotareq.subway_e_ticketing.model.SearchModel
+import com.abdotareq.subway_e_ticketing.ui.activity.BuyTicketActivity
 import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.OverviewModelFactory
@@ -52,6 +55,15 @@ class OverviewFragment : Fragment() {
 
         AnimationUtil.fadeAnimate(binding.instructions)
 
+        viewModel.eventBuy.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                viewModel.onEventBuyComplete()
+                val intent = Intent(context, BuyTicketActivity::class.java)
+                intent.putExtra("ticket", viewModel.trip.value!!.ticketType)
+                startActivity(intent)
+            }
+        })
+
         binding.start.setOnClickListener {
             SimpleSearchDialogCompat(requireContext(), getString(R.string.chooseStation), getString(R.string.search_stattions),
                     null, initData(), SearchResultListener { dialog, item, position ->
@@ -69,6 +81,7 @@ class OverviewFragment : Fragment() {
                     null, initData(), SearchResultListener { dialog, item, position ->
                 binding.destination.text = item.title
                 viewModel.destinationStationId.value = getStationId(item)
+                viewModel.onChooseStartDestinationComplete()
                 dialog.dismiss()
             }).show()
         }

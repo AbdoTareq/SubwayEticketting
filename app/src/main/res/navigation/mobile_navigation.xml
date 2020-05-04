@@ -79,7 +79,7 @@
     <fragment
         android:id="@+id/overviewFragment"
         android:name="com.abdotareq.subway_e_ticketing.ui.fragment.overview.OverviewFragment"
-        android:label="fragment_ticket_helper"
+        android:label="fragment_overview"
         tools:layout="@layout/fragment_overview" />
 
 </navigation>
