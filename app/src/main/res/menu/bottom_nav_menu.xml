@@ -8,14 +8,17 @@
         android:id="@id/appSettingsFragment"
         android:icon="@drawable/ic_settings_state"
         android:title="@string/settings" />
-    <item
-        android:id="@id/overviewFragment"
-        android:icon="@drawable/ic_help_state"
-        android:title="@string/ticket_choose_helper" />
+
     <item
         android:id="@id/ticketFragment"
         android:icon="@drawable/ic_ticket_state"
         android:title="@string/tickets" />
+
+    <item
+        android:id="@id/overviewFragment"
+        android:icon="@drawable/ic_help_state"
+        android:title="@string/overview" />
+
     <item
         android:id="@id/pocketFragment"
         android:icon="@drawable/ic_pocket_state"
