@@ -66,7 +66,7 @@ class OverviewFragment : Fragment() {
 
         binding.start.setOnClickListener {
             SimpleSearchDialogCompat(requireContext(), getString(R.string.chooseStation), getString(R.string.search_stattions),
-                    null, initData(), SearchResultListener { dialog, item, position ->
+                    null, initData(), SearchResultListener { dialog, item, _ ->
                 binding.start.text = item.title
                 viewModel.startStationId.value = getStationId(item)
 
@@ -78,7 +78,7 @@ class OverviewFragment : Fragment() {
 
         binding.destination.setOnClickListener {
             SimpleSearchDialogCompat(requireContext(), getString(R.string.chooseStation), getString(R.string.search_stattions),
-                    null, initData(), SearchResultListener { dialog, item, position ->
+                    null, initData(), SearchResultListener { dialog, item, _ ->
                 binding.destination.text = item.title
                 viewModel.destinationStationId.value = getStationId(item)
                 viewModel.onChooseStartDestinationComplete()
