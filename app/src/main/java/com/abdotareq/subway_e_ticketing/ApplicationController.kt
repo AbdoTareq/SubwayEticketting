@@ -3,6 +3,7 @@ package com.abdotareq.subway_e_ticketing
 import android.app.Application
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
+import com.rezwan.knetworklib.KNetwork
 import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 
@@ -14,6 +15,8 @@ import timber.log.Timber
 class ApplicationController : Application() {
     override fun onCreate() {
         super.onCreate()
+
+        KNetwork.initialize(this)
 
         configureCrashReporting()
 

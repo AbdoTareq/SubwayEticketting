@@ -1,6 +1,7 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
@@ -9,13 +10,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.rezwan.knetworklib.KNetwork
 import kotlinx.android.synthetic.main.activity_home_land.*
 
 /**
  * Class responsible for the main home opening activity that host all the app fragments & contents
  * */
 
-class HomeLandActivity : AppCompatActivity() {
+class HomeLandActivity : AppCompatActivity(), KNetwork.OnNetWorkConnectivityListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,9 @@ class HomeLandActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        KNetwork.bind(this, lifecycle)
+                .setConnectivityListener(this)
 
         // this for icon background tint to be empty(just lines make image)
         bottom_nav_view.itemIconTintList = null
@@ -46,6 +51,14 @@ class HomeLandActivity : AppCompatActivity() {
         // Use NavigationUI to set up Bottom Nav
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         bottomNav?.setupWithNavController(navController)
+    }
+
+    override fun onNetConnected() {
+        Toast.makeText(this,"connected",Toast.LENGTH_LONG).show()
+    }
+
+    override fun onNetDisConnected() {
+        Toast.makeText(this,"disconnected",Toast.LENGTH_LONG).show()
     }
 
 }

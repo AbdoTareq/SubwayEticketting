@@ -51,6 +51,12 @@ android {
         enabled = true
     }
 
+    //RNetwork
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     // for parcelable to work
     androidExtensions {
         experimental = true
@@ -128,7 +134,11 @@ dependencies {
 
     // for search dialog
     implementation 'com.github.mirrajabi:search-dialog:1.2.4'
-    
+
+    // A light weight and lifecycle awared live internet connection status library using reactivenetwork and crouton
+    implementation 'com.rezwan.knetworklib:knetworklib:1.0.3'
+
+
 
 }
 repositories {
