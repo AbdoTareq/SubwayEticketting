@@ -22,15 +22,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
 import com.abdotareq.subway_e_ticketing.model.GetUserInterface
-import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.model.User
+import com.abdotareq.subway_e_ticketing.model.UserInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.RegisterActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.ImageUtil
-import com.abdotareq.subway_e_ticketing.utility.Util
-import com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.ProfileViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel
 import timber.log.Timber
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -122,10 +122,10 @@ class ProfileSettingsFragment : Fragment() {
     }
 
     private fun birthDateDialog() {
+        val calendar = Calendar.getInstance()
         // Get Current Date
-        val datePickerDialog = DatePickerDialog(context!!,
-                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    val calendar = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(requireContext(),
+                OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                     calendar[Calendar.YEAR] = year
                     calendar[Calendar.MONTH] = monthOfYear
                     calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
@@ -134,6 +134,7 @@ class ProfileSettingsFragment : Fragment() {
                     binding.calender.text = currentDateString
 
                 }, mYear, mMonth, mDay)
+        datePickerDialog.datePicker.maxDate = calendar.timeInMillis
         datePickerDialog.show()
     }
 
@@ -245,7 +246,7 @@ class ProfileSettingsFragment : Fragment() {
                     //start the sign in activity
                     val intent = Intent(context, RegisterActivity::class.java)
                     startActivity(intent)
-                    activity!!.finishAffinity()
+                    requireActivity().finishAffinity()
                 }
             }
         }
@@ -257,9 +258,9 @@ class ProfileSettingsFragment : Fragment() {
 
         //change the color of the buttons
         dialog.setOnShowListener { //set the negative button with the red color
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(context!!, android.R.color.holo_red_dark))
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(requireContext(), android.R.color.holo_red_dark))
             //set the positive button with the primary color
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(context!!, R.color.primaryColor))
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(requireContext(), R.color.primaryColor))
         }
         //show the dialog
         dialog.show()

@@ -86,7 +86,7 @@ class SignUpFragment : Fragment() {
     // Call listeners on the activity for code readability
     private fun callListeners() {
         binding.signUpGenderBtn.setOnClickListener {
-            val builder = AlertDialog.Builder(context!!)
+            val builder = AlertDialog.Builder(requireContext())
             builder.setTitle(getString(R.string.select_gender))
             builder.setItems(genderList) { dialogInterface, position ->
                 gender = genderList[position]
@@ -96,10 +96,10 @@ class SignUpFragment : Fragment() {
             alertDialog.show()
         }
         binding.signUpCalender.setOnClickListener {
-            val datePickerDialog = DatePickerDialog(context!!,
+            val calendar = Calendar.getInstance()
+            val datePickerDialog = DatePickerDialog(requireContext(),
                     DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 //                        birthDate = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
-                        val calendar = Calendar.getInstance()
                         calendar[Calendar.YEAR] = year
                         calendar[Calendar.MONTH] = monthOfYear
                         calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
@@ -109,6 +109,7 @@ class SignUpFragment : Fragment() {
                         birthDate = currentDateString
 
                     }, mYear, mMonth, mDay)
+            datePickerDialog.datePicker.maxDate = calendar.timeInMillis
             datePickerDialog.show()
         }
     }
