@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentPocketBinding
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.InTicket
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.home.PocketViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.PocketViewModelFactory
+import com.ramotion.foldingcell.FoldingCell
 
 
 /**
@@ -54,9 +56,7 @@ class PocketFragment : Fragment() {
         // handle list change
         binding.inUseTicketsList.adapter = inUseAdapter
 
-        val availableAdapter = AvailablePocketAdapter(AvailableTicketListener { id ->
-            viewModel.onChooseBoughtTicket(id)
-        })
+        val availableAdapter = AvailablePocketAdapter()
         // handle list change
         binding.availableTicketsList.adapter = availableAdapter
 
@@ -76,20 +76,13 @@ class PocketFragment : Fragment() {
         })
 
         // Handle pocket bought ticket click
-        viewModel.eventChooseBoughtTicket.observe(viewLifecycleOwner, Observer { ticket_id ->
-            if (!ticket_id.isNullOrEmpty()) {
+//        viewModel.eventChooseBoughtTicket.observe(viewLifecycleOwner, Observer { ticket_id ->
+//
+//
+//        })
 
-                var ticketTemp = BoughtTicket()
-                for (ticket in viewModel.boughtTickets.value!!) {
-                    if (ticket_id == ticket.id)
-                        ticketTemp = ticket
-                }
-                viewModel.onChooseBoughtTicketComplete()
-                findNavController().navigate(PocketFragmentDirections
-                        .actionPocketFragmentToScanPocketFragment(null, ticketTemp))
 
-            }
-        })
+
 
 
 

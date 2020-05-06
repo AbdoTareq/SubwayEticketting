@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.InTicket
+import com.ramotion.foldingcell.FoldingCell
 import timber.log.Timber
 
 // this for price in in-use item in pocket recycle view
@@ -48,5 +49,8 @@ fun View.setTicketAvailableColor(item: BoughtTicket?) {
         }
     }
 }
+
+
+
 
 

@@ -128,7 +128,10 @@ dependencies {
 
     // for search dialog
     implementation 'com.github.mirrajabi:search-dialog:1.2.4'
-    
+
+    implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
+
+
 
 }
 repositories {
