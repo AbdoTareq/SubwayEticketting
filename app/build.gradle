@@ -129,8 +129,8 @@ dependencies {
     // for search dialog
     implementation 'com.github.mirrajabi:search-dialog:1.2.4'
 
+    // for foldable animation used in scan tickets
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
-
 
 
 }
