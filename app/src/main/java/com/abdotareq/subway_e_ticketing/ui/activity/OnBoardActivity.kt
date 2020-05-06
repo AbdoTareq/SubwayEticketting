@@ -1,65 +1,50 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
-import com.crashlytics.android.Crashlytics
-import com.hololo.tutorial.library.Step
-import com.hololo.tutorial.library.TutorialActivity
+import com.ramotion.paperonboarding.PaperOnboardingFragment
+import com.ramotion.paperonboarding.PaperOnboardingPage
 
 
-class OnBoardActivity : TutorialActivity() {
+class OnBoardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_register)
 
-        // for firebase crash reports
-//        val crashButton = Button(this)
-//        crashButton.text = "Crash!"
-//        crashButton.setOnClickListener {
-//            Crashlytics.getInstance().crash() // Force a crash
-//        }
-//
-//        addContentView(crashButton, ViewGroup.LayoutParams(
-//                ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.WRAP_CONTENT))
+        val scr1 = PaperOnboardingPage(getString(R.string.create_new_account),
+                getString(R.string.tut_acc_mess),
+                Color.parseColor("#678FB4"), R.drawable.create_account_image, R.drawable.create_account_image)
+        val scr2 = PaperOnboardingPage(getString(R.string.buy_tickets),
+                getString(R.string.tut_buy_tickets),
+                Color.parseColor("#266fc3"), R.drawable.buy_tickets_image, R.drawable.buy_tickets_image)
+        val scr3 = PaperOnboardingPage(getString(R.string.scan_code),
+                getString(R.string.tut_scan_code),
+                Color.parseColor("#f99565"), R.drawable.scan_code_image, R.drawable.scan_code_image)
 
-        addFragment(Step.Builder().setTitle(getString(R.string.create_new_account))
-                .setContent(getString(R.string.tut_acc_mess))
-                .setBackgroundColor(ContextCompat.getColor(this, R.color.darkGray)) // int background color
-                .setDrawable(R.drawable.create_account_image) // int top drawable
-                .build())
+        val elements: ArrayList<PaperOnboardingPage> = ArrayList()
+        elements.add(scr1)
+        elements.add(scr2)
+        elements.add(scr3)
 
-        addFragment(Step.Builder().setTitle(getString(R.string.buy_tickets))
-                .setContent(getString(R.string.tut_buy_tickets))
-                .setBackgroundColor(ContextCompat.getColor(this, R.color.darkBlue)) // int background color
-                .setDrawable(R.drawable.buy_tickets_image) // int top drawable
-                .build())
+        val onBoardingFragment = PaperOnboardingFragment.newInstance(elements)
 
-        addFragment(Step.Builder().setTitle(getString(R.string.scan_code))
-                .setContent(getString(R.string.tut_scan_code))
-                .setBackgroundColor(ContextCompat.getColor(this, R.color.darkOrange)) // int background color
-                .setDrawable(R.drawable.scan_code_image) // int top drawable
-                .build())
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.fragment_container, onBoardingFragment)
+        fragmentTransaction.commit()
 
-    }
+        // replacing this fragment to another when the user swipes next from the last screen:
+        onBoardingFragment.setOnRightOutListener {
+            val intent =
+                    Intent(this@OnBoardActivity, RegisterActivity::class.java)
 
-    override fun finishTutorial() {
-        // Your implementation
-        val intent: Intent = if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this@OnBoardActivity))
-            Intent(this@OnBoardActivity, HomeLandActivity::class.java)
-        else
-            Intent(this@OnBoardActivity, RegisterActivity::class.java)
-
-        startActivity(intent)
-        finish()
-    }
-
-    override fun currentFragmentPosition(position: Int) {
+            startActivity(intent)
+            finish()
+        }
 
     }
+
 }
