@@ -17,15 +17,7 @@
         android:id="@+id/pocketFragment"
         android:name="com.abdotareq.subway_e_ticketing.ui.fragment.pocket.PocketFragment"
         android:label="fragment_pocket"
-        tools:layout="@layout/fragment_pocket">
-        <action
-            android:id="@+id/action_pocketFragment_to_scanPocketFragment"
-            app:destination="@id/scanPocketFragment"
-            app:enterAnim="@anim/slide_in_up"
-            app:exitAnim="@anim/slide_out_down"
-            app:popEnterAnim="@anim/slide_in_down"
-            app:popExitAnim="@anim/slide_out_up" />
-    </fragment>
+        tools:layout="@layout/fragment_pocket"/>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.abdotareq.subway_e_ticketing.ui.fragment.history.HistoryFragment"
@@ -41,20 +33,6 @@
         android:name="com.abdotareq.subway_e_ticketing.ui.fragment.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
-    <fragment
-        android:id="@+id/scanPocketFragment"
-        android:name="com.abdotareq.subway_e_ticketing.ui.activity.ScanTicketFragment"
-        android:label="fragment_scan_pocket"
-        tools:layout="@layout/fragment_scan_pocket">
-        <argument
-            android:name="inTicket"
-            app:argType="com.abdotareq.subway_e_ticketing.model.InTicket"
-            app:nullable="true" />
-        <argument
-            android:name="boughtTicket"
-            app:argType="com.abdotareq.subway_e_ticketing.model.BoughtTicket"
-            app:nullable="true" />
-    </fragment>
 
     <fragment
         android:id="@+id/appSettingsFragment"

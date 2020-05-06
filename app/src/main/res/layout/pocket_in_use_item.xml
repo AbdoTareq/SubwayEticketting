@@ -9,94 +9,175 @@
             name="inTicket"
             type="com.abdotareq.subway_e_ticketing.model.InTicket" />
 
-        <variable
-            name="clickListener"
-            type="com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUseTicketListener" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+    <com.ramotion.foldingcell.FoldingCell
+        android:id="@+id/folding_cell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="@{()-> clickListener.onClick(inTicket)}">
+        android:clipChildren="false"
+        android:clipToPadding="false">
+        ​
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/check_in_ticket"
+        <FrameLayout
+            android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"
-            android:orientation="vertical">
+            android:visibility="gone">
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="@dimen/_10sdp"
-                android:layout_height="0dp"
-                android:background="#c0c0c0"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:setTicketInUseColor="@{inTicket}" />
-
-            <TextView
-                android:id="@+id/ticket_price"
-                android:layout_width="0dp"
+            <!--After click state -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="false"
-                android:focusable="false"
-                android:text="@string/_3le_ticket"
-                android:textAppearance="@style/CustomHeadline5"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:setTicketInUsePrice="@{inTicket}" />
+                tools:context="com.abdotareq.subway_e_ticketing.ui.activity.ScanTicketFragment">
 
-            <TextView
-                android:id="@+id/check_in"
-                android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/check_in"
+                    android:textAppearance="@style/CustomHeadline5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/display_price"
+                    android:textAppearance="@style/CustomHeadline5"
+                    app:layout_constraintBottom_toBottomOf="@+id/title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/title" />
+
+                <ImageView
+                    android:id="@+id/qr_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="@string/scan_this_qr_code"
+                    android:src="@drawable/scan_code_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/price" />
+
+                <TextView
+                    android:id="@+id/instructions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/scan_this_qr_code"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/CustomHeadline6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/qr_image" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/cell_title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--Before click state -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/in_card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:clickable="false"
-                android:focusable="false"
-                android:lines="1"
-                android:text="@string/check_out"
-                android:textAppearance="@style/CustomHeadline5"
-                android:textSize="@dimen/medium_margin"
-                app:layout_constraintBottom_toBottomOf="@+id/ticket_price"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/ticket_price" />
+                android:layout_margin="8dp"
+                tools:showIn="@layout/pocket_in_use_item"
+                >
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent=".5" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/check_in_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="28dp"
-                android:layout_marginBottom="16dp"
-                android:contentDescription="@string/check_out"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.484"
-                app:srcCompat="@drawable/right_arrow" />
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="0dp"
+                        android:background="#c0c0c0"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:setTicketInUseColor="@{inTicket}" />
+
+                    <TextView
+                        android:id="@+id/ticket_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:text="@string/_3le_ticket"
+                        android:textAppearance="@style/CustomHeadline5"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:setTicketInUsePrice="@{inTicket}" />
+
+                    <TextView
+                        android:id="@+id/check_in"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:lines="1"
+                        android:text="@string/check_out"
+                        android:textAppearance="@style/CustomHeadline5"
+                        android:textSize="@dimen/medium_margin"
+                        app:layout_constraintBottom_toBottomOf="@+id/ticket_price"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                        app:layout_constraintTop_toTopOf="@+id/ticket_price" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent=".5" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="28dp"
+                        android:layout_marginBottom="16dp"
+                        android:contentDescription="@string/check_out"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.484"
+                        app:srcCompat="@drawable/right_arrow" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
+
+        </FrameLayout>
+        ​
+    </com.ramotion.foldingcell.FoldingCell>
 
 
 </layout>

@@ -50,41 +50,13 @@ class PocketFragment : Fragment() {
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
-        val inUseAdapter = InUsePocketAdapter(InUseTicketListener { id ->
-            viewModel.onChooseCheckInTicket(id)
-        })
+        val inUseAdapter = InUsePocketAdapter()
         // handle list change
         binding.inUseTicketsList.adapter = inUseAdapter
 
         val availableAdapter = AvailablePocketAdapter()
         // handle list change
         binding.availableTicketsList.adapter = availableAdapter
-
-        // Handle pocket check-in ticket click
-        viewModel.eventChooseCheckInTicket.observe(viewLifecycleOwner, Observer { ticket_id ->
-            if (!ticket_id.isNullOrEmpty()) {
-
-                var ticketTemp = InTicket()
-                for (ticket in viewModel.checkInTickets.value!!) {
-                    if (ticket_id == ticket.id)
-                        ticketTemp = ticket
-                }
-                viewModel.onChooseCheckInComplete()
-                findNavController().navigate(PocketFragmentDirections
-                        .actionPocketFragmentToScanPocketFragment(ticketTemp, null))
-            }
-        })
-
-        // Handle pocket bought ticket click
-//        viewModel.eventChooseBoughtTicket.observe(viewLifecycleOwner, Observer { ticket_id ->
-//
-//
-//        })
-
-
-
-
-
 
         return view
     }

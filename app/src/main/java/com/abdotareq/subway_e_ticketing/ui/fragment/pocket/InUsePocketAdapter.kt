@@ -1,16 +1,20 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidmads.library.qrgenearator.QRGContents
+import androidmads.library.qrgenearator.QRGEncoder
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.PocketInUseItemBinding
 import com.abdotareq.subway_e_ticketing.model.InTicket
+import timber.log.Timber
 
-class InUsePocketAdapter(val clickListener: InUseTicketListener) : ListAdapter<InTicket,
+class InUsePocketAdapter : ListAdapter<InTicket,
         InUsePocketAdapter.ViewHolder>(InUseTicketDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -18,28 +22,47 @@ class InUsePocketAdapter(val clickListener: InUseTicketListener) : ListAdapter<I
         // add animation
         holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_right)
 
-        holder.bind(clickListener, item)
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: PocketInUseItemBinding)
+    class ViewHolder private constructor(val binding: PocketInUseItemBinding, val application: Context)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(clickListener: InUseTicketListener, item: InTicket) {
+        fun bind(item: InTicket) {
             binding.inTicket = item
-            binding.clickListener = clickListener
+
+            binding.title.text = application.getString(R.string.check_out)
+            binding.price.text = String.format(application.getString(R.string.ticket_price_format, item.price))
+            binding.instructions.text = String.format(application.getString(R.string.scan_mess_format,
+                    application.getString(R.string.exit), application.getString(R.string.check_out)))
+            // Initializing the QR Encoder with your value to be encoded, type you required and Dimension
+            val qrgEncoder = QRGEncoder(item.id, null, QRGContents.Type.TEXT, 400)
+            try {
+                // Getting QR-Code as Bitmap
+                val bitmap = qrgEncoder.bitmap
+                // Setting Bitmap to ImageView
+                binding.qrImage.setImageBitmap(bitmap)
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+
             binding.executePendingBindings()
+
+            // this for foldable animation
+            binding.foldingCell.setOnClickListener {
+                binding.foldingCell.toggle(false)
+            }
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = PocketInUseItemBinding.inflate(layoutInflater, parent, false)
-
-                return ViewHolder(binding)
+                return ViewHolder(binding, parent.context)
             }
         }
     }
@@ -59,8 +82,4 @@ private class InUseTicketDiffCallback : DiffUtil.ItemCallback<InTicket>() {
     override fun areContentsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
         return oldItem == newItem
     }
-}
-
-class InUseTicketListener(val clickListener: (id: String) -> Unit) {
-    fun onClick(inTicket: InTicket) = clickListener(inTicket.id!!)
 }

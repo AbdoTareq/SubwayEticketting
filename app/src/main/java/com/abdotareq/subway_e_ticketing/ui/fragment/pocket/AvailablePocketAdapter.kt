@@ -41,7 +41,7 @@ class AvailablePocketAdapter : ListAdapter<BoughtTicket,
             binding.instructions.text = String.format(application.getString(R.string.scan_mess_format,
                     application.getString(R.string.entrance), application.getString(R.string.use)))
             // Initializing the QR Encoder with your value to be encoded, type you required and Dimension
-            val qrgEncoder = QRGEncoder(item.id, null, QRGContents.Type.TEXT, 550)
+            val qrgEncoder = QRGEncoder(item.id, null, QRGContents.Type.TEXT, 400)
             try {
                 // Getting QR-Code as Bitmap
                 val bitmap = qrgEncoder.bitmap
@@ -50,7 +50,7 @@ class AvailablePocketAdapter : ListAdapter<BoughtTicket,
             } catch (e: Exception) {
                 Timber.e(e)
             }
-            
+
             binding.executePendingBindings()
 
             // this for foldable animation
