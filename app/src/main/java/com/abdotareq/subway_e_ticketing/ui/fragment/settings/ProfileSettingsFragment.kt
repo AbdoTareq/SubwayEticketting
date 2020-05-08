@@ -135,6 +135,9 @@ class ProfileSettingsFragment : Fragment() {
 
                 }, mYear, mMonth, mDay)
         datePickerDialog.datePicker.maxDate = calendar.timeInMillis
+        // this value = 100 years converted from
+        // https://codechi.com/dev-tools/date-to-millisecond-calculators/
+        datePickerDialog.datePicker.minDate = calendar.timeInMillis.minus(3153600000000)
         datePickerDialog.show()
     }
 
