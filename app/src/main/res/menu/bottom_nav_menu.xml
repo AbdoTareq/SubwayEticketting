@@ -6,25 +6,30 @@
 
     <item
         android:id="@id/appSettingsFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_settings_state"
         android:title="@string/settings" />
 
     <item
         android:id="@id/ticketFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_ticket_state"
         android:title="@string/tickets" />
 
     <item
         android:id="@id/overviewFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_help_state"
         android:title="@string/overview" />
 
     <item
         android:id="@id/pocketFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_pocket_state"
         android:title="@string/pocket" />
     <item
         android:id="@id/historyFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_history_state"
         android:title="@string/history" />
 

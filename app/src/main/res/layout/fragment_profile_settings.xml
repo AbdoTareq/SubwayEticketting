@@ -98,11 +98,10 @@
 
         <Button
             android:id="@+id/gender_btn"
-            android:layout_width="0dp"
             style="@style/ButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
-            android:drawableStart="@drawable/gender_icon"
             android:hint="@string/select_gender"
             android:onClick="@{() -> viewModel.onGender()}"
             android:text="@={viewModel.user.gender}"
@@ -119,7 +118,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:drawableStart="@drawable/calender_icon"
             android:hint="@string/birth_date"
             android:onClick="@{() -> viewModel.onBirth()}"
             android:padding="@dimen/small_margin"

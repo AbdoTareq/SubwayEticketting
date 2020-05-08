@@ -12,6 +12,7 @@
   <color name="lightBlue">#28B7D1</color>
   <color name="darkBlue">#266fc3</color>
   <color name="darkGray">#323c46</color>
+  <color name="lightGray">@color/wallet_bright_foreground_holo_dark</color>
   <color name="darkOrange">#FFFF6C22</color>
   
 

@@ -172,7 +172,7 @@
             android:id="@+id/start"
             style="@style/ButtonStyleTicketHelper"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
@@ -257,7 +257,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:setIsVisible="@{!viewModel.detailsVisible}"
             app:startApiStatus="@{viewModel.statusStations}"
-            app:tripApiStatus="@{viewModel.statusTrip}" />
+            />
 
         <!-- bind connection status image with ticketApiStatus  -->
         <ImageView
