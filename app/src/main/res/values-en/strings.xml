@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Subway E-ticketting</string>
     <string name="password">Password</string>
-    <string name="log_in">log in</string>
-    <string name="forget_pass">Recover password</string>
+    <string name="log_in">Login</string>
+    <string name="forget_pass">Forgot Password ?</string>
     <string name="create_new_account">Create Account</string>
     <string name="first_name">First Name</string>
     <string name="first_name_warrning">Enter First Name</string>
@@ -19,7 +19,7 @@
     <string name="message4">Please enter the activation code</string>
     <string name="confirm_new_pass">Confirm Password</string>
     <string name="new_pass">New password</string>
-    <string name="change_pass_button">change Password</string>
+    <string name="change_pass_button">Change Password</string>
     <string name="pass_fix">pass fix</string>
     <string name="invalid_pass">Enter Pass between 12 to 8 Characters</string>
     <string name="fix_confirmPassWarning">Enter the same Password</string>
@@ -27,7 +27,7 @@
     <string name="loading">sending</string>
     <string name="wrong_code">Verification code is wrong</string>
     <string name="wrong_mail_or_pass">Wrong mail or pass</string>
-    <string name="log_out">sign out</string>
+    <string name="log_out">Logout</string>
     <string name="account_info">Account details</string>
     <string name="save">Save</string>
     <string name="progMessage">Loading</string>
@@ -96,4 +96,7 @@
     <string name="search_stattions">Search stations</string>
     <string name="no_swithing">No Switching Stations</string>
     <string name="overview_status">overview status</string>
+    <string name="register">Register</string>
+    <string name="don_t_have_an_account">Don\'t have an Account ?</string>
+    <string name="already_have_an_account">Already have an Account ?</string>
 </resources>

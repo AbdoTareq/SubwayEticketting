@@ -29,6 +29,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 tools:context="com.abdotareq.subway_e_ticketing.ui.activity.ScanTicketFragment">
 
                 <TextView

@@ -3,9 +3,9 @@
     <string name="logo">logo</string>
     <string name="phone">رقم المحمول</string>
     <string name="password">Password</string>
-    <string name="log_in">log in</string>
+    <string name="log_in">Login</string>
     <string name="sign_without_logging">الاستمرار بدون تسجيل دخول</string>
-    <string name="forget_pass">Recover password</string>
+    <string name="forget_pass">Forgot Password ?</string>
     <string name="or">--------------------- أو ---------------------</string>
     <string name="create_new_account">Create Account</string>
     <string name="sign_up_with_google">إنشاء حساب باستخدام Google</string>
@@ -86,7 +86,7 @@
     <string name="account_Settings">إعدادات الحساب</string>
     <string name="password_settings">إعدادات كلمة المرور</string>
     <string name="save_settings">حفظ الإعدادات</string>
-    <string name="log_out">تسجيل الخروج</string>
+    <string name="log_out">Logout</string>
     <string name="keep_me_logged_in">تذكرني</string>
     <string name="test_address">عنوان المطعم</string>
     <string name="rest_name_favourite_rest">اسم المطعم</string>
@@ -331,6 +331,9 @@
     <string name="_">_</string>
     <string name="no_swithing">No Switching Stations</string>
     <string name="overview_status">overview status</string>
+    <string name="register">Register</string>
+    <string name="don_t_have_an_account">Don\'t have an Account ?</string>
+    <string name="already_have_an_account">Already have an Account ?</string>
 
 
 </resources>

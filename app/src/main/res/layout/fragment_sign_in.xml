@@ -17,37 +17,24 @@
 
         <TextView
             android:id="@+id/textView"
-            style="?textAppearanceHeadline2"
+            style="@style/RegisterTextHeadLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin"
-            android:gravity="center"
-            android:text="@string/signIn"
+            android:text="@string/log_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-        <TextView
-            android:id="@+id/textView2"
-            style="?textAppearanceHeadline4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/message2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:contentDescription="@string/app_log_is_train"
             android:src="@drawable/ic_subway_icon"
             app:layout_constraintBottom_toTopOf="@+id/guideline4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
-            android:contentDescription="@string/app_log_is_train" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -105,42 +92,50 @@
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="16dp"
             android:onClick="@{() -> viewmodel.onAuthenticate()}"
             android:padding="@dimen/_12sdp"
             android:text="@string/log_in"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
             app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_recover_pass_tv"
             tools:targetApi="lollipop" />
 
         <TextView
             android:id="@+id/sign_in_recover_pass_tv"
+            style="@style/TextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginTop="16dp"
             android:onClick="@{()->viewmodel.onRecoverPass()}"
             android:text="@string/forget_pass"
-
-            android:textSize="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
         <TextView
             android:id="@+id/sign_in_sign_up_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:onClick="@{()->viewmodel.onSignUp()}"
-            android:text="@string/create_new_account"
+            android:text="@string/register"
+            android:textColor="@color/primaryColor"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
-            android:textSize="@dimen/sign_in_sub_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->viewmodel.onSignUp()}"
+            android:text="@string/don_t_have_an_account"
+            app:layout_constraintStart_toStartOf="@+id/sign_in_btn"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline6"

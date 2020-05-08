@@ -17,27 +17,13 @@
 
         <TextView
             android:id="@+id/textView"
+            style="@style/RegisterTextHeadLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/very_large_margin"
-            android:gravity="center"
-            android:text="@string/sign_up"
-            android:textAppearance="@style/CustomHeadline3"
+            android:text="@string/register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-        <TextView
-            android:id="@+id/textView2"
-            style="@style/EditTStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/message2"
-            android:textSize="@dimen/sign_in_sub_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fName_ti"
@@ -183,14 +169,12 @@
 
         <Button
             android:id="@+id/sign_up_gender_btn"
+            style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/small_margin"
             android:layout_marginRight="@dimen/small_margin"
-            android:drawableStart="@drawable/gender_icon"
             android:text="@={viewModel.gender}"
-            android:textAlignment="center"
-            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="@+id/sign_up_calender"
             app:layout_constraintEnd_toStartOf="@+id/v_line2"
             app:layout_constraintStart_toStartOf="@+id/v_line1"
@@ -203,13 +187,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/small_margin"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="16dp"
             android:layout_marginRight="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/_12sdp"
-            android:drawableStart="@drawable/calender_icon"
+            android:layout_marginBottom="16dp"
             android:text="@={viewModel.birthDate}"
-            android:textAlignment="center"
-            android:textAllCaps="false"
             app:layout_constraintBottom_toTopOf="@+id/sign_up_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/v_line2"
@@ -220,26 +201,34 @@
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginTop="16dp"
             android:onClick="@{() -> viewModel.onRegister()}"
-            android:padding="15dp"
-            android:text="@string/sign_up"
-            app:layout_constraintBottom_toTopOf="@+id/sign_up_sign_in_tv"
+            android:text="@string/register"
             app:layout_constraintEnd_toEndOf="@+id/sign_up_calender"
             app:layout_constraintStart_toStartOf="@+id/sign_up_gender_btn"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_gender_btn" />
 
         <TextView
             android:id="@+id/sign_up_sign_in_tv"
-            android:layout_width="match_parent"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginTop="16dp"
             android:onClick="@{() -> viewModel.onSignIn()}"
-            android:text="@string/signIn"
-            android:textAppearance="@style/CustomHeadline4"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/already_have_an_account"
+            app:layout_constraintStart_toStartOf="@+id/sign_up_btn"
             app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
+
+        <TextView
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:onClick="@{() -> viewModel.onSignIn()}"
+            android:text="@string/log_in"
+            android:textColor="@color/primaryColor"
+            app:layout_constraintStart_toEndOf="@+id/sign_up_sign_in_tv"
+            app:layout_constraintTop_toTopOf="@+id/sign_up_sign_in_tv" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline6"

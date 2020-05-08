@@ -49,7 +49,15 @@
 
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
 
-        <item name="android:labelTextSize">@style/CustomHeadline3</item>
+        <item name="android:textAppearance">@style/CustomHeadline6</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="textAllCaps">false</item>
+
+    </style>
+
+    <style name="TextViewStyle" parent="Widget.MaterialComponents.TextView">
+
+        <item name="android:textAppearance">@style/CustomHeadline6</item>
 
     </style>
 
@@ -67,6 +75,12 @@
         <item name="cornerSize">8dp</item>
         <item name="strokeWidth">1dp</item>
         <item name="strokeColor">@color/primaryColor</item>
+    </style>
+
+    <style name="RegisterTextHeadLine">
+        <item name="android:layout_marginTop">@dimen/large_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/CustomHeadline3</item>
     </style>
 
 
