@@ -108,7 +108,11 @@ class UserRepository {
                 userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-                userInterface.onFail(e.toString())
+                try {
+                    userInterface.onFail(e.toString())
+                } catch (e: Exception) {
+                    Timber.e(e)
+                }
             }
         }
     }
