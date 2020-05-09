@@ -36,8 +36,8 @@ class TicketsTypeViewModel(private val bearerToken: String, application: Applica
     val ticketsType: LiveData<List<TicketType>>
         get() = _ticketsType
 
-    private val _eventChooseTicket = MutableLiveData<Int>()
-    val eventChooseTicket: LiveData<Int>
+    private val _eventChooseTicket = MutableLiveData<TicketType>()
+    val eventChooseTicket: LiveData<TicketType>
         get() = _eventChooseTicket
 
     init {
@@ -60,11 +60,11 @@ class TicketsTypeViewModel(private val bearerToken: String, application: Applica
     }
 
     fun onChooseTicketComplete() {
-        _eventChooseTicket.value = 0
+        _eventChooseTicket.value = null
     }
 
-    fun onChooseTicket(price: Int) {
-        _eventChooseTicket.value = price
+    fun onChooseTicket(ticketType: TicketType) {
+        _eventChooseTicket.value = ticketType
     }
 
     private fun getTickets() {

@@ -57,10 +57,10 @@ class OverviewFragment : Fragment() {
 
         viewModel.eventBuy.observe(viewLifecycleOwner, Observer {
             if (it) {
-                viewModel.onEventBuyComplete()
                 val intent = Intent(context, BuyTicketActivity::class.java)
                 intent.putExtra("ticket", viewModel.trip.value!!.ticketType)
                 startActivity(intent)
+                viewModel.onEventBuyComplete()
             }
         })
 

@@ -1,9 +1,7 @@
 package com.abdotareq.subway_e_ticketing.utility
 
-import android.animation.ObjectAnimator
 import android.app.ProgressDialog
 import android.content.Context
-import android.view.View
 import com.abdotareq.subway_e_ticketing.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,7 +20,7 @@ object Util {
     // Validate pass is 8 - 12
     // return true when pass isn't valid
     fun isValidPassword(target: String?): Boolean {
-        return Pattern.compile("^(?=.*\\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,12}$").matcher(target).matches()
+        return Pattern.compile("^(?=.*\\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,12}$").matcher(target!!).matches()
     }
 
     // return true when mail isn't valid
@@ -34,7 +32,7 @@ object Util {
                 + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$")
         val pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE)
-        val matcher = pattern.matcher(target)
+        val matcher = pattern.matcher(target!!)
         return !matcher.matches()
     }
 
@@ -47,7 +45,7 @@ object Util {
 
     fun formatDate(date: Date?): String {
         val formatter = SimpleDateFormat("dd/MM/yyyy")
-        return formatter.format(date)
+        return formatter.format(date!!)
     }
 
 }

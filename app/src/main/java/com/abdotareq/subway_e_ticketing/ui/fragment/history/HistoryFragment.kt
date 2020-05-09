@@ -42,8 +42,7 @@ class HistoryFragment : Fragment() {
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
-        val adapter = HistoryAdapter()
-        binding.historyList.adapter = adapter
+        binding.historyList.adapter = HistoryAdapter()
         // handle list change
 
         return view

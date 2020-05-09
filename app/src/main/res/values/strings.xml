@@ -311,7 +311,6 @@
     <string name="buy_notification_channel_name" translatable="false">Buy Tickets</string>
     <string name="small_ticket">Small Ticket</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="settings">Settings</string>
     <string name="ticket_choose_helper">Ticket Choose Helper</string>

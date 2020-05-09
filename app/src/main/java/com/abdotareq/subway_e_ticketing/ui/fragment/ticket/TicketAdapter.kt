@@ -61,6 +61,6 @@ private class TicketDiffCallback : DiffUtil.ItemCallback<TicketType>() {
     }
 }
 
-class TicketListener(val clickListener: (price: Int) -> Unit) {
-    fun onClick(ticketType: TicketType) = clickListener(ticketType.price)
+class TicketListener(val clickListener: (ticket: TicketType) -> Unit) {
+    fun onClick(ticketType: TicketType) = clickListener(ticketType)
 }

@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
-import com.abdotareq.subway_e_ticketing.model.TicketType
 import com.abdotareq.subway_e_ticketing.ui.activity.BuyTicketActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.home.TicketsTypeViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
+import timber.log.Timber
 
 
 /**
@@ -47,22 +47,15 @@ class TicketFragment : Fragment() {
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
-        val adapter = TicketAdapter(TicketListener { price ->
-            viewModel.onChooseTicket(price)
-        })
         // handle list change
-        binding.ticketList.adapter = adapter
+        binding.ticketList.adapter = TicketAdapter(TicketListener {
+            viewModel.onChooseTicket(it)
+        })
 
-        viewModel.eventChooseTicket.observe(viewLifecycleOwner, Observer { ticket_price ->
-            if (ticket_price > 0) {
-
-                var ticketTemp = TicketType()
-                for (ticket in viewModel.ticketsType.value!!) {
-                    if (ticket_price == ticket.price)
-                        ticketTemp = ticket
-                }
+        viewModel.eventChooseTicket.observe(viewLifecycleOwner, Observer {
+            if (null != it) {
                 val intent = Intent(context, BuyTicketActivity::class.java)
-                intent.putExtra("ticket", ticketTemp)
+                intent.putExtra("ticket", it)
                 startActivity(intent)
                 viewModel.onChooseTicketComplete()
             }
