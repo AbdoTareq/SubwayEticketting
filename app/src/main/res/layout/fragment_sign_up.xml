@@ -42,7 +42,7 @@
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/password"
+                android:autofillHints="@string/first_name"
                 android:drawablePadding="@dimen/_8sdp"
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="@dimen/small_margin"
-            android:importantForAutofill="no"
+
             app:hintTextColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/v_line2"
@@ -70,8 +70,7 @@
                 style="@style/EditTStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/password"
-
+                android:autofillHints="@string/last_name"
                 android:drawablePadding="@dimen/_8sdp"
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
@@ -95,7 +94,6 @@
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no"
                 tools:targetApi="lollipop">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -103,7 +101,7 @@
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:autofillHints="@string/mail"
                     android:drawablePadding="@dimen/_8sdp"
                     android:hint="@string/mail"
                     android:inputType="textEmailAddress"
@@ -120,7 +118,6 @@
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no"
                 app:passwordToggleEnabled="true"
                 tools:targetApi="lollipop">
 
@@ -130,7 +127,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/password"
-
                     android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
@@ -145,7 +141,6 @@
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no"
                 app:passwordToggleEnabled="true"
                 tools:targetApi="lollipop">
 
@@ -155,7 +150,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/password"
-
                     android:drawablePadding="10dp"
                     android:hint="@string/confirm_new_pass"
                     android:inputType="textPassword"
@@ -163,7 +157,6 @@
                     android:text="@={viewModel.confPass}" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
         </LinearLayout>
 

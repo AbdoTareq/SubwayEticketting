@@ -19,7 +19,7 @@
     <View
         android:id="@+id/view2"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_2sdp"
+        android:layout_height="@dimen/_1sdp"
         android:background="@color/secondaryColor"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
         app:layout_constraintStart_toStartOf="parent" />
