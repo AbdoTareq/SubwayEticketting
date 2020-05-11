@@ -36,6 +36,25 @@ class UserRepository {
         }
     }
 
+    //This is the method that calls API using Retrofit
+    fun authenticateGoogle(tokenSent: String, registerInterface: RegisterInterface) {
+        coroutineScope.launch {
+            try {
+                val receivedToken = UserApiObj.retrofitService.authenticateGoogle(tokenSent)
+                registerInterface.onSuccess(receivedToken!!.token)
+            } catch (e: HttpException) {
+                Timber.e("${e.code()}")
+                registerInterface.onFail("${e.code()}")
+            } catch (e: SocketTimeoutException) {
+                Timber.e("Timeout")
+                registerInterface.onFail("-2")
+            } catch (e: Exception) {
+                Timber.e(e)
+                registerInterface.onFail(e.toString())
+            }
+        }
+    }
+
     fun signUpCall(user: User, registerInterface: RegisterInterface) {
         //start the call
         coroutineScope.launch {

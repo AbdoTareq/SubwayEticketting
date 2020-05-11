@@ -30,6 +30,9 @@ interface UserApiService {
     @POST("users/signin")
     suspend fun authenticate(@Body user: User?): Token?
 
+    @POST("users/users/google/signin")
+    suspend fun authenticateGoogle(@Query("token") token: String): Token?
+
     @POST("users/forgetpassword")
     suspend fun sendVerificationCode(@Body user: User?)
 

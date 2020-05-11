@@ -40,6 +40,8 @@ class ErrorStatus {
 
         private const val InvalidCVV = "455"
 
+        private const val InvalidToken = "459"
+
         fun getErrorMessage(errorCode: String, applicationCon: Application): String {
             return when (errorCode) {
                 Forbidden -> applicationCon.getString(R.string.forbidden_mess)
@@ -63,6 +65,8 @@ class ErrorStatus {
 
                 InvalidDate -> applicationCon.getString(R.string.invalid_date)
                 InvalidCVV -> applicationCon.getString(R.string.invalid_cvv)
+                InvalidToken -> applicationCon.getString(R.string.invalid_token)
+
                 else -> errorCode
             }
         }

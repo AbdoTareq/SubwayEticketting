@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.model.Token
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.utility.Util
@@ -88,8 +89,11 @@ class SigninViewModel(application: Application) : AndroidViewModel(application) 
         val user = User(email = mail.value, password = pass.value)
         Timber.e(user.toString())
 
-        //start the coroutine
-        userRepo.authenticate(user,registerInterface)
+        userRepo.authenticate(user, registerInterface)
+    }
+
+    fun authenticateGoogle(tokenSent: String, registerInterface: RegisterInterface) {
+        userRepo.authenticateGoogle(tokenSent, registerInterface)
     }
 
     fun getErrorMess(code: String): String {

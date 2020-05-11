@@ -36,7 +36,7 @@ class SplashScreenActivity : AwesomeSplash() {
 
         //Customize Circular Reveal
         configSplash.backgroundColor = R.color.primaryColor //any color you want form colors.xml
-        configSplash.animCircularRevealDuration = 2000 //int ms
+        configSplash.animCircularRevealDuration = 20 //int ms 2000
         configSplash.revealFlagX = Flags.REVEAL_RIGHT //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
 
@@ -44,7 +44,7 @@ class SplashScreenActivity : AwesomeSplash() {
 
         //Customize Logo
         configSplash.logoSplash = R.drawable.white_logo //or any other drawable
-        configSplash.animLogoSplashDuration = 1000 //int ms
+        configSplash.animLogoSplashDuration = 10 //int ms 1000
         configSplash.animLogoSplashTechnique = Techniques.Landing //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
         //Customize Path
@@ -59,7 +59,7 @@ class SplashScreenActivity : AwesomeSplash() {
 
         configSplash.titleTextColor = R.color.secondaryTextColor
         configSplash.titleTextSize = 30f //float value
-        configSplash.animTitleDuration = 2000
+        configSplash.animTitleDuration = 20 //2000
         configSplash.animTitleTechnique = Techniques.FadeIn
 
     }
@@ -70,7 +70,7 @@ class SplashScreenActivity : AwesomeSplash() {
         val intent: Intent = if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this@SplashScreenActivity)) {
             Intent(this@SplashScreenActivity, HomeLandActivity::class.java)
         } else
-            Intent(this@SplashScreenActivity, OnBoardActivity::class.java)
+            Intent(this@SplashScreenActivity, RegisterActivity::class.java)
 
         startActivity(intent)
         finish()

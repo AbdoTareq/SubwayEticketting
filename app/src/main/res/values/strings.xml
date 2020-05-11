@@ -334,6 +334,8 @@
     <string name="don_t_have_an_account">Don\'t have an Account ?</string>
     <string name="already_have_an_account">Already have an Account ?</string>
     <string name="status_image">status image</string>
+    <string name="invalid_token">Invalid Token</string>
+    <string name="server_client_id">9451048394-sbqr0ln9m5in74vfujp0rikpmtq1rjbo.apps.googleusercontent.com</string>
 
 
 </resources>

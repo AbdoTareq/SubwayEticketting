@@ -1,7 +1,9 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.registration
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +16,19 @@ import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
-import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsLoggedIn
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsTokenId
 import com.abdotareq.subway_e_ticketing.utility.Util
-import com.abdotareq.subway_e_ticketing.viewmodels.register.SigninViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.register.SigninViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import timber.log.Timber
 
 /**
  * The Activity Controller Class that is responsible for handling Signing in
@@ -28,6 +39,11 @@ class SignInFragment : Fragment() {
     private lateinit var viewModel: SigninViewModel
 
     private var _binding: FragmentSignInBinding? = null
+
+    private val RC_SIGN_IN: Int = 1
+
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -78,6 +94,29 @@ class SignInFragment : Fragment() {
             }
         })
 
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        val gso =
+                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestEmail()
+                        .requestIdToken(getString(R.string.server_client_id))
+                        .build()
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        binding.signInButton.setSize(SignInButton.SIZE_WIDE)
+
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        val account = GoogleSignIn.getLastSignedInAccount(requireActivity())
+        updateUI(account)
+
+        binding.signInButton.setOnClickListener {
+            Toast.makeText(requireContext(),"succ",Toast.LENGTH_LONG).show()
+            signIn()
+        }
+
         return view
     }
 
@@ -96,7 +135,7 @@ class SignInFragment : Fragment() {
         }
         // data is valid call authenticate
         authenticate()
-//        Toast.makeText(context, "pass", Toast.LENGTH_SHORT).show()
+
     }
 
     /**
@@ -111,8 +150,8 @@ class SignInFragment : Fragment() {
         val registerInterface = object : RegisterInterface {
             override fun onSuccess(token: String) {
                 //write token into SharedPreferences to use in remember user
-                SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
-                SharedPreferenceUtil.setSharedPrefsTokenId(context, token)
+                setSharedPrefsLoggedIn(context, true)
+                setSharedPrefsTokenId(context, token)
                 progressDialog.dismiss()
                 val intent = Intent(context, HomeLandActivity::class.java)
                 startActivity(intent)
@@ -127,6 +166,77 @@ class SignInFragment : Fragment() {
 
         viewModel.authenticateCall(registerInterface)
 
+    }
+
+    private fun signIn() {
+        val signInIntent: Intent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+
+    }
+
+    private fun updateUI(account: GoogleSignInAccount?) {
+        if (account != null) {
+            val personName: String = account.getDisplayName()!!
+            val personGivenName: String = account.getGivenName()!!
+            val personFamilyName: String = account.getFamilyName()!!
+            val personEmail: String = account.getEmail()!!
+            val personId: String = account.getId()!!
+            val tokenId: String = account.idToken!!
+
+//            val personPhoto: Uri = account.getPhotoUrl()!!
+
+            Toast.makeText(requireActivity(), "sc ${account.givenName}", Toast.LENGTH_LONG).show()
+            Timber.e(personName)
+            Timber.e(personGivenName)
+            Timber.e(personFamilyName)
+            Timber.e(personEmail)
+            Timber.e(personId)
+            Timber.e(tokenId)
+
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account =
+                    completedTask.getResult(ApiException::class.java)
+
+            val registerInterface = object : RegisterInterface {
+                override fun onSuccess(token: String) {
+                    //write token into SharedPreferences to use in remember user
+                    setSharedPrefsLoggedIn(context, true)
+                    setSharedPrefsTokenId(context, token)
+                    val intent = Intent(context, HomeLandActivity::class.java)
+                    startActivity(intent)
+                    activity!!.finishAffinity()
+                }
+
+                override fun onFail(responseCode: String) {
+                    Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
+                }
+            }
+
+            // Signed in successfully, show authenticated UI.
+            viewModel.authenticateGoogle(account!!.idToken!!, registerInterface)
+            updateUI(account)
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.e("signInfailed code=", "$e.statusCode")
+            updateUI(null)
+        }
     }
 
     override fun onDestroyView() {

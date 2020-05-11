@@ -1,5 +1,6 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subway_e_ticketing.databinding.ActivityRegisterBinding
@@ -17,6 +18,5 @@ class RegisterActivity : AppCompatActivity() {
 
 
     }
-
 
 }

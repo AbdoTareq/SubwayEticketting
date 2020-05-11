@@ -7,32 +7,35 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class User(@SerializedName("id")
                 var id: Int = 0,
-                @SerializedName( "email")
+                @SerializedName("email")
                 var email: String? = null,
 
-                @SerializedName( "password")
+                @SerializedName("password")
                 var password: String? = null,
 
-                @SerializedName( "first_name")
+                @SerializedName("first_name")
                 var first_name: String? = null,
 
-                @SerializedName( "last_name")
+                @SerializedName("last_name")
                 var last_name: String? = null,
 
-                @SerializedName( "image")
+                @SerializedName("image")
                 var image: String? = null,
 
-                @SerializedName( "birth_date")
+                @SerializedName("birth_date")
                 var birth_date: String? = null,
 
-                @SerializedName( "gender")
+                @SerializedName("gender")
                 var gender: String? = null,
 
-                @SerializedName( "admin")
+                @SerializedName("admin")
                 var admin: Int = 0,
 
-                @SerializedName( "otp_token")
-                var otp_token: String? = null) {
+                @SerializedName("otp_token")
+                var otp_token: String? = null,
+
+                @SerializedName("imageLink")
+                var imageLink: String? = null) {
 
     override fun toString(): String {
         return ("User [id=" + id + ", email=" + email + ", password=" + password + ", first_name=" + first_name

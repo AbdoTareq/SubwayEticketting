@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="@dimen/very_large_margin"
+            android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginEnd="16dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,9 +60,9 @@
                     style="@style/EditTStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="@string/mail"
                     android:drawablePadding="@dimen/_8sdp"
                     android:inputType="textEmailAddress"
-                    android:autofillHints="@string/mail"
                     android:padding="@dimen/_10sdp"
                     android:text="@={viewmodel.mail}" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -139,6 +139,15 @@
             app:layout_constraintStart_toStartOf="@+id/sign_in_btn"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/sign_in_btn"
+            app:layout_constraintStart_toStartOf="@+id/sign_in_btn"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline6"
             android:layout_width="wrap_content"
@@ -158,14 +167,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+            app:layout_constraintGuide_percent="0.16" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.45" />
+            app:layout_constraintGuide_percent="0.37" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"

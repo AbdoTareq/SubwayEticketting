@@ -124,6 +124,10 @@ dependencies {
     // for foldable animation used in scan tickets
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
 
+    // google signin
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
+
 
 }
 repositories {

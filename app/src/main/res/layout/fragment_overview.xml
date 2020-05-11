@@ -163,12 +163,12 @@
             android:layout_marginBottom="16dp"
             android:text="@string/start_station"
             android:textAppearance="@style/CustomHeadline5"
-            app:stationStatus="@{viewModel.statusStations}"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline21"
+            app:stationStatus="@{viewModel.statusStations}"
             app:tripApiStatus="@{viewModel.statusTrip}" />
 
         <Button
@@ -236,11 +236,11 @@
             android:text="@string/please_choose_start_and_destination_to_proceed"
             android:textAlignment="center"
             android:textAppearance="@style/CustomHeadline6"
-            app:stationStatus="@{viewModel.statusStations}"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:setIsVisible="@{!viewModel.detailsVisible}" />
+            app:setIsVisible="@{!viewModel.detailsVisible}"
+            app:stationStatus="@{viewModel.statusStations}" />
 
         <!-- bind connection status image with ticketApiStatus  -->
         <ImageView
@@ -262,6 +262,7 @@
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
             android:clickable="false"
             android:focusable="false"
             android:text="@string/overview"
