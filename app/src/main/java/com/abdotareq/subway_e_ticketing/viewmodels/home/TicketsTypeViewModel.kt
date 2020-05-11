@@ -7,9 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.repository.TicketRepository
+import com.abdotareq.subway_e_ticketing.ui.fragment.ApiStatus
 import timber.log.Timber
 
-enum class TicketTypeApiStatus { LOADING, ERROR, DONE }
 
 /**
  * ViewModel for SleepTrackerFragment.
@@ -22,10 +22,10 @@ class TicketsTypeViewModel(private val bearerToken: String, application: Applica
     private val ticketObj: TicketTypeInterface
 
     // The internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<TicketTypeApiStatus>()
+    private val _status = MutableLiveData<ApiStatus>()
 
     // The external immutable LiveData for the request status
-    val statusType: LiveData<TicketTypeApiStatus>
+    val statusType: LiveData<ApiStatus>
         get() = _status
 
     // Internally, we use a MutableLiveData, because we will be updating the List of History
@@ -41,15 +41,15 @@ class TicketsTypeViewModel(private val bearerToken: String, application: Applica
         get() = _eventChooseTicket
 
     init {
-        _status.value = TicketTypeApiStatus.LOADING
+        _status.value = ApiStatus.LOADING
         ticketObj = object : TicketTypeInterface {
             override fun onSuccess(ticketsType: List<TicketType>) {
-                _status.value = TicketTypeApiStatus.DONE
+                _status.value = ApiStatus.DONE
                 _ticketsType.value = ticketsType
             }
 
             override fun onFail(responseCode: String) {
-                _status.value = TicketTypeApiStatus.ERROR
+                _status.value = ApiStatus.ERROR
                 _ticketsType.value = ArrayList()
                 Timber.e(getErrorMess(responseCode))
             }

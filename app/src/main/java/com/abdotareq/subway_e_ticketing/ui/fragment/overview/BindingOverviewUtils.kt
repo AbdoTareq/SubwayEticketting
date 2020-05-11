@@ -6,7 +6,6 @@ import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.home.StationsApiStatus
-import com.abdotareq.subway_e_ticketing.viewmodels.home.TicketTypeApiStatus
 import com.abdotareq.subway_e_ticketing.viewmodels.home.TripDetailsApiStatus
 
 @BindingAdapter("setIsVisible")
