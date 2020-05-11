@@ -24,11 +24,10 @@ import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel
 
 class ProfileViewModelFactory(
-        private val user: User,
         private val application: Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
-            return ProfileViewModel(user, application) as T
+            return ProfileViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -1,14 +1,17 @@
 package com.abdotareq.subway_e_ticketing.viewmodels.register
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.GetUserInterface
-import com.abdotareq.subway_e_ticketing.model.UserInterface
-import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.repository.UserRepository
+import com.abdotareq.subway_e_ticketing.ui.fragment.ApiStatus
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.*
+import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import timber.log.Timber
 
 
@@ -19,7 +22,7 @@ import timber.log.Timber
  * reference to applications across rotation since Application is never recreated during activity
  * or fragment lifecycle events.
  */
-class ProfileViewModel(userProperty: User, application: Application) : AndroidViewModel(application) {
+class ProfileViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      *  Don't expose:   private val _pass = MutableLiveData<String>()
@@ -28,8 +31,13 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
     as this make errors for a reason and will not work I swear ( val pass: LiveData<String> get() = _pass) makes big error
      * */
     private val userRepo = UserRepository()
-
     private val applicationCon = application
+
+    private val getUserObj: GetUserInterface
+
+    private val _status = MutableLiveData<ApiStatus>()
+    val statusType: LiveData<ApiStatus>
+        get() = _status
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User>
@@ -60,8 +68,22 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
         get() = _eventGender
 
     init {
-        _user.value = userProperty
-        _user.value!!.birth_date?.substring(0..9)
+        _status.value = ApiStatus.LOADING
+        //start the call
+        getUserObj = object : GetUserInterface {
+            override fun onSuccess(userPassed: User) {
+                _user.value = userPassed
+
+                setSharedPrefsName(applicationCon, "${userPassed.first_name} ${userPassed.last_name} ")
+            }
+
+            override fun onFail(responseCode: String) {
+                Toast.makeText(applicationCon, getErrorMess(responseCode), Toast.LENGTH_LONG).show()
+
+            }
+        }
+
+        getUser(getSharedPrefsTokenId(applicationCon), getUserObj)
     }
 
     fun onLogoutComplete() {
@@ -126,16 +148,12 @@ class ProfileViewModel(userProperty: User, application: Application) : AndroidVi
         userRepo.updateUser(bearerToken, _user.value!!, userInterface)
     }
 
-    fun getUser(bearerToken: String, getUserInterface: GetUserInterface) {
+    fun getUser(userIdToken: String, getUserInterface: GetUserInterface) {
+        var bearerToken = "Bearer "
+        bearerToken += userIdToken
         //start the coroutine
         userRepo.getUserData(bearerToken, getUserInterface)
     }
-
-    // The displayPropertyBirth formatted Transformation Map LiveData, which displays the sale
-    // or rental price.
-//    val displayPropertyBirth = Transformations.map(user) {
-//        it.birth_date?.substring(0..9)
-//    }
 
     fun getErrorMess(code: String): String {
         return getErrorMessage(code, this.applicationCon)

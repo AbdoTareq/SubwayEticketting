@@ -64,7 +64,7 @@ class ProfileSettingsFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = ProfileViewModelFactory(user, application)
+        viewModelFactory = ProfileViewModelFactory(application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
 
@@ -72,9 +72,6 @@ class ProfileSettingsFragment : Fragment() {
         // Specify the current activity as the lifecycle owner of the binding. This is used so that
         // the binding can observe LiveData updates
         binding.lifecycleOwner = this
-
-        // if failed to get user obj from splash screen get user call
-        getUser(SharedPreferenceUtil.getSharedPrefsTokenId(context))
 
         viewModel.eventChangePass.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -151,48 +148,6 @@ class ProfileSettingsFragment : Fragment() {
         alertDialog.show()
     }
 
-    private fun getUser(userIdToken: String) {
-        var bearerToken = "Bearer "
-        bearerToken += userIdToken
-
-        //initialize and show a progress dialog to the user
-        val progressDialog = Util.initProgress(context, getString(R.string.progMessage))
-        progressDialog.show()
-
-        //start the call
-        val getUserInterface = object : GetUserInterface {
-            override fun onSuccess(userPassed: User) {
-                user = userPassed
-                progressDialog.dismiss()
-
-                binding.firstNameEt.setText(user.first_name)
-                binding.lastNameEt.setText(user.last_name)
-                binding.mail.text = user.email
-                binding.genderBtn.text = user.gender
-                binding.calender.text = user.birth_date?.substring(0..9)
-                if (user.image != null) {
-                    val bitMapCon = BitmapConverter(BitmapConverter.AsyncResponse {
-                        binding.profileImage.setImageBitmap(it)
-                    })
-                    bitMapCon.execute(user.image)
-                }
-
-                SharedPreferenceUtil.setSharedPrefsName(context, "${user.first_name} ${user.last_name} ")
-
-                progressDialog.dismiss()
-            }
-
-            override fun onFail(responseCode: String) {
-                progressDialog.dismiss()
-                Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
-
-            }
-        }
-
-        viewModel.getUser(bearerToken, getUserInterface)
-
-    }
-
     private fun updateUser() {
         var bearerToken = "Bearer "
         bearerToken += SharedPreferenceUtil.getSharedPrefsTokenId(context)
@@ -214,7 +169,7 @@ class ProfileSettingsFragment : Fragment() {
                 Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
             }
         }
-        viewModel.saveUserCall(bearerToken, user.image, user.id, profileInterface)
+        viewModel.saveUserCall(bearerToken, user.image,viewModel.user.value!!.id, profileInterface)
     }
 
     private fun saveBtnClk() {
