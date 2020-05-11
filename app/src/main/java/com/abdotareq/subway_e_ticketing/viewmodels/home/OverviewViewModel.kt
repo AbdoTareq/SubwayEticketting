@@ -11,9 +11,9 @@ import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.network.TicketApiService
 import com.abdotareq.subway_e_ticketing.repository.StationRepository
+import com.abdotareq.subway_e_ticketing.ui.fragment.ApiStatus
 import timber.log.Timber
 
-enum class StationsApiStatus { LOADING, ERROR, DONE }
 enum class TripDetailsApiStatus { LOADING, ERROR, DONE }
 
 /**
@@ -34,8 +34,8 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
     var stationsTime = MutableLiveData<String>()
     var stationsSwitching = MutableLiveData<String>()
 
-    private val _statusStations = MutableLiveData<StationsApiStatus>()
-    val statusStations: LiveData<StationsApiStatus>
+    private val _statusStations = MutableLiveData<ApiStatus>()
+    val statusStations: LiveData<ApiStatus>
         get() = _statusStations
 
      private val _statusTrip = MutableLiveData<TripDetailsApiStatus>()
@@ -65,16 +65,16 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
     }
 
     init {
-        _statusStations.value = StationsApiStatus.LOADING
+        _statusStations.value = ApiStatus.LOADING
         stationsObj = object : AllStationsInterface {
             override fun onSuccess(stations: List<MetroStation>) {
                 _stationsSearchList.value = stationsSearchList(stations)
                 _allStations.value = stations
-                _statusStations.value = StationsApiStatus.DONE
+                _statusStations.value = ApiStatus.DONE
             }
 
             override fun onFail(responseCode: String) {
-                _statusStations.value = StationsApiStatus.ERROR
+                _statusStations.value = ApiStatus.ERROR
                 _allStations.value = ArrayList()
                 _stationsSearchList.value = ArrayList()
                 Toast.makeText(application, getErrorMess(responseCode), Toast.LENGTH_LONG).show()

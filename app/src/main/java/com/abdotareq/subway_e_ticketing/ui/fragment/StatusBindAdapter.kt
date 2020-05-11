@@ -2,7 +2,6 @@ package com.abdotareq.subway_e_ticketing.ui.fragment
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
@@ -14,6 +13,7 @@ import com.abdotareq.subway_e_ticketing.ui.fragment.history.HistoryAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailablePocketAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUsePocketAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketAdapter
+import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 
 enum class ApiStatus { LOADING, ERROR, DONE, EMPTY }
 
@@ -65,13 +65,27 @@ fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
 }
 
 @BindingAdapter("progressApiStatus")
-fun bindProgress(statusProgress: ProgressBar, statusType: ApiStatus?) {
+fun bindProgress(statusProgress: View, statusType: ApiStatus?) {
     when (statusType) {
         ApiStatus.LOADING -> {
             statusProgress.visibility = View.VISIBLE
         }
         else -> {
             statusProgress.visibility = View.GONE
+        }
+    }
+}
+
+// bind start button & text instructions to display if data is available
+@BindingAdapter("stationStatus")
+fun bindStart(view: View, statusType: ApiStatus?) {
+    when (statusType) {
+        ApiStatus.DONE -> {
+            view.visibility = View.VISIBLE
+            AnimationUtil.translateRightAnimate(view)
+        }
+        else -> {
+            view.visibility = View.GONE
         }
     }
 }

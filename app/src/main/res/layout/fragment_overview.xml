@@ -42,33 +42,17 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/ticket_price"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:text="@string/overview"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/CustomHeadline3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
                     android:id="@+id/check_in_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/small_margin"
                     android:clickable="false"
                     android:focusable="false"
                     android:lines="1"
                     android:text="@string/stations_number"
                     android:textAppearance="@style/CustomHeadline5"
-                    app:layout_constraintStart_toStartOf="@+id/ticket_price"
-                    app:layout_constraintTop_toBottomOf="@+id/ticket_price" />
+                    app:layout_constraintStart_toStartOf="@+id/his_ticket"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/check_out_date"
@@ -179,12 +163,12 @@
             android:layout_marginBottom="16dp"
             android:text="@string/start_station"
             android:textAppearance="@style/CustomHeadline5"
+            app:stationStatus="@{viewModel.statusStations}"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
             app:layout_constraintEnd_toStartOf="@+id/guideline12"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline21"
-            app:startApiStatus="@{viewModel.statusStations}"
             app:tripApiStatus="@{viewModel.statusTrip}" />
 
         <Button
@@ -209,12 +193,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:onClick="@{()-> viewModel.onEventBuy()}"
             android:text="@string/buy_now"
             android:textAppearance="@style/CustomHeadline5"
             android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline20"
@@ -252,12 +236,11 @@
             android:text="@string/please_choose_start_and_destination_to_proceed"
             android:textAlignment="center"
             android:textAppearance="@style/CustomHeadline6"
+            app:stationStatus="@{viewModel.statusStations}"
             app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:setIsVisible="@{!viewModel.detailsVisible}"
-            app:startApiStatus="@{viewModel.statusStations}"
-            />
+            app:setIsVisible="@{!viewModel.detailsVisible}" />
 
         <!-- bind connection status image with ticketApiStatus  -->
         <ImageView
@@ -268,12 +251,37 @@
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/overview_status"
             android:visibility="gone"
+            app:apiStatus="@{viewModel.statusStations}"
             app:layout_constraintBottom_toTopOf="@+id/guideline20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/overview"
-            app:StationImageApiStatus="@{viewModel.statusStations}"
             app:tripImageApiStatus="@{viewModel.statusTrip}" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/overview"
+            android:textAlignment="center"
+            android:textAppearance="@style/CustomHeadline4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/pBar3"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:progress="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:progressApiStatus="@{viewModel.statusStations}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
