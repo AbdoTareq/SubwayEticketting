@@ -2,6 +2,7 @@ package com.abdotareq.subway_e_ticketing.ui.fragment.ticket
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
@@ -27,16 +28,24 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<TicketType>?) {
 @BindingAdapter("ticketTypeApiStatus")
 fun bindStatus(statusImageView: ImageView, statusType: TicketTypeApiStatus?) {
     when (statusType) {
-        TicketTypeApiStatus.LOADING -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.loading_animation)
-        }
         TicketTypeApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        TicketTypeApiStatus.DONE -> {
+        else -> {
             statusImageView.visibility = View.GONE
+        }
+    }
+}
+
+@BindingAdapter("ticketProgressApiStatus")
+fun bindProgress(statusProgress: ProgressBar, statusType: TicketTypeApiStatus?) {
+    when (statusType) {
+        TicketTypeApiStatus.LOADING -> {
+            statusProgress.visibility = View.VISIBLE
+        }
+        else -> {
+            statusProgress.visibility = View.GONE
         }
     }
 }

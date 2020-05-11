@@ -17,7 +17,7 @@
         <item name="textAppearanceHeadline3">@style/CustomHeadline3</item>
     </style>
 
-    // smaller is text larger
+    // smaller num is larger
 
     <style name="CustomHeadline6" parent="TextAppearance.MaterialComponents.Headline6" />
 

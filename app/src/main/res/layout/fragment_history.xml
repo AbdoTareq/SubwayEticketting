@@ -19,9 +19,9 @@
             android:id="@+id/tickets_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginTop="@dimen/medium_margin"
             android:text="@string/history"
-            android:textSize="@dimen/_35sdp"
+            android:textAppearance="@style/CustomHeadline4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,12 +34,12 @@
             android:layout_marginStart="@dimen/very_small_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/very_small_margin"
+            app:historyListData="@{viewModel.historyTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tickets_header"
-            app:historyListData="@{viewModel.historyTickets}"
             tools:listitem="@layout/history_item" />
 
         <!-- bind connection status image with ticketApiStatus  -->
@@ -47,11 +47,11 @@
             android:id="@+id/status_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:historyApiStatus="@{viewModel.status}"
             app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintEnd_toStartOf="@+id/guideline14"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/guideline15"
-            app:historyApiStatus="@{viewModel.status}" />
+            app:layout_constraintTop_toTopOf="@+id/guideline15" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline14"
