@@ -81,7 +81,7 @@
             android:id="@+id/status_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:inUseApiStatus="@{viewModel.inUseStatus}"
+            app:apiStatus="@{viewModel.inUseStatus}"
             app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintEnd_toStartOf="@+id/guideline14"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -91,7 +91,7 @@
             android:id="@+id/bought_status_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:boughtApiStatus="@{viewModel.boughtStatus}"
+            app:apiStatus="@{viewModel.boughtStatus}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline14"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
@@ -132,6 +132,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintGuide_percent="0.5"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/pBar3"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:progress="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tickets_header"
+            app:progressApiStatus="@{viewModel.inUseStatus}" />
+
+        <ProgressBar
+            android:id="@+id/pBar4"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:progress="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tickets_header2"
+            app:progressApiStatus="@{viewModel.boughtStatus}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

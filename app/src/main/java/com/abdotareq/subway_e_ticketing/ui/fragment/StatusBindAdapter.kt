@@ -6,11 +6,14 @@ import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.History
+import com.abdotareq.subway_e_ticketing.model.InTicket
 import com.abdotareq.subway_e_ticketing.model.TicketType
 import com.abdotareq.subway_e_ticketing.ui.fragment.history.HistoryAdapter
+import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailablePocketAdapter
+import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUsePocketAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.ticket.TicketAdapter
-
 
 enum class ApiStatus { LOADING, ERROR, DONE, EMPTY }
 
@@ -25,6 +28,16 @@ fun bindHistoryRecyclerView(recyclerView: RecyclerView, data: List<History>?) {
 @BindingAdapter("ticketTypeListData")
 fun bindTicketRecyclerView(recyclerView: RecyclerView, data: List<TicketType>?) {
     val adapter = recyclerView.adapter as TicketAdapter
+    adapter.submitList(data)
+}
+@BindingAdapter("checkInListData")
+fun bindCheckInRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
+    val adapter = recyclerView.adapter as InUsePocketAdapter
+    adapter.submitList(data)
+}
+@BindingAdapter("availableListData")
+fun bindAvailableRecyclerView(recyclerView: RecyclerView, data: List<BoughtTicket>?) {
+    val adapter = recyclerView.adapter as AvailablePocketAdapter
     adapter.submitList(data)
 }
 
