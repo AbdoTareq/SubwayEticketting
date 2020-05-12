@@ -112,7 +112,6 @@ class SignInFragment : Fragment() {
         updateUI(account)
 
         binding.signInButton.setOnClickListener {
-            Toast.makeText(requireContext(), "succ", Toast.LENGTH_LONG).show()
             signIn()
         }
 

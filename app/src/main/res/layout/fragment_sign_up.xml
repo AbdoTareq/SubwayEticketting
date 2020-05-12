@@ -130,7 +130,7 @@
                     android:drawablePadding="10dp"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:padding="16dp"
+                    android:padding="@dimen/small_margin"
                     android:text="@={viewModel.pass}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -153,7 +153,7 @@
                     android:drawablePadding="10dp"
                     android:hint="@string/confirm_new_pass"
                     android:inputType="textPassword"
-                    android:padding="16dp"
+                    android:padding="@dimen/small_margin"
                     android:text="@={viewModel.confPass}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -180,9 +180,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/small_margin"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/small_margin"
             android:layout_marginRight="@dimen/small_margin"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/small_margin"
             android:text="@={viewModel.birthDate}"
             app:layout_constraintBottom_toTopOf="@+id/sign_up_btn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +194,7 @@
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/small_margin"
             android:onClick="@{() -> viewModel.onRegister()}"
             android:text="@string/register"
             app:layout_constraintEnd_toEndOf="@+id/sign_up_calender"
@@ -206,7 +206,7 @@
             style="@style/TextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/small_margin"
             android:onClick="@{() -> viewModel.onSignIn()}"
             android:text="@string/already_have_an_account"
             app:layout_constraintStart_toStartOf="@+id/sign_up_btn"

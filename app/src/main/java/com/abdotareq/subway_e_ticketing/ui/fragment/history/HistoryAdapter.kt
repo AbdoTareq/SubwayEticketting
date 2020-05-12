@@ -56,6 +56,6 @@ private class HistoryDiffCallback : DiffUtil.ItemCallback<History>() {
     }
 
     override fun areContentsTheSame(oldItem: History, newItem: History): Boolean {
-        return oldItem.equals(newItem)
+        return oldItem == newItem
     }
 }

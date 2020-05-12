@@ -42,7 +42,7 @@
 
                 android:drawablePadding="10dp"
                 android:inputType="textPassword"
-                android:padding="16dp"
+                android:padding="@dimen/small_margin"
                 android:text="@={viewModel.pass}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -71,7 +71,7 @@
 
                 android:drawablePadding="10dp"
                 android:inputType="textPassword"
-                android:padding="16dp"
+                android:padding="@dimen/small_margin"
                 android:text="@={viewModel.confirmPass}" />
 
         </com.google.android.material.textfield.TextInputLayout>
