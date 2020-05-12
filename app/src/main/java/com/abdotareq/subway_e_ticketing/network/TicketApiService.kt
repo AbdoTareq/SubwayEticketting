@@ -56,6 +56,6 @@ interface TicketApiService {
 // so it's better to instantiate it once 
 object TicketApiObj {
     val retrofitService: TicketApiService by lazy {
-        retrofit.create(TicketApiService::class.java)
+        createRetrofit().create(TicketApiService::class.java)
     }
 }

@@ -1,8 +1,11 @@
 package com.abdotareq.subway_e_ticketing.network
 
+import com.abdotareq.subway_e_ticketing.BuildConfig
 import com.abdotareq.subway_e_ticketing.model.Token
 import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.model.UserPassword
+import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -10,12 +13,6 @@ import retrofit2.http.*
 
 // Create the ApiObj object using Retrofit to implement the UserApiService
 private const val BASE_URL = "https://subway-ticketing-system.herokuapp.com/"
-
-
-private val retrofit = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_URL)
-        .build()
 
 /**
  * The UserService Interface that is responsible for sending and receiving calls for the
@@ -61,6 +58,21 @@ interface UserApiService {
 // so it's better to instantiate it once 
 object UserApiObj {
     val retrofitService: UserApiService by lazy {
-        retrofit.create(UserApiService::class.java)
+        createRetrofit().create(UserApiService::class.java)
     }
+}
+
+fun createRetrofit(): Retrofit {
+    // this for debugging network calls
+    val builder = OkHttpClient.Builder()
+    if (BuildConfig.DEBUG) {
+        builder.addInterceptor( OkHttpProfilerInterceptor() )
+    }
+    val client = builder.build()
+
+    return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .client(client)
+            .build()
 }

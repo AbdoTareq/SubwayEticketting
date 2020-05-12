@@ -78,14 +78,28 @@ dependencies {
     // has recycle view
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    // this for dynamic dimensions Scalable DP Library
-    implementation 'com.intuit.sdp:sdp-android:1.0.5'
+    // Saved state module for ViewModel & Life cycles
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
 
+    // Timber logs library
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // Material design components
+    implementation "com.google.android.material:material:1.1.0"
+    
     //retrofit library for auto convert response to objects
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     // we use converter-gson instead of moshi as mosh needs adapter for objects list that have date
     // property to work
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    // for debugging network calls
+    implementation 'com.itkacher.okhttpprofiler:okhttpprofiler:1.0.4'
+
+
+    // Glide for image loading from urls
+    implementation "com.github.bumptech.glide:glide:4.11.0"
 
     // for navigation and safe arguments
     implementation "android.arch.navigation:navigation-fragment-ktx:2.2.1"
@@ -94,32 +108,11 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:2.3.0-alpha06"
     implementation "androidx.navigation:navigation-ui:2.3.0-alpha06"
 
-    // Timber logs library
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    // this for dynamic dimensions Scalable DP Library
+    implementation 'com.intuit.sdp:sdp-android:1.0.5'
 
-    // Splash screen library
-    implementation 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
-
-    // circle profile picture
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    // Saved state module for ViewModel & Life cycles
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-
-    // Tutorial (onBoard) library
-    implementation 'com.ramotion.paperonboarding:paper-onboarding:1.1.3'
-
-    // Material design components
-    implementation "com.google.android.material:material:1.1.0"
-
-    // for qr code generation
-    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
-    implementation 'com.google.zxing:core:3.3.3'
-
-    // for google payment
-    implementation "com.google.android.gms:play-services-wallet:18.0.0"
+    // for search dialog
+    implementation 'com.github.mirrajabi:search-dialog:1.2.4'
 
     // (Recommended) Add the Google Analytics dependency.
     implementation 'com.google.firebase:firebase-analytics:17.4.1'
@@ -127,17 +120,27 @@ dependencies {
     // Add the Firebase Crashlytics dependency.
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
-    // for search dialog
-    implementation 'com.github.mirrajabi:search-dialog:1.2.4'
-
-    // for foldable animation used in scan tickets
-    implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
-
     // google signin
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
 
-    // Glide for image loading from urls
-    implementation "com.github.bumptech.glide:glide:4.11.0"
+    // for google payment
+    implementation "com.google.android.gms:play-services-wallet:18.0.0"
+
+    // for qr code generation
+    implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.4'
+    implementation 'com.google.zxing:core:3.3.3'
+
+    // Splash screen library
+    implementation 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
+
+    // circle profile picture UI
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Tutorial (onBoard) library
+    implementation 'com.ramotion.paperonboarding:paper-onboarding:1.1.3'
+
+    // for foldable animation used in scan tickets
+    implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
 
 
 }

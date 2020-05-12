@@ -36,13 +36,12 @@ interface StationApiService {
                                @Query("startStationId") startStationId: Int,
                                @Query("destinationStationId") destinationStationId: Int) : TripDetails
 
-
 }
 
 // this singleton  object to use it like static object to use it directly as network call is expensive
 // so it's better to instantiate it once 
 object StationApiObj {
     val retrofitService: StationApiService by lazy {
-        retrofit.create(StationApiService::class.java)
+        createRetrofit().create(StationApiService::class.java)
     }
 }
