@@ -1,9 +1,7 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.settings
 
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
@@ -27,34 +25,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 
                 )
                 .into(imgView)
-    }
-}
-
-@BindingAdapter("setFirstName")
-fun EditText.setFirstName(item: User?) {
-    item?.let {
-        setText(it.first_name)
-    }
-}
-
-@BindingAdapter("setLastName")
-fun EditText.setLastName(item: User?) {
-    item?.let {
-        setText(it.last_name)
-    }
-}
-
-@BindingAdapter("setMail")
-fun TextView.setMail(item: User?) {
-    item?.let {
-        text = it.email
-    }
-}
-
-@BindingAdapter("setGender")
-fun Button.setGender(item: User?) {
-    item?.let {
-        text = it.gender
     }
 }
 

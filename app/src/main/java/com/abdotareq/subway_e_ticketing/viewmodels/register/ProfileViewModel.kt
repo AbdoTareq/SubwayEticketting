@@ -148,7 +148,7 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         userRepo.updateUser(bearerToken, _user.value!!, userInterface)
     }
 
-    fun getUser(userIdToken: String, getUserInterface: GetUserInterface) {
+    private fun getUser(userIdToken: String, getUserInterface: GetUserInterface) {
         var bearerToken = "Bearer "
         bearerToken += userIdToken
         //start the coroutine

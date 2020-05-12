@@ -102,4 +102,5 @@
     <string name="status_image">status image</string>
     <string name="invalid_token">Invalid Token</string>
     <string name="server_client_id">9451048394-sbqr0ln9m5in74vfujp0rikpmtq1rjbo.apps.googleusercontent.com</string>
+    <string name="change_profile_picture">change profile picture</string>
 </resources>

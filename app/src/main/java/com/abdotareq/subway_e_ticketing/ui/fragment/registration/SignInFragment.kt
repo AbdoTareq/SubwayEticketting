@@ -1,9 +1,7 @@
 package com.abdotareq.subway_e_ticketing.ui.fragment.registration
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -100,7 +98,8 @@ class SignInFragment : Fragment() {
         val gso =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestEmail()
-                        .requestIdToken(getString(R.string.server_client_id))
+                        .requestIdToken("9451048394-t24jeq5dd122j0kjfttu8art14p4j3ds.apps.googleusercontent.com")
+//                        .requestIdToken("9451048394-p2vqtg4m37qacm97vkv6dko1c80hdlbs.apps.googleusercontent.com")
                         .build()
 
         // Build a GoogleSignInClient with the options specified by gso.
@@ -113,7 +112,7 @@ class SignInFragment : Fragment() {
         updateUI(account)
 
         binding.signInButton.setOnClickListener {
-            Toast.makeText(requireContext(),"succ",Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "succ", Toast.LENGTH_LONG).show()
             signIn()
         }
 
@@ -176,11 +175,11 @@ class SignInFragment : Fragment() {
 
     private fun updateUI(account: GoogleSignInAccount?) {
         if (account != null) {
-            val personName: String = account.getDisplayName()!!
-            val personGivenName: String = account.getGivenName()!!
-            val personFamilyName: String = account.getFamilyName()!!
-            val personEmail: String = account.getEmail()!!
-            val personId: String = account.getId()!!
+            val personName: String = account.displayName!!
+            val personGivenName: String = account.givenName!!
+            val personFamilyName: String = account.familyName!!
+            val personEmail: String = account.email!!
+            val personId: String = account.id!!
             val tokenId: String = account.idToken!!
 
 //            val personPhoto: Uri = account.getPhotoUrl()!!
@@ -191,7 +190,7 @@ class SignInFragment : Fragment() {
             Timber.e(personFamilyName)
             Timber.e(personEmail)
             Timber.e(personId)
-            Timber.e(tokenId)
+            Timber.e("tokenId: $tokenId")
 
         }
     }
@@ -234,7 +233,7 @@ class SignInFragment : Fragment() {
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.e("signInfailed code=", "$e.statusCode")
+            Timber.e("signInfailed code= $e.statusCode")
             updateUI(null)
         }
     }

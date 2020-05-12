@@ -46,7 +46,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="@dimen/_2sdp"
             app:layout_constraintBottom_toBottomOf="@+id/last_ti"
             app:layout_constraintEnd_toStartOf="@+id/v_line2"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
                 android:hint="@string/first_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
-                app:setFirstName="@{viewModel.user}" />
+                android:text="@={viewModel.user.first_name}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +71,7 @@
             style="@style/LoginTextInputLayoutStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/small_margin"
             android:importantForAutofill="no"
@@ -90,7 +90,7 @@
                 android:hint="@string/last_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/small_margin"
-                app:setLastName="@{viewModel.user}" />
+                android:text="@={viewModel.user.last_name}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,15 +100,15 @@
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="@dimen/_2sdp"
             android:hint="@string/select_gender"
             android:onClick="@{() -> viewModel.onGender()}"
+            android:text="@={viewModel.user.gender}"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="@+id/calender"
             app:layout_constraintEnd_toStartOf="@+id/v_line2"
             app:layout_constraintStart_toStartOf="@+id/first_ti"
-            app:layout_constraintTop_toTopOf="@+id/calender"
-            app:setGender="@{viewModel.user}" />
+            app:layout_constraintTop_toTopOf="@+id/calender" />
 
         <Button
             android:id="@+id/calender"
@@ -119,11 +119,12 @@
             android:hint="@string/birth_date"
             android:onClick="@{() -> viewModel.onBirth()}"
             android:padding="@dimen/small_margin"
-            app:setBirthDate="@{viewModel.user}"
+            android:text="@={viewModel.user.birth_date}"
             app:layout_constraintBottom_toTopOf="@+id/guideline9"
             app:layout_constraintEnd_toEndOf="@+id/last_ti"
             app:layout_constraintStart_toStartOf="@+id/last_ti"
-            app:layout_constraintTop_toBottomOf="@+id/mail" />
+            app:layout_constraintTop_toBottomOf="@+id/mail"
+            app:setBirthDate="@{viewModel.user}" />
 
         <Button
             android:id="@+id/change_pass_btn"
@@ -131,8 +132,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/very_small_margin"
             android:onClick="@{() -> viewModel.onChangePass()}"
             android:text="@string/password"
             app:layout_constraintBottom_toTopOf="@+id/log_out_btn"
@@ -158,8 +159,8 @@
             style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:layout_marginBottom="@dimen/very_small_margin"
             android:onClick="@{()->viewModel.onLogout()}"
             android:text="@string/log_out"
             app:layout_constraintBottom_toTopOf="@+id/guideline10"
@@ -210,17 +211,17 @@
             android:id="@+id/mail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
             android:drawablePadding="@dimen/_8sdp"
             android:hint="@string/mail"
             android:padding="@dimen/small_margin"
+            android:text="@{viewModel.user.email}"
             android:textAppearance="@style/CustomHeadline6"
             app:layout_constraintBottom_toTopOf="@+id/gender_btn"
             app:layout_constraintEnd_toEndOf="@+id/last_ti"
             app:layout_constraintStart_toStartOf="@+id/first_ti"
-            app:layout_constraintTop_toBottomOf="@+id/last_ti"
-            app:setMail="@{viewModel.user}" />
+            app:layout_constraintTop_toBottomOf="@+id/last_ti" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
@@ -233,15 +234,16 @@
             android:id="@+id/pick_image"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginStart="@dimen/large_margin"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
             android:onClick="@{() -> viewModel.onChangePhoto()}"
             android:src="@drawable/change_pic1"
             app:layout_constraintBottom_toBottomOf="@+id/profile_image"
             app:layout_constraintStart_toStartOf="@+id/v_line2"
             app:layout_constraintTop_toTopOf="@+id/guideline8"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:contentDescription="@string/change_profile_picture" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
