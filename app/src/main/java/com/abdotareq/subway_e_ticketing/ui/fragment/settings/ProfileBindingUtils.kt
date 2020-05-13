@@ -24,7 +24,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
 //                        .error(R.drawable.ic_broken_image)
                         .override(100, 100) // resize does not respect aspect ratio
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
-
+                        .skipMemoryCache(true)
 
                 )
                 .into(imgView)
