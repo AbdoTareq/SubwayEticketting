@@ -23,6 +23,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
                         .placeholder(R.drawable.loading_animation)
 //                        .error(R.drawable.ic_broken_image)
                         .override(100, 100) // resize does not respect aspect ratio
+                        // for changing profile picture to work
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
 

@@ -107,11 +107,6 @@ class SignInFragment : Fragment() {
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         binding.signInButton.setSize(SignInButton.SIZE_WIDE)
 
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        val account = GoogleSignIn.getLastSignedInAccount(requireActivity())
-        updateUI(account)
-
         binding.signInButton.setOnClickListener {
             signIn()
         }
@@ -170,29 +165,6 @@ class SignInFragment : Fragment() {
     private fun signIn() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
-
-    }
-
-    private fun updateUI(account: GoogleSignInAccount?) {
-        if (account != null) {
-            val personName: String = account.displayName!!
-            val personGivenName: String = account.givenName!!
-            val personFamilyName: String = account.familyName!!
-            val personEmail: String = account.email!!
-            val personId: String = account.id!!
-            val tokenId: String = account.idToken!!
-
-//            val personPhoto: Uri = account.getPhotoUrl()!!
-
-            Toast.makeText(requireActivity(), "sc ${account.givenName}", Toast.LENGTH_LONG).show()
-            Timber.e(personName)
-            Timber.e(personGivenName)
-            Timber.e(personFamilyName)
-            Timber.e(personEmail)
-            Timber.e(personId)
-            Timber.e("tokenId: $tokenId")
-
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -224,7 +196,8 @@ class SignInFragment : Fragment() {
 
                 override fun onFail(responseCode: String) {
                     if (responseCode == ErrorStatus.Codes.UserNotFound)
-                        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToGoogleRegisterFragment(account!!.idToken!!))
+                        findNavController().navigate(SignInFragmentDirections
+                                .actionSignInFragmentToGoogleRegisterFragment(account!!.idToken!!))
                     Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
                 }
             }
@@ -232,12 +205,10 @@ class SignInFragment : Fragment() {
             // Signed in successfully, show authenticated UI.
             viewModel.authenticateGoogle(account!!.idToken!!, registerInterface)
 
-            updateUI(account)
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Timber.e("signInfailed code= $e.statusCode")
-            updateUI(null)
         }
     }
 
