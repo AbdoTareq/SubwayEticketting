@@ -19,8 +19,8 @@ android {
         applicationId "com.abdotareq.subwaye_ticketting"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 5
-        versionName "1.05"
+        versionCode 7
+        versionName "1.07"
 
         multiDexEnabled true  //ADD THIS LINE if we implement a lot of libraries
 
@@ -141,6 +141,9 @@ dependencies {
 
     // for foldable animation used in scan tickets
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
+
+    // our service ads
+    implementation 'com.github.OmarRaed:subway-ads:1.1'
 
 
 }

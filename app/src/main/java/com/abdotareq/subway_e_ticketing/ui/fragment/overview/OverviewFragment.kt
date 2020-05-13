@@ -14,13 +14,12 @@ import com.abdotareq.subway_e_ticketing.databinding.FragmentOverviewBinding
 import com.abdotareq.subway_e_ticketing.model.SearchModel
 import com.abdotareq.subway_e_ticketing.ui.activity.BuyTicketActivity
 import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
-import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.getSharedPrefsTokenId
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.OverviewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.OverviewViewModel
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
 import ir.mirrajabi.searchdialog.core.SearchResultListener
 import timber.log.Timber
-
 
 /**
  * A [OverviewFragment] provides user with all needed info about metro trip and buy tickets.
@@ -42,7 +41,7 @@ class OverviewFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        val token = SharedPreferenceUtil.getSharedPrefsTokenId(context)
+        val token = getSharedPrefsTokenId(context)
 
         viewModelFactory = OverviewModelFactory(token, application)
 
@@ -85,7 +84,6 @@ class OverviewFragment : Fragment() {
                 dialog.dismiss()
             }).show()
         }
-
 
         return view
     }

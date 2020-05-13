@@ -9,9 +9,12 @@ import androidx.lifecycle.Transformations
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.network.TicketApiService
 import com.abdotareq.subway_e_ticketing.repository.StationRepository
 import com.abdotareq.subway_e_ticketing.ui.fragment.ApiStatus
+import com.crashlytics.android.Crashlytics
+import com.crashlytics.android.core.CrashlyticsListener
+import com.omaar.ads_sdk.network.AdService
+import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 
 enum class TripDetailsApiStatus { LOADING, ERROR, DONE }
@@ -19,13 +22,15 @@ enum class TripDetailsApiStatus { LOADING, ERROR, DONE }
 /**
  * ViewModel for SleepTrackerFragment.
  */
-class OverviewViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
+class OverviewViewModel(private val token: String, application: Application) : AndroidViewModel(application) {
 
     private val stationsRepository = StationRepository()
     private val applicationCon = application
 
     private val stationsObj: AllStationsInterface
     private val tripDetailsObj: TripDetailInterface
+
+    private lateinit var adService: AdService
 
     val startStationId = MutableLiveData<Int>()
     val destinationStationId = MutableLiveData<Int>()
@@ -51,8 +56,6 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
         get() = _stationsSearchList
 
     private val _eventChooseStartDestination = MutableLiveData<Boolean>()
-    val eventChooseStartDestination: LiveData<Boolean>
-        get() = _eventChooseStartDestination
 
     private val _eventBuy = MutableLiveData<Boolean>()
     val eventBuy: LiveData<Boolean>
@@ -61,6 +64,13 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
     // this to control details & buy visibility
     val detailsVisible = Transformations.map(trip) {
         onChooseStartDestination()
+        try {
+            adService.playAd()
+        } catch (e: Exception) {
+            Timber.e(e)
+//            FirebaseCrashlytics.getInstance().recordException(e)
+
+        }
         null != it
     }
 
@@ -104,8 +114,10 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
                         Timber.e(getErrorMess(responseCode))
                     }
                 }
-
         getAllStations()
+
+        adService = AdService(application, token)
+        adService.requestAd()
     }
 
     private fun stationsSearchList(stations: List<MetroStation>): ArrayList<String> {
@@ -133,12 +145,12 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
     }
 
     private fun getAllStations() {
-        stationsRepository.getAllStations(bearerToken, stationsObj)
+        stationsRepository.getAllStations(token, stationsObj)
     }
 
     private fun getTripDetails() {
         _statusTrip.value = TripDetailsApiStatus.LOADING
-        stationsRepository.getTripDetails(bearerToken, tripDetailsObj,
+        stationsRepository.getTripDetails(token, tripDetailsObj,
                 startStationId.value!!, destinationStationId.value!!)
     }
 
@@ -148,6 +160,7 @@ class OverviewViewModel(private val bearerToken: String, application: Applicatio
 
     override fun onCleared() {
         super.onCleared()
+        adService.cancelJob()
         stationsRepository.cancelJob()
     }
 
