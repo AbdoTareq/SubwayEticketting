@@ -88,7 +88,7 @@ dependencies {
 
     // Material design components
     implementation "com.google.android.material:material:1.1.0"
-    
+
     //retrofit library for auto convert response to objects
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     // we use converter-gson instead of moshi as mosh needs adapter for objects list that have date

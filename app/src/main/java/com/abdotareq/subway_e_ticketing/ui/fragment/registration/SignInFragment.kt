@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
+import com.abdotareq.subway_e_ticketing.model.ErrorStatus
 import com.abdotareq.subway_e_ticketing.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsLoggedIn
@@ -222,12 +223,15 @@ class SignInFragment : Fragment() {
                 }
 
                 override fun onFail(responseCode: String) {
+                    if (responseCode == ErrorStatus.Codes.UserNotFound)
+                        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToGoogleRegisterFragment(account!!.idToken!!))
                     Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
                 }
             }
 
             // Signed in successfully, show authenticated UI.
             viewModel.authenticateGoogle(account!!.idToken!!, registerInterface)
+
             updateUI(account)
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.

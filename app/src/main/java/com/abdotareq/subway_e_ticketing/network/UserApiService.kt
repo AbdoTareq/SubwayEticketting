@@ -22,13 +22,18 @@ interface UserApiService {
     @POST("users/signup")
     suspend fun saveUser(@Body user: User?): Token?
 
-    //    After Retrofit 2.6.0
-    //So the magic now is that you can create suspend methods in your Retrofit interface and directly return your data object.
+    // After Retrofit 2.6.0 So the magic now is that you can create suspend methods in your
+    // Retrofit interface and directly return your data object.
     @POST("users/signin")
     suspend fun authenticate(@Body user: User?): Token?
 
-    @POST("users/google/signin")
-    suspend fun authenticateGoogle(@Query("token") token: String): Token?
+    @POST("/users/google/signin")
+    suspend fun authenticateWithGoogle(@Query("token") token: String): Token?
+
+    @POST("users/google/signup")
+    suspend fun registerWithGoogle(@Query("token") token: String,
+                                   @Query("birthDate") birthDate: String,
+                                   @Query("gender") gender: String): Token?
 
     @POST("users/forgetpassword")
     suspend fun sendVerificationCode(@Body user: User?)
@@ -66,7 +71,7 @@ fun createRetrofit(): Retrofit {
     // this for debugging network calls
     val builder = OkHttpClient.Builder()
     if (BuildConfig.DEBUG) {
-        builder.addInterceptor( OkHttpProfilerInterceptor() )
+        builder.addInterceptor(OkHttpProfilerInterceptor())
     }
     val client = builder.build()
 

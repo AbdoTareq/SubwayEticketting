@@ -338,6 +338,9 @@
     <string name="server_client_id">9451048394-sbqr0ln9m5in74vfujp0rikpmtq1rjbo.apps.googleusercontent.com</string>
     <string name="change_profile_picture">change profile picture</string>
     <string name="ticket_status">Ticket status</string>
+    <string name="only_1_step_from_creating_an_account">Only 1 step from creating an account</string>
+    <string name="please_choose_gender_and_birth_date">Please choose gender and birth date</string>
+    <string name="create_account">Create Account</string>
 
 
 </resources>

@@ -18,7 +18,7 @@ class ErrorStatus {
 
         private const val WrongPassword = "437"
 
-        private const val UserNotFound = "438"
+        const val UserNotFound = "438"
 
         private const val WrongOtpToken = "439"
 

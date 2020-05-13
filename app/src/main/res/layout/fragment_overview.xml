@@ -146,9 +146,7 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_percent=".5" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </com.google.android.material.card.MaterialCardView>
 
