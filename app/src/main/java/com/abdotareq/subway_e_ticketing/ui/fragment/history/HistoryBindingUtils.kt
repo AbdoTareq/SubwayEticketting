@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.History
 import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 
 @BindingAdapter("setTicketPrice")
@@ -57,6 +58,7 @@ fun View.setHistoryColor(item: History?) {
             setBackgroundColor(Color.parseColor("#${it.color_code}"))
         } catch (e: Exception) {
             Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
         }
     }
 }

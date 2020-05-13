@@ -17,6 +17,7 @@ import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.getSharedPrefsTokenId
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.OverviewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.OverviewViewModel
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
 import ir.mirrajabi.searchdialog.core.SearchResultListener
 import timber.log.Timber
@@ -104,6 +105,7 @@ class OverviewFragment : Fragment() {
                 list.add(SearchModel(item))
         } catch (e: Exception) {
             Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
         }
         return list
     }

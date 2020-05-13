@@ -11,10 +11,8 @@ import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.repository.StationRepository
 import com.abdotareq.subway_e_ticketing.ui.fragment.ApiStatus
-import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.core.CrashlyticsListener
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.omaar.ads_sdk.network.AdService
-import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 
 enum class TripDetailsApiStatus { LOADING, ERROR, DONE }
@@ -43,7 +41,7 @@ class OverviewViewModel(private val token: String, application: Application) : A
     val statusStations: LiveData<ApiStatus>
         get() = _statusStations
 
-     private val _statusTrip = MutableLiveData<TripDetailsApiStatus>()
+    private val _statusTrip = MutableLiveData<TripDetailsApiStatus>()
     val statusTrip: LiveData<TripDetailsApiStatus>
         get() = _statusTrip
 
@@ -68,8 +66,8 @@ class OverviewViewModel(private val token: String, application: Application) : A
             adService.playAd()
         } catch (e: Exception) {
             Timber.e(e)
-//            FirebaseCrashlytics.getInstance().recordException(e)
-
+            FirebaseCrashlytics.getInstance().recordException(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
         }
         null != it
     }

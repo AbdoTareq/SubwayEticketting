@@ -2,6 +2,7 @@ package com.abdotareq.subway_e_ticketing.repository
 
 import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.network.UserApiObj
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -31,6 +32,7 @@ class UserRepository {
                 registerInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 registerInterface.onFail(e.toString())
             }
         }
@@ -49,6 +51,7 @@ class UserRepository {
                 registerInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 registerInterface.onFail(e.toString())
             }
         }
@@ -67,6 +70,7 @@ class UserRepository {
                 registerInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 registerInterface.onFail(e.toString())
             }
         }
@@ -86,6 +90,7 @@ class UserRepository {
                 registerInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 registerInterface.onFail(e.toString())
             }
         }
@@ -105,6 +110,7 @@ class UserRepository {
                 userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 userInterface.onFail(e.toString())
             }
         }
@@ -125,6 +131,7 @@ class UserRepository {
                 getUserInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 getUserInterface.onFail(e.toString())
             }
         }
@@ -144,10 +151,12 @@ class UserRepository {
                 userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 try {
                     userInterface.onFail(e.toString())
                 } catch (e: Exception) {
                     Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 }
             }
         }
@@ -166,6 +175,7 @@ class UserRepository {
                 registerInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 registerInterface.onFail(e.toString())
             }
         }
@@ -185,6 +195,7 @@ class UserRepository {
                 userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 userInterface.onFail(e.toString())
             }
         }
@@ -204,6 +215,7 @@ class UserRepository {
                 userInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 userInterface.onFail(e.toString())
             }
         }

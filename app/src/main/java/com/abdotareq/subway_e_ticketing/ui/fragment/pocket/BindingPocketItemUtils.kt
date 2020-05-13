@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.model.InTicket
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.ramotion.foldingcell.FoldingCell
 import timber.log.Timber
 
@@ -26,6 +27,7 @@ fun View.setTicketInUseColor(item: InTicket?) {
             setBackgroundColor(Color.parseColor("#${it.color_code}"))
         } catch (e: Exception) {
             Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
         }
     }
 }
@@ -46,6 +48,7 @@ fun View.setTicketAvailableColor(item: BoughtTicket?) {
             setBackgroundColor(Color.parseColor("#${it.color_code}"))
         } catch (e: Exception) {
             Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
         }
     }
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.PocketAvailableItemBinding
 import com.abdotareq.subway_e_ticketing.model.BoughtTicket
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 
 class AvailablePocketAdapter : ListAdapter<BoughtTicket,
@@ -49,6 +50,7 @@ class AvailablePocketAdapter : ListAdapter<BoughtTicket,
                 binding.qrImage.setImageBitmap(bitmap)
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
             }
 
             binding.executePendingBindings()

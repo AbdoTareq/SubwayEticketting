@@ -2,6 +2,7 @@ package com.abdotareq.subway_e_ticketing.repository
 
 import com.abdotareq.subway_e_ticketing.model.*
 import com.abdotareq.subway_e_ticketing.network.StationApiObj
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -35,6 +36,7 @@ class StationRepository {
                 stationsInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 stationsInterface.onFail(e.toString())
             }
         }
@@ -55,6 +57,7 @@ class StationRepository {
                 tripDetailInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
                 tripDetailInterface.onFail(e.toString())
             }
         }
