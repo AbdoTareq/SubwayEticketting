@@ -27,3 +27,11 @@
 -keep class com.daimajia.** { *; }
            -dontwarn com.daimajia.**
            -keepnames class com.daimajia.**
+
+# firebase
+-keepattributes *Annotation*
+# prevent Crashlytics obfuscation
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
+-keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
+-keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.

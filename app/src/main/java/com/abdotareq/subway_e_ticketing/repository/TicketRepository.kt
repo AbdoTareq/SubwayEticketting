@@ -36,7 +36,7 @@ class TicketRepository {
                 historyTicketInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
                 historyTicketInterface.onFail(e.toString())
             }
         }
@@ -58,7 +58,7 @@ class TicketRepository {
                 ticketTypeInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
                 ticketTypeInterface.onFail(e.toString())
             }
         }
@@ -80,7 +80,7 @@ class TicketRepository {
                 inTicketObj.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
                 inTicketObj.onFail(e.toString())
             }
         }
@@ -101,7 +101,7 @@ class TicketRepository {
                 boughtTicketInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
                 boughtTicketInterface.onFail(e.toString())
             }
         }
@@ -122,7 +122,7 @@ class TicketRepository {
                 buyInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
                 buyInterface.onFail(e.toString())
             }
         }

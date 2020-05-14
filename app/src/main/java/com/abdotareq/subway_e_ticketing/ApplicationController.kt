@@ -20,8 +20,6 @@ class ApplicationController : Application() {
     // and vice versa in release mode
     private fun configureCrashReporting() {
 
-
-
         // this condition to prevent logs in release
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())

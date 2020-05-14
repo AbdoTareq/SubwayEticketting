@@ -33,6 +33,9 @@ android {
         release {
             //Enable the proguard
             minifyEnabled true
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), "proguard-rules.pro"
             //Other parameters
             shrinkResources true
@@ -41,6 +44,7 @@ android {
             renderscriptDebuggable false
             zipAlignEnabled true
             pseudoLocalesEnabled false
+
         }
     }
 
@@ -145,8 +149,7 @@ dependencies {
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
 
     // our service ads
-    implementation 'com.github.OmarRaed:subway-ads:1.1'
-
+    implementation 'com.github.OmarRaed:subway-ads:1.2'
 
 }
 repositories {

@@ -36,7 +36,7 @@ class StationRepository {
                 stationsInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
                 stationsInterface.onFail(e.toString())
             }
         }
@@ -57,7 +57,7 @@ class StationRepository {
                 tripDetailInterface.onFail("-2")
             } catch (e: Exception) {
                 Timber.e(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
                 tripDetailInterface.onFail(e.toString())
             }
         }
