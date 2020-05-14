@@ -20,7 +20,6 @@ package com.abdotareq.subway_e_ticketing.viewmodels.factories
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.abdotareq.subway_e_ticketing.model.User
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel
 
 class ProfileViewModelFactory(

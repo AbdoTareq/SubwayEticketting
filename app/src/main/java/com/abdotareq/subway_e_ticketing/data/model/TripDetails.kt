@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.model
+package com.abdotareq.subway_e_ticketing.data.model
 
 import androidx.annotation.Keep
 

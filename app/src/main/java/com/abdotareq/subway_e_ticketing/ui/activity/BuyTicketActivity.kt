@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ActivityBuyBinding
-import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.data.model.TicketType
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.payment.PaymentsUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.BuyTicketViewModelFactory

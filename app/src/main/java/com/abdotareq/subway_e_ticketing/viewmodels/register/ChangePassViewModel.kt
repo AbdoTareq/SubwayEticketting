@@ -4,11 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.model.UserInterface
-import com.abdotareq.subway_e_ticketing.repository.UserRepository
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.data.model.User
+import com.abdotareq.subway_e_ticketing.data.model.UserInterface
+import com.abdotareq.subway_e_ticketing.data.repository.UserRepository
 import timber.log.Timber
 
 /**

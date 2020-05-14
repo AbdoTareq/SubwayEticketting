@@ -5,7 +5,7 @@
 
         <variable
             name="boughtTicket"
-            type="com.abdotareq.subway_e_ticketing.model.BoughtTicket" />
+            type="com.abdotareq.subway_e_ticketing.data.model.BoughtTicket" />
 
     </data>
 

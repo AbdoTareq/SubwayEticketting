@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.HistoryItemBinding
-import com.abdotareq.subway_e_ticketing.model.History
+import com.abdotareq.subway_e_ticketing.data.model.History
 
 class HistoryAdapter : ListAdapter<History,
         HistoryAdapter.ViewHolder>(HistoryDiffCallback()) {

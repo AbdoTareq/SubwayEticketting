@@ -5,9 +5,9 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.RegisterInterface
-import com.abdotareq.subway_e_ticketing.repository.UserRepository
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.data.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.data.repository.UserRepository
 
 /**
  * ViewModel containing all the logic needed to sign in

@@ -8,10 +8,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.model.BuyInterface
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus
-import com.abdotareq.subway_e_ticketing.model.TicketType
-import com.abdotareq.subway_e_ticketing.repository.TicketRepository
+import com.abdotareq.subway_e_ticketing.data.model.BuyInterface
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus
+import com.abdotareq.subway_e_ticketing.data.model.TicketType
+import com.abdotareq.subway_e_ticketing.data.repository.TicketRepository
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.createChannel
 import com.abdotareq.subway_e_ticketing.utility.sendNotification

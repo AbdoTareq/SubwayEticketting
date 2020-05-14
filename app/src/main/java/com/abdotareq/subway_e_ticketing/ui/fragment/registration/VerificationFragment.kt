@@ -12,8 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentVerificationBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.data.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.viewmodels.register.VerificationViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.VerificationViewModelFactory

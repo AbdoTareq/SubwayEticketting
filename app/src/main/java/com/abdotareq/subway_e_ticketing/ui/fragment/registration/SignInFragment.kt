@@ -12,8 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus
-import com.abdotareq.subway_e_ticketing.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus
+import com.abdotareq.subway_e_ticketing.data.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsLoggedIn
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsTokenId

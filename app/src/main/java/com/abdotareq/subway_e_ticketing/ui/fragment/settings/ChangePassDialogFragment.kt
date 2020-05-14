@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.ChangePassDialogeBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.UserInterface
-import com.abdotareq.subway_e_ticketing.model.UserPassword
-import com.abdotareq.subway_e_ticketing.repository.UserRepository
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.data.model.UserInterface
+import com.abdotareq.subway_e_ticketing.data.model.UserPassword
+import com.abdotareq.subway_e_ticketing.data.repository.UserRepository
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.Util
 import timber.log.Timber

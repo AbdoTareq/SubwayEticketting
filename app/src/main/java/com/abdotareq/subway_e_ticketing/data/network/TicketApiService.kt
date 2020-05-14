@@ -1,9 +1,9 @@
-package com.abdotareq.subway_e_ticketing.network
+package com.abdotareq.subway_e_ticketing.data.network
 
-import com.abdotareq.subway_e_ticketing.model.BoughtTicket
-import com.abdotareq.subway_e_ticketing.model.History
-import com.abdotareq.subway_e_ticketing.model.InTicket
-import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.data.model.BoughtTicket
+import com.abdotareq.subway_e_ticketing.data.model.History
+import com.abdotareq.subway_e_ticketing.data.model.InTicket
+import com.abdotareq.subway_e_ticketing.data.model.TicketType
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

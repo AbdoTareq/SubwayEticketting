@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentForgetPassBinding
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.model.UserInterface
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.data.model.UserInterface
 import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ForgetPassViewModel
 import com.abdotareq.subway_e_ticketing.viewmodels.factories.ForgetPassViewModelFactory

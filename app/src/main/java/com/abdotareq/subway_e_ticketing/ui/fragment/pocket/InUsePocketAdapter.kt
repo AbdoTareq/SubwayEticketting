@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.PocketInUseItemBinding
-import com.abdotareq.subway_e_ticketing.model.InTicket
+import com.abdotareq.subway_e_ticketing.data.model.InTicket
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 

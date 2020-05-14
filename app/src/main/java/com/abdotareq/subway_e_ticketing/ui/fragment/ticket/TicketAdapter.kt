@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.TicketItemNewBinding
-import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.data.model.TicketType
 
 class TicketAdapter(val clickListener: TicketListener) : ListAdapter<TicketType,
         TicketAdapter.ViewHolder>(TicketDiffCallback()) {

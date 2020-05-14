@@ -21,9 +21,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentProfileSettingsBinding
-import com.abdotareq.subway_e_ticketing.model.GetUserInterface
-import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.model.UserInterface
+import com.abdotareq.subway_e_ticketing.data.model.User
+import com.abdotareq.subway_e_ticketing.data.model.UserInterface
 import com.abdotareq.subway_e_ticketing.ui.activity.RegisterActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.Util

@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.data.model.TicketType
 
 
 @BindingAdapter("setTicketTypePrice")

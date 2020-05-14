@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.databinding.FragmentOverviewBinding
-import com.abdotareq.subway_e_ticketing.model.SearchModel
+import com.abdotareq.subway_e_ticketing.data.model.SearchModel
 import com.abdotareq.subway_e_ticketing.ui.activity.BuyTicketActivity
 import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.getSharedPrefsTokenId

@@ -1,9 +1,9 @@
-package com.abdotareq.subway_e_ticketing.network
+package com.abdotareq.subway_e_ticketing.data.network
 
 import com.abdotareq.subway_e_ticketing.BuildConfig
-import com.abdotareq.subway_e_ticketing.model.Token
-import com.abdotareq.subway_e_ticketing.model.User
-import com.abdotareq.subway_e_ticketing.model.UserPassword
+import com.abdotareq.subway_e_ticketing.data.model.Token
+import com.abdotareq.subway_e_ticketing.data.model.User
+import com.abdotareq.subway_e_ticketing.data.model.UserPassword
 import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

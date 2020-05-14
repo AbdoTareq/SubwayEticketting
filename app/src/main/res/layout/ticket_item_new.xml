@@ -6,7 +6,7 @@
 
         <variable
             name="ticket"
-            type="com.abdotareq.subway_e_ticketing.model.TicketType" />
+            type="com.abdotareq.subway_e_ticketing.data.model.TicketType" />
 
         <variable
             name="clickListener"

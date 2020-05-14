@@ -1,4 +1,4 @@
-package com.abdotareq.subway_e_ticketing.model
+package com.abdotareq.subway_e_ticketing.data.model
 
 import android.graphics.Color
 import android.os.Parcelable

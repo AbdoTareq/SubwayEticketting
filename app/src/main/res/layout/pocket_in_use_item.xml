@@ -7,7 +7,7 @@
 
         <variable
             name="inTicket"
-            type="com.abdotareq.subway_e_ticketing.model.InTicket" />
+            type="com.abdotareq.subway_e_ticketing.data.model.InTicket" />
 
     </data>
 

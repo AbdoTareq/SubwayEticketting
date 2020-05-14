@@ -5,10 +5,10 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.model.BoughtTicket
-import com.abdotareq.subway_e_ticketing.model.History
-import com.abdotareq.subway_e_ticketing.model.InTicket
-import com.abdotareq.subway_e_ticketing.model.TicketType
+import com.abdotareq.subway_e_ticketing.data.model.BoughtTicket
+import com.abdotareq.subway_e_ticketing.data.model.History
+import com.abdotareq.subway_e_ticketing.data.model.InTicket
+import com.abdotareq.subway_e_ticketing.data.model.TicketType
 import com.abdotareq.subway_e_ticketing.ui.fragment.history.HistoryAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.AvailablePocketAdapter
 import com.abdotareq.subway_e_ticketing.ui.fragment.pocket.InUsePocketAdapter

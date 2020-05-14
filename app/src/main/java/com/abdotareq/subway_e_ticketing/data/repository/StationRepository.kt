@@ -1,7 +1,7 @@
-package com.abdotareq.subway_e_ticketing.repository
+package com.abdotareq.subway_e_ticketing.data.repository
 
-import com.abdotareq.subway_e_ticketing.model.*
-import com.abdotareq.subway_e_ticketing.network.StationApiObj
+import com.abdotareq.subway_e_ticketing.data.model.*
+import com.abdotareq.subway_e_ticketing.data.network.StationApiObj
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.abdotareq.subway_e_ticketing.model.*
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.repository.TicketRepository
+import com.abdotareq.subway_e_ticketing.data.model.*
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.data.repository.TicketRepository
 import com.abdotareq.subway_e_ticketing.ui.fragment.ApiStatus
 import timber.log.Timber
 

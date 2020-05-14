@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.model.*
-import com.abdotareq.subway_e_ticketing.model.ErrorStatus.Codes.getErrorMessage
-import com.abdotareq.subway_e_ticketing.repository.StationRepository
+import com.abdotareq.subway_e_ticketing.data.model.*
+import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
+import com.abdotareq.subway_e_ticketing.data.repository.StationRepository
 import com.abdotareq.subway_e_ticketing.ui.fragment.ApiStatus
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.omaar.ads_sdk.network.AdService
