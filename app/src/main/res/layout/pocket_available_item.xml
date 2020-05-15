@@ -19,6 +19,7 @@
         android:clipToPadding="false"
         tools:ignore="ExtraText">
         ​
+
         <FrameLayout
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
@@ -26,10 +27,10 @@
             android:visibility="gone">
 
             <!--After click state it doesn't show here customize in another layout-->
-            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/very_small_margin"
-                tools:context="com.abdotareq.subway_e_ticketing.ui.activity.ScanTicketFragment">
+                android:layout_margin="@dimen/very_small_margin">
 
                 <TextView
                     android:id="@+id/title"

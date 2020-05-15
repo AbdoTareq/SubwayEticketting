@@ -99,7 +99,6 @@ class SignUpFragment : Fragment() {
             val calendar = Calendar.getInstance()
             val datePickerDialog = DatePickerDialog(requireContext(),
                     DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-//                        birthDate = year.toString() + "-" + (monthOfYear + 1) + "-" + dayOfMonth.toString()
                         calendar[Calendar.YEAR] = year
                         calendar[Calendar.MONTH] = monthOfYear
                         calendar[Calendar.DAY_OF_MONTH] = dayOfMonth
@@ -157,8 +156,6 @@ class SignUpFragment : Fragment() {
 
         val registerInterface = object : RegisterInterface {
             override fun onSuccess(token: String) {
-                //user authenticated successfully
-
                 //write token into SharedPreferences to use in remember user
                 SharedPreferenceUtil.setSharedPrefsLoggedIn(context, true)
                 SharedPreferenceUtil.setSharedPrefsTokenId(context, token)

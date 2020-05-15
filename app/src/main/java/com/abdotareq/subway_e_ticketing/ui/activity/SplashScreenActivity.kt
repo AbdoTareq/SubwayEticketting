@@ -70,7 +70,7 @@ class SplashScreenActivity : AwesomeSplash() {
         val intent: Intent = if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this@SplashScreenActivity)) {
             Intent(this@SplashScreenActivity, HomeLandActivity::class.java)
         } else
-            Intent(this@SplashScreenActivity, RegisterActivity::class.java)
+            Intent(this@SplashScreenActivity, OnBoardActivity::class.java)
 
         startActivity(intent)
         finish()

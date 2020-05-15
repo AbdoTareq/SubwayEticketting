@@ -59,8 +59,6 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(SigninViewModel::class.java)
 
         binding.viewmodel = viewModel
-        // Specify the current activity as the lifecycle owner of the binding. This is used so that
-        // the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
         // Navigates to sign up when button is pressed
@@ -100,7 +98,6 @@ class SignInFragment : Fragment() {
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestEmail()
                         .requestIdToken("9451048394-t24jeq5dd122j0kjfttu8art14p4j3ds.apps.googleusercontent.com")
-//                        .requestIdToken("9451048394-p2vqtg4m37qacm97vkv6dko1c80hdlbs.apps.googleusercontent.com")
                         .build()
 
         // Build a GoogleSignInClient with the options specified by gso.
@@ -208,7 +205,7 @@ class SignInFragment : Fragment() {
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Timber.e("signInfailed code= $e.statusCode")
+            Timber.e("signInFailed code= $e.statusCode")
         }
     }
 

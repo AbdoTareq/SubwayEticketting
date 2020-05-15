@@ -29,8 +29,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/very_small_margin"
-                tools:context="com.abdotareq.subway_e_ticketing.ui.activity.ScanTicketFragment">
+                android:layout_margin="@dimen/very_small_margin">
 
                 <TextView
                     android:id="@+id/title"
@@ -91,7 +90,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/view3"
                     app:layout_constraintTop_toBottomOf="@+id/qr_image" />
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
