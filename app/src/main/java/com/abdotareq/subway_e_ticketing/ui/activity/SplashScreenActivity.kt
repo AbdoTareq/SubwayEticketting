@@ -2,6 +2,7 @@ package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
+import com.abdotareq.subway_e_ticketing.BuildConfig
 import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.daimajia.androidanimations.library.Techniques
@@ -10,6 +11,9 @@ import com.viksaa.sssplash.lib.cnst.Flags
 import com.viksaa.sssplash.lib.model.ConfigSplash
 
 class SplashScreenActivity : AwesomeSplash() {
+
+    private val debugTime = 20
+    private val releaseTime = 2000
 
     //DO NOT OVERRIDE onCreate()!
     //if you need to start some services do it in initSplash()!
@@ -36,7 +40,10 @@ class SplashScreenActivity : AwesomeSplash() {
 
         //Customize Circular Reveal
         configSplash.backgroundColor = R.color.primaryColor //any color you want form colors.xml
-        configSplash.animCircularRevealDuration = 20 //int ms 2000
+        if (BuildConfig.DEBUG)
+            configSplash.animCircularRevealDuration = debugTime //int ms 2000
+        else
+            configSplash.animCircularRevealDuration = releaseTime //int ms 2000
         configSplash.revealFlagX = Flags.REVEAL_RIGHT //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
 
@@ -44,22 +51,18 @@ class SplashScreenActivity : AwesomeSplash() {
 
         //Customize Logo
         configSplash.logoSplash = R.drawable.white_logo //or any other drawable
-        configSplash.animLogoSplashDuration = 10 //int ms 1000
+        if (BuildConfig.DEBUG)
+            configSplash.animLogoSplashDuration = debugTime //int ms 1000
+        else
+            configSplash.animLogoSplashDuration = releaseTime //int ms 1000
         configSplash.animLogoSplashTechnique = Techniques.Landing //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
-
-        //Customize Path
-        /*   configSplash.setPathSplash(R.string.account_Settings.toString()); //set path String
-           configSplash.setOriginalHeight(400); //in relation to your svg (path) resource
-           configSplash.setOriginalWidth(400); //in relation to your svg (path) resource
-           configSplash.setAnimPathStrokeDrawingDuration(3000);
-           configSplash.setPathSplashStrokeSize(3); //I advise value be <5
-           configSplash.setPathSplashStrokeColor(R.color.primaryTextColor); //any color you want form colors.xml
-           configSplash.setAnimPathFillingDuration(3000);
-           configSplash.setPathSplashFillColor(R.color.design_default_color_on_primary); //path object filling color*/
 
         configSplash.titleTextColor = R.color.secondaryTextColor
         configSplash.titleTextSize = 30f //float value
-        configSplash.animTitleDuration = 20 //2000
+        if (BuildConfig.DEBUG)
+            configSplash.animTitleDuration = debugTime
+        else
+            configSplash.animTitleDuration = releaseTime //2000
         configSplash.animTitleTechnique = Techniques.FadeIn
 
     }
