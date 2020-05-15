@@ -10,12 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.FragmentForgetPassBinding
 import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.data.model.UserInterface
+import com.abdotareq.subway_e_ticketing.databinding.FragmentForgetPassBinding
 import com.abdotareq.subway_e_ticketing.utility.Util
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ForgetPassViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.ForgetPassViewModelFactory
 
 /**
  *  [ForgetPassFragment] responsible for sending verification code to user mail
@@ -29,7 +29,7 @@ class ForgetPassFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var viewModelFactory: ForgetPassViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: ForgetPassViewModel
 
 
@@ -39,7 +39,7 @@ class ForgetPassFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = ForgetPassViewModelFactory(application)
+        viewModelFactory = ViewModelFactory(application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ForgetPassViewModel::class.java)
 

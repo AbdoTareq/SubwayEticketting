@@ -8,15 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentHistoryBinding
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.*
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.HistoryViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.HistoryViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
  */
 class HistoryFragment : Fragment() {
 
-    private lateinit var viewModelFactory: HistoryViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: HistoryViewModel
 
     private var _binding: FragmentHistoryBinding? = null
@@ -31,9 +32,9 @@ class HistoryFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        val bearerToken = SharedPreferenceUtil.getSharedPrefsTokenId(context)
+        val token = getSharedPrefsTokenId(context)
 
-        viewModelFactory = HistoryViewModelFactory(bearerToken, application)
+        viewModelFactory = ViewModelFactory(application, token)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(HistoryViewModel::class.java)
 

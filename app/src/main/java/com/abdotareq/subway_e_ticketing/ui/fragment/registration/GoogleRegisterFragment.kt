@@ -19,7 +19,7 @@ import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.Util
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.GoogleRegisterViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.register.GoogleRegisterViewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -28,7 +28,7 @@ import java.util.*
 
 class GoogleRegisterFragment : Fragment() {
 
-    private lateinit var viewModelFactory: GoogleRegisterViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: GoogleRegisterViewModel
 
 
@@ -54,7 +54,7 @@ class GoogleRegisterFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = GoogleRegisterViewModelFactory(token, application)
+        viewModelFactory = ViewModelFactory(application, token)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(GoogleRegisterViewModel::class.java)
 

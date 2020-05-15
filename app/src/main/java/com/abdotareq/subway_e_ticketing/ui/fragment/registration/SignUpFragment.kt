@@ -13,13 +13,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.FragmentSignUpBinding
 import com.abdotareq.subway_e_ticketing.data.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.databinding.FragmentSignUpBinding
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.Util
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.register.SignupViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.SignUpViewModelFactory
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,7 +31,7 @@ import java.util.*
 
 class SignUpFragment : Fragment() {
 
-    private lateinit var viewModelFactory: SignUpViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: SignupViewModel
 
     private var _binding: FragmentSignUpBinding? = null
@@ -54,7 +54,7 @@ class SignUpFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = SignUpViewModelFactory(application)
+        viewModelFactory = ViewModelFactory(application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(SignupViewModel::class.java)
 

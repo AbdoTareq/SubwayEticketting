@@ -15,8 +15,8 @@ import com.abdotareq.subway_e_ticketing.databinding.FragmentVerificationBinding
 import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.data.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.utility.Util
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.register.VerificationViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.VerificationViewModelFactory
 
 class VerificationFragment : Fragment() {
 
@@ -26,7 +26,7 @@ class VerificationFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var viewModelFactory: VerificationViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: VerificationViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,7 +39,7 @@ class VerificationFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = VerificationViewModelFactory(mail, application)
+        viewModelFactory = ViewModelFactory(application, mail)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(VerificationViewModel::class.java)
 

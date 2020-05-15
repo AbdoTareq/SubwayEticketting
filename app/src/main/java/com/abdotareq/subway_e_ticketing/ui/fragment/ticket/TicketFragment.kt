@@ -11,9 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentTicketBinding
 import com.abdotareq.subway_e_ticketing.ui.activity.BuyTicketActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.TicketsTypeViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.TicketViewModelFactory
-import timber.log.Timber
 
 
 /**
@@ -21,7 +20,7 @@ import timber.log.Timber
  */
 class TicketFragment : Fragment() {
 
-    private lateinit var viewModelFactory: TicketViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: TicketsTypeViewModel
 
     private var _binding: FragmentTicketBinding? = null
@@ -38,7 +37,7 @@ class TicketFragment : Fragment() {
 
         val token = SharedPreferenceUtil.getSharedPrefsTokenId(context)
 
-        viewModelFactory = TicketViewModelFactory(token, application)
+        viewModelFactory = ViewModelFactory(application, token)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(TicketsTypeViewModel::class.java)
 

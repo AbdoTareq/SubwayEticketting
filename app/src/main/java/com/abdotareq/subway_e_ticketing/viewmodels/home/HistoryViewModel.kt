@@ -17,7 +17,7 @@ import kotlin.collections.ArrayList
 /**
  * ViewModel for SleepTrackerFragment.
  */
-class HistoryViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
+class HistoryViewModel(private val token: String, application: Application) : AndroidViewModel(application) {
 
     private val ticketRepository = TicketRepository()
     private val applicationCon = application
@@ -60,7 +60,7 @@ class HistoryViewModel(private val bearerToken: String, application: Application
 
 
     private fun getHistoryTickets() {
-        ticketRepository.getHistoryTickets(bearerToken, historyObj)
+        ticketRepository.getHistoryTickets(token, historyObj)
     }
 
     private fun getErrorMess(code: String): String {

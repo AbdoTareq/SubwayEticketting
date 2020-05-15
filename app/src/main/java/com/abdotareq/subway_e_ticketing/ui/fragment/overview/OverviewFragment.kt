@@ -15,7 +15,7 @@ import com.abdotareq.subway_e_ticketing.data.model.SearchModel
 import com.abdotareq.subway_e_ticketing.ui.activity.BuyTicketActivity
 import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.getSharedPrefsTokenId
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.OverviewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.OverviewViewModel
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
@@ -27,7 +27,7 @@ import timber.log.Timber
  */
 class OverviewFragment : Fragment() {
 
-    private lateinit var viewModelFactory: OverviewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: OverviewViewModel
 
     private var _binding: FragmentOverviewBinding? = null
@@ -44,7 +44,7 @@ class OverviewFragment : Fragment() {
 
         val token = getSharedPrefsTokenId(context)
 
-        viewModelFactory = OverviewModelFactory(token, application)
+        viewModelFactory = ViewModelFactory(application, token)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
 

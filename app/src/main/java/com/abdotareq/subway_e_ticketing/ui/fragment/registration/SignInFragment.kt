@@ -18,7 +18,7 @@ import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsLoggedIn
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsTokenId
 import com.abdotareq.subway_e_ticketing.utility.Util
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.SigninViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.register.SigninViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -34,7 +34,7 @@ import timber.log.Timber
  */
 class SignInFragment : Fragment() {
 
-    private lateinit var viewModelFactory: SigninViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: SigninViewModel
 
     private var _binding: FragmentSignInBinding? = null
@@ -54,7 +54,7 @@ class SignInFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = SigninViewModelFactory(application)
+        viewModelFactory = ViewModelFactory(application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(SigninViewModel::class.java)
 

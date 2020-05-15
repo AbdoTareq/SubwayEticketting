@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.databinding.FragmentPocketBinding
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.viewmodels.home.PocketViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.PocketViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 
 
 /**
@@ -18,7 +18,7 @@ import com.abdotareq.subway_e_ticketing.viewmodels.factories.PocketViewModelFact
  */
 class PocketFragment : Fragment() {
 
-    private lateinit var viewModelFactory: PocketViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: PocketViewModel
 
     private var _binding: FragmentPocketBinding? = null
@@ -35,7 +35,7 @@ class PocketFragment : Fragment() {
 
         val token = SharedPreferenceUtil.getSharedPrefsTokenId(context)
 
-        viewModelFactory = PocketViewModelFactory(token, application)
+        viewModelFactory = ViewModelFactory(application, token)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(PocketViewModel::class.java)
 

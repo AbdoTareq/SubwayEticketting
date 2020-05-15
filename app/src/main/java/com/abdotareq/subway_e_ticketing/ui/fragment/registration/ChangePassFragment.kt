@@ -15,7 +15,7 @@ import com.abdotareq.subway_e_ticketing.databinding.FragmentChangePassBinding
 import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.data.model.UserInterface
 import com.abdotareq.subway_e_ticketing.utility.Util
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.ChangePassViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ChangePassViewModel
 
 class ChangePassFragment : Fragment() {
@@ -26,7 +26,7 @@ class ChangePassFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private lateinit var viewModelFactory: ChangePassViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: ChangePassViewModel
 
     private var bearerToken: String = "Bearer "
@@ -45,7 +45,7 @@ class ChangePassFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = ChangePassViewModelFactory(mail, token, application)
+        viewModelFactory = ViewModelFactory(application, mail, token)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ChangePassViewModel::class.java)
 

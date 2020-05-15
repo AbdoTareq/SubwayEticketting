@@ -28,7 +28,7 @@ import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.abdotareq.subway_e_ticketing.utility.Util
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.BitmapConverter
 import com.abdotareq.subway_e_ticketing.utility.imageUtil.ImageUtil
-import com.abdotareq.subway_e_ticketing.viewmodels.factories.ProfileViewModelFactory
+import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.register.ProfileViewModel
 import timber.log.Timber
 import java.text.DateFormat
@@ -42,7 +42,7 @@ import java.util.*
 // TODO FIX photo can't be set or shown from view model bu user object as I couldn't convert string image in user to src property
 class ProfileSettingsFragment : Fragment() {
 
-    private lateinit var viewModelFactory: ProfileViewModelFactory
+    private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var viewModel: ProfileViewModel
 
     private var _binding: FragmentProfileSettingsBinding? = null
@@ -63,7 +63,7 @@ class ProfileSettingsFragment : Fragment() {
 
         val application = requireNotNull(activity).application
 
-        viewModelFactory = ProfileViewModelFactory(application)
+        viewModelFactory = ViewModelFactory(application)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(ProfileViewModel::class.java)
 
