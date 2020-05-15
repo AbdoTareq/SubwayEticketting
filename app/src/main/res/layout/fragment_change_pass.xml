@@ -39,7 +39,6 @@
                 android:layout_marginLeft="@dimen/_24sdp"
                 android:layout_marginRight="@dimen/_24sdp"
                 android:layout_marginBottom="@dimen/small_margin"
-
                 android:drawablePadding="10dp"
                 android:inputType="textPassword"
                 android:padding="@dimen/small_margin"

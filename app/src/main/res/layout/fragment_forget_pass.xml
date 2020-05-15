@@ -58,6 +58,5 @@
             app:layout_constraintTop_toBottomOf="@+id/mail_Ti"
             tools:targetApi="lollipop" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

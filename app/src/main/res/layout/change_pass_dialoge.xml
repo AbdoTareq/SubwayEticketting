@@ -41,7 +41,6 @@
             android:id="@+id/new_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:drawablePadding="@dimen/small_margin"
             android:hint="@string/new_password"
             android:inputType="textPassword"
@@ -64,7 +63,6 @@
             android:id="@+id/confirm_new_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:drawablePadding="@dimen/small_margin"
             android:hint="@string/confirm_new_pass"
             android:inputType="textPassword"

@@ -21,8 +21,8 @@ android {
         applicationId "com.abdotareq.subwaye_ticketting"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 7
-        versionName "1.07"
+        versionCode 8
+        versionName "1.08"
 
         multiDexEnabled true  //ADD THIS LINE if we implement a lot of libraries
 
@@ -33,6 +33,7 @@ android {
         release {
             //Enable the proguard
             minifyEnabled true
+            // firebase settings to build aap
             firebaseCrashlytics {
                 mappingFileUploadEnabled false
             }

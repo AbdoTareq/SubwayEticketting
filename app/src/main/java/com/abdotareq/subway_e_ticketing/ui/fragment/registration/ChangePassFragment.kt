@@ -75,7 +75,7 @@ class ChangePassFragment : Fragment() {
             return
         } else if (viewModel.confirmPass.value!!.isEmpty()
                 || viewModel.confirmPass.value!! != viewModel.pass.value!!) {
-            binding.confirmTi.error = getString(R.string.confirm_message)
+            binding.confirmTi.error = getString(R.string.fix_confirmPassWarning)
             binding.confirmTi.requestFocus()
             return
         }
