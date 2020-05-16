@@ -13,8 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.FragmentGoogleRegisterBinding
 import com.abdotareq.subway_e_ticketing.data.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.databinding.FragmentGoogleRegisterBinding
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
@@ -38,7 +38,6 @@ class GoogleRegisterFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private var genderList = arrayOf("Female", "Male")
     private var mYear = 0
     private var mMonth: Int = 0
     private var mDay: Int = 0
@@ -82,6 +81,8 @@ class GoogleRegisterFragment : Fragment() {
     }
 
     private fun callListeners() {
+        val genderList = resources.getStringArray(R.array.genderList)
+
         binding.genderBtn.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle(getString(R.string.select_gender))

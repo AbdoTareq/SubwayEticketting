@@ -42,7 +42,7 @@
 	<string name="prog_image_message">تحميل الصور</string>
 	<string name="fix_last_name_mess">أدخل الاسم الثاني</string>
 	<string name="birth_date">تاريخ الميلاد</string>
-	<string name="select_gender">جنس</string>
+	<string name="select_gender">الجنس</string>
 	<string name="select_birthday">اختر تاريخ الميلاد:</string>
 	<string name="last_name">الاسم الثاني</string>
 	<string name="pocket">الحافظة</string>
@@ -92,19 +92,19 @@
 	<string name="small_ticket">تذكرة الصغيرة</string>
 	<string name="settings">الإعدادات</string>
 	<string name="start_station">البداية</string>
-	<string name="destination">المكان المقصود</string>
+	<string name="destination">الوجهة</string>
 	<string name="overview">نظرة عامة</string>
 	<string name="stations_number">عدد المحطات:</string>
 	<string name="estimated_time">الوقت المقدر:</string>
 	<string name="switch_stations">تبديل محطات:</string>
 	<string name="buy_now">اشتري ؟</string>
-	<string name="please_choose_start_and_destination_to_proceed">الرجاء اختر ابدأ ثم الوصول إلى المضي قدما</string>
+	<string name="please_choose_start_and_destination_to_proceed">الرجاء اختيار (ابدأ) ثم (الوجهة)</string>
 	<string name="chooseStation">اختيار محطة</string>
 	<string name="search_stattions">محطات البحث</string>
 	<string name="no_swithing">لا توجد محطات التحويل</string>
 	<string name="overview_status">وضع نظرة عامة</string>
 	<string name="register">تسجيل</string>
-	<string name="don_t_have_an_account">دون \ \'ر لديك حساب؟</string>
+	<string name="don_t_have_an_account">أليس لديك حساب؟</string>
 	<string name="already_have_an_account">هل لديك حساب ؟</string>
 	<string name="status_image">صورة الوضع</string>
 	<string name="invalid_token">غير صالح رمز</string>
@@ -121,4 +121,10 @@
 	<string name="buy_notification_channel_id">قناة شراء التذاكر</string>
 	<string name="googlepay_button_content_description">الدفع بواسطة Google</string>
 	<string name="buy_with_googlepay_button_content_description">الدفع بواسطة Google</string>
+
+	<string-array name="genderList">
+		<item>ذكر</item>
+		<item>أنثى</item>
+	</string-array>
+
 </resources>

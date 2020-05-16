@@ -40,13 +40,11 @@ class SignUpFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private var genderList = arrayOf("Female", "Male")
     private var mYear = 0
     private var mMonth: Int = 0
     private var mDay: Int = 0
     private var gender = ""
     private var birthDate: String? = null
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
@@ -85,6 +83,8 @@ class SignUpFragment : Fragment() {
 
     // Call listeners on the activity for code readability
     private fun callListeners() {
+        val genderList = resources.getStringArray(R.array.genderList)
+
         binding.signUpGenderBtn.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle(getString(R.string.select_gender))

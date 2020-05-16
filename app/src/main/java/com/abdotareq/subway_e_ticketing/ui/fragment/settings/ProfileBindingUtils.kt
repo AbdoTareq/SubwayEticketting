@@ -20,7 +20,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
         Glide.with(imgView.context)
                 .load(imgUri)
                 .apply(RequestOptions()
-                        .placeholder(R.drawable.loading_animation)
+                        .placeholder(R.drawable.create_account_image)
 //                        .error(R.drawable.ic_broken_image)
                         .override(100, 100) // resize does not respect aspect ratio
                         // for changing profile picture to work

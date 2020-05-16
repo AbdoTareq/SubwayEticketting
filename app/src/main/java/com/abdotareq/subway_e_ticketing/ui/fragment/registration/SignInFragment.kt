@@ -11,9 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
 import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus
 import com.abdotareq.subway_e_ticketing.data.model.RegisterInterface
+import com.abdotareq.subway_e_ticketing.databinding.FragmentSignInBinding
 import com.abdotareq.subway_e_ticketing.ui.activity.HomeLandActivity
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsLoggedIn
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.setSharedPrefsTokenId
@@ -92,8 +92,8 @@ class SignInFragment : Fragment() {
         })
 
 
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        // When you upload app on play store After signing , it will give you a new SHA
+        // which you have to add in your firebase account. then it'll work InSahaAllah
         val gso =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestEmail()

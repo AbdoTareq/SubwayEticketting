@@ -131,4 +131,9 @@
     <string name="forbidden" tools:ignore="MissingTranslation">Forbidden check your authorization check bearer token</string>
     <string name="fix_fist_name" tools:ignore="MissingTranslation">Enter F name </string>
 
+    <string-array name="genderList">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
 </resources>

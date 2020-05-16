@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.data.model.ErrorStatus.Codes.getErrorMessage
 import com.abdotareq.subway_e_ticketing.data.model.RegisterInterface
 import com.abdotareq.subway_e_ticketing.data.model.User
@@ -52,8 +53,8 @@ class SignupViewModel(application: Application) : AndroidViewModel(application) 
         get() = _eventSignIn
 
     init {
-        gender.value = "Gender"
-        birthDate.value = "Birth Date"
+        gender.value = applicationCon.getString(R.string.select_gender)
+        birthDate.value = applicationCon.getString(R.string.birth_date)
     }
 
     fun onRegisterComplete() {

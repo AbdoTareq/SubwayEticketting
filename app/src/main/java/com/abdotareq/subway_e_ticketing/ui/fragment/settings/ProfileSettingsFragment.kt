@@ -102,7 +102,7 @@ class ProfileSettingsFragment : Fragment() {
 
         viewModel.eventGender.observe(viewLifecycleOwner, Observer {
             if (it) {
-                genderDialogBuilder(arrayOf("Female", "Male"))
+                genderDialogBuilder()
                 viewModel.onGenderComplete()
             }
         })
@@ -137,7 +137,9 @@ class ProfileSettingsFragment : Fragment() {
         datePickerDialog.show()
     }
 
-    private fun genderDialogBuilder(genderList: Array<String>) {
+    private fun genderDialogBuilder() {
+        val genderList = resources.getStringArray(R.array.genderList)
+
         val builder = android.app.AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.select_gender))
         builder.setItems(genderList) { _, position ->
