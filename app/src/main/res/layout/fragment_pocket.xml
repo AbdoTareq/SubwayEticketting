@@ -47,16 +47,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/in_use_tickets_list"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/very_small_margin"
-            android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/very_small_margin"
             app:checkInListData="@{viewModel.checkInTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tickets_header"
+            app:layout_constraintTop_toBottomOf="@+id/pBar3"
             tools:itemCount="3"
             tools:listitem="@layout/pocket_in_use_item" />
 

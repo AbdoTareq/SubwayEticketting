@@ -74,7 +74,7 @@
 
                 <TextView
                     android:id="@+id/check_out"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin"
                     android:layout_marginEnd="@dimen/small_margin"
@@ -90,16 +90,15 @@
 
                 <TextView
                     android:id="@+id/textView7"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin"
-                    android:layout_marginEnd="@dimen/small_margin"
                     android:clickable="false"
                     android:focusable="false"
                     android:lines="1"
                     android:text="@string/switch_stations"
                     android:textAppearance="@style/CustomHeadline5"
-                    app:layout_constraintEnd_toEndOf="@+id/check_in_date"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline13"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/check_in_date"
                     app:layout_constraintTop_toBottomOf="@+id/check_out" />

@@ -1,134 +1,134 @@
-<resources>
-    <string name="app_name">Subway E-ticketting</string>
-    <string name="password">Password</string>
-    <string name="log_in">Login</string>
-    <string name="forget_pass">Forgot Password ?</string>
-    <string name="create_new_account">Create Account</string>
-    <string name="display_price">%,.0fLE</string>
-    <string name="first_name">First Name</string>
-    <string name="first_name_warrning">Enter First Name</string>
-    <string name="mail">Email</string>
-    <string name="mail_exist">Email already exist</string>
-    <string name="pass_less">Password Less Than 8 Characters </string>
-    <string name="wrong_pass">Wrong password </string>
-    <string name="user_not_found">User not found </string>
-    <string name="email_does_not_match">Email does not match </string>
-    <string name="send_verification_code">Send activation code</string>
-    <string name="continue_pass">Continue</string>
-    <string name="enter_verification">Please enter code activation</string>
-    <string name="message3">Activation code has been sent to:</string>
-    <string name="message4">Please enter the activation code</string>
-    <string name="confirm_new_pass">Confirm Password</string>
-    <string name="new_pass">New password</string>
-    <string name="base_url" translatable="false">https://subway-ticketing-system.herokuapp.com/</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="MissingTranslation">Subway E-ticketting</string>
+    <string name="password" tools:ignore="MissingTranslation">Password</string>
+    <string name="log_in" tools:ignore="MissingTranslation">Login</string>
+    <string name="forget_pass" tools:ignore="MissingTranslation">Forgot Password ?</string>
+    <string name="create_new_account" tools:ignore="MissingTranslation">Create Account</string>
+    <string name="display_price" tools:ignore="MissingTranslation">%,.0fLE</string>
+    <string name="first_name" tools:ignore="MissingTranslation">First Name</string>
+    <string name="first_name_warrning" tools:ignore="MissingTranslation">Enter First Name</string>
+    <string name="mail" tools:ignore="MissingTranslation">Email</string>
+    <string name="mail_exist" tools:ignore="MissingTranslation">Email already exist</string>
+    <string name="pass_less" tools:ignore="MissingTranslation">Password Less Than 8 Characters </string>
+    <string name="wrong_pass" tools:ignore="MissingTranslation">Wrong password </string>
+    <string name="user_not_found" tools:ignore="MissingTranslation">User not found </string>
+    <string name="email_does_not_match" tools:ignore="MissingTranslation">Email does not match </string>
+    <string name="send_verification_code" tools:ignore="MissingTranslation">Send activation code</string>
+    <string name="continue_pass" tools:ignore="MissingTranslation">Continue</string>
+    <string name="enter_verification" tools:ignore="MissingTranslation">Please enter code activation</string>
+    <string name="message3" tools:ignore="MissingTranslation">Activation code has been sent to:</string>
+    <string name="message4" tools:ignore="MissingTranslation">Please enter the activation code</string>
+    <string name="confirm_new_pass" tools:ignore="MissingTranslation">Confirm Password</string>
+    <string name="new_pass" tools:ignore="MissingTranslation">New password</string>
+    <string name="base_url" translatable="false" tools:ignore="MissingTranslation">https://subway-ticketing-system.herokuapp.com/</string>
 
-    <string name="pass_fix">pass fix</string>
-    <string name="invalid_pass">Enter Pass between 12 to 8 Characters</string>
-    <string name="fix_confirmPassWarning">Enter the same Password</string>
-    <string name="invalid_mail_warning">Enter mail correctly</string>
-    <string name="loading">sending</string>
-    <string name="wrong_code">Verification code is wrong</string>
-    <string name="wrong_mail_or_pass">Wrong mail or pass</string>
-    <string name="ticket_num_format"> %d</string>
-    <string name="ticket_price_format"> %d LE / Ticket</string>
-    <string name="ticket_title_format"> %s Ticket</string>
-    <string name="ticket_cost_format">Total cost : %d LE</string>
-    <string name="check_in_format">Check-in : %s</string>
-    <string name="check_out_format">Check-out : %s</string>
-    <string name="scan_mess_format">Scan this QR code at %s gate to %s</string>
-    <string name="log_out">Logout</string>
-    <string name="account_info">Account details</string>
-    <string name="save">Save</string>
-    <string name="progMessage">Loading</string>
-    <string name="some_error">Eerror occurred, please try again later</string>
-    <string name="ok">OK</string>
-    <string name="prog_image_message">Loading image</string>
-    <string name="fix_last_name_mess">Enter L name</string>
-    <string name="birth_date">Birth date</string>
-    <string name="select_gender">Gender</string>
-    <string name="select_birthday">Select birthday:</string>
-    <string name="last_name">Last Name</string>
-    <string name="pocket">Pocket</string>
-    <string name="profile">Profile</string>
-    <string name="tickets">Tickets</string>
-    <string name="history">History</string>
-    <string name="welcome">Welcome</string>
-    <string name="do_u_want_logout">Do you really want to Log out?</string>
-    <string name="change_pass_button">Change Password</string>
-    <string name="data_saved">Data saved</string>
-    <string name="tut_acc_mess">To be able to access all your data and trips history</string>
-    <string name="tut_buy_tickets">Buy tickets easily from the store in just few seconds</string>
-    <string name="scan_code">Scan code</string>
-    <string name="tut_scan_code">Scan the ticket code to at the station gates</string>
-    <string name="show_tutorial">Show Tutorial</string>
-    <string name="server_offline_try">Server is offline try again</string>
-    <string name="_3le_ticket">3LE Ticket</string>
-    <string name="_0_9_stations">0 – 9 Stations</string>
-    <string name="buy_tickets">Buy Tickets</string>
+    <string name="pass_fix" translatable="false" tools:ignore="MissingTranslation">pass fix</string>
+    <string name="invalid_pass" tools:ignore="MissingTranslation">Enter Pass between 12 to 8 Characters</string>
+    <string name="fix_confirmPassWarning" tools:ignore="MissingTranslation">Enter the same Password</string>
+    <string name="invalid_mail_warning" tools:ignore="MissingTranslation">Enter mail correctly</string>
+    <string name="loading" tools:ignore="MissingTranslation">sending</string>
+    <string name="wrong_code" tools:ignore="MissingTranslation">Verification code is wrong</string>
+    <string name="wrong_mail_or_pass" tools:ignore="MissingTranslation">Wrong mail or pass</string>
+    <string name="ticket_num_format" translatable="false" tools:ignore="MissingTranslation"> %d</string>
+    <string name="ticket_price_format" tools:ignore="MissingTranslation"> %d LE / Ticket</string>
+    <string name="ticket_title_format" tools:ignore="MissingTranslation"> %s Ticket</string>
+    <string name="ticket_cost_format" tools:ignore="MissingTranslation">Total cost : %d LE</string>
+    <string name="check_in_format" tools:ignore="MissingTranslation">Check-in : %s</string>
+    <string name="check_out_format" tools:ignore="MissingTranslation">Check-out : %s</string>
+    <string name="scan_mess_format" tools:ignore="MissingTranslation">Scan this QR code at %s gate</string>
+    <string name="log_out" tools:ignore="MissingTranslation">Logout</string>
+    <string name="account_info" tools:ignore="MissingTranslation">Account details</string>
+    <string name="save" tools:ignore="MissingTranslation">Save</string>
+    <string name="progMessage" tools:ignore="MissingTranslation">Loading</string>
+    <string name="some_error" tools:ignore="MissingTranslation">Eerror occurred, please try again later</string>
+    <string name="ok" tools:ignore="MissingTranslation">OK</string>
+    <string name="prog_image_message" tools:ignore="MissingTranslation">Loading image</string>
+    <string name="fix_last_name_mess" tools:ignore="MissingTranslation">Enter L name</string>
+    <string name="birth_date" tools:ignore="MissingTranslation">Birth date</string>
+    <string name="select_gender" tools:ignore="MissingTranslation">Gender</string>
+    <string name="select_birthday" tools:ignore="MissingTranslation">Select birthday:</string>
+    <string name="last_name" tools:ignore="MissingTranslation">Last Name</string>
+    <string name="pocket" tools:ignore="MissingTranslation">Pocket</string>
+    <string name="profile" tools:ignore="MissingTranslation">Profile</string>
+    <string name="tickets" tools:ignore="MissingTranslation">Tickets</string>
+    <string name="history" tools:ignore="MissingTranslation">History</string>
+    <string name="welcome" tools:ignore="MissingTranslation">Welcome</string>
+    <string name="do_u_want_logout" tools:ignore="MissingTranslation">Do you really want to Log out?</string>
+    <string name="change_pass_button" tools:ignore="MissingTranslation">Change Password</string>
+    <string name="data_saved" tools:ignore="MissingTranslation">Data saved</string>
+    <string name="tut_acc_mess" tools:ignore="MissingTranslation">To be able to access all your data and trips history</string>
+    <string name="tut_buy_tickets" tools:ignore="MissingTranslation">Buy tickets easily from the store in just few seconds</string>
+    <string name="scan_code" tools:ignore="MissingTranslation">Scan code</string>
+    <string name="tut_scan_code" tools:ignore="MissingTranslation">Scan the ticket code to at the station gates</string>
+    <string name="show_tutorial" tools:ignore="MissingTranslation">Show Tutorial</string>
+    <string name="server_offline_try" tools:ignore="MissingTranslation">Server is offline try again</string>
+    <string name="_3le_ticket" translatable="false" tools:ignore="MissingTranslation">3LE Ticket</string>
+    <string name="_0_9_stations" translatable="false" tools:ignore="MissingTranslation">0 – 9 Stations</string>
+    <string name="buy_tickets" tools:ignore="MissingTranslation">Buy Tickets</string>
 
-    <string name="total_cost">Total Cost</string>
-    <string name="check_in_ain_shams_station_at_15_20_2020_11_26_am">Check-in: Ain Shams Station </string>
-    <string name="check_out_maadi_station_at_15_20_2020_13_26_am">Check-out: Maadi Station</string>
-    <string name="wrong_ticket_price">Wrong Ticket Price</string>
-    <string name="invalid_ticket">Invalid Ticket</string>
-    <string name="no_tickets_found">No tickets found</string>
-    <string name="cards_not_found">Cards not found</string>
-    <string name="card_alread_exist">Card already exist</string>
-    <string name="invalid_card_number">Invalid card number</string>
-    <string name="invalid_date">Invalid date</string>
-    <string name="invalid_cvv">InvalidCVV</string>
-    <string name="check_in_date">at 15/20/2020 11:26 Am</string>
-    <string name="check_out_date">at 15/20/2020 13:26 Am</string>
-    <string name="in_use_tickets">In-Use Tickets</string>
-    <string name="available_tickets">Available Tickets</string>
-    <string name="use">use</string>
-    <string name="check_out">Check Out</string>
-    <string name="forbidden_mess">Forbidden check your authorization check bearer token</string>
-    <string name="check_in">Check In</string>
-    <string name="scan_this_qr_code">Scan this QR code</string>
-    <string name="entrance">entrance</string>
-    <string name="exit">exit</string>
+    <string name="total_cost" tools:ignore="MissingTranslation">Total Cost</string>
+    <string name="check_in_ain_shams_station_at_15_20_2020_11_26_am" tools:ignore="MissingTranslation">Check-in: Ain Shams Station </string>
+    <string name="check_out_maadi_station_at_15_20_2020_13_26_am" tools:ignore="MissingTranslation">Check-out: Maadi Station</string>
+    <string name="wrong_ticket_price" translatable="false" tools:ignore="MissingTranslation">Wrong Ticket Price</string>
+    <string name="invalid_ticket" tools:ignore="MissingTranslation">Invalid Ticket</string>
+    <string name="no_tickets_found" tools:ignore="MissingTranslation">No tickets found</string>
+    <string name="cards_not_found" tools:ignore="MissingTranslation">Cards not found</string>
+    <string name="card_alread_exist" tools:ignore="MissingTranslation">Card already exist</string>
+    <string name="invalid_card_number" tools:ignore="MissingTranslation">Invalid card number</string>
+    <string name="invalid_date" tools:ignore="MissingTranslation">Invalid date</string>
+    <string name="invalid_cvv" tools:ignore="MissingTranslation">InvalidCVV</string>
+    <string name="check_in_date" tools:ignore="MissingTranslation">at 15/20/2020 11:26 Am</string>
+    <string name="check_out_date" tools:ignore="MissingTranslation">at 15/20/2020 13:26 Am</string>
+    <string name="in_use_tickets" tools:ignore="MissingTranslation">In-Use Tickets</string>
+    <string name="available_tickets" tools:ignore="MissingTranslation">Available Tickets</string>
+    <string name="use" tools:ignore="MissingTranslation">use</string>
+    <string name="check_out" tools:ignore="MissingTranslation">Check Out</string>
+    <string name="forbidden_mess" tools:ignore="MissingTranslation">Forbidden check your authorization check bearer token</string>
+    <string name="check_in" tools:ignore="MissingTranslation">Check In</string>
+    <string name="scan_this_qr_code" tools:ignore="MissingTranslation">Scan this QR code</string>
+    <string name="entrance" tools:ignore="MissingTranslation">entrance</string>
+    <string name="exit" tools:ignore="MissingTranslation">exit</string>
 
-    <string name="turn_dark_mode">Turn Dark Mode</string>
-    <string name="rate_us">Rate us</string>
-    <string name="ticket_description">Ticket Description</string>
-    <string name="choose_tickets_number">Choose tickets number</string>
-    <string name="tickets_added_to_your_pocket">%d tickets added to your pocket</string>
-    <string name="plus">+</string>
-    <string name="minus">—</string>
-    <string name="app_log_is_train">App log is train</string>
-    <string name="buy_notification_channel_id" translatable="false">buy_channel</string>
-    <string name="buy_notification_channel_name" translatable="false">Buy Tickets</string>
-    <string name="small_ticket">Small Ticket</string>
+    <string name="turn_dark_mode" tools:ignore="MissingTranslation">Turn Dark Mode</string>
+    <string name="rate_us" tools:ignore="MissingTranslation">Rate us</string>
+    <string name="ticket_description" tools:ignore="MissingTranslation">Ticket Description</string>
+    <string name="choose_tickets_number" tools:ignore="MissingTranslation">Choose tickets number</string>
+    <string name="tickets_added_to_your_pocket" tools:ignore="MissingTranslation">%d tickets added to your pocket</string>
+    <string name="plus" tools:ignore="MissingTranslation">+</string>
+    <string name="minus" tools:ignore="MissingTranslation">—</string>
+    <string name="app_log_is_train" tools:ignore="MissingTranslation">App logo is train</string>
+    <string name="buy_notification_channel_id" tools:ignore="MissingTranslation">buy_channel</string>
+    <string name="buy_notification_channel_name" translatable="false" tools:ignore="MissingTranslation">Buy Tickets</string>
+    <string name="small_ticket" tools:ignore="MissingTranslation">Small Ticket</string>
 
-    <string name="settings">Settings</string>
-    <string name="start_station">Start</string>
-    <string name="destination">Destination</string>
-    <string name="overview">Overview</string>
-    <string name="stations_number">Stations Number:</string>
-    <string name="estimated_time">Estimated Time:</string>
-    <string name="switch_stations">Switch Stations:</string>
-    <string name="buy_now">Buy ?</string>
-    <string name="please_choose_start_and_destination_to_proceed">Please choose Start then Destination to proceed</string>
-    <string name="chooseStation">Choose Station</string>
-    <string name="search_stattions">Search stations</string>
-    <string name="no_swithing">No Switching Stations</string>
-    <string name="overview_status">overview status</string>
-    <string name="register">Register</string>
-    <string name="don_t_have_an_account">Don\'t have an Account ?</string>
-    <string name="already_have_an_account">Already have an Account ?</string>
-    <string name="status_image">status image</string>
-    <string name="invalid_token">Invalid Token</string>
-    <string name="change_profile_picture">change profile picture</string>
-    <string name="ticket_status">Ticket status</string>
-    <string name="only_1_step_from_creating_an_account">Only 1 step from creating an account</string>
-    <string name="please_choose_gender_and_birth_date">Please choose gender and birth date</string>
-    <string name="no">No</string>
+    <string name="settings" tools:ignore="MissingTranslation">Settings</string>
+    <string name="start_station" tools:ignore="MissingTranslation">Start</string>
+    <string name="destination" tools:ignore="MissingTranslation">Destination</string>
+    <string name="overview" tools:ignore="MissingTranslation">Overview</string>
+    <string name="stations_number" tools:ignore="MissingTranslation">Stations Number:</string>
+    <string name="estimated_time" tools:ignore="MissingTranslation">Estimated Time:</string>
+    <string name="switch_stations" tools:ignore="MissingTranslation">Switch Stations:</string>
+    <string name="buy_now" tools:ignore="MissingTranslation">Buy ?</string>
+    <string name="please_choose_start_and_destination_to_proceed" tools:ignore="MissingTranslation">Please choose Start then Destination to proceed</string>
+    <string name="chooseStation" tools:ignore="MissingTranslation">Choose Station</string>
+    <string name="search_stattions" tools:ignore="MissingTranslation">Search stations</string>
+    <string name="no_swithing" tools:ignore="MissingTranslation">No Switching Stations</string>
+    <string name="overview_status" tools:ignore="MissingTranslation">overview status</string>
+    <string name="register" tools:ignore="MissingTranslation">Register</string>
+    <string name="don_t_have_an_account" tools:ignore="MissingTranslation">Don\'t have an Account ?</string>
+    <string name="already_have_an_account" tools:ignore="MissingTranslation">Already have an Account ?</string>
+    <string name="status_image" tools:ignore="MissingTranslation">status image</string>
+    <string name="invalid_token" tools:ignore="MissingTranslation">Invalid Token</string>
+    <string name="change_profile_picture" tools:ignore="MissingTranslation">change profile picture</string>
+    <string name="ticket_status" tools:ignore="MissingTranslation">Ticket status</string>
+    <string name="only_1_step_from_creating_an_account" tools:ignore="MissingTranslation">Only 1 step from creating an account</string>
+    <string name="please_choose_gender_and_birth_date" tools:ignore="MissingTranslation">Please choose gender and birth date</string>
+    <string name="no" tools:ignore="MissingTranslation">No</string>
 
-    <string name="profile_picture">profile picture</string>
-    <string name="old_password">Old Password</string>
-    <string name="new_password">New Password</string>
-    <string name="forbidden">Forbidden check your authorization check bearer token</string>
-    <string name="fix_fist_name">Enter F name </string>
+    <string name="profile_picture" tools:ignore="MissingTranslation">profile picture</string>
+    <string name="old_password" tools:ignore="MissingTranslation">Old Password</string>
+    <string name="new_password" tools:ignore="MissingTranslation">New Password</string>
+    <string name="forbidden" tools:ignore="MissingTranslation">Forbidden check your authorization check bearer token</string>
+    <string name="fix_fist_name" tools:ignore="MissingTranslation">Enter F name </string>
 
 </resources>

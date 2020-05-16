@@ -19,6 +19,7 @@
         android:clipToPadding="false"
         tools:ignore="ExtraText">
         ​
+
         <FrameLayout
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
@@ -173,11 +174,11 @@
                         android:layout_marginEnd="28dp"
                         android:layout_marginBottom="@dimen/small_margin"
                         android:contentDescription="@string/check_out"
+                        android:src="@drawable/arrow_right_small"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.484"
-                        app:srcCompat="@drawable/arrow_right_small" />
+                        app:layout_constraintVertical_bias="0.484" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

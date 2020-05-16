@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/showTitle"
+        style="@style/ButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -20,6 +21,7 @@
 
     <Button
         android:id="@+id/rate"
+        style="@style/ButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -38,11 +40,10 @@
         android:layout_marginTop="288dp"
         android:layout_marginEnd="@dimen/medium_margin"
         android:text="@string/turn_dark_mode"
-        android:textSize="@dimen/_24sdp"
+        android:textAppearance="@style/CustomHeadline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

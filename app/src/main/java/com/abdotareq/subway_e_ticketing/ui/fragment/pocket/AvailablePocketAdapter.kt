@@ -40,7 +40,7 @@ class AvailablePocketAdapter : ListAdapter<BoughtTicket,
             binding.title.text = application.getString(R.string.check_in)
             binding.price.text = String.format(application.getString(R.string.ticket_price_format, item.price))
             binding.instructions.text = String.format(application.getString(R.string.scan_mess_format,
-                    application.getString(R.string.entrance), application.getString(R.string.use)))
+                    application.getString(R.string.entrance)))
             // Initializing the QR Encoder with your value to be encoded, type you required and Dimension
             val qrgEncoder = QRGEncoder(item.id, null, QRGContents.Type.TEXT, 400)
             try {
