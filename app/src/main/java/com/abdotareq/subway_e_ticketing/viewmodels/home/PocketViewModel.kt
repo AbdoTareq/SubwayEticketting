@@ -20,7 +20,7 @@ class PocketViewModel(private val bearerToken: String, application: Application)
     private val applicationCon = application
 
     private val checkInTicketInterface: CheckInTicketInterface
-    private val boughtTicketInterface: BoughtTicketInterface
+    private val boughtTicketInterface: CheckInTicketInterface
 
     private val _inUseStatus = MutableLiveData<ApiStatus>()
     val inUseStatus: LiveData<ApiStatus>
@@ -37,8 +37,8 @@ class PocketViewModel(private val bearerToken: String, application: Application)
     val checkInTickets: LiveData<List<InTicket>>
         get() = _checkInTickets
 
-    private val _boughtTickets = MutableLiveData<List<BoughtTicket>>()
-    val boughtTickets: LiveData<List<BoughtTicket>>
+    private val _boughtTickets = MutableLiveData<List<InTicket>>()
+    val boughtTickets: LiveData<List<InTicket>>
         get() = _boughtTickets
 
     init {
@@ -60,8 +60,8 @@ class PocketViewModel(private val bearerToken: String, application: Application)
         }
 
         _boughtStatus.value = ApiStatus.LOADING
-        boughtTicketInterface = object : BoughtTicketInterface {
-            override fun onSuccess(boughtTickets: List<BoughtTicket>) {
+        boughtTicketInterface = object : CheckInTicketInterface {
+            override fun onSuccess(boughtTickets: List<InTicket>) {
                 _boughtTickets.value = boughtTickets
                 _boughtStatus.value = ApiStatus.DONE
             }

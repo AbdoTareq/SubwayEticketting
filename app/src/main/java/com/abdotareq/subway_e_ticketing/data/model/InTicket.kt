@@ -11,7 +11,6 @@ import java.util.*
  */
 // this is for release to be working
 @Keep
-@Parcelize
 data class InTicket(@SerializedName("id") val id: String? = null,
                     @SerializedName("buyDate") val buyDate: Date? = null,
                     @SerializedName("color") val color: String? = null,
@@ -24,4 +23,4 @@ data class InTicket(@SerializedName("id") val id: String? = null,
 
                     @SerializedName("buyerId") val buyerId: Int = 0,
                     @SerializedName("ownerId") val ownerId: Int = 0,
-                    @SerializedName("ownerName") val ownerName: String? = null) : Parcelable
+                    @SerializedName("ownerName") val ownerName: String? = null)

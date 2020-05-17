@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">مترو الانفاق E-ticketting</string>
+	<string name="app_name">مترو الانفاق</string>
 	<string name="password">كلمه السر</string>
 	<string name="log_in">تسجيل الدخول</string>
 	<string name="forget_pass">هل نسيت كلمة المرور؟</string>

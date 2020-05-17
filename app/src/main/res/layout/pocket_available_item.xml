@@ -7,7 +7,7 @@
 
         <variable
             name="boughtTicket"
-            type="com.abdotareq.subway_e_ticketing.data.model.BoughtTicket" />
+            type="com.abdotareq.subway_e_ticketing.data.model.InTicket" />
 
     </data>
 
@@ -19,7 +19,6 @@
         android:clipToPadding="false"
         tools:ignore="ExtraText">
         ​
-
         <FrameLayout
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
@@ -51,7 +50,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:setTicketAvailableColor="@{boughtTicket}" />
+                    app:setTicketInUseColor="@{boughtTicket}" />
 
                 <TextView
                     android:id="@+id/price"
@@ -106,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/very_small_margin"
-                tools:showIn="@layout/pocket_available_item">
+                >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/check_in_ticket"
@@ -124,7 +123,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:setTicketAvailableColor="@{boughtTicket}" />
+                        app:setTicketInUseColor="@{boughtTicket}" />
 
                     <TextView
                         android:id="@+id/ticket_price"
@@ -140,7 +139,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:setTicketAvailablePrice="@{boughtTicket}" />
+                        app:setTicketInUsePrice="@{boughtTicket}" />
 
                     <TextView
                         android:id="@+id/check_in"

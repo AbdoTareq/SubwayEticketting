@@ -5,7 +5,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.data.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.data.model.History
 import com.abdotareq.subway_e_ticketing.data.model.InTicket
 import com.abdotareq.subway_e_ticketing.data.model.TicketType
@@ -36,7 +35,7 @@ fun bindCheckInRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
     adapter.submitList(data)
 }
 @BindingAdapter("availableListData")
-fun bindAvailableRecyclerView(recyclerView: RecyclerView, data: List<BoughtTicket>?) {
+fun bindAvailableRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
     val adapter = recyclerView.adapter as AvailablePocketAdapter
     adapter.submitList(data)
 }

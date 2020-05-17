@@ -15,63 +15,31 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.ticket.TicketFragment">
 
-        <TextView
-            android:id="@+id/tickets_header2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/very_small_margin"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/very_small_margin"
-            android:text="@string/available_tickets"
-            android:textAlignment="center"
-            android:textAppearance="@style/CustomHeadline4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/in_use_tickets_list" />
-
-        <TextView
-            android:id="@+id/tickets_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/very_small_margin"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/very_small_margin"
-            android:text="@string/in_use_tickets"
-            android:textAlignment="center"
-            android:textAppearance="@style/CustomHeadline4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <!-- bind recycler view to hide when no data with listData  -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/in_use_tickets_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/very_small_margin"
-            android:layout_marginEnd="@dimen/very_small_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:checkInListData="@{viewModel.checkInTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/guideline1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pBar3"
             tools:itemCount="3"
             tools:listitem="@layout/pocket_in_use_item" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/available_tickets_list"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/very_small_margin"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/very_small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
             app:availableListData="@{viewModel.boughtTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tickets_header2"
+            app:layout_constraintTop_toBottomOf="@+id/in_use_tickets_list"
             tools:itemCount="3"
             tools:listitem="@layout/pocket_available_item" />
 
@@ -80,24 +48,12 @@
             android:id="@+id/status_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:contentDescription="@string/ticket_status"
             app:apiStatus="@{viewModel.inUseStatus}"
             app:layout_constraintBottom_toBottomOf="@+id/in_use_tickets_list"
             app:layout_constraintEnd_toStartOf="@+id/guideline14"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/guideline15"
-            android:contentDescription="@string/ticket_status" />
-
-        <ImageView
-            android:id="@+id/bought_status_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/small_margin"
-            app:apiStatus="@{viewModel.boughtStatus}"
-            app:layout_constraintBottom_toBottomOf="@+id/available_tickets_list"
-            app:layout_constraintEnd_toStartOf="@+id/guideline14"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/available_tickets_list"
-            android:contentDescription="@string/ticket_status" />
+            app:layout_constraintTop_toTopOf="@+id/guideline15" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline14"
@@ -139,24 +95,24 @@
             android:id="@+id/pBar3"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:indeterminate="true"
             android:progress="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tickets_header"
+            app:layout_constraintTop_toTopOf="parent"
             app:progressApiStatus="@{viewModel.inUseStatus}" />
 
         <ProgressBar
-            android:id="@+id/pBar4"
+            android:id="@+id/pBar1"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:indeterminate="true"
             android:progress="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tickets_header2"
+            app:layout_constraintTop_toTopOf="@id/available_tickets_list"
             app:progressApiStatus="@{viewModel.boughtStatus}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

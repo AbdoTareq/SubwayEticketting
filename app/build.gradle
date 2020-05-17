@@ -12,7 +12,6 @@ apply plugin: 'com.google.firebase.crashlytics'
 // this is also necessary for firebase to work
 apply plugin: 'com.google.gms.google-services'
 
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -21,8 +20,8 @@ android {
         applicationId "com.abdotareq.subwaye_ticketting"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 8
-        versionName "1.08"
+        versionCode 10
+        versionName "2.0"
 
         multiDexEnabled true  //ADD THIS LINE if we implement a lot of libraries
 
@@ -149,7 +148,7 @@ dependencies {
     implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
 
     // our service ads
-    implementation 'com.github.OmarRaed:subway-ads:1.2'
+    implementation 'com.github.OmarRaed:subway-ads:1.4'
 
 }
 repositories {

@@ -86,7 +86,7 @@ class TicketRepository {
         }
     }
 
-    fun getBoughtTickets(token: String, boughtTicketInterface: BoughtTicketInterface) {
+    fun getBoughtTickets(token: String, boughtTicketInterface: CheckInTicketInterface) {
         //start the call
         val bearerToken = "Bearer $token"
         coroutineScope.launch {

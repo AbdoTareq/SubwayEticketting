@@ -1,6 +1,5 @@
 package com.abdotareq.subway_e_ticketing.data.network
 
-import com.abdotareq.subway_e_ticketing.data.model.BoughtTicket
 import com.abdotareq.subway_e_ticketing.data.model.History
 import com.abdotareq.subway_e_ticketing.data.model.InTicket
 import com.abdotareq.subway_e_ticketing.data.model.TicketType
@@ -41,14 +40,13 @@ interface TicketApiService {
     suspend fun getInTickets(@Header("Authorization") bearerToken: String): List<InTicket>
 
     @GET("tickets")
-    suspend fun getBoughtTickets(@Header("Authorization") bearerToken: String): List<BoughtTicket>
+    suspend fun getBoughtTickets(@Header("Authorization") bearerToken: String): List<InTicket>
 
     @POST("tickets/insertmulti")
     suspend fun insertMultiTickets(@Header("Authorization") bearerToken: String,
                                    @Query("ownerEmail") ownerEmail: String,
                                    @Query("price") price: Int,
                                    @Query("number") number: Int)
-
 
 }
 

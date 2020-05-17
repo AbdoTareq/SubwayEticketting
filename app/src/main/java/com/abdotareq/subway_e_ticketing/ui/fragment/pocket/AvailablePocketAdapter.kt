@@ -10,17 +10,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.data.model.InTicket
 import com.abdotareq.subway_e_ticketing.databinding.PocketAvailableItemBinding
-import com.abdotareq.subway_e_ticketing.data.model.BoughtTicket
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
-class AvailablePocketAdapter : ListAdapter<BoughtTicket,
+private val ITEM_VIEW_TYPE_HEADER = 0
+private val ITEM_VIEW_TYPE_ITEM = 1
+
+class AvailablePocketAdapter : ListAdapter<InTicket,
         AvailablePocketAdapter.ViewHolder>(AvailableTicketDiffCallback()) {
+
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-
         // add animation
         holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_left)
 
@@ -34,7 +41,7 @@ class AvailablePocketAdapter : ListAdapter<BoughtTicket,
     class ViewHolder private constructor(val binding: PocketAvailableItemBinding, val application: Context)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: BoughtTicket) {
+        fun bind(item: InTicket) {
             binding.boughtTicket = item
 
             binding.title.text = application.getString(R.string.check_in)
@@ -72,18 +79,24 @@ class AvailablePocketAdapter : ListAdapter<BoughtTicket,
     }
 }
 
-/**
- * Callback for calculating the diff between two non-null items in a list.
- *
- * Used by ListAdapter to calculate the minumum number of changes between and old list and a new
- * list that's been passed to `submitList`.
- */
-private class AvailableTicketDiffCallback : DiffUtil.ItemCallback<BoughtTicket>() {
-    override fun areItemsTheSame(oldItem: BoughtTicket, newItem: BoughtTicket): Boolean {
+private class AvailableTicketDiffCallback : DiffUtil.ItemCallback<InTicket>() {
+    override fun areItemsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: BoughtTicket, newItem: BoughtTicket): Boolean {
+    override fun areContentsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
         return oldItem == newItem
     }
 }
+
+//sealed class DataItem {
+//    data class TicketItem(val sleepNight: BoughtTicket): DataItem() {
+//        override val id = sleepNight.nightId
+//    }
+//
+//    object Header: DataItem() {
+//        override val id = Long.MIN_VALUE
+//    }
+//
+//    abstract val id: Long
+//}
