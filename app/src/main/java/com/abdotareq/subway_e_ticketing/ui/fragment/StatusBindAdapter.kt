@@ -37,7 +37,7 @@ fun bindCheckInRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
 @BindingAdapter("availableListData")
 fun bindAvailableRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
     val adapter = recyclerView.adapter as AvailablePocketAdapter
-    adapter.submitList(data)
+    adapter.addHeaderAndSubmitList(data)
 }
 
 /**

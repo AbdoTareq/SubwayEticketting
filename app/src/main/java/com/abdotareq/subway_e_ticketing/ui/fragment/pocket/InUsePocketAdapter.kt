@@ -70,12 +70,6 @@ class InUsePocketAdapter : ListAdapter<InTicket,
     }
 }
 
-/**
- * Callback for calculating the diff between two non-null items in a list.
- *
- * Used by ListAdapter to calculate the minumum number of changes between and old list and a new
- * list that's been passed to `submitList`.
- */
 private class InUseTicketDiffCallback : DiffUtil.ItemCallback<InTicket>() {
     override fun areItemsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
         return oldItem.id == newItem.id

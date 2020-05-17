@@ -2,6 +2,7 @@ package com.abdotareq.subway_e_ticketing.ui.fragment.pocket
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidmads.library.qrgenearator.QRGContents
@@ -15,27 +16,63 @@ import com.abdotareq.subway_e_ticketing.databinding.PocketAvailableItemBinding
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 private val ITEM_VIEW_TYPE_HEADER = 0
 private val ITEM_VIEW_TYPE_ITEM = 1
 
-class AvailablePocketAdapter : ListAdapter<InTicket,
-        AvailablePocketAdapter.ViewHolder>(AvailableTicketDiffCallback()) {
+class AvailablePocketAdapter : ListAdapter<DataItem, RecyclerView.ViewHolder>(AvailableTicketDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        // add animation
-        holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_left)
-
-        holder.bind(item)
+    fun addHeaderAndSubmitList(list: List<InTicket>?) {
+        adapterScope.launch {
+            val items = when (list) {
+                null -> listOf(DataItem.Header)
+                else -> listOf(DataItem.Header) + list.map { DataItem.TicketItem(it) }
+            }
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is ViewHolder -> {
+                val item = getItem(position) as DataItem.TicketItem
+                // add animation
+                holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.slide_in_left)
+                holder.bind(item.ticket)
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> ViewHolder.from(parent)
+            else -> throw ClassCastException("Unknown viewType ${viewType}")
+        }
+    }
+
+    class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        companion object {
+            fun from(parent: ViewGroup): TextViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.header, parent, false)
+                return TextViewHolder(view)
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is DataItem.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItem.TicketItem -> ITEM_VIEW_TYPE_ITEM
+        }
     }
 
     class ViewHolder private constructor(val binding: PocketAvailableItemBinding, val application: Context)
@@ -57,7 +94,7 @@ class AvailablePocketAdapter : ListAdapter<InTicket,
                 binding.qrImage.setImageBitmap(bitmap)
             } catch (e: Exception) {
                 Timber.e(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
+                FirebaseCrashlytics.getInstance().recordException(e)
             }
 
             binding.executePendingBindings()
@@ -79,24 +116,24 @@ class AvailablePocketAdapter : ListAdapter<InTicket,
     }
 }
 
-private class AvailableTicketDiffCallback : DiffUtil.ItemCallback<InTicket>() {
-    override fun areItemsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
+class AvailableTicketDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: InTicket, newItem: InTicket): Boolean {
+    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
         return oldItem == newItem
     }
 }
 
-//sealed class DataItem {
-//    data class TicketItem(val sleepNight: BoughtTicket): DataItem() {
-//        override val id = sleepNight.nightId
-//    }
-//
-//    object Header: DataItem() {
-//        override val id = Long.MIN_VALUE
-//    }
-//
-//    abstract val id: Long
-//}
+sealed class DataItem {
+    data class TicketItem(val ticket: InTicket) : DataItem() {
+        override val id: String = ticket.id!!
+    }
+
+    object Header : DataItem() {
+        override val id = Long.MIN_VALUE.toString()
+    }
+
+    abstract val id: String
+}
