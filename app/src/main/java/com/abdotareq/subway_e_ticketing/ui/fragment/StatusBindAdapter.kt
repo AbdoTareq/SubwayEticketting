@@ -24,16 +24,19 @@ fun bindHistoryRecyclerView(recyclerView: RecyclerView, data: List<History>?) {
     val adapter = recyclerView.adapter as HistoryAdapter
     adapter.submitList(data)
 }
+
 @BindingAdapter("ticketTypeListData")
 fun bindTicketRecyclerView(recyclerView: RecyclerView, data: List<TicketType>?) {
     val adapter = recyclerView.adapter as TicketAdapter
     adapter.submitList(data)
 }
+
 @BindingAdapter("checkInListData")
 fun bindCheckInRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
     val adapter = recyclerView.adapter as InUsePocketAdapter
-    adapter.submitList(data)
+    adapter.addHeaderAndSubmitList(data)
 }
+
 @BindingAdapter("availableListData")
 fun bindAvailableRecyclerView(recyclerView: RecyclerView, data: List<InTicket>?) {
     val adapter = recyclerView.adapter as AvailablePocketAdapter
@@ -67,6 +70,17 @@ fun bindStatus(statusImageView: ImageView, status: ApiStatus?) {
 fun bindProgress(statusProgress: View, statusType: ApiStatus?) {
     when (statusType) {
         ApiStatus.LOADING -> {
+            statusProgress.visibility = View.VISIBLE
+        }
+        else -> {
+            statusProgress.visibility = View.GONE
+        }
+    }
+}
+@BindingAdapter("recycleStatus")
+fun recycleStatus(statusProgress: View, statusType: ApiStatus?) {
+    when (statusType) {
+        ApiStatus.DONE -> {
             statusProgress.visibility = View.VISIBLE
         }
         else -> {

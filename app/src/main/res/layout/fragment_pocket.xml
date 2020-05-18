@@ -19,9 +19,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/in_use_tickets_list"
             android:layout_width="match_parent"
+            app:recycleStatus="@{viewModel.inUseStatus}"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
             app:checkInListData="@{viewModel.checkInTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/available_tickets_list"
             app:layout_constraintTop_toBottomOf="@+id/pBar3"
             tools:itemCount="3"
             tools:listitem="@layout/pocket_in_use_item" />
@@ -30,9 +33,7 @@
             android:id="@+id/available_tickets_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/very_small_margin"
             android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/very_small_margin"
             android:layout_marginBottom="@dimen/small_margin"
             app:availableListData="@{viewModel.boughtTickets}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -46,14 +47,14 @@
         <!-- bind connection status image with ticketApiStatus  -->
         <ImageView
             android:id="@+id/status_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/ticket_status"
             app:apiStatus="@{viewModel.inUseStatus}"
-            app:layout_constraintBottom_toBottomOf="@+id/in_use_tickets_list"
-            app:layout_constraintEnd_toStartOf="@+id/guideline14"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/guideline15" />
+            app:layout_constraintBottom_toTopOf="@+id/available_tickets_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/in_use_tickets_list" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline14"
@@ -110,9 +111,9 @@
             android:layout_height="0dp"
             android:indeterminate="true"
             android:progress="1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/available_tickets_list"
             app:progressApiStatus="@{viewModel.boughtStatus}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
