@@ -67,7 +67,6 @@ class OverviewViewModel(private val token: String, application: Application) : A
         } catch (e: Exception) {
             Timber.e(e)
             FirebaseCrashlytics.getInstance().recordException(e)
-            FirebaseCrashlytics.getInstance().recordException(e)
         }
         null != it
     }
@@ -99,8 +98,7 @@ class OverviewViewModel(private val token: String, application: Application) : A
                         stationsSwitching.value = ""
 
                         if (tripDetails.switchStations!!.isNotEmpty())
-                            for (i in tripDetails.switchStations!!)
-                                stationsSwitching.value += "${i} "
+                            stationsSwitching.value = tripDetails.switchStations.toString()
                         else
                             stationsSwitching.value += applicationCon.getString(R.string.no_swithing)
 

@@ -25,9 +25,10 @@
     <dimen name="control_panel_top_image_margin">@dimen/_6sdp</dimen>
     <dimen name="control_panel_bottom_image_margin">@dimen/_6sdp</dimen>
 
+    <dimen name="very_large_font">@dimen/_15sdp</dimen>
 
     <dimen name="large_font">@dimen/_12sdp</dimen>
-    <dimen name="very_large_font">@dimen/_15sdp</dimen>
+    <dimen name="font_20">@dimen/_20sdp</dimen>
     <dimen name="medium_font">@dimen/_9sdp</dimen>
     <dimen name="small_font">@dimen/_6sdp</dimen>
 
@@ -43,7 +44,6 @@
     <dimen name="sign_in_main_text_size">@dimen/_40sdp</dimen>
     <dimen name="sign_in_sub_text_size">@dimen/_20sdp</dimen>
     <dimen name="sign_in_medium_text_size">@dimen/_16sdp</dimen>
-    <dimen name="buy_button_height">48sp</dimen>
-
+    <dimen name="buy_button_height">@dimen/_40sdp</dimen>
 
 </resources>

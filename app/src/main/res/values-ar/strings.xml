@@ -72,7 +72,7 @@
 	<string name="invalid_cvv">InvalidCVV</string>
 	<string name="check_in_date">في 15/20/2020 11:26</string>
 	<string name="check_out_date">في 15/20/2020 13:26 صباحا</string>
-	<string name="in_use_tickets">تذاكرفي الاستخدام</string>
+	<string name="in_use_tickets">تذاكر قيد الاستخدام</string>
 	<string name="available_tickets">التذاكر الغير مستخدمة</string>
 	<string name="use">استخدم للدخول</string>
 	<string name="check_out">استخدم للخروج</string>

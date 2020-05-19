@@ -95,10 +95,7 @@ class BuyTicketActivity : AppCompatActivity() {
         possiblyShowGooglePayButton()
 
         googlePayButton.setOnClickListener {
-            if (viewModel.ticketNum.value!! > 0)
-                requestPayment()
-            else
-                Toast.makeText(this, getString(R.string.choose_tickets_number), Toast.LENGTH_LONG).show()
+            requestPayment()
         }
     }
 

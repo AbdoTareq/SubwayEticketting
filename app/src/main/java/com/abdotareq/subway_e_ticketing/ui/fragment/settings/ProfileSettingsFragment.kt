@@ -39,7 +39,6 @@ import java.util.*
 /**
  *  [ProfileSettingsFragment] responsible for user profile settings & changes.
  */
-// TODO FIX photo can't be set or shown from view model bu user object as I couldn't convert string image in user to src property
 class ProfileSettingsFragment : Fragment() {
 
     private lateinit var viewModelFactory: ViewModelFactory

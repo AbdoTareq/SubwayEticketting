@@ -28,7 +28,7 @@ class BuyTicketViewModel(private val ticketType: TicketType, application: Applic
         get() = _ticketNum
 
     init {
-        _ticketNum.value = 0
+        _ticketNum.value = 1
 
         buyInterface = object : BuyInterface {
             override fun onSuccess() {

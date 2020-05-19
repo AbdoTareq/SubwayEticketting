@@ -1,13 +1,17 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.abdotareq.subway_e_ticketing.R
+import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.ramotion.paperonboarding.PaperOnboardingFragment
 import com.ramotion.paperonboarding.PaperOnboardingPage
-
+import java.util.*
+import kotlin.collections.ArrayList
 
 class OnBoardActivity : AppCompatActivity() {
 
@@ -26,9 +30,10 @@ class OnBoardActivity : AppCompatActivity() {
                 Color.parseColor("#f99565"), R.drawable.scan_code_image, R.drawable.scan_code_image)
 
         val elements: ArrayList<PaperOnboardingPage> = ArrayList()
-        elements.add(scr1)
-        elements.add(scr2)
+
         elements.add(scr3)
+        elements.add(scr2)
+        elements.add(scr1)
 
         val onBoardingFragment = PaperOnboardingFragment.newInstance(elements)
 
@@ -36,15 +41,24 @@ class OnBoardActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.fragment_container, onBoardingFragment)
         fragmentTransaction.commit()
 
-        // replacing this fragment to another when the user swipes next from the last screen:
+        val yourResource: Resources = this.resources
+        val config: Configuration = yourResource.configuration
+
+        config.setLayoutDirection(Locale.ENGLISH)
+
         onBoardingFragment.setOnRightOutListener {
-            val intent =
-                    Intent(this@OnBoardActivity, RegisterActivity::class.java)
-
-            startActivity(intent)
-            finish()
+            tutorialFinished()
         }
+    }
 
+    private fun tutorialFinished() {
+        val intent =
+                if (SharedPreferenceUtil.getSharedPrefsLoggedIn(this))
+                    Intent(this@OnBoardActivity, HomeLandActivity::class.java)
+                else
+                    Intent(this@OnBoardActivity, RegisterActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

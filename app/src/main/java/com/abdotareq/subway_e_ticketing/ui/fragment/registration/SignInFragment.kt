@@ -177,12 +177,16 @@ class SignInFragment : Fragment() {
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        //initialize and show a progress dialog to the user
+        val progressDialog = Util.initProgress(context, getString(R.string.progMessage))
+        progressDialog.show()
         try {
             val account =
                     completedTask.getResult(ApiException::class.java)
 
             val registerInterface = object : RegisterInterface {
                 override fun onSuccess(token: String) {
+                    progressDialog.dismiss()
                     //write token into SharedPreferences to use in remember user
                     setSharedPrefsLoggedIn(context, true)
                     setSharedPrefsTokenId(context, token)
@@ -192,6 +196,7 @@ class SignInFragment : Fragment() {
                 }
 
                 override fun onFail(responseCode: String) {
+                    progressDialog.dismiss()
                     if (responseCode == ErrorStatus.Codes.UserNotFound)
                         findNavController().navigate(SignInFragmentDirections
                                 .actionSignInFragmentToGoogleRegisterFragment(account!!.idToken!!))
@@ -203,6 +208,7 @@ class SignInFragment : Fragment() {
             viewModel.authenticateGoogle(account!!.idToken!!, registerInterface)
 
         } catch (e: ApiException) {
+            progressDialog.dismiss()
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Timber.e("signInFailed code= $e.statusCode")
