@@ -41,11 +41,6 @@ class OnBoardActivity : AppCompatActivity() {
         fragmentTransaction.add(R.id.fragment_container, onBoardingFragment)
         fragmentTransaction.commit()
 
-        val yourResource: Resources = this.resources
-        val config: Configuration = yourResource.configuration
-
-        config.setLayoutDirection(Locale.ENGLISH)
-
         onBoardingFragment.setOnRightOutListener {
             tutorialFinished()
         }
