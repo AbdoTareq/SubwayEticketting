@@ -32,8 +32,8 @@ class InUseViewModel(private val bearerToken: String, application: Application) 
     init {
         _inUseStatus.value = ApiStatus.LOADING
         checkInTicketInterface = object : CheckInTicketInterface {
-            override fun onSuccess(checkInTickets: List<InTicket>) {
-                _checkInTickets.value = checkInTickets
+            override fun onSuccess(tickets: List<InTicket>) {
+                _checkInTickets.value = tickets
                 _inUseStatus.value = ApiStatus.DONE
             }
 

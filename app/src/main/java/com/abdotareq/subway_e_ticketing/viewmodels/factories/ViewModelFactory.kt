@@ -15,6 +15,7 @@ import com.abdotareq.subway_e_ticketing.viewmodels.register.*
  *  [arg2] is mail
  * */
 
+@Suppress("UNCHECKED_CAST")
 class ViewModelFactory(private val application: Application,
                        private val arg1: String = "",
                        private val arg2: String = "") : ViewModelProvider.Factory {

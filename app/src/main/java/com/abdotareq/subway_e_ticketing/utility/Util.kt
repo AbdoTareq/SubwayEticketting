@@ -11,11 +11,6 @@ import java.util.regex.Pattern
  * A util class that contains a global static methods used across the App
  */
 object Util {
-    //TYPES ID
-    const val HELP_TYPE_ID = 1
-    const val PRIVACY_TYPE_ID = 2
-    const val INFO_TYPE_ID = 3
-    const val ABOUT_US_TYPE_ID = 4
 
     // Validate pass is 8 - 12
     // return true when pass isn't valid
@@ -41,11 +36,6 @@ object Util {
         progress.setMessage(message)
         progress.setCancelable(true) // disable dismiss by tapping outside of the dialog
         return progress
-    }
-
-    fun formatDate(date: Date?): String {
-        val formatter = SimpleDateFormat("dd/MM/yyyy")
-        return formatter.format(date!!)
     }
 
 }
