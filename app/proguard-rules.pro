@@ -24,6 +24,7 @@
 -dontwarn cn.pedant.SweetAlert.*
 -keepnames class cn.pedant.SweetAlert.**
 
+# for splash library
 -keep class com.daimajia.** { *; }
            -dontwarn com.daimajia.**
            -keepnames class com.daimajia.**

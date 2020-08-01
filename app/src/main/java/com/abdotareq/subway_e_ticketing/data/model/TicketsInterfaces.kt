@@ -11,7 +11,7 @@ interface TicketTypeInterface {
 }
 
 interface CheckInTicketInterface {
-    fun onSuccess(checkInTickets: List<InTicket>)
+    fun onSuccess(tickets: List<InTicket>)
     fun onFail(responseCode: String)
 }
 

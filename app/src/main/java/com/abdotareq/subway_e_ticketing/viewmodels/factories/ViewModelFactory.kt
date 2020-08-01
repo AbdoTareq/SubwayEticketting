@@ -4,10 +4,7 @@ package com.abdotareq.subway_e_ticketing.viewmodels.factories
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.abdotareq.subway_e_ticketing.viewmodels.home.HistoryViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.home.OverviewViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.home.PocketViewModel
-import com.abdotareq.subway_e_ticketing.viewmodels.home.TicketsTypeViewModel
+import com.abdotareq.subway_e_ticketing.viewmodels.home.*
 import com.abdotareq.subway_e_ticketing.viewmodels.register.*
 
 /**
@@ -30,8 +27,11 @@ class ViewModelFactory(private val application: Application,
             modelClass.isAssignableFrom(TicketsTypeViewModel::class.java) -> {
                 TicketsTypeViewModel(arg1, application) as T
             }
-            modelClass.isAssignableFrom(PocketViewModel::class.java) -> {
-                PocketViewModel(arg1, application) as T
+            modelClass.isAssignableFrom(InUseViewModel::class.java) -> {
+                InUseViewModel(arg1, application) as T
+            }
+            modelClass.isAssignableFrom(AvailableViewModel::class.java) -> {
+                AvailableViewModel(arg1, application) as T
             }
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 HistoryViewModel(arg1, application) as T

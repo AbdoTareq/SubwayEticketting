@@ -33,7 +33,7 @@ class VerificationFragment : Fragment() {
         _binding = FragmentVerificationBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // this how to receive with safe args
+        // this how to receive with safe args and must be called inside onCreateView
         val safeArgs: VerificationFragmentArgs by navArgs()
         val mail = safeArgs.mail
 

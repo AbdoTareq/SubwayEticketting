@@ -25,12 +25,12 @@
     <item
         android:id="@id/pocketFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_pocket_state"
+        android:icon="@drawable/ic_ticket_available_state"
         android:title="@string/pocket" />
     <item
-        android:id="@id/historyFragment"
+        android:id="@id/availableTicketFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_history_state"
-        android:title="@string/history" />
+        android:icon="@drawable/ic_pocket_state"
+        android:title="@string/available_tickets" />
 
 </menu>

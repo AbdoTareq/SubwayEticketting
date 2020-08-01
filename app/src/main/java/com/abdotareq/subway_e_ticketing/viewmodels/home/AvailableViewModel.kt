@@ -14,55 +14,27 @@ import kotlin.collections.ArrayList
 /**
  * ViewModel for SleepTrackerFragment.
  */
-class PocketViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
+class AvailableViewModel(private val bearerToken: String, application: Application) : AndroidViewModel(application) {
 
     private val ticketRepository = TicketRepository()
     private val applicationCon = application
 
-    private val checkInTicketInterface: CheckInTicketInterface
     private val boughtTicketInterface: CheckInTicketInterface
-
-    private val _inUseStatus = MutableLiveData<ApiStatus>()
-    val inUseStatus: LiveData<ApiStatus>
-        get() = _inUseStatus
 
     // The internal MutableLiveData that stores the status of the most recent request
     private val _boughtStatus = MutableLiveData<ApiStatus>()
-
-    // The external immutable LiveData for the request status
     val boughtStatus: LiveData<ApiStatus>
         get() = _boughtStatus
-
-    private val _checkInTickets = MutableLiveData<List<InTicket>>()
-    val checkInTickets: LiveData<List<InTicket>>
-        get() = _checkInTickets
 
     private val _boughtTickets = MutableLiveData<List<InTicket>>()
     val boughtTickets: LiveData<List<InTicket>>
         get() = _boughtTickets
 
     init {
-        _inUseStatus.value = ApiStatus.LOADING
-        checkInTicketInterface = object : CheckInTicketInterface {
-            override fun onSuccess(checkInTickets: List<InTicket>) {
-                _checkInTickets.value = checkInTickets
-                _inUseStatus.value = ApiStatus.DONE
-            }
-
-            override fun onFail(responseCode: String) {
-                if (responseCode == ErrorStatus.Codes.NoTicketsFound)
-                    _inUseStatus.value = ApiStatus.EMPTY
-                else
-                    _inUseStatus.value = ApiStatus.ERROR
-                _checkInTickets.value = ArrayList()
-                Timber.e(getErrorMess(responseCode))
-            }
-        }
-
         _boughtStatus.value = ApiStatus.LOADING
         boughtTicketInterface = object : CheckInTicketInterface {
-            override fun onSuccess(boughtTickets: List<InTicket>) {
-                _boughtTickets.value = boughtTickets
+            override fun onSuccess(tickets: List<InTicket>) {
+                _boughtTickets.value = tickets
                 _boughtStatus.value = ApiStatus.DONE
             }
 
@@ -80,7 +52,6 @@ class PocketViewModel(private val bearerToken: String, application: Application)
 
 
     private fun getTickets() {
-        ticketRepository.getInTickets(bearerToken, checkInTicketInterface)
         ticketRepository.getBoughtTickets(bearerToken, boughtTicketInterface)
     }
 
