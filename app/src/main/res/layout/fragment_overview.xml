@@ -22,16 +22,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/very_small_margin"
-            android:layout_marginTop="@dimen/small_margin"
             android:layout_marginEnd="@dimen/very_small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
             android:clickable="true"
             android:focusable="true"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/instructions"
+            app:layout_constraintBottom_toTopOf="@+id/guideline21"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/pBar3"
             app:setIsVisible="@{viewModel.detailsVisible}"
             app:tripApiStatus="@{viewModel.statusTrip}">
 

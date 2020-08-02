@@ -25,7 +25,7 @@ fun NotificationManager.sendNotification(notificationTitle: String, messageBody:
     val pendingIntent = NavDeepLinkBuilder(applicationContext)
             .setComponentName(HomeLandActivity::class.java)
             .setGraph(R.navigation.mobile_navigation)
-            .setDestination(R.id.pocketFragment)
+            .setDestination(R.id.availableTicketFragment)
             .createPendingIntent()
 
     // Build the notification
