@@ -169,7 +169,7 @@ class ProfileSettingsFragment : Fragment() {
                 Toast.makeText(context, viewModel.getErrorMess(responseCode), Toast.LENGTH_LONG).show()
             }
         }
-        viewModel.saveUserCall(bearerToken, user.image,viewModel.user.value!!.id, profileInterface)
+        viewModel.saveUserCall(bearerToken, user.image, viewModel.user.value!!.id, profileInterface)
     }
 
     private fun saveBtnClk() {
@@ -280,16 +280,12 @@ class ProfileSettingsFragment : Fragment() {
      * */
     private fun convertImageToString(selectedImageUri: Uri?) {
         // how to store image in string format
-        val cropImage = ImageUtil.resizeImage(context, selectedImageUri)
+        val cropImage = ImageUtil.resizeImage(requireContext(), selectedImageUri)
         val imageString = Base64.encodeToString(cropImage, 4)
         user.image = imageString
     }
 
     override fun onDestroyView() {
-        // this to save user data before destroy fragment or replace ir
-        // (when select another fragment from bottom navigation view)
-//        activity!!.intent.putExtra("user", user) // saving user object.
-
         super.onDestroyView()
         _binding = null
     }

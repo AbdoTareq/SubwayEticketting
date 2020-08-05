@@ -31,9 +31,9 @@ class OnBoardActivity : AppCompatActivity() {
 
         val elements: ArrayList<PaperOnboardingPage> = ArrayList()
 
-        elements.add(scr3)
-        elements.add(scr2)
         elements.add(scr1)
+        elements.add(scr2)
+        elements.add(scr3)
 
         val onBoardingFragment = PaperOnboardingFragment.newInstance(elements)
 
