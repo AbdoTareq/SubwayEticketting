@@ -20,8 +20,8 @@ android {
         applicationId "com.abdotareq.subwaye_ticketting"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 14
-        versionName "2.4"
+        versionName "${getVersionNameTimestamp()}"
+        versionCode getVersionCodeTimestamp()
 
         multiDexEnabled true  //ADD THIS LINE if we implement a lot of libraries
 
@@ -159,6 +159,19 @@ dependencies {
     implementation 'com.github.OmarRaed:subway-ads:1.4'
 
 }
+
+// this 2 fun to create unique version code & name every time from the time stamp
+static def getVersionNameTimestamp() {
+    return new Date().format('yy.MM.dd')
+}
+def getVersionCodeTimestamp() {
+    def date = new Date()
+    def formattedDate = date.format('yyMMdd')
+    def code = formattedDate.toInteger()
+    println sprintf("VersionCode: %d", code)
+    return code
+}
+
 repositories {
     mavenCentral()
 }
