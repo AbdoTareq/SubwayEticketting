@@ -29,6 +29,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Disables PNG crunching on DEBUG build type
+            crunchPngs false // Enabled by default for RELEASE build type
+        }
         release {
             //Enable the proguard
             // Enables code shrinking, obfuscation, and optimization for only
