@@ -9,8 +9,13 @@ import timber.log.Timber
  * */
 
 class ApplicationController : Application() {
+    companion object {
+        lateinit var instance: ApplicationController
+    }
+
     override fun onCreate() {
         super.onCreate()
+        instance = this
 
         configureCrashReporting()
 

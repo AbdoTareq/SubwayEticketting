@@ -105,7 +105,7 @@ class SignInFragment : Fragment() {
         binding.signInButton.setSize(SignInButton.SIZE_WIDE)
 
         binding.signInButton.setOnClickListener {
-            signIn()
+            googleSignIn()
         }
 
         return view
@@ -159,7 +159,7 @@ class SignInFragment : Fragment() {
 
     }
 
-    private fun signIn() {
+    private fun googleSignIn() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
