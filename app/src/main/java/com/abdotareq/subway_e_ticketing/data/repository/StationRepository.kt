@@ -24,28 +24,8 @@ class StationRepository {
         //start the call
         val bearerToken = "Bearer $token"
         coroutineScope.launch {
-            try {
-                val stations = StationApiObj.retrofitService.getAllStations(bearerToken)
-                stationsInterface.onSuccess(stations)
-            } catch (e: HttpException) {
-                Timber.e("${e.code()}")
-                stationsInterface.onFail("${e.code()}")
-            } catch (e: SocketTimeoutException) {
-//                Timber.e("Timeout")
-                // request again if server is offline
-                try {
-                    val stations = StationApiObj.retrofitService.getAllStations(bearerToken)
-                    stationsInterface.onSuccess(stations)
-                } catch (e: Exception) {
-                    Timber.e(e)
-                    stationsInterface.onFail(e.toString())
-                }
-//                stationsInterface.onFail("-2")
-            } catch (e: Exception) {
-                Timber.e(e)
-                FirebaseCrashlytics.getInstance().recordException(e)
-                stationsInterface.onFail(e.toString())
-            }
+            val stations = StationApiObj.retrofitService.getAllStations(bearerToken)
+            stationsInterface.onSuccess(stations)
         }
     }
 
@@ -53,29 +33,10 @@ class StationRepository {
         //start the call
         val bearerToken = "Bearer $token"
         coroutineScope.launch {
-            try {
-                val tripDetails = StationApiObj.retrofitService.getTripDetails(bearerToken, startStationId, destinationStationId)
-                tripDetailInterface.onSuccess(tripDetails)
-            } catch (e: HttpException) {
-                Timber.e("${e.code()}")
-                tripDetailInterface.onFail("${e.code()}")
-            } catch (e: SocketTimeoutException) {
-                // request again if server is offline
-                try {
-                    val tripDetails = StationApiObj.retrofitService.getTripDetails(bearerToken, startStationId, destinationStationId)
-                    tripDetailInterface.onSuccess(tripDetails)
-                } catch (e: Exception) {
-                    Timber.e(e)
-                    tripDetailInterface.onFail(e.toString())
-                }
-            } catch (e: Exception) {
-                Timber.e(e)
-                FirebaseCrashlytics.getInstance().recordException(e)
-                tripDetailInterface.onFail(e.toString())
-            }
+            val tripDetails = StationApiObj.retrofitService.getTripDetails(bearerToken, startStationId, destinationStationId)
+            tripDetailInterface.onSuccess(tripDetails)
         }
     }
-
 
     fun cancelJob() {
         job.cancel()

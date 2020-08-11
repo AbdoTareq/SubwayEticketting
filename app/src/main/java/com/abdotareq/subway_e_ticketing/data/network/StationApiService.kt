@@ -1,22 +1,11 @@
 package com.abdotareq.subway_e_ticketing.data.network
 
-import com.abdotareq.subway_e_ticketing.data.model.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.abdotareq.subway_e_ticketing.data.model.MetroStation
+import com.abdotareq.subway_e_ticketing.data.model.TripDetails
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
-
-
-// Create the ApiObj object using Retrofit to implement the UserApiService
-private const val BASE_URL = "https://subway-ticketing-system.herokuapp.com/"
-
-// moshi for auto convert response to objects
-private val retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
 
 /**
  * The TicketService Interface that is responsible for sending and receiving calls for the

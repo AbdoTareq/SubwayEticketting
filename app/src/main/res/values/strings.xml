@@ -84,6 +84,9 @@
     <string name="use" tools:ignore="MissingTranslation">use</string>
     <string name="check_out" tools:ignore="MissingTranslation">Check Out</string>
     <string name="forbidden_mess" tools:ignore="MissingTranslation">Forbidden check your authorization check bearer token</string>
+    <string name="bad_request" tools:ignore="MissingTranslation">Bad Request</string>
+    <string name="notFound" tools:ignore="MissingTranslation">Not Found</string>
+    <string name="unauthorizedError" tools:ignore="MissingTranslation">Unauthorized request</string>
     <string name="check_in" tools:ignore="MissingTranslation">Check In</string>
     <string name="scan_this_qr_code" tools:ignore="MissingTranslation">Scan this QR code</string>
     <string name="entrance" tools:ignore="MissingTranslation">entrance</string>

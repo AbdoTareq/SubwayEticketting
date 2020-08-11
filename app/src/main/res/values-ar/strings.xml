@@ -77,6 +77,9 @@
 	<string name="use">استخدم للدخول</string>
 	<string name="check_out">استخدم للخروج</string>
 	<string name="forbidden_mess">ممنوع تحقق الاختيار تفويضك حامل رمزية</string>
+	<string name="bad_request" >حدث خطأ في الاتصال بالشبكة</string>
+	<string name="unauthorizedError" >طلب غير مصرح به</string>
+	<string name="notFound">بيانات غير موجوده</string>
 	<string name="check_in">استخدم للدخول</string>
 	<string name="scan_this_qr_code">امسح هذا الرمز</string>
 	<string name="entrance">الدخول</string>
