@@ -83,6 +83,7 @@
     <string name="available_tickets" tools:ignore="MissingTranslation">Available Tickets</string>
     <string name="use" tools:ignore="MissingTranslation">use</string>
     <string name="check_out" tools:ignore="MissingTranslation">Check Out</string>
+    <string name="noInternetConnection" tools:ignore="MissingTranslation">No Internet Connection</string>
     <string name="forbidden_mess" tools:ignore="MissingTranslation">Forbidden check your authorization check bearer token</string>
     <string name="bad_request" tools:ignore="MissingTranslation">Bad Request</string>
     <string name="notFound" tools:ignore="MissingTranslation">Not Found</string>

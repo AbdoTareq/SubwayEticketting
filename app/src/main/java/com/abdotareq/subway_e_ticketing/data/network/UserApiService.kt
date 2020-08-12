@@ -1,10 +1,7 @@
 package com.abdotareq.subway_e_ticketing.data.network
 
 import com.abdotareq.subway_e_ticketing.BuildConfig
-import com.abdotareq.subway_e_ticketing.data.model.ErrorInterceptor
-import com.abdotareq.subway_e_ticketing.data.model.Token
-import com.abdotareq.subway_e_ticketing.data.model.User
-import com.abdotareq.subway_e_ticketing.data.model.UserPassword
+import com.abdotareq.subway_e_ticketing.data.model.*
 import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -71,6 +68,7 @@ object UserApiObj {
 fun createRetrofit(): Retrofit {
     // this for debugging network calls
     val builder = OkHttpClient.Builder()
+    builder.addInterceptor(NetworkConnectionInterceptor())
     builder.addInterceptor(ErrorInterceptor())
 
     if (BuildConfig.DEBUG) {

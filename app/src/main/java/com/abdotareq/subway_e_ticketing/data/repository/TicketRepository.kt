@@ -30,7 +30,6 @@ class TicketRepository {
             } catch (e: HttpException) {
                 Timber.e("${e.code()}")
                 historyTicketInterface.onFail("${e.code()}")
-
             } catch (e: SocketTimeoutException) {
                 Timber.e("Timeout")
                 historyTicketInterface.onFail("-2")

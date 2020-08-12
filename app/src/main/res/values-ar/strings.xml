@@ -77,6 +77,7 @@
 	<string name="use">استخدم للدخول</string>
 	<string name="check_out">استخدم للخروج</string>
 	<string name="forbidden_mess">ممنوع تحقق الاختيار تفويضك حامل رمزية</string>
+	<string name="noInternetConnection" >لا يوجد اتصال بالانترنت</string>
 	<string name="bad_request" >حدث خطأ في الاتصال بالشبكة</string>
 	<string name="unauthorizedError" >طلب غير مصرح به</string>
 	<string name="notFound">بيانات غير موجوده</string>

@@ -6,6 +6,7 @@ import com.abdotareq.subway_e_ticketing.R
 class ErrorStatus {
     object Codes {
 
+        private const val NoInternetConnection = "-1"
         private const val SocketTimeoutServerOffline = "-2"
 
         private const val Forbidden = "403"
@@ -44,6 +45,7 @@ class ErrorStatus {
 
         fun getErrorMessage(errorCode: String, applicationCon: Application): String {
             return when (errorCode) {
+                NoInternetConnection -> applicationCon.getString(R.string.noInternetConnection)
                 Forbidden -> applicationCon.getString(R.string.forbidden_mess)
                 SocketTimeoutServerOffline -> applicationCon.getString(R.string.server_offline_try)
                 PasswordLessThan_8 -> applicationCon.getString(R.string.pass_less)

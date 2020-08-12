@@ -1,16 +1,25 @@
 package com.abdotareq.subway_e_ticketing.data.model
 
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import com.abdotareq.subway_e_ticketing.ApplicationController
 import com.abdotareq.subway_e_ticketing.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
+import retrofit2.HttpException
 import timber.log.Timber
 import java.net.SocketTimeoutException
 
 class ErrorInterceptor : Interceptor {
     object Codes {
         // network errors
+        private const val NoInternetConnection = -1
         private const val SocketTimeoutServerOffline = -2
         private const val BadRequest = 400
         private const val UnauthorizedError = 401
@@ -54,7 +63,9 @@ class ErrorInterceptor : Interceptor {
             val applicationCon = ApplicationController.instance
             return when (errorCode) {
                 BadRequest -> applicationCon.getString(R.string.bad_request)
+                NoInternetConnection -> applicationCon.getString(R.string.noInternetConnection)
                 SocketTimeoutServerOffline -> applicationCon.getString(R.string.server_offline_try)
+
                 UnauthorizedError -> applicationCon.getString(R.string.unauthorizedError)
                 NotFound -> applicationCon.getString(R.string.notFound)
                 Forbidden -> applicationCon.getString(R.string.forbidden_mess)
@@ -90,16 +101,27 @@ class ErrorInterceptor : Interceptor {
 
         val request: Request = chain.request()
 
-        val response: Response
-        response = try {
-            chain.proceed(request)
+        var response: Response
+        try {
+           chain.proceed(request)
         } catch (e: SocketTimeoutException) {
+            // handle server sleep state
             Timber.e(Codes.getErrorMessage(-2))
-            chain.proceed(request)
+            response = chain.proceed(request)
+        } catch (e: NoConnectivityException) {
+            Timber.e("No Internet Connection")
+            CoroutineScope(Job() + Dispatchers.Main)
+                    .launch {
+                        Toast.makeText(ApplicationController.instance, Codes.getErrorMessage(-1),
+                                Toast.LENGTH_LONG).show()
+                    }
+        } catch (e: HttpException) {
+            CoroutineScope(Job() + Dispatchers.Main)
+                    .launch {
+                        Toast.makeText(ApplicationController.instance, Codes.getErrorMessage(e.code()),
+                                Toast.LENGTH_LONG).show()
+                    }
         }
-
-        if (!response.isSuccessful)
-            Timber.e(Codes.getErrorMessage(response.code))
 
         return response
     }
