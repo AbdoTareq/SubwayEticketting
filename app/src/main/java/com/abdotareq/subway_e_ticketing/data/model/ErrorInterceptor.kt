@@ -1,7 +1,5 @@
 package com.abdotareq.subway_e_ticketing.data.model
 
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
 import com.abdotareq.subway_e_ticketing.ApplicationController
 import com.abdotareq.subway_e_ticketing.R
@@ -10,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import okhttp3.Interceptor
+import okhttp3.Protocol
 import okhttp3.Request
 import okhttp3.Response
 import retrofit2.HttpException
@@ -102,27 +101,58 @@ class ErrorInterceptor : Interceptor {
         val request: Request = chain.request()
 
         var response: Response
-        try {
-           chain.proceed(request)
-        } catch (e: SocketTimeoutException) {
-            // handle server sleep state
-            Timber.e(Codes.getErrorMessage(-2))
-            response = chain.proceed(request)
-        } catch (e: NoConnectivityException) {
-            Timber.e("No Internet Connection")
-            CoroutineScope(Job() + Dispatchers.Main)
-                    .launch {
-                        Toast.makeText(ApplicationController.instance, Codes.getErrorMessage(-1),
-                                Toast.LENGTH_LONG).show()
-                    }
-        } catch (e: HttpException) {
-            CoroutineScope(Job() + Dispatchers.Main)
-                    .launch {
-                        Toast.makeText(ApplicationController.instance, Codes.getErrorMessage(e.code()),
-                                Toast.LENGTH_LONG).show()
-                    }
+
+        var retryMaxCount = 3
+
+        while (retryMaxCount > 0) {
+
+            try {
+                response = chain.proceed(request)
+                return response
+            } catch (e: SocketTimeoutException) {
+                // handle server sleep state
+                Timber.e(Codes.getErrorMessage(-2))
+                if (retryMaxCount != 0) {
+                    retryMaxCount--
+                    continue
+                }
+            } catch (e: NoConnectivityException) {
+                Timber.e("No Internet Connection")
+                CoroutineScope(Job() + Dispatchers.Main)
+                        .launch {
+                            Toast.makeText(ApplicationController.instance, Codes.getErrorMessage(-1),
+                                    Toast.LENGTH_LONG).show()
+                        }
+                return Response.Builder()
+                        .protocol(Protocol.HTTP_2)
+                        .message("No Internet Connection")
+                        .request(chain.request())
+                        .build()
+            } catch (e: HttpException) {
+                CoroutineScope(Job() + Dispatchers.Main)
+                        .launch {
+                            Toast.makeText(ApplicationController.instance, Codes.getErrorMessage(e.code()),
+                                    Toast.LENGTH_LONG).show()
+                        }
+                return Response.Builder()
+                        .code(e.code())
+                        .protocol(Protocol.HTTP_2)
+                        .message(Codes.getErrorMessage(e.code()))
+                        .request(chain.request())
+                        .build()
+            }
+
         }
 
-        return response
+        //Server is Sleeping
+        return Response.Builder()
+                .code(404)
+                .protocol(Protocol.HTTP_2)
+                .message("Not Found")
+                .request(chain.request())
+                .build()
+
     }
+
+
 }
