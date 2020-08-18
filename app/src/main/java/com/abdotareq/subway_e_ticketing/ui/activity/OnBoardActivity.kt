@@ -1,8 +1,6 @@
 package com.abdotareq.subway_e_ticketing.ui.activity
 
 import android.content.Intent
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +8,6 @@ import com.abdotareq.subway_e_ticketing.R
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil
 import com.ramotion.paperonboarding.PaperOnboardingFragment
 import com.ramotion.paperonboarding.PaperOnboardingPage
-import java.util.*
-import kotlin.collections.ArrayList
 
 class OnBoardActivity : AppCompatActivity() {
 

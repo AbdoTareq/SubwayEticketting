@@ -53,9 +53,10 @@ class TicketFragment : Fragment() {
 
         viewModel.eventChooseTicket.observe(viewLifecycleOwner, Observer {
             if (null != it) {
-                val intent = Intent(context, BuyTicketActivity::class.java)
-                intent.putExtra("ticket", it)
-                startActivity(intent)
+                Intent(context, BuyTicketActivity::class.java).apply {
+                    putExtra("ticket", it)
+                    startActivity(this)
+                }
                 viewModel.onChooseTicketComplete()
             }
         })

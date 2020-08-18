@@ -23,7 +23,7 @@ class ErrorInterceptor : Interceptor {
         private const val BadRequest = 400
         private const val UnauthorizedError = 401
         private const val Forbidden = 403
-        private const val NotFound = 404
+        const val NotFound = 404
 
         // our custom system errors
         private const val PasswordLessThan_8 = 434
@@ -116,18 +116,6 @@ class ErrorInterceptor : Interceptor {
                     retryMaxCount--
                     continue
                 }
-            } catch (e: NoConnectivityException) {
-                Timber.e("No Internet Connection")
-                CoroutineScope(Job() + Dispatchers.Main)
-                        .launch {
-                            Toast.makeText(ApplicationController.instance, Codes.getErrorMessage(-1),
-                                    Toast.LENGTH_LONG).show()
-                        }
-                return Response.Builder()
-                        .protocol(Protocol.HTTP_2)
-                        .message("No Internet Connection")
-                        .request(chain.request())
-                        .build()
             } catch (e: HttpException) {
                 CoroutineScope(Job() + Dispatchers.Main)
                         .launch {
@@ -140,13 +128,20 @@ class ErrorInterceptor : Interceptor {
                         .message(Codes.getErrorMessage(e.code()))
                         .request(chain.request())
                         .build()
+            } catch (e: Exception) {
+                Timber.e("No Internet Connection")
+                CoroutineScope(Job() + Dispatchers.Main)
+                        .launch {
+                            Toast.makeText(ApplicationController.instance, Codes.getErrorMessage(-1),
+                                    Toast.LENGTH_LONG).show()
+                        }
             }
 
         }
 
         //Server is Sleeping
         return Response.Builder()
-                .code(404)
+                .code(Codes.NotFound)
                 .protocol(Protocol.HTTP_2)
                 .message("Not Found")
                 .request(chain.request())

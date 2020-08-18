@@ -68,8 +68,8 @@ object UserApiObj {
 fun createRetrofit(): Retrofit {
     // this for debugging network calls
     val builder = OkHttpClient.Builder()
-    builder.addInterceptor(NetworkConnectionInterceptor())
     builder.addInterceptor(ErrorInterceptor())
+
 
     if (BuildConfig.DEBUG) {
         builder.addInterceptor(OkHttpProfilerInterceptor())

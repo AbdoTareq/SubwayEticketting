@@ -25,6 +25,7 @@ import timber.log.Timber
 /**
  * A [OverviewFragment] provides user with all needed info about metro trip and buy tickets.
  */
+// TODO: 8/18/2020 fix no connection exception interceptor happened if u go to another fragment then returned
 class OverviewFragment : Fragment() {
 
     private lateinit var viewModelFactory: ViewModelFactory
@@ -57,9 +58,10 @@ class OverviewFragment : Fragment() {
 
         viewModel.eventBuy.observe(viewLifecycleOwner, Observer {
             if (it) {
-                val intent = Intent(context, BuyTicketActivity::class.java)
-                intent.putExtra("ticket", viewModel.trip.value!!.ticketType)
-                startActivity(intent)
+                Intent(context, BuyTicketActivity::class.java).apply {
+                    putExtra("ticket", viewModel.trip.value!!.ticketType)
+                    startActivity(this)
+                }
                 viewModel.onEventBuyComplete()
             }
         })
