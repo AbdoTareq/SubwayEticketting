@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.abdotareq.subway_e_ticketing.R
-import com.abdotareq.subway_e_ticketing.databinding.FragmentOverviewBinding
 import com.abdotareq.subway_e_ticketing.data.model.SearchModel
+import com.abdotareq.subway_e_ticketing.databinding.FragmentOverviewBinding
 import com.abdotareq.subway_e_ticketing.ui.activity.BuyTicketActivity
 import com.abdotareq.subway_e_ticketing.utility.AnimationUtil
 import com.abdotareq.subway_e_ticketing.utility.SharedPreferenceUtil.getSharedPrefsTokenId
@@ -19,7 +19,6 @@ import com.abdotareq.subway_e_ticketing.viewmodels.factories.ViewModelFactory
 import com.abdotareq.subway_e_ticketing.viewmodels.home.OverviewViewModel
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
-import ir.mirrajabi.searchdialog.core.SearchResultListener
 import timber.log.Timber
 
 /**
@@ -59,7 +58,7 @@ class OverviewFragment : Fragment() {
         viewModel.eventBuy.observe(viewLifecycleOwner, Observer {
             if (it) {
                 Intent(context, BuyTicketActivity::class.java).apply {
-                    putExtra("ticket", viewModel.trip.value!!.ticketType)
+                    putExtra(BuyTicketActivity.KEY_NAME, viewModel.trip.value!!.ticketType)
                     startActivity(this)
                 }
                 viewModel.onEventBuyComplete()
@@ -68,24 +67,24 @@ class OverviewFragment : Fragment() {
 
         binding.start.setOnClickListener {
             SimpleSearchDialogCompat(requireContext(), getString(R.string.chooseStation), getString(R.string.search_stattions),
-                    null, initData(), SearchResultListener { dialog, item, _ ->
+                    null, initData()) { dialog, item, _ ->
                 binding.start.text = item.title
                 viewModel.startStationId.value = getStationId(item)
 
                 binding.destination.isEnabled = true
                 Toast.makeText(context, "${getStationId(item)}", Toast.LENGTH_LONG).show()
                 dialog.dismiss()
-            }).show()
+            }.show()
         }
 
         binding.destination.setOnClickListener {
             SimpleSearchDialogCompat(requireContext(), getString(R.string.chooseStation), getString(R.string.search_stattions),
-                    null, initData(), SearchResultListener { dialog, item, _ ->
+                    null, initData()) { dialog, item, _ ->
                 binding.destination.text = item.title
                 viewModel.destinationStationId.value = getStationId(item)
                 viewModel.onChooseStartDestinationComplete()
                 dialog.dismiss()
-            }).show()
+            }.show()
         }
 
         return view

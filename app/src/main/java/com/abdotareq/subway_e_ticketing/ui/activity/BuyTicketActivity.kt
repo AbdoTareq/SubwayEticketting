@@ -32,6 +32,10 @@ import timber.log.Timber
  */
 class BuyTicketActivity : AppCompatActivity() {
 
+    companion object {
+        const val KEY_NAME = "ticket"
+    }
+
     /**
      * A client for interacting with the Google Pay API.
      *
@@ -65,7 +69,7 @@ class BuyTicketActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        ticket = intent.getParcelableExtra("ticket")!!
+        ticket = intent.getParcelableExtra(KEY_NAME)!!
 
         val application = requireNotNull(this).application
 
@@ -246,9 +250,11 @@ class BuyTicketActivity : AppCompatActivity() {
 //            Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show()
 
             // Logging token string.
-            Timber.e("GooglePaymentToken ${paymentMethodData
-                    .getJSONObject("tokenizationData")
-                    .getString("token")}")
+            Timber.e("GooglePaymentToken ${
+                paymentMethodData
+                        .getJSONObject("tokenizationData")
+                        .getString("token")
+            }")
 
         } catch (e: JSONException) {
             Timber.e("Error: %s", e.toString())

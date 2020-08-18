@@ -70,7 +70,6 @@ fun createRetrofit(): Retrofit {
     val builder = OkHttpClient.Builder()
     builder.addInterceptor(ErrorInterceptor())
 
-
     if (BuildConfig.DEBUG) {
         builder.addInterceptor(OkHttpProfilerInterceptor())
     }
