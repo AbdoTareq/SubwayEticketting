@@ -75,6 +75,9 @@ android {
     }
 
     compileOptions {
+        // for Desugaring It allows lower API levels to work with new Java libraries.
+        // print out the current month using the new Time API and I’ll test it on Android R (API 30) and Android M (API 23).
+        coreLibraryDesugaringEnabled
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -92,6 +95,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.core:core-ktx:1.3.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72"
+    // Desugaring
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
 
     // has recycle view
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
